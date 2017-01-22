@@ -1,0 +1,20 @@
+{
+  "name": "engineering-report-app",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "rx3-scripts": "0.0.2"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2",
+    "redux": "^3.6.0"
+  },
+  "scripts": {
+    "start": "rx3-scripts start",
+    "build": "rx3-scripts build",
+    "test": "rx3-scripts test --env=jsdom",
+    "eject": "rx3-scripts eject"
+  }
+}
