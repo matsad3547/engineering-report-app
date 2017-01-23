@@ -24,10 +24,10 @@ const App = () => {
   return (
     <div>
       <MuiThemeProvider>
-        <JustButtons />
+        <Buttons />
       </MuiThemeProvider>
       <MuiThemeProvider>
-        <ButtonsWithSlider />
+        <SliderInput />
       </MuiThemeProvider>
     </div>
   )
@@ -35,7 +35,7 @@ const App = () => {
 
 export default App;
 
-const JustButtons = () => {
+const Buttons = () => {
   // injectTapEventPlugin()
   return (
     <div className="input">
@@ -59,24 +59,11 @@ const JustButtons = () => {
   )
 }
 
-const ButtonsWithSlider = () => {
+const SliderInput = () => {
   return (
     <div className="input">
       <div className="metricName">
-        <h2>Metric Name 1</h2>
-      </div>
-      <div>
-        <FloatingActionButton>
-          +
-        </FloatingActionButton>
-      </div>
-      <div>
-        <h2>value goes here</h2>
-      </div>
-      <div>
-        <FloatingActionButton>
-          -
-        </FloatingActionButton>
+        <h2>Metric Name 2: value goes here</h2>
       </div>
       <Slider
         className="slider"
@@ -87,23 +74,3 @@ const ButtonsWithSlider = () => {
     </div>
   )
 }
-
-// const ButtonsWithSlider = () => {
-//   return (
-//     <div className="input">
-//       <h2>Metric Name 1</h2>
-//       <FloatingActionButton>
-//         +
-//       </FloatingActionButton>
-//       <h2>value goes here</h2>
-//       <FloatingActionButton>
-//         -
-//       </FloatingActionButton>
-//       <Slider
-//         step={0.25}
-//         max={9}
-//         defaultValue={4.5}
-//         />
-//     </div>
-//   )
-// }
