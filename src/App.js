@@ -1,5 +1,4 @@
 import React from 'react';
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
@@ -27,16 +26,17 @@ const App = () => {
       <MuiThemeProvider>
         <JustButtons />
       </MuiThemeProvider>
+      <MuiThemeProvider>
+        <ButtonsWithSlider />
+      </MuiThemeProvider>
     </div>
   )
 }
 
-// <MuiThemeProvider>
-//   <ButtonsWithSlider />
-// </MuiThemeProvider>
 export default App;
 
 const JustButtons = () => {
+  // injectTapEventPlugin()
   return (
     <div className="input">
       <div className="metricName">
@@ -62,15 +62,24 @@ const JustButtons = () => {
 const ButtonsWithSlider = () => {
   return (
     <div className="input">
-      <h2>Metric Name 1</h2>
-      <FloatingActionButton>
-        +
-      </FloatingActionButton>
-      <h2>value goes here</h2>
-      <FloatingActionButton>
-        -
-      </FloatingActionButton>
+      <div className="metricName">
+        <h2>Metric Name 1</h2>
+      </div>
+      <div>
+        <FloatingActionButton>
+          +
+        </FloatingActionButton>
+      </div>
+      <div>
+        <h2>value goes here</h2>
+      </div>
+      <div>
+        <FloatingActionButton>
+          -
+        </FloatingActionButton>
+      </div>
       <Slider
+        className="slider"
         step={0.25}
         max={9}
         defaultValue={4.5}
@@ -78,3 +87,23 @@ const ButtonsWithSlider = () => {
     </div>
   )
 }
+
+// const ButtonsWithSlider = () => {
+//   return (
+//     <div className="input">
+//       <h2>Metric Name 1</h2>
+//       <FloatingActionButton>
+//         +
+//       </FloatingActionButton>
+//       <h2>value goes here</h2>
+//       <FloatingActionButton>
+//         -
+//       </FloatingActionButton>
+//       <Slider
+//         step={0.25}
+//         max={9}
+//         defaultValue={4.5}
+//         />
+//     </div>
+//   )
+// }
