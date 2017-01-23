@@ -1,41 +1,45 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Slider from 'material-ui/Slider'
 
-// class App extends Component {
-//   render() {
-//     return (
-//       <div className="App">
-//         <div className="App-header">
-//           <img src={logo} className="App-logo" alt="logo" />
-//           <h2>Welcome to React</h2>
-//         </div>
-//         <p className="App-intro">
-//           To get started, edit <code>src/App.js</code> and save to reload.
-//         </p>
-//       </div>
-//     );
-//   }
-// }
+const getCurrentState = state => state
 
-const App = () => {
+// onChange = connect()(onChange)
+
+let App = (state) => {
+
+  const metricValues = getCurrentState(state).metricValues
+
   return (
     <div>
       <MuiThemeProvider>
-        <Buttons />
+        <Buttons
+          value={metricValues.metricName1.val}
+          />
       </MuiThemeProvider>
       <MuiThemeProvider>
-        <SliderInput />
+        <SliderInput
+          value={metricValues.metricName2.val}
+
+          />
       </MuiThemeProvider>
     </div>
   )
 }
 
+App = connect(getCurrentState)(App)
+
 export default App;
 
-const Buttons = () => {
+const Buttons = ({ name, value }) => {
+
+  const onChange = (e, input) => {
+    e.preventDefault()
+    console.log('on change value:', input);
+  }
   // injectTapEventPlugin()
   return (
     <div className="input">
@@ -48,7 +52,7 @@ const Buttons = () => {
         </FloatingActionButton>
       </div>
       <div>
-        <h2>value goes here</h2>
+        <h2>{value}</h2>
       </div>
       <div>
         <FloatingActionButton>
@@ -59,17 +63,24 @@ const Buttons = () => {
   )
 }
 
-const SliderInput = () => {
+const SliderInput = ({ name, value }) => {
+
+  const onChange = (e, input) => {
+    e.preventDefault()
+    console.log('on change value:', input);
+  }
+
   return (
     <div className="input">
       <div className="metricName">
-        <h2>Metric Name 2: value goes here</h2>
+        <h2>Metric Name 2: {value}</h2>
       </div>
       <Slider
         className="slider"
         step={0.25}
         max={9}
         defaultValue={4.5}
+        onChange={onChange}
         />
     </div>
   )
