@@ -1,11 +1,11 @@
 
 
-export const changeVal = (input) => {
-  console.log('action input:', input);
+export const changeVal = (output) => {
+  // console.log('action output:', output);
   return {
     type: 'CHANGE_VAL',
-    [input.metricName]: {
-      val: input.val
-    }
+    id: output.id,
+    val: output.val,
+    name: output.name,
   }
 }

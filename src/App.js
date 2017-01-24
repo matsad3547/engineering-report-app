@@ -1,28 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import './App.css';
+import { changeVal } from './actions'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Slider from 'material-ui/Slider'
 
 const getCurrentState = state => state
 
-// onChange = connect()(onChange)
-
 let App = (state) => {
 
   const metricValues = getCurrentState(state).metricValues
+  // console.log('metric values:', metricValues);
+  const keys = Object.keys(metricValues).sort()
+  // console.log(keys.sort());
 
   return (
     <div>
       <MuiThemeProvider>
         <Buttons
-          value={metricValues.metricName1.val}
+          id={keys[0]}
+          name={metricValues[keys[0]].name}
+          value={metricValues[keys[0]].val}
           />
       </MuiThemeProvider>
       <MuiThemeProvider>
         <SliderInput
-          value={metricValues.metricName2.val}
+          id={keys[1]}
+          name={metricValues[keys[1]].name}
+          value={metricValues[keys[1]].val}
 
           />
       </MuiThemeProvider>
@@ -34,28 +40,48 @@ App = connect(getCurrentState)(App)
 
 export default App;
 
-const Buttons = ({ name, value }) => {
+let Buttons = ({ dispatch, id, name, value }) => {
 
-  const onChange = (e, input) => {
+  const onIncrement = e => {
     e.preventDefault()
-    console.log('on change value:', input);
+    let output = {
+      id,
+      val: value + 0.25,
+      name,
+    }
+    dispatch(changeVal(output))
   }
-  // injectTapEventPlugin()
+
+  const onDecrement = e => {
+    e.preventDefault()
+    let output = {
+      id,
+      val: value - 0.25,
+      name,
+    }
+    dispatch(changeVal(output))
+  }
+
+
   return (
     <div className="input">
       <div className="metricName">
-        <h2>Metric Name 1</h2>
+        <h2>{name}</h2>
       </div>
-      <div>
-        <FloatingActionButton>
+      <div className="button">
+        <FloatingActionButton
+          onClick={onIncrement}
+          backgroundColor='#F6A10D'>
           +
         </FloatingActionButton>
       </div>
-      <div>
-        <h2>{value}</h2>
+      <div className="valueDisplay">
+        <h2>{value.toFixed(2)}</h2>
       </div>
-      <div>
-        <FloatingActionButton>
+      <div className="button">
+        <FloatingActionButton
+          onClick={onDecrement}
+          backgroundColor='#F6A10D'>
           -
         </FloatingActionButton>
       </div>
@@ -63,17 +89,25 @@ const Buttons = ({ name, value }) => {
   )
 }
 
-const SliderInput = ({ name, value }) => {
+Buttons = connect()(Buttons)
+
+let SliderInput = ({ dispatch, id, name, value }) => {
 
   const onChange = (e, input) => {
     e.preventDefault()
     console.log('on change value:', input);
+    let output = {
+      id,
+      val: input,
+      name,
+    }
+    dispatch(changeVal(output))
   }
 
   return (
     <div className="input">
       <div className="metricName">
-        <h2>Metric Name 2: {value}</h2>
+        <h2>{name}: {value.toFixed(2)}</h2>
       </div>
       <Slider
         className="slider"
@@ -85,3 +119,5 @@ const SliderInput = ({ name, value }) => {
     </div>
   )
 }
+
+SliderInput = connect()(SliderInput)
