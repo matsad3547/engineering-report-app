@@ -1,6 +1,16 @@
+@include responsive-font(5vw, 35px, 150px, 50px);
+
+@-ms-viewport{
+  width: device-width;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
   background-color: #FAC72D;
+}
+
+.title {
+  text-align: center;
 }

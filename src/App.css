@@ -15,8 +15,9 @@
 .slider {
   display: inline-block;
   width: 100%;
-  padding: 1em;
-  margin: 0;
+  text-align: center;
+  padding: .5em;
+  margin: 1em;
 }
 
 .valueDisplay {
@@ -30,4 +31,9 @@
   width: 15%;
   padding: .5em;
   text-align: center;
+}
+
+.dropDownMenu {
+  text-align: center;
+  font-size: 50px;
 }

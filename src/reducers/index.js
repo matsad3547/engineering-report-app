@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-const initVal = 4.5
+export const initVal = 5
 
 const metricNames = ['Awesomeness', 'Coolness']
 //
