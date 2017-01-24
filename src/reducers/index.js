@@ -2,7 +2,25 @@ import { combineReducers } from 'redux'
 
 export const initVal = 5
 
-const metricNames = ['Awesomeness', 'Coolness']
+const metricNames = [
+  'Awesomeness',
+  'Coolness',
+  'Sweetness',
+  'Desireablity',
+  'Cheesiness',
+  'Stuff',
+  'Worthwhile',
+  'Sleepy',
+  'Words',
+  'Chocolate',
+  'Swiftness',
+  'Leanness',
+  'Blackness',
+  'Whiteness',
+  'Redness',
+  'Brownness',
+  'Blueness'
+ ]
 //
 const getInitMetricState = metricNames => {
   let initMetricState = {}

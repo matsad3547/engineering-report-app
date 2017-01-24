@@ -24,23 +24,27 @@ let App = (state) => {
       <div className="title">
         <h1>Test Report App</h1>
       </div>
-      <MuiThemeProvider>
-        <SliderInput
-          id={keys[0]}
-          name={metricValues[keys[0]].name}
-          value={metricValues[keys[0]].val}
+        {keys.map( (key, i) =>
+        <MuiThemeProvider
+          key={i + 'a'}>
+          <DropDownSliderInput
+          key={i + 'b'}
+          id={key}
+          name={metricValues[key].name}
+          value={metricValues[key].val}
           />
-      </MuiThemeProvider>
-      <MuiThemeProvider>
-        <DropDownSliderInput
-          id={keys[1]}
-          name={metricValues[keys[1]].name}
-          value={metricValues[keys[1]].val}
-          />
-      </MuiThemeProvider>
+        </MuiThemeProvider>
+      )}
     </div>
   )
 }
+// <MuiThemeProvider>
+//   <DropDownSliderInput
+//     id={keys[1]}
+//     name={metricValues[keys[1]].name}
+//     value={metricValues[keys[1]].val}
+//     />
+// </MuiThemeProvider>
 
 App = connect(getCurrentState)(App)
 
@@ -82,7 +86,6 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
 
   const onChange = (e, input) => {
     e.preventDefault()
-    // console.log('on change value:', input);
     let output = {
       id,
       val: input,
@@ -93,15 +96,15 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
 
   const styles = {
     label: {
-      fontSize: 25,
-    },
-    menuItem: {
-      height: 50,
-      backgroundColor: '#333',
+      fontSize: 20,
     },
     menu: {
       width: 250,
-
+    },
+    customWidth: {
+      // marginLeft: 0,//effects dropped down menu
+      fontSize: 20,
+      paddingLeft: 0,
     }
   }
 
@@ -113,13 +116,12 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
         className="slider"
         labelStyle={styles.label}
         menuStyle={styles.menu}
-        style={styles.menu}
+        style={styles.customWidth}
         >
         <MenuItem
           value={1}
           primaryText={ name +': ' + value.toFixed(2)}
-          menuItemStyle={styles.menuItem}
-          className="dropDownMenu"><strong>          
+          className="dropDownMenu">
           <Slider
             step={0.25}
             min={1}
@@ -127,7 +129,7 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
             defaultValue={initVal}
             onChange={onChange}
             />
-          </strong>
+
         </MenuItem>
       </DropDownMenu>
     </div>
