@@ -15,7 +15,7 @@ const getCurrentState = state => state
 let App = (state) => {
 
   const metricValues = getCurrentState(state).metricValues
-  const keys = Object.keys(metricValues).sort()
+  const keys = Object.keys(metricValues).sort( (a, b) => a - b)
 
   return (
     <div className="reportInput">

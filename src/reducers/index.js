@@ -24,15 +24,15 @@ const metricNames = [
 //
 const getInitMetricState = metricNames => {
   let initMetricState = {}
-  for (let i = 0; i < metricNames.length; i++) {
-    let str = 'metricName' + (i + 1)
+  metricNames.map( (name, i) => {
+    let str = i + 1
     Object.assign( initMetricState, {
       [str]: {
-        name: metricNames[i],
+        name,
         val: initVal,
       }
     })
-  }
+  })
   return initMetricState
 }
 
