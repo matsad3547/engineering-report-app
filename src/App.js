@@ -33,6 +33,7 @@ let App = (state) => {
           />
         </MuiThemeProvider>
       )}
+      <NoteField />
     </div>
   )
 }
@@ -134,3 +135,17 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
 }
 
 DropDownSliderInput = connect()(DropDownSliderInput)
+
+let NoteField = () => {
+  return (
+    <div>
+      <textarea
+        name="textArea"
+        rows={10}
+        placeholder="Note Area"
+        >
+
+      </textarea>
+    </div>
+  )
+}
