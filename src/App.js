@@ -118,8 +118,9 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
         >
         <MenuItem
           value={1}
-          primaryText={ name +': ' + value.toFixed(2)}
+          label={name +': ' + value.toFixed(2)}
           className="dropDownMenu">
+          <h2>{name +': ' + value.toFixed(2)}</h2>
           <Slider
             step={0.25}
             min={1}
@@ -144,7 +145,6 @@ let NoteField = () => {
         rows={10}
         placeholder="Note Area"
         >
-
       </textarea>
     </div>
   )
