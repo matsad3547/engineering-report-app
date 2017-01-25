@@ -32,31 +32,14 @@ const getInitMetricState = metricNames => {
         val: initVal,
       }
     })
+    return true
   })
   return initMetricState
 }
 
 const initMetricState = getInitMetricState(metricNames)
 
-// console.log('Object version:', initMetricState);
-
-// {awesomeness:
-//   val: initVal,
-// }
-
-//
-// const initMetricState = {
-//   metricName1: {
-//     name: 'Awesomeness',
-//     val: initVal,
-//   },
-//   metricName2: {
-//     name: 'Coolness',
-//     val: initVal,
-//   },
-// }
-
-const getUnchangedState = (state, changedKey) => {
+export const getUnchangedState = (state, changedKey) => {
   let unchangedState = {}
   for (let key in state) {
     if (state.hasOwnProperty(key)) {
@@ -73,14 +56,12 @@ export const metricValues = (state = initMetricState, action) => {
   switch (action.type) {
     case 'CHANGE_VAL':
     let unchangedState = getUnchangedState(state, action.id)
-    // console.log('changed value:', action.val);
       return  Object.assign(unchangedState, {
           [action.id]: {
             name: action.name,
             val: action.val,
           }
       })
-
     default:
     return state
   }

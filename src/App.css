@@ -1,10 +1,16 @@
+.reportInput {
+  background-color: #FAC72D;
+  max-width: 400px;
+  margin: 1em;
+  padding: .5em 0;
+}
 
 .input {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   background-color: white;
-  margin: 1em
+  margin: .5em;
 }
 
 .metricName {
@@ -37,4 +43,10 @@
 .dropDownMenu {
   text-align: center;
   font-size: 50px;
+}
+
+@media (max-width: 350px) {
+  .reportInput {
+    margin: 0;
+  }
 }
