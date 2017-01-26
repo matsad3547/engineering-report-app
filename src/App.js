@@ -20,7 +20,7 @@ let App = (state) => {
   return (
     <div className="reportInput">
       <div className="title">
-        <h1>Test Report App</h1>
+        <h3>New Report Screen</h3>
       </div>
         {keys.map( (key, i) =>
         <MuiThemeProvider
@@ -37,48 +37,10 @@ let App = (state) => {
     </div>
   )
 }
-// <MuiThemeProvider>
-//   <DropDownSliderInput
-//     id={keys[1]}
-//     name={metricValues[keys[1]].name}
-//     value={metricValues[keys[1]].val}
-//     />
-// </MuiThemeProvider>
 
 App = connect(getCurrentState)(App)
 
 export default App;
-
-// let SliderInput = ({ dispatch, id, name, value }) => {
-//
-//   const onChange = (e, input) => {
-//     e.preventDefault()
-//     let output = {
-//       id,
-//       val: input,
-//       name,
-//     }
-//     dispatch(changeVal(output))
-//   }
-//
-//   return (
-//     <div className="input">
-//       <div className="metricName">
-//         <h2>{name}: {value.toFixed(2)}</h2>
-//       </div>
-//       <Slider
-//         className="slider"
-//         step={0.25}
-//         min={1}
-//         max={9}
-//         defaultValue={initVal}
-//         onChange={onChange}
-//         />
-//     </div>
-//   )
-// }
-//
-// SliderInput = connect()(SliderInput)
 
 let DropDownSliderInput = ({ dispatch, id, name, value }) => {
 
@@ -95,19 +57,23 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
   const styles = {
     label: {
       fontSize: 20,
+      paddingLeft: 15,
+      paddingRight: 15,
+      lineHeight: 1,
     },
     menu: {
+      margin: 15,
       width: 250,
     },
     customWidth: {
-      // marginLeft: 0,//effects dropped down menu
-      fontSize: 20,
-      paddingLeft: 0,
+      width: 200,
     }
   }
 
   return (
     <div className="input">
+      <h2 className="previousVal">4.50</h2>
+      <h2>{value.toFixed(2)}</h2>
       <DropDownMenu
         value={1}
         autoWidth={false}
@@ -118,9 +84,9 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
         >
         <MenuItem
           value={1}
-          label={name +': ' + value.toFixed(2)}
+          label={name}
           className="dropDownMenu">
-          <h2>{name +': ' + value.toFixed(2)}</h2>
+          <h2>{name}</h2>
           <Slider
             step={0.25}
             min={1}
