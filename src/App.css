@@ -17,12 +17,41 @@
   background-color: white;
   width: 45%;
   margin: 1%;
-  /*margin: .5em;*/
 }
 
 .input h2 {
   margin: 0;
   padding: .25em;
+}
+
+.reportConfig {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  /*margin: .5em;*/
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.textInput, .muiInput {
+  width: 40%;
+  margin: .5em;
+}
+
+.textInput > input {
+  font-size: 1em;
+  width: 100%;
+}
+
+.muiInput {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+hr {
+  width: 90%;
 }
 
 .previousVal {
@@ -39,16 +68,14 @@
   display: inline-block;
   width: 100%;
   text-align: center;
-  /*padding: .5em;*/
-  /*margin: 1em;*/
   background-color: white;
 }
 
 textarea {
-  margin: .5em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  flex-grow: 1;
-  /*width: 95%;*/
+  width: 100%;
   min-width: 300px;
 }
 
@@ -70,8 +97,9 @@ textarea {
   font-size: 50px;
 }
 
-.title {
-  width: 100%
+.reportButton {
+  width: 80%;
+  height: 10em;
 }
 
 @media (max-width: 425px) {

@@ -10,6 +10,8 @@ import Slider from 'material-ui/Slider'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 
+import RaisedButton from 'material-ui/RaisedButton'
+
 const getCurrentState = state => state
 
 let App = (state) => {
@@ -17,23 +19,41 @@ let App = (state) => {
   const metricValues = getCurrentState(state).metricValues
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
 
+  const styles = {
+    button: {
+      height: 50,
+      margin: 12,
+    }
+  }
+
   return (
     <div className="reportInput">
-      <div className="title">
-        <h3>New Report Screen</h3>
-      </div>
-        {keys.map( (key, i) =>
-        <MuiThemeProvider
-          key={i + 'a'}>
-          <DropDownSliderInput
-          key={i + 'b'}
-          id={key}
-          name={metricValues[key].name}
-          value={metricValues[key].val}
-          />
-        </MuiThemeProvider>
+
+      <NewReportConfigMenu />
+
+      <hr/>
+
+      {keys.map( (key, i) =>
+      <MuiThemeProvider
+        key={i + 'a'}>
+        <DropDownSliderInput
+        key={i + 'b'}
+        id={key}
+        name={metricValues[key].name}
+        value={metricValues[key].val}
+        />
+      </MuiThemeProvider>
       )}
       <NoteField />
+
+      <MuiThemeProvider>
+        <RaisedButton
+          label="Save Report"
+          style={styles.button}
+          className="reportButton"
+          />
+      </MuiThemeProvider>
+
     </div>
   )
 }
@@ -41,6 +61,54 @@ let App = (state) => {
 App = connect(getCurrentState)(App)
 
 export default App;
+
+import Toggle from 'material-ui/Toggle'
+
+let NewReportConfigMenu = () => {
+  const styles = {
+    menu: {
+      backgroundColor: 'white',
+      height: 30,
+      width: 75,
+    },
+    label: {
+      fontSize: 15,
+      lineHeight: 2,
+    },
+  }
+  return (
+    <div className="reportConfig">
+      <div className="textInput">
+        <input type="text" placeholder="Model"></input>
+      </div>
+      <div className="textInput">
+        <input type="text" placeholder="Short Name"></input>
+      </div>
+      <div className="muiInput">
+        <h4>Config</h4>
+        <MuiThemeProvider>
+          <DropDownMenu
+            value={1}
+            labelStyle={styles.label}
+            style={styles.menu}>
+            <MenuItem primaryText={1} label={1} value={1}/>
+            <MenuItem primaryText={2} label={2} value={2}/>
+            <MenuItem primaryText={3} label={3} value={3}/>
+            <MenuItem primaryText={4} label={4} value={4}/>
+          </DropDownMenu>
+        </MuiThemeProvider>
+      </div>
+      <div className="muiInput">
+        <h4>Ballast</h4>
+        <MuiThemeProvider>
+          <Toggle/>
+        </MuiThemeProvider>
+      </div>
+    </div>
+  )
+}
+
+
 
 let DropDownSliderInput = ({ dispatch, id, name, value }) => {
 
@@ -56,12 +124,13 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
 
   const styles = {
     label: {
-      fontSize: 20,
+      fontSize: 15,
       paddingLeft: 15,
       paddingRight: 15,
       lineHeight: 1,
     },
     menu: {
+      autoWidth: false,
       margin: 15,
       width: 250,
     },
