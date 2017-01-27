@@ -5,6 +5,9 @@ import { changeVal } from './actions'
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+import { Tab, Tabs } from 'material-ui/Tabs'
+import SwipeableViews from 'react-swipeable-views'
+
 import Slider from 'material-ui/Slider'
 
 import DropDownMenu from 'material-ui/DropDownMenu'
@@ -14,7 +17,41 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 const getCurrentState = state => state
 
-let App = (state) => {
+let App = () => {
+
+  var slideIndex = 0
+
+  const handleChange = (value) => {
+    console.log('value:', value);
+    slideIndex = value
+  }
+  console.log('slideIndex:', slideIndex);
+
+  return (
+    <div className="app">
+      <MuiThemeProvider>
+        <Tabs onChange={handleChange}>
+          <Tab label="New Report" value={0} />
+          <Tab label="Existing Reports" value={1} />
+        </Tabs>
+      </MuiThemeProvider>
+      <SwipeableViews
+        index={slideIndex}
+        onChangeIndex={handleChange}>
+        <div>
+          <NewReport />
+        </div>
+        <div>
+          <ExistingReports />
+        </div>
+      </SwipeableViews>
+    </div>
+  )
+}
+
+export default App;
+
+let NewReport = (state) => {
 
   const metricValues = getCurrentState(state).metricValues
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
@@ -58,9 +95,15 @@ let App = (state) => {
   )
 }
 
-App = connect(getCurrentState)(App)
+NewReport = connect(getCurrentState)(NewReport)
 
-export default App;
+let ExistingReports = () => {
+  return (
+    <div className="existingReports">
+      <h3>Existing Reports Will Go Here</h3>
+    </div>
+  )
+}
 
 import Toggle from 'material-ui/Toggle'
 
@@ -101,12 +144,21 @@ let NewReportConfigMenu = () => {
       <div className="muiInput">
         <h4>Ballast</h4>
         <MuiThemeProvider>
-          <Toggle/>
+          <DropDownMenu
+            value={1}
+            labelStyle={styles.label}
+            style={styles.menu}>
+            <MenuItem primaryText={'Yes'} label={'Yes'} value={1}/>
+            <MenuItem primaryText={'No'} label={'No'} value={2}/>
+          </DropDownMenu>
         </MuiThemeProvider>
       </div>
+
     </div>
   )
 }
+
+
 
 
 
