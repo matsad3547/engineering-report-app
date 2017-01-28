@@ -105,8 +105,6 @@ let ExistingReports = () => {
   )
 }
 
-import Toggle from 'material-ui/Toggle'
-
 let NewReportConfigMenu = () => {
   const styles = {
     menu: {

@@ -12,6 +12,7 @@
 
 .existingReports {
   background-color: gray;
+  height: 100vh;
 }
 
 .input {
