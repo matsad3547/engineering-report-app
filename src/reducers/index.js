@@ -67,6 +67,27 @@ export const metricValues = (state = initMetricState, action) => {
   }
 }
 
+export const notes = (state = '', action) => {
+  switch (action.type) {
+    case 'SAVE_REPORT_NOTES':
+      return action.string
+    default:
+    return state
+  }
+}
+
+export const previousMetricValues = (state = [], action) => {
+  return state
+}
+
 export const combinedReducers = combineReducers({
-  metricValues
+  metricValues,
+  notes,
+  previousMetricValues,
 })
+
+//
+// export const combinedReducers = combineReducers({
+//   newReportState,
+//   previousMetricValues,
+// })

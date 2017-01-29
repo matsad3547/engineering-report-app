@@ -4,8 +4,6 @@ import { changeMetricVal } from './actions'
 // import { initVal } from './reducers'
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import injectTapEventPlugin from 'react-tap-event-plugin'
-
 
 import { Tab, Tabs } from 'material-ui/Tabs'
 import SwipeableViews from 'react-swipeable-views'
@@ -17,10 +15,13 @@ import MenuItem from 'material-ui/MenuItem'
 
 import RaisedButton from 'material-ui/RaisedButton'
 
-injectTapEventPlugin()
+
+// const getNewReportState = state => {
+//   // console.log('state:', state.newReportState);
+//   return state.newReportState
+// }
 
 
-const getCurrentState = state => state
 
 let App = () => {
 
@@ -56,9 +57,9 @@ let App = () => {
 
 export default App;
 
-let NewReport = (state) => {
+let NewReport = state => {
 
-  const metricValues = getCurrentState(state).metricValues
+  const metricValues = state.metricValues
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
 
   const styles = {
@@ -100,7 +101,7 @@ let NewReport = (state) => {
   )
 }
 
-NewReport = connect(getCurrentState)(NewReport)
+NewReport = connect(state => state)(NewReport)
 
 let ExistingReports = () => {
   return (
@@ -160,10 +161,6 @@ let NewReportConfigMenu = () => {
     </div>
   )
 }
-
-
-
-
 
 let DropDownSliderInput = ({ dispatch, id, name, value }) => {
 
