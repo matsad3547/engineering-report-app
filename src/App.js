@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { changeVal } from './actions'
+import { changeMetricVal } from './actions'
 // import { initVal } from './reducers'
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+
 
 import { Tab, Tabs } from 'material-ui/Tabs'
 import SwipeableViews from 'react-swipeable-views'
@@ -14,6 +16,9 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 
 import RaisedButton from 'material-ui/RaisedButton'
+
+injectTapEventPlugin()
+
 
 const getCurrentState = state => state
 
@@ -169,7 +174,7 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
       val: input,
       name,
     }
-    dispatch(changeVal(output))
+    dispatch(changeMetricVal(output))
   }
 
   const styles = {

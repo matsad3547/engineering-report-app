@@ -1,9 +1,7 @@
 
-
-export const changeVal = (output) => {
-  // console.log('action output:', output);
+export const changeMetricVal = (output) => {
   return {
-    type: 'CHANGE_VAL',
+    type: 'CHANGE_METRIC_VAL',
     id: output.id,
     val: output.val,
     name: output.name,

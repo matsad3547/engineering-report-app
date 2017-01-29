@@ -37,7 +37,7 @@ const getInitMetricState = metricNames => {
   return initMetricState
 }
 
-const initMetricState = getInitMetricState(metricNames)
+export const initMetricState = getInitMetricState(metricNames)
 
 export const getUnchangedState = (state, changedKey) => {
   let unchangedState = {}
@@ -54,7 +54,7 @@ export const getUnchangedState = (state, changedKey) => {
 export const metricValues = (state = initMetricState, action) => {
 
   switch (action.type) {
-    case 'CHANGE_VAL':
+    case 'CHANGE_METRIC_VAL':
     let unchangedState = getUnchangedState(state, action.id)
       return  Object.assign(unchangedState, {
           [action.id]: {
