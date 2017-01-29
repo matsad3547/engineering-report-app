@@ -76,6 +76,9 @@ export const notes = (state = '', action) => {
   }
 }
 
+export const newReportConfig = (state = {}, action) => {
+  return state
+}
 export const previousMetricValues = (state = [], action) => {
   return state
 }

@@ -7,3 +7,10 @@ export const changeMetricVal = (output) => {
     name: output.name,
   }
 }
+
+export const saveReportNotes = (output) => {
+  return {
+    type: 'SAVE_REPORT_NOTES',
+    string: output,
+  }
+}

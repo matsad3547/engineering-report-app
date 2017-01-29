@@ -3,6 +3,7 @@ import {
   getUnchangedState,
   metricValues,
   notes,
+  newReportConfig,
 } from './index.js'
 
 const action = {
@@ -71,4 +72,8 @@ test('notes() should return a string provided by the action', () => {
     string: 'This is a test of the notes() reducer function'
   }
   expect(notes(undefined, action)).toBe(action.string)
+})
+
+test('newReportConfig() should return an object', () => {
+  expect(typeof(newReportConfig(undefined))).toBe('object')
 })
