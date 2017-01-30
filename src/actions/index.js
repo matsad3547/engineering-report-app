@@ -14,3 +14,13 @@ export const saveReportNotes = (output) => {
     string: output,
   }
 }
+
+export const setNewReportConfig = ({model, shortName, configNum, ballast}) => {
+  return {
+    type: 'SET_NEW_REPORT_CONFIG',
+    model,
+    shortName,
+    configNum,
+    ballast,
+  }
+}

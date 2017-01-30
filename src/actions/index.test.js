@@ -1,6 +1,7 @@
 import {
   changeMetricVal,
   saveReportNotes,
+  setNewReportConfig,
 } from './index.js'
 
 const metricValActionOutput = {
@@ -25,4 +26,21 @@ test('saveReportNotes() action type should be "SAVE_REPORT_NOTES"', () => {
 test('saveReportNotes() should return a string', () => {
   let output = 'This is a test string'
   expect(saveReportNotes(output).string).toBe(output)
+})
+
+test ('setNewReportConfig() action type should be "SET_NEW_REPORT_CONFIG"', () => {
+  let output = {}
+  expect(setNewReportConfig(output).type).toBe('SET_NEW_REPORT_CONFIG')
+})
+
+test ('setNewReportConfig() should return an object with model, shortName, configNum, and ballast', () => {
+  let output = {
+    type: 'SET_NEW_REPORT_CONFIG',
+    model: 'string',
+    shortName: 'string',
+    configNum: 1,
+    ballast: false,
+  }
+  let returnValues = Object.keys(output)
+  expect(Object.keys(setNewReportConfig(output))).toEqual(returnValues)
 })
