@@ -75,5 +75,22 @@ test('notes() should return a string provided by the action', () => {
 })
 
 test('newReportConfig() should return an object', () => {
-  expect(typeof(newReportConfig(undefined))).toBe('object')
+  expect(typeof(newReportConfig(undefined, 'TEST'))).toBe('object')
+})
+
+test ('newReportConfig() should return an object with model, short name, config number, and ballast when given a action type of "SET_NEW_REPORT_CONFIG"', () => {
+  let action = {
+    type: 'SET_NEW_REPORT_CONFIG',
+    model: 'string',
+    shortName: 'string',
+    configNum: 1,
+    ballast: false,
+  }
+  let output = {
+    model: 'string',
+    shortName: 'string',
+    configNum: 1,
+    ballast: false,
+  }
+  expect(newReportConfig({}, action)).toEqual(output)
 })

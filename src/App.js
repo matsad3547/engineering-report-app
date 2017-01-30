@@ -162,6 +162,10 @@ let NewReportConfigMenu = () => {
   )
 }
 
+
+
+
+
 let DropDownSliderInput = ({ dispatch, id, name, value }) => {
 
   const onChange = (e, input) => {

@@ -77,8 +77,19 @@ export const notes = (state = '', action) => {
 }
 
 export const newReportConfig = (state = {}, action) => {
-  return state
+  switch (action.type) {
+    case 'SET_NEW_REPORT_CONFIG':
+      return {
+        model: action.model,
+        shortName: action.shortName,
+        configNum: action.configNum,
+        ballast: action.ballast,
+      }
+    default:
+    return state
+  }
 }
+
 export const previousMetricValues = (state = [], action) => {
   return state
 }
