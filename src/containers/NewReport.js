@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import * as firebase from 'firebase'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -7,8 +8,9 @@ import RaisedButton from 'material-ui/RaisedButton'
 import NewReportConfigMenu from './NewReportConfigMenu'
 import DropDownSliderInput from './DropDownSliderInput'
 import NoteField from './NoteField'
+import fbRef from './Firebase'
 
-let NewReport = state => {
+let NewReport = (state, { dispatch }) => {
 
   const newReportConfig = state.newReportConfig
   const metricValues = state.metricValues
@@ -21,6 +23,19 @@ let NewReport = state => {
       height: 50,
       margin: 12,
     }
+  }
+
+  const submitReport = e => {
+    e.preventDefault()
+    const newReportKey = Date.now()
+    const newReport = {
+        config: newReportConfig,
+        metricValues,
+        notes,
+    }
+    let updates = {}
+    updates['test reports/' + newReportKey] = newReport
+    fbRef.update(updates)
   }
 
   return (
@@ -52,6 +67,7 @@ let NewReport = state => {
           label="Save Report"
           style={styles.button}
           className="reportButton"
+          onClick={submitReport}
           />
       </MuiThemeProvider>
 
