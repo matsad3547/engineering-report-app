@@ -59,6 +59,9 @@ export default App;
 
 let NewReport = state => {
 
+  const newReportConfig = state.newReportConfig
+  // console.log('new report config at new report component:', newReportConfig);
+
   const metricValues = state.metricValues
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
 
@@ -72,7 +75,9 @@ let NewReport = state => {
   return (
     <div className="reportInput">
 
-      <NewReportConfigMenu />
+      <NewReportConfigMenu
+        newReportConfig={newReportConfig}
+        />
 
       <hr/>
 
@@ -111,7 +116,52 @@ let ExistingReports = () => {
   )
 }
 
-let NewReportConfigMenu = () => {
+import { setNewReportConfig } from './actions'
+
+let NewReportConfigMenu = ({ newReportConfig, dispatch }) => {
+
+  const {
+    model,
+    shortName,
+    configNum,
+    ballast,
+  } = newReportConfig
+
+  const output = {
+    model,
+    shortName,
+    configNum,
+    ballast,
+  }
+
+  const configDispatch = () => {
+    dispatch(setNewReportConfig(output))
+  }
+
+  const onChange = {
+
+    model(e) {
+      e.preventDefault()
+      output.model = e.target.value
+      configDispatch()
+    },
+    shortName(e) {
+      e.preventDefault()
+      output.shortName = e.target.value
+      configDispatch()
+    },
+    ballast(e, k, p) {
+      e.preventDefault()
+      output.ballast = p
+      configDispatch()
+    },
+    configNum(e, k, p) {
+      e.preventDefault()
+      output.configNum = p
+      configDispatch()
+    },
+  }
+
   const styles = {
     menu: {
       backgroundColor: 'white',
@@ -123,21 +173,33 @@ let NewReportConfigMenu = () => {
       lineHeight: 2,
     },
   }
+
   return (
     <div className="reportConfig">
       <div className="textInput">
-        <input type="text" placeholder="Model"></input>
+        <input type="text"
+          placeholder="Model"
+          value={model}
+          onChange={onChange.model}
+          />
       </div>
       <div className="textInput">
-        <input type="text" placeholder="Short Name"></input>
+        <input
+          type="text"
+          placeholder="Short Name"
+          value={shortName}
+          onChange={onChange.shortName}
+          />
       </div>
       <div className="muiInput">
         <h4>Config</h4>
         <MuiThemeProvider>
           <DropDownMenu
-            value={1}
+            onChange={onChange.configNum}
+            value={configNum}
             labelStyle={styles.label}
-            style={styles.menu}>
+            style={styles.menu}
+            >
             <MenuItem primaryText={1} label={1} value={1}/>
             <MenuItem primaryText={2} label={2} value={2}/>
             <MenuItem primaryText={3} label={3} value={3}/>
@@ -149,22 +211,20 @@ let NewReportConfigMenu = () => {
         <h4>Ballast</h4>
         <MuiThemeProvider>
           <DropDownMenu
-            value={1}
+            onChange={onChange.ballast}
+            value={ballast}
             labelStyle={styles.label}
             style={styles.menu}>
+            <MenuItem primaryText={'No'} label={'No'} value={0}/>
             <MenuItem primaryText={'Yes'} label={'Yes'} value={1}/>
-            <MenuItem primaryText={'No'} label={'No'} value={2}/>
           </DropDownMenu>
         </MuiThemeProvider>
       </div>
-
     </div>
   )
 }
 
-
-
-
+NewReportConfigMenu = connect()(NewReportConfigMenu)
 
 let DropDownSliderInput = ({ dispatch, id, name, value }) => {
 

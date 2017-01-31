@@ -2,6 +2,13 @@ import { combineReducers } from 'redux'
 
 export const initVal = 5
 
+const initReportConfig = {
+  model: '',
+  shortName: '',
+  configNum: 1,
+  ballast: 0,
+}
+
 const metricNames = [
   'Awesomeness',
   'Coolness',
@@ -76,14 +83,16 @@ export const notes = (state = '', action) => {
   }
 }
 
-export const newReportConfig = (state = {}, action) => {
-  switch (action.type) {
+export const newReportConfig = (state = initReportConfig, action) => {
+
+  const { type, model, shortName, configNum, ballast } = action
+  switch (type) {
     case 'SET_NEW_REPORT_CONFIG':
       return {
-        model: action.model,
-        shortName: action.shortName,
-        configNum: action.configNum,
-        ballast: action.ballast,
+        model,
+        shortName,
+        configNum,
+        ballast,
       }
     default:
     return state
@@ -95,6 +104,7 @@ export const previousMetricValues = (state = [], action) => {
 }
 
 export const combinedReducers = combineReducers({
+  newReportConfig,
   metricValues,
   notes,
   previousMetricValues,
