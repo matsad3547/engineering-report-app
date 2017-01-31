@@ -6,7 +6,7 @@ const initReportConfig = {
   model: '',
   shortName: '',
   configNum: 1,
-  ballast: 0,
+  ballast: 'No',
 }
 
 const metricNames = [
