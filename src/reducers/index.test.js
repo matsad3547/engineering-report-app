@@ -1,9 +1,11 @@
 import {
+  metricNames,
   initMetricState,
   getUnchangedState,
   metricValues,
   notes,
   newReportConfig,
+  previousMetricValues,
 } from './index.js'
 
 const action = {
@@ -93,4 +95,12 @@ test ('newReportConfig() should return an object with model, short name, config 
     ballast: false,
   }
   expect(newReportConfig({}, action)).toEqual(output)
+})
+
+test('previousMetricValues() should return an object (which is actually an array)', () => {
+  expect(typeof(previousMetricValues(undefined, 'TEST'))).toBe('object')
+})
+
+test('previousMetricValues() should return an empty array by default', () => {
+  expect(previousMetricValues(undefined, 'TEST').length).toBe(0)
 })

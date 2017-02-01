@@ -9,7 +9,7 @@ const initReportConfig = {
   ballast: 'No',
 }
 
-const metricNames = [
+export const metricNames = [
   'Awesomeness',
   'Coolness',
   'Sweetness',
@@ -28,11 +28,11 @@ const metricNames = [
   'Brownness',
   'Blueness'
  ]
-//
+
 const getInitMetricState = metricNames => {
   let initMetricState = {}
   metricNames.map( (name, i) => {
-    let str = i + 1
+    let str = i
     Object.assign( initMetricState, {
       [str]: {
         name,
@@ -81,7 +81,6 @@ export const notes = (state = '', action) => {
     case 'SAVE_REPORT_NOTES':
       return action.string
     case 'SAVE_REPORT_AND_RESET':
-      console.log('received action at notes');
       return ''
     default:
     return state
@@ -107,7 +106,13 @@ export const newReportConfig = (state = initReportConfig, action) => {
 }
 
 export const previousMetricValues = (state = [], action) => {
-  return state
+  switch (action.type) {
+    case 'SAVE_REPORT_AND_RESET':
+      console.log('editing previous metric values');
+      return action.output
+    default:
+      return state
+  }
 }
 
 export const combinedReducers = combineReducers({
@@ -117,8 +122,12 @@ export const combinedReducers = combineReducers({
   previousMetricValues,
 })
 
+// Jesse's way of setting the metricValues state
+// return {
+//   ...metricValues,
 //
-// export const combinedReducers = combineReducers({
-//   newReportState,
-//   previousMetricValues,
-// })
+//   [action.id]: {
+//     ...metricValues[action.id],
+//     action.metricValueUpdate,
+//   }
+// }

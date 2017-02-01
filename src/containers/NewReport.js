@@ -15,11 +15,21 @@ import fbRef from './Firebase'
 let NewReport = ({  newReportConfig,
                     metricValues,
                     notes,
-                    saveReportData }) => {
+                    previousMetricValues,                   dispatch }) => {
 
-  const previousMetricValues = []
+  // const previousMetricValues = []
 
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
+
+  const getMetricValArr = () => {
+    let metricValArr = []
+    for (let key in metricValues) {
+      if (metricValues.hasOwnProperty(key)){
+        metricValArr[key] = metricValues[key].val
+      }
+    }
+    return metricValArr
+  }
 
   const submitReport = e => {
     e.preventDefault()
@@ -32,7 +42,9 @@ let NewReport = ({  newReportConfig,
     let updates = {}
     updates['test reports/' + newReportKey] = newReport
     fbRef.update(updates)
-    saveReportData()
+    const metricValArr = getMetricValArr()
+    dispatch(saveReport(metricValArr))
+    // saveReportData()
   }
 
   const styles = {
@@ -85,18 +97,12 @@ const mapStateToProps = state => {
     newReportConfig: state.newReportConfig,
     metricValues: state.metricValues,
     notes: state.notes,
-  }
-}
-
-const mapDispatchToProps = (dispatch, state) => {
-  return {
-    saveReportData: () => dispatch(saveReport())
+    previousMetricValues: state.previousMetricValues,
   }
 }
 
 NewReport = connect(
   mapStateToProps,
-  mapDispatchToProps
 )(NewReport)
 
 export default NewReport

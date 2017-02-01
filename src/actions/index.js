@@ -1,5 +1,5 @@
 
-export const changeMetricVal = (output) => {
+export const changeMetricVal = output => {
   return {
     type: 'CHANGE_METRIC_VAL',
     id: output.id,
@@ -8,7 +8,7 @@ export const changeMetricVal = (output) => {
   }
 }
 
-export const saveReportNotes = (output) => {
+export const saveReportNotes = output => {
   return {
     type: 'SAVE_REPORT_NOTES',
     string: output,
@@ -25,8 +25,16 @@ export const setNewReportConfig = ({model, shortName, configNum, ballast}) => {
   }
 }
 
-export const saveReport = () => {
+export const saveReport = output => {
   return {
     type: 'SAVE_REPORT_AND_RESET',
+    output,
+  }
+}
+
+export const selectPage = output => {
+  return {
+    type:'CHANGE_PAGE',
+    
   }
 }
