@@ -14,22 +14,28 @@ import NewReport from './containers/NewReport'
 let App = ({  pageDisplayed,
               dispatch }) => {
 
-  const handleChange = (value, e) => {
+  const handleTabClick = (value, e) => {
     e.preventDefault()
+    dispatch(selectPage(value))
+  }
+
+  const handleSwipe = (value) => {
     dispatch(selectPage(value))
   }
 
   return (
     <div className="app">
       <MuiThemeProvider>
-        <Tabs onChange={handleChange}>
+        <Tabs
+          onChange={handleTabClick}
+          value={pageDisplayed}>
           <Tab label="New Report" value={0} />
           <Tab label="Existing Reports" value={1} />
         </Tabs>
       </MuiThemeProvider>
       <SwipeableViews
         index={pageDisplayed}
-        onChangeIndex={handleChange}>
+        onChangeIndex={handleSwipe}>
         <div>
           <NewReport />
         </div>
