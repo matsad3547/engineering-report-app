@@ -1,5 +1,7 @@
 import React from 'react';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
+
+import { selectPage } from './actions'
 
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -9,12 +11,12 @@ import SwipeableViews from 'react-swipeable-views'
 
 import NewReport from './containers/NewReport'
 
-let App = () => {
+let App = ({  pageDisplayed,
+              dispatch }) => {
 
-  var slideIndex = 0
-
-  const handleChange = (value) => {
-    slideIndex = value
+  const handleChange = (value, e) => {
+    e.preventDefault()
+    dispatch(selectPage(value))
   }
 
   return (
@@ -26,7 +28,7 @@ let App = () => {
         </Tabs>
       </MuiThemeProvider>
       <SwipeableViews
-        index={slideIndex}
+        index={pageDisplayed}
         onChangeIndex={handleChange}>
         <div>
           <NewReport />
@@ -38,6 +40,16 @@ let App = () => {
     </div>
   )
 }
+
+const mapStateToProps = state => {
+  return {
+    pageDisplayed: state.pageDisplayed,
+  }
+}
+
+App = connect(
+  mapStateToProps,
+  )(App)
 
 export default App;
 

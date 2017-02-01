@@ -114,7 +114,7 @@ export const previousMetricValues = (state = [], { type, output }) => {
   }
 }
 
-export const pageDisplayed = (state = 1, { type, output }) => {
+export const pageDisplayed = (state = 0, { type, output }) => {
   switch (type) {
     case 'CHANGE_PAGE':
       return output
@@ -129,6 +129,7 @@ export const combinedReducers = combineReducers({
   metricValues,
   notes,
   previousMetricValues,
+  pageDisplayed,
 })
 
 // Jesse's way of setting the metricValues state

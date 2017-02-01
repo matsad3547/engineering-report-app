@@ -103,6 +103,6 @@ const mapStateToProps = state => {
 
 NewReport = connect(
   mapStateToProps,
-)(NewReport)
+  )(NewReport)
 
 export default NewReport
