@@ -58,15 +58,15 @@ export const getUnchangedState = (state, changedKey) => {
   return unchangedState
 }
 
-export const metricValues = (state = initMetricState, action) => {
+export const metricValues = (state = initMetricState, { type, id, name, val }) => {
 
-  switch (action.type) {
+  switch (type) {
     case 'CHANGE_METRIC_VAL':
-    let unchangedState = getUnchangedState(state, action.id)
+    let unchangedState = getUnchangedState(state, id)
       return  Object.assign(unchangedState, {
-          [action.id]: {
-            name: action.name,
-            val: action.val,
+          [id]: {
+            name,
+            val,
           }
       })
       case 'SAVE_REPORT_AND_RESET':
@@ -76,10 +76,10 @@ export const metricValues = (state = initMetricState, action) => {
   }
 }
 
-export const notes = (state = '', action) => {
-  switch (action.type) {
+export const notes = (state = '', { type, string }) => {
+  switch (type) {
     case 'SAVE_REPORT_NOTES':
-      return action.string
+      return string
     case 'SAVE_REPORT_AND_RESET':
       return ''
     default:
@@ -105,11 +105,20 @@ export const newReportConfig = (state = initReportConfig, action) => {
   }
 }
 
-export const previousMetricValues = (state = [], action) => {
-  switch (action.type) {
+export const previousMetricValues = (state = [], { type, output }) => {
+  switch (type) {
     case 'SAVE_REPORT_AND_RESET':
-      console.log('editing previous metric values');
-      return action.output
+      return output
+    default:
+      return state
+  }
+}
+
+export const pageDisplayed = (state = 1, { type, output }) => {
+  switch (type) {
+    case 'CHANGE_PAGE':
+      return output
+
     default:
       return state
   }

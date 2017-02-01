@@ -35,6 +35,6 @@ export const saveReport = output => {
 export const selectPage = output => {
   return {
     type:'CHANGE_PAGE',
-    
+    output,
   }
 }
