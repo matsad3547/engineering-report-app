@@ -8,7 +8,7 @@ import MenuItem from 'material-ui/MenuItem'
 import Slider from 'material-ui/Slider'
 
 
-let DropDownSliderInput = ({ dispatch, id, name, value }) => {
+let DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
 
   const onChange = (e, input) => {
     e.preventDefault()
@@ -39,7 +39,7 @@ let DropDownSliderInput = ({ dispatch, id, name, value }) => {
 
   return (
     <div className="input">
-      <h2 className="previousVal">4.50</h2>
+      <h2 className="previousVal">{previousVal.toFixed(2)}</h2>
       <h2>{value.toFixed(2)}</h2>
       <DropDownMenu
         value={1}

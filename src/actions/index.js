@@ -24,3 +24,9 @@ export const setNewReportConfig = ({model, shortName, configNum, ballast}) => {
     ballast,
   }
 }
+
+export const saveReport = () => {
+  return {
+    type: 'SAVE_REPORT_AND_RESET',
+  }
+}

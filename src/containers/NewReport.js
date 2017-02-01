@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import * as firebase from 'firebase'
+// import * as firebase from 'firebase'
+
+import { saveReport } from '../actions'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -10,20 +12,14 @@ import DropDownSliderInput from './DropDownSliderInput'
 import NoteField from './NoteField'
 import fbRef from './Firebase'
 
-let NewReport = (state, { dispatch }) => {
+let NewReport = ({  newReportConfig,
+                    metricValues,
+                    notes,
+                    saveReportData }) => {
 
-  const newReportConfig = state.newReportConfig
-  const metricValues = state.metricValues
-  const notes = state.notes
+  const previousMetricValues = []
 
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
-
-  const styles = {
-    button: {
-      height: 50,
-      margin: 12,
-    }
-  }
 
   const submitReport = e => {
     e.preventDefault()
@@ -36,6 +32,14 @@ let NewReport = (state, { dispatch }) => {
     let updates = {}
     updates['test reports/' + newReportKey] = newReport
     fbRef.update(updates)
+    saveReportData()
+  }
+
+  const styles = {
+    button: {
+      height: 50,
+      margin: 12,
+    }
   }
 
   return (
@@ -55,6 +59,7 @@ let NewReport = (state, { dispatch }) => {
         id={key}
         name={metricValues[key].name}
         value={metricValues[key].val}
+        previousVal={previousMetricValues[i] ? previousMetricValues[i] : 4.5}
         />
       </MuiThemeProvider>
       )}
@@ -75,6 +80,23 @@ let NewReport = (state, { dispatch }) => {
   )
 }
 
-NewReport = connect(state => state)(NewReport)
+const mapStateToProps = state => {
+  return {
+    newReportConfig: state.newReportConfig,
+    metricValues: state.metricValues,
+    notes: state.notes,
+  }
+}
+
+const mapDispatchToProps = (dispatch, state) => {
+  return {
+    saveReportData: () => dispatch(saveReport())
+  }
+}
+
+NewReport = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewReport)
 
 export default NewReport

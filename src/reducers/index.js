@@ -69,6 +69,8 @@ export const metricValues = (state = initMetricState, action) => {
             val: action.val,
           }
       })
+      case 'SAVE_REPORT_AND_RESET':
+      return initMetricState
     default:
     return state
   }
@@ -78,6 +80,9 @@ export const notes = (state = '', action) => {
   switch (action.type) {
     case 'SAVE_REPORT_NOTES':
       return action.string
+    case 'SAVE_REPORT_AND_RESET':
+      console.log('received action at notes');
+      return ''
     default:
     return state
   }
@@ -94,6 +99,8 @@ export const newReportConfig = (state = initReportConfig, action) => {
         configNum,
         ballast,
       }
+    case 'SAVE_REPORT_AND_RESET':
+      return initReportConfig
     default:
     return state
   }

@@ -2,7 +2,8 @@ import {
   changeMetricVal,
   saveReportNotes,
   setNewReportConfig,
-} from './index.js'
+  saveReport,
+        } from './index.js'
 
 const metricValActionOutput = {
   id: 1,
@@ -43,4 +44,12 @@ test ('setNewReportConfig() should return an object with model, shortName, confi
   }
   let returnValues = Object.keys(output)
   expect(Object.keys(setNewReportConfig(output))).toEqual(returnValues)
+})
+
+test('saveReport() should return an object', () => {
+  expect(typeof(saveReport())).toBe('object')
+})
+
+test('saveReport() should return an action type of "SAVE_REPORT_AND_RESET"', () => {
+  expect(saveReport().type).toBe('SAVE_REPORT_AND_RESET')
 })
