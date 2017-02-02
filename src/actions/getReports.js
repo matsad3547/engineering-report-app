@@ -16,6 +16,15 @@ export const getReports = ref => {
     .catch( err => console.log('there was an error:', err))
 }
 
-const getFirstTen = obj => {
+export const getFirstTen = obj => {
   let firstTenObj = []
+  let i = 0
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      while (i < 10) {
+        firstTenObj.push(obj[key])
+      }
+    }
+  }
+  return firstTenObj
 }
