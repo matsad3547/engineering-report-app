@@ -1,10 +1,10 @@
 
-export const changeMetricVal = output => {
+export const changeMetricVal = ({ id, val, name }) => {
   return {
     type: 'CHANGE_METRIC_VAL',
-    id: output.id,
-    val: output.val,
-    name: output.name,
+    id,
+    val,
+    name,
   }
 }
 
@@ -37,4 +37,12 @@ export const selectPage = output => {
     type:'CHANGE_PAGE',
     output,
   }
+}
+
+export const requestReports = ref => {
+
+}
+
+export const receiveReports = reports => {
+
 }
