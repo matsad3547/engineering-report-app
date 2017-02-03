@@ -54,6 +54,9 @@ export const receiveReports = reports => {
   }
 }
 
-export const reportError = () => {
-
+export const reportError = error => {
+  return {
+    type: 'REPORT_ERROR',
+    error
+  }
 }

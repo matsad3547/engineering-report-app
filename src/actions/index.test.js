@@ -6,6 +6,7 @@ import {
   selectPage,
   requestReports,
   receiveReports,
+  reportError,
         } from './index.js'
 
 import {
@@ -133,6 +134,21 @@ describe('receiveReports() ', () => {
     expect(receiveReports('test').reports).toBe('test')
   })
 
+})
+
+describe('reportError() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(reportError())).toBe('object')
+  })
+
+  test('should return an action type of "REPORT_ERROR"', () => {
+    expect(reportError().type).toBe('REPORT_ERROR')
+  })
+
+  test('should return any error passed in as a parameter', () => {
+    expect(reportError('test').error).toBe('test')
+  })
 })
 
 describe( 'getReports() ', () => {

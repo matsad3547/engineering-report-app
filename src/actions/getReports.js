@@ -24,7 +24,7 @@ export const getReports = (ref, action) => {
     })
     .catch( err => {
       console.log('An error occured while querying the database:', err);
-      dispatch(reportError())
+      dispatch(reportError(err))
     })
   }
 
