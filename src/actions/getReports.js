@@ -5,18 +5,18 @@ import database from '../containers/Firebase'
 
 export const getReports = (ref, action) => {
 
-  return dispatch => {
-    dispatch(requestReports(ref));
-    console.log('get reports is getting tested');
+  let urlKey = ''
+  if (ref === 'reports') {
+    urlKey = 'test reports'
+  }
+  else {
+    urlKey = 'test reports/' + ref
+  }
+  console.log('url key:', urlKey);
 
-    let urlKey = ''
-    if (ref === 'reports') {
-      urlKey = 'test reports'
-    }
-    else {
-      urlKey = 'test reports/' + ref
-    }
-    console.log('url key:', urlKey);
+  return dispatch => {
+    dispatch(requestReports());
+    console.log('get reports is getting tested');
     return database.ref(urlKey).once('value', snap => {
       const reports = snap.val()
       console.log('reports:', reports);

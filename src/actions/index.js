@@ -39,16 +39,19 @@ export const selectPage = output => {
   }
 }
 
-export const requestReports = ref => {
+export const requestReports = () => {
   console.log('request reports called');
   return {
     type: 'REPORTS_REQUESTED',
-    ref,
   }
 }
 
 export const receiveReports = reports => {
-
+  console.log('receive reports called');
+  return {
+    type: 'REPORTS_RECEIVED',
+    reports,
+  }
 }
 
 export const reportError = () => {

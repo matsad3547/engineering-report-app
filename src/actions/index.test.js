@@ -117,9 +117,22 @@ describe('requestReports() ', () => {
     expect(requestReports().type).toBe('REPORTS_REQUESTED')
   })
 
-  test('should return the ref passed to it', () => {
-    expect(requestReports('test').ref).toBe('test')
+})
+
+describe('receiveReports() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(receiveReports(undefined))).toBe('object')
   })
+
+  test('should return an action type of "REPORTS_RECEIVED"', () => {
+    expect(receiveReports().type).toBe('REPORTS_RECEIVED')
+  })
+
+  test('should return a report variable passed into it', () => {
+    expect(receiveReports('test').reports).toBe('test')
+  })
+
 })
 
 describe( 'getReports() ', () => {
