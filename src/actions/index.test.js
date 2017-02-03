@@ -153,6 +153,6 @@ describe('reportError() ', () => {
 
 describe( 'getReports() ', () => {
   test('should do something', () => {
-    expect(getReports('reports')).toEqual()
+    expect(typeof(getReports('reports'))).toBe('function')
   })
 })

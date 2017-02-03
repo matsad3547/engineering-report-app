@@ -7,6 +7,7 @@ import {
   newReportConfig,
   previousMetricValues,
   pageDisplayed,
+  reports,
       } from './index.js'
 
 const action = {
@@ -132,4 +133,58 @@ describe('pageDisplayed() ', () => {
     }
     expect(pageDisplayed(undefined, action)).toBe(2)
   })
+})
+
+describe('reports() ', () => {
+
+  test('should return an object by default', () => {
+    expect(typeof(reports(undefined, 'test'))).toBe('object')
+  })
+
+  test('should return a status of "requested" given an action type of "REPORTS_REQUESTED"', () => {
+
+    const action = { type: 'REPORTS_REQUESTED' }
+
+    expect(reports(undefined, action).status).toBe('requested')
+  })
+
+  test('should return a status of "received" given an action type of "REPORTS_RECEIVED"', () => {
+
+    const action = { type: 'REPORTS_RECEIVED' }
+
+    expect(reports(undefined, action).status).toBe('received')
+  })
+
+  test('should return reports passed in as a parameter an action type of "REPORTS_RECEIVED"', () => {
+
+    const action = {
+      type: 'REPORTS_RECEIVED',
+      reports: ['test'],
+    }
+
+    expect(reports(undefined, action).reports).toEqual(['test'])
+  })
+
+  test('should return an error passed in as a parameter an action type of "REPORT_ERROR"', () => {
+
+    const action = {
+      type: 'REPORT_ERROR',
+      error: 'test error',
+    }
+
+    expect(reports(undefined, action).error).toEqual(
+    'test error')
+  })
+
+  test('should return an status of "erroed" passed when passed an action type of "REPORT_ERROR"', () => {
+
+    const action = {
+      type: 'REPORT_ERROR',
+      error: 'test error',
+    }
+
+    expect(reports(undefined, action).status).toEqual(
+    'errored')
+  })
+
 })

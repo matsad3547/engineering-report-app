@@ -124,6 +124,27 @@ export const pageDisplayed = (state = 0, { type, output }) => {
   }
 }
 
+export const reports = (state = {}, { type, reports, error }) => {
+  switch (type) {
+    case 'REPORTS_REQUESTED':
+    return {
+      status: 'requested',
+    }
+    case 'REPORTS_RECEIVED':
+    return {
+      status: 'received',
+      reports,
+    }
+    case 'REPORT_ERROR':
+    return {
+      status: 'errored',
+      error,
+    }
+    default:
+    return {}
+  }
+}
+
 export const combinedReducers = combineReducers({
   newReportConfig,
   metricValues,
