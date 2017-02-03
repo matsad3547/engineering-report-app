@@ -23,12 +23,12 @@ describe('changeMetricVal() ', () => {
 })
 
 describe('saveReportNotes() ', () => {
-  test('saveReportNotes() action type should be "SAVE_REPORT_NOTES"', () => {
+  test('action type should be "SAVE_REPORT_NOTES"', () => {
     let output = ''
     expect(saveReportNotes(output).type).toBe('SAVE_REPORT_NOTES')
   })
 
-  test('saveReportNotes() should return a string', () => {
+  test('should return a string', () => {
     let output = 'This is a test string'
     expect(saveReportNotes(output).string).toBe(output)
   })

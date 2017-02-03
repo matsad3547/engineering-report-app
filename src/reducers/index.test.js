@@ -7,7 +7,13 @@ import {
   newReportConfig,
   previousMetricValues,
   pageDisplayed,
-} from './index.js'
+      } from './index.js'
+
+
+import {
+  getReports,
+  getFirstTen,
+      } from './getReports'
 
 const action = {
     type: 'TEST_REDUCER'
@@ -131,5 +137,35 @@ describe('pageDisplayed() ', () => {
       output: 2,
     }
     expect(pageDisplayed(undefined, action)).toBe(2)
+  })
+})
+
+describe( 'getFirstTen() ', () => {
+
+  test('should return an array', () => {
+    expect(getFirstTen()).toEqual([])
+  })
+
+  test('should return an array with a max of ten items', () => {
+    const test = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4,
+      e: 5,
+      f: 6,
+      g: 7,
+      h: 8,
+      i: 9,
+      j: 10,
+      k: 11,
+    }
+    expect(getFirstTen(test).length).toBe(10)
+  })
+})
+
+describe( 'getReports() ', () => {
+  test('should do something', () => {
+    expect(getReports('reports')).toEqual()
   })
 })
