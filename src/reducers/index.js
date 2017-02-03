@@ -9,6 +9,11 @@ const initReportConfig = {
   ballast: 'No',
 }
 
+const initReports = {
+  status: 'not requested',
+  reports: [],
+  error: '',
+}
 export const metricNames = [
   'Awesomeness',
   'Coolness',
@@ -124,7 +129,7 @@ export const pageDisplayed = (state = 0, { type, output }) => {
   }
 }
 
-export const reports = (state = {}, { type, reports, error }) => {
+export const reports = (state = initReports, { type, reports, error }) => {
   switch (type) {
     case 'REPORTS_REQUESTED':
     return {
@@ -135,13 +140,13 @@ export const reports = (state = {}, { type, reports, error }) => {
       status: 'received',
       reports,
     }
-    case 'REPORT_ERROR':
+    case 'REPORTS_ERRORED':
     return {
       status: 'errored',
       error,
     }
     default:
-    return {}
+    return state
   }
 }
 
@@ -151,6 +156,7 @@ export const combinedReducers = combineReducers({
   notes,
   previousMetricValues,
   pageDisplayed,
+  reports,
 })
 
 // Jesse's way of setting the metricValues state

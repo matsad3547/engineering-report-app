@@ -165,10 +165,10 @@ describe('reports() ', () => {
     expect(reports(undefined, action).reports).toEqual(['test'])
   })
 
-  test('should return an error passed in as a parameter an action type of "REPORT_ERROR"', () => {
+  test('should return an error passed in as a parameter an action type of "REPORT_ERRORED"', () => {
 
     const action = {
-      type: 'REPORT_ERROR',
+      type: 'REPORTS_ERRORED',
       error: 'test error',
     }
 
@@ -176,10 +176,10 @@ describe('reports() ', () => {
     'test error')
   })
 
-  test('should return an status of "erroed" passed when passed an action type of "REPORT_ERROR"', () => {
+  test('should return an status of "erroed" passed when passed an action type of "REPORTS_ERRORED"', () => {
 
     const action = {
-      type: 'REPORT_ERROR',
+      type: 'REPORTS_ERRORED',
       error: 'test error',
     }
 

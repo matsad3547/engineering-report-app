@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
-// import * as firebase from 'firebase'
 
 import { saveReport } from '../actions'
+import { getReports } from '../actions/getReports'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -16,8 +16,6 @@ let NewReport = ({  newReportConfig,
                     metricValues,
                     notes,
                     previousMetricValues,                   dispatch }) => {
-
-  // const previousMetricValues = []
 
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
 
@@ -41,9 +39,12 @@ let NewReport = ({  newReportConfig,
     }
     let updates = {}
     updates['test reports/' + newReportKey] = newReport
-    database.update(updates)
+    database.ref().update(updates)
     const metricValArr = getMetricValArr()
-    dispatch(saveReport(metricValArr))
+    dispatch(
+      saveReport(metricValArr),
+      getReports('reports'),
+    )
     // saveReportData()
   }
 

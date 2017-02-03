@@ -86,10 +86,6 @@ describe('selectPage() ', () => {
 
 describe( 'getFirstTen() ', () => {
 
-  test('should return an array', () => {
-    expect(getFirstTen()).toEqual([])
-  })
-
   test('should return an array with a max of ten items', () => {
     const test = {
       a: 1,
@@ -142,8 +138,8 @@ describe('reportError() ', () => {
     expect(typeof(reportError())).toBe('object')
   })
 
-  test('should return an action type of "REPORT_ERROR"', () => {
-    expect(reportError().type).toBe('REPORT_ERROR')
+  test('should return an action type of "REPORTS_ERRORED"', () => {
+    expect(reportError().type).toBe('REPORTS_ERRORED')
   })
 
   test('should return any error passed in as a parameter', () => {
@@ -152,6 +148,7 @@ describe('reportError() ', () => {
 })
 
 describe( 'getReports() ', () => {
+
   test('should do something', () => {
     expect(typeof(getReports('reports'))).toBe('function')
   })

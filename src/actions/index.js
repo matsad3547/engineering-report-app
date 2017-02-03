@@ -40,14 +40,12 @@ export const selectPage = output => {
 }
 
 export const requestReports = () => {
-  console.log('request reports called');
   return {
     type: 'REPORTS_REQUESTED',
   }
 }
 
 export const receiveReports = reports => {
-  console.log('receive reports called');
   return {
     type: 'REPORTS_RECEIVED',
     reports,
@@ -56,7 +54,7 @@ export const receiveReports = reports => {
 
 export const reportError = error => {
   return {
-    type: 'REPORT_ERROR',
+    type: 'REPORTS_ERRORED',
     error
   }
 }

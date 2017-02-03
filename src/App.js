@@ -10,9 +10,12 @@ import { Tab, Tabs } from 'material-ui/Tabs'
 import SwipeableViews from 'react-swipeable-views'
 
 import NewReport from './containers/NewReport'
+import ExistingReports from './containers/ExistingReports'
 
 let App = ({  pageDisplayed,
               dispatch }) => {
+
+// console.log('reports at app:', reports);
 
   const handleTabClick = (value, e) => {
     e.preventDefault()
@@ -49,7 +52,7 @@ let App = ({  pageDisplayed,
 
 const mapStateToProps = state => {
   return {
-    pageDisplayed: state.pageDisplayed,
+    pageDisplayed: state.pageDisplayed
   }
 }
 
@@ -58,11 +61,3 @@ App = connect(
   )(App)
 
 export default App;
-
-let ExistingReports = () => {
-  return (
-    <div className="existingReports">
-      <h3>Existing Reports Will Go Here</h3>
-    </div>
-  )
-}
