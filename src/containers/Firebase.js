@@ -9,9 +9,9 @@ const config = {
 };
 
 
-const fbRef = firebase
+const database = firebase
   .initializeApp(config)
   .database()
   .ref()
 
-export default fbRef
+export default database

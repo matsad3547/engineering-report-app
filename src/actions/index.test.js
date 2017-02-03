@@ -4,7 +4,14 @@ import {
   setNewReportConfig,
   saveReport,
   selectPage,
+  requestReports,
+  receiveReports,
         } from './index.js'
+
+import {
+  getReports,
+  getFirstTen,
+        } from './getReports'
 
 const metricValActionOutput = {
   id: 1,
@@ -73,5 +80,50 @@ describe('selectPage() ', () => {
 
   test('should return an action type of "CHANGE_PAGE"', () => {
     expect(selectPage(undefined).type).toBe('CHANGE_PAGE')
+  })
+})
+
+describe( 'getFirstTen() ', () => {
+
+  test('should return an array', () => {
+    expect(getFirstTen()).toEqual([])
+  })
+
+  test('should return an array with a max of ten items', () => {
+    const test = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4,
+      e: 5,
+      f: 6,
+      g: 7,
+      h: 8,
+      i: 9,
+      j: 10,
+      k: 11,
+    }
+    expect(getFirstTen(test).length).toBe(10)
+  })
+})
+
+describe('requestReports() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(requestReports(undefined))).toBe('object')
+  })
+
+  test('should return an action type of "REPORTS_REQUESTED"', () => {
+    expect(requestReports().type).toBe('REPORTS_REQUESTED')
+  })
+
+  test('should return the ref passed to it', () => {
+    expect(requestReports('test').ref).toBe('test')
+  })
+})
+
+describe( 'getReports() ', () => {
+  test('should do something', () => {
+    expect(getReports('reports')).toEqual()
   })
 })

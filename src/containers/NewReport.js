@@ -10,7 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import NewReportConfigMenu from './NewReportConfigMenu'
 import DropDownSliderInput from './DropDownSliderInput'
 import NoteField from './NoteField'
-import fbRef from './Firebase'
+import database from './Firebase'
 
 let NewReport = ({  newReportConfig,
                     metricValues,
@@ -41,7 +41,7 @@ let NewReport = ({  newReportConfig,
     }
     let updates = {}
     updates['test reports/' + newReportKey] = newReport
-    fbRef.update(updates)
+    database.update(updates)
     const metricValArr = getMetricValArr()
     dispatch(saveReport(metricValArr))
     // saveReportData()
