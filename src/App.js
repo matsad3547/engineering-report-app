@@ -27,26 +27,26 @@ let App = ({  pageDisplayed,
   }
 
   return (
-    <div className="app">
-      <MuiThemeProvider>
+    <MuiThemeProvider>
+      <div className="app">
         <Tabs
           onChange={handleTabClick}
           value={pageDisplayed}>
           <Tab label="New Report" value={0} />
           <Tab label="Existing Reports" value={1} />
         </Tabs>
-      </MuiThemeProvider>
-      <SwipeableViews
-        index={pageDisplayed}
-        onChangeIndex={handleSwipe}>
-        <div>
-          <NewReport />
-        </div>
-        <div>
-          <ExistingReports />
-        </div>
+        <SwipeableViews
+          index={pageDisplayed}
+          onChangeIndex={handleSwipe}>
+          <div>
+            <NewReport />
+          </div>
+          <div>
+            <ExistingReports />
+          </div>
       </SwipeableViews>
     </div>
+  </MuiThemeProvider>
   )
 }
 

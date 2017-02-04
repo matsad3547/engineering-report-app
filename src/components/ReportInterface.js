@@ -1,6 +1,5 @@
 import React from 'react';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
 
 import NewReportConfigMenu from '../containers/NewReportConfigMenu'
@@ -37,7 +36,6 @@ const ReportInterface = ({  config,
     let updates = {}
     updates[`test reports/${newReportKey}`] = newReport
     database.ref().update(updates)
-    // const metricValArr = getMetricValArr(metricValues)
     saveReport()
     getReports()
   }
@@ -59,8 +57,7 @@ const ReportInterface = ({  config,
       <hr/>
 
       {keys.map( (key, i) =>
-      <MuiThemeProvider
-        key={i + 'a'}>
+
         <DropDownSliderInput
         key={i + 'b'}
         id={key}
@@ -68,20 +65,18 @@ const ReportInterface = ({  config,
         value={metricValues[key].val}
         previousVal={previousMetricValues[i] ? previousMetricValues[i] : 4.5}
         />
-      </MuiThemeProvider>
       )}
       <NoteField
         notes={notes}
         />
 
-      <MuiThemeProvider>
         <RaisedButton
           label="Save Report"
           style={styles.button}
           className="reportButton"
           onClick={submitReport}
           />
-      </MuiThemeProvider>
+
 
     </div>
   )

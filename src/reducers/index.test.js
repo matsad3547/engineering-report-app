@@ -22,27 +22,6 @@ test('inital metric state is an object', () => {
   expect(typeof(initMetricState)).toBe('object')
 })
 
-test('getUnchangedState() should edit an object to return the rest of the object minus the specified property', () => {
-  let test = {
-    initState: {
-      1: {
-        b: 'b',
-      },
-      2: {
-        c: 'c',
-      },
-    },
-    changedKey: '2',
-    unchangedState: {
-      1: {
-        b: 'b',
-      },
-    }
-  }
-
-  expect(getUnchangedState(test.initState, test.changedKey )).toEqual(test.unchangedState)
-})
-
 describe('metricValues() ', () => {
 
   test('should return an object', () => {
@@ -54,20 +33,37 @@ describe('metricValues() ', () => {
   })
 
   test('should return a state with an object composed of components of the action', () => {
+
     let action = {
       type: 'CHANGE_METRIC_VAL',
       id: 1,
       val: 1,
       name: 'name',
     }
-    let newState = Object.assign (getUnchangedState(initMetricState, action.id),   {
+
+    let oldState = {
+      0: {
+        name: 'stuff',
+        val: 6,
+      },
       1: {
         name: 'name',
-        val: 1,
+        val: 9,
       }
-    })
+    }
 
-    expect(metricValues(undefined, action)).toEqual(newState)
+    let newState = {
+      0: {
+        name: 'stuff',
+        val: 6,
+      },
+      1: {
+        name: 'name',
+        val: 1, //changed
+      }
+    }
+
+    expect(metricValues(oldState, action)).toEqual(newState)
   })
 })
 

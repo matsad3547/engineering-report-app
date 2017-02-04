@@ -37,9 +37,8 @@ export const metricNames = [
 const getInitMetricState = metricNames => {
   let initMetricState = {}
   metricNames.map( (name, i) => {
-    let str = i
     Object.assign( initMetricState, {
-      [str]: {
+      [i]: {
         name,
         val: initVal,
       }
@@ -50,18 +49,6 @@ const getInitMetricState = metricNames => {
 }
 
 export const initMetricState = getInitMetricState(metricNames)
-
-export const getUnchangedState = (state, changedKey) => {
-  let unchangedState = {}
-  for (let key in state) {
-    if (state.hasOwnProperty(key)) {
-      if (key !== changedKey ) {
-        Object.assign(unchangedState, {[key]: state[key]})
-      }
-    }
-  }
-  return unchangedState
-}
 
 const getMetricValArr = (metricValues) => {
   let metricValArr = []
@@ -77,15 +64,15 @@ export const metricValues = (state = initMetricState, { type, id, name, val }) =
 
   switch (type) {
     case 'CHANGE_METRIC_VAL':
-    let unchangedState = getUnchangedState(state, id)
-      return  Object.assign(unchangedState, {
-          [id]: {
-            name,
-            val,
-          }
-      })
-      case 'SAVE_REPORT_AND_RESET':
-      return initMetricState
+    return { ...state,
+              [id]: {
+                      name,
+                      val,
+                    }
+                  }
+
+    case 'SAVE_REPORT_AND_RESET':
+    return initMetricState
     default:
     return state
   }

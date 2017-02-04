@@ -6,7 +6,7 @@ import { getReports } from '../actions/getReports'
 import ReportInterface from '../components/ReportInterface'
 
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     config: state.newReportConfig,
     metricValues: state.metricValues,
@@ -15,7 +15,11 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
+  //
+  // const { foo, config, metricValues, notes } = ownProps
+  //
+  // console.log('foo:', foo);
 
   return {
     saveReport: () => dispatch(saveReport()),

@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 // import createLogger from 'redux-logger'
+
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import App from './App';

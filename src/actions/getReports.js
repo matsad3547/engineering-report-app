@@ -12,7 +12,7 @@ export const getReports = (ref, action) => {
     urlKey = 'test reports/' + ref
   }
   console.log('get reports called');
-  return dispatch => {
+  return dispatch => { 
     dispatch(requestReports());
     return database.ref(urlKey).once('value', snap => {
       const reports = snap.val()

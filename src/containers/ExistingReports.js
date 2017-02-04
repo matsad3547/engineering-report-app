@@ -16,6 +16,7 @@ let ExistingReports = ({ reports, status }) => {
       <div className="existingReports">
         <h3>Most Recent Reports</h3>
         {selectedKeys.map( (k, i) => <p key={i}>{`${i + 1}: `}{ date(k) }</p>)}
+        <a href="https://gist.githubusercontent.com/matsad3547/e1675a331b95073d4a22bddf8cc8785a/raw/49af3f939ffaf0928b229f6f4c652555eb64680e/data.csv" download >Download Test</a>
       </div>
     )
 

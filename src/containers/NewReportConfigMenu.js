@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import { setNewReportConfig } from '../actions'
 
@@ -82,32 +81,28 @@ let NewReportConfigMenu = ({ newReportConfig, dispatch }) => {
       </div>
       <div className="muiInput">
         <h4>Config</h4>
-        <MuiThemeProvider>
-          <DropDownMenu
-            onChange={onChange.configNum}
-            value={configNum}
-            labelStyle={styles.label}
-            style={styles.menu}
-            >
-            <MenuItem primaryText={1} label={1} value={1}/>
-            <MenuItem primaryText={2} label={2} value={2}/>
-            <MenuItem primaryText={3} label={3} value={3}/>
-            <MenuItem primaryText={4} label={4} value={4}/>
-          </DropDownMenu>
-        </MuiThemeProvider>
+        <DropDownMenu
+          onChange={onChange.configNum}
+          value={configNum}
+          labelStyle={styles.label}
+          style={styles.menu}
+          >
+          <MenuItem primaryText={1} label={1} value={1}/>
+          <MenuItem primaryText={2} label={2} value={2}/>
+          <MenuItem primaryText={3} label={3} value={3}/>
+          <MenuItem primaryText={4} label={4} value={4}/>
+        </DropDownMenu>
       </div>
       <div className="muiInput">
         <h4>Ballast</h4>
-        <MuiThemeProvider>
-          <DropDownMenu
-            onChange={onChange.ballast}
-            value={ballast}
-            labelStyle={styles.label}
-            style={styles.menu}>
-            <MenuItem primaryText={'No'} label={'No'} value={'No'}/>
-            <MenuItem primaryText={'Yes'} label={'Yes'} value={'Yes'}/>
-          </DropDownMenu>
-        </MuiThemeProvider>
+        <DropDownMenu
+          onChange={onChange.ballast}
+          value={ballast}
+          labelStyle={styles.label}
+          style={styles.menu}>
+          <MenuItem primaryText={'No'} label={'No'} value={'No'}/>
+          <MenuItem primaryText={'Yes'} label={'Yes'} value={'Yes'}/>
+        </DropDownMenu>
       </div>
     </div>
   )
