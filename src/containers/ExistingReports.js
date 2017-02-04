@@ -10,12 +10,12 @@ let ExistingReports = ({ reports, status }) => {
     let keys = Object.keys(reports)
     keys = keys.sort( (a, b) => b - a )
     const selectedKeys = keys.slice(firstReport, lastReport)
-    const date = k => new Date(+k).toString()
+    const date = k => new Date(+k).toString().slice(0, 24)
 
     return (
       <div className="existingReports">
         <h3>Most Recent Reports</h3>
-        {selectedKeys.map( (k, i) => <p key={i}>{ date(k) }</p>)}
+        {selectedKeys.map( (k, i) => <p key={i}>{`${i + 1}: `}{ date(k) }</p>)}
       </div>
     )
 
