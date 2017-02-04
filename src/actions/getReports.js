@@ -46,7 +46,7 @@ export const getReports = (ref, action) => {
   return dispatch => {
     dispatch(requestReports());
     return database.ref(urlKey).once('value', snap => {
-      const reports = getFirstTen(snap.val())
+      const reports = snap.val()
       dispatch(receiveReports(reports))
       })
     .catch( err => {

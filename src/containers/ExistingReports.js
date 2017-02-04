@@ -16,6 +16,7 @@ let ExistingReports = ({ reports, status }) => {
       <div className="existingReports">
         <h3>Most Recent Reports</h3>
         {keys.map( (k, i) => <p key={i}>{Date(k)}</p>)}
+        <a href="https://gist.githubusercontent.com/JoniWeiss/e5a4044c9610edc8a0f2c4878539e5fd/raw/edc75a89a6d9f9611bbdf92000245ea9a071cc30/Mac-CLI-Tools.md" download='test.txt'>test download</a>
       </div>
     )
 
@@ -39,3 +40,5 @@ ExistingReports = connect(
   )(ExistingReports)
 
 export default ExistingReports
+
+const ReportDisplay = ({ })
