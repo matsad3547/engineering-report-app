@@ -63,6 +63,16 @@ export const getUnchangedState = (state, changedKey) => {
   return unchangedState
 }
 
+const getMetricValArr = (metricValues) => {
+  let metricValArr = []
+  for (let key in metricValues) {
+    if (metricValues.hasOwnProperty(key)){
+      metricValArr[key] = metricValues[key].val
+    }
+  }
+  return metricValArr
+}
+
 export const metricValues = (state = initMetricState, { type, id, name, val }) => {
 
   switch (type) {
@@ -110,10 +120,13 @@ export const newReportConfig = (state = initReportConfig, action) => {
   }
 }
 
-export const previousMetricValues = (state = [], { type, output }) => {
+export const previousMetricValues = (state = [], { type, output, reports }) => {
   switch (type) {
-    case 'SAVE_REPORT_AND_RESET':
-      return output
+    // case 'SAVE_REPORT_AND_RESET':
+    //   return output
+    case 'REPORTS_RECEIVED':
+    const lastReportKey = Object.keys(reports).sort( (a, b) => b - a )[0]
+      return getMetricValArr(reports[lastReportKey].metricValues)
     default:
       return state
   }

@@ -3,23 +3,29 @@ import { connect } from 'react-redux'
 
 let ExistingReports = ({ reports, status }) => {
 
-  // console.log('reports:', reports);
-  // console.log('status at existing reports:', status);
-  // console.log('reports at existing reports:', reports);
+  const firstReport = 0
+  const lastReport = 10
 
   if (status === 'received') {
-    const keys = reports.map( obj => {
-      let keyArr = Object.keys(obj)
-      return keyArr[0]
-    })
+    let keys = Object.keys(reports)
+    keys = keys.sort( (a, b) => b - a )
+    const selectedKeys = keys.slice(firstReport, lastReport)
+    const date = k => new Date(+k).toString()
+
     return (
       <div className="existingReports">
         <h3>Most Recent Reports</h3>
-        {keys.map( (k, i) => <p key={i}>{Date(k)}</p>)}
-        <a href="https://gist.githubusercontent.com/JoniWeiss/e5a4044c9610edc8a0f2c4878539e5fd/raw/edc75a89a6d9f9611bbdf92000245ea9a071cc30/Mac-CLI-Tools.md" download='test.txt'>test download</a>
+        {selectedKeys.map( (k, i) => <p key={i}>{ date(k) }</p>)}
       </div>
     )
 
+  }
+  else if (status === 'errored') {
+    return (
+      <div className="existingReports">
+        <h3>Report loading has failed, sorry!</h3>
+      </div>
+    )
   }
   return (
     <div className="existingReports">
@@ -41,4 +47,4 @@ ExistingReports = connect(
 
 export default ExistingReports
 
-const ReportDisplay = ({ })
+// const ReportDisplay = ({ })

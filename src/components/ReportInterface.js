@@ -1,8 +1,4 @@
 import React from 'react';
-// import { connect } from 'react-redux'
-
-// import { saveReport } from '../actions'
-// import { getReports } from '../actions/getReports'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -10,20 +6,41 @@ import RaisedButton from 'material-ui/RaisedButton'
 import NewReportConfigMenu from '../containers/NewReportConfigMenu'
 import DropDownSliderInput from '../containers/DropDownSliderInput'
 import NoteField from '../containers/NoteField'
-// import database from './Firebase'
+import database from '../containers/Firebase'
+
 
 const ReportInterface = ({  config,
                             metricValues,
                             notes,
-                            previousMetricValues,           submitReport }) => {
+                            previousMetricValues,
+                            saveReport,
+                            getReports }) => {
 
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
 
-  console.log('config:', config,
-    'metric values:', metricValues,
-    'notes:', notes,
-    'previousMetricValues:', previousMetricValues,
-  );
+  // console.log('config:', config,
+  //   'metric values:', metricValues,
+  //   'notes:', notes,
+  //   'previousMetricValues:', previousMetricValues,
+  // );
+
+  const submitReport = e => {
+
+    e.preventDefault()
+    const newReportKey = Date.now()
+    const newReport = {
+      config,
+      metricValues,
+      notes,
+    }
+    console.log('report key:', `test reports/${newReportKey}`);
+    let updates = {}
+    updates[`test reports/${newReportKey}`] = newReport
+    database.ref().update(updates)
+    // const metricValArr = getMetricValArr(metricValues)
+    saveReport()
+    getReports()
+  }
 
   const styles = {
     button: {
