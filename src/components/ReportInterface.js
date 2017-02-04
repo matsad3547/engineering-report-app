@@ -51,7 +51,7 @@ const ReportInterface = ({  config,
     <div className="reportInput">
 
       <NewReportConfigMenu
-        newReportConfig={config}
+        config={config}
         />
 
       <hr/>
