@@ -37,8 +37,8 @@ const Root = () => (
         <IndexRoute component={Home}></IndexRoute>
       </Route>
       <Route path="/app" component={App} >
-        <Route path="/new_report" component={NewReport} />
-        <Route path="/existing_reports" component={ExistingReports} />
+        <Route path="/app/new_report" component={NewReport} />
+        <Route path="/app/existing_reports" component={ExistingReports} />
       </Route>
     </Router>
   </Provider>
