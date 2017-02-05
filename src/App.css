@@ -13,11 +13,21 @@
 .existingReports {
   box-sizing: border-box;
   background-color: gray;
+  color: white;
   min-height: 100vh;
   width: 100vw;
   padding: .5em;
   margin-bottom: -100px;
   padding-bottom: 100px;
+  text-align: center;
+}
+
+.reportList {
+  text-align: left;
+}
+
+.reportItem {
+  padding: .5em;
 }
 
 .input {
@@ -113,8 +123,20 @@ textarea {
   height: 10em;
 }
 
+.download {
+  margin: auto;
+  width: 60%;
+}
+
 /*@media (max-width: 425px) {
   .reportInput {
     margin: 0;
   }
+}*/
+
+/*@media (max-width: 750px) {
+  .download {
+    display: none;
+  }
+
 }*/

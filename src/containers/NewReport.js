@@ -16,10 +16,6 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  //
-  // const { foo, config, metricValues, notes } = ownProps
-  //
-  // console.log('foo:', foo);
 
   return {
     saveReport: () => dispatch(saveReport()),

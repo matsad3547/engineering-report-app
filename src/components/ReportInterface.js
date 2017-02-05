@@ -65,18 +65,18 @@ const ReportInterface = ({  config,
         value={metricValues[key].val}
         previousVal={previousMetricValues[i] ? previousMetricValues[i] : 4.5}
         />
+      
       )}
       <NoteField
         notes={notes}
         />
 
-        <RaisedButton
-          label="Save Report"
-          style={styles.button}
-          className="reportButton"
-          onClick={submitReport}
-          />
-
+      <RaisedButton
+        label="Save Report"
+        style={styles.button}
+        className="reportButton"
+        onClick={submitReport}
+        />
 
     </div>
   )
