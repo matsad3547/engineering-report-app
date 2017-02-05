@@ -1,0 +1,7 @@
+.home {
+  box-sizing: border-box;
+  text-align: center;
+  background-color: gray;
+  color: white;
+  height: 100vh;
+}

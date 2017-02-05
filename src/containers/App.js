@@ -13,15 +13,24 @@ import SwipeableViews from 'react-swipeable-views'
 import NewReport from './NewReport'
 import ExistingReports from './ExistingReports'
 
-export const Home = () => (
-  <div>
-    <h1>Engineering Report App</h1>
-    <Link to="/app"  >Try out the App</Link>
-  </div>
-)
+// export const Home = () => (
+//   <div>
+//     <h1>Engineering Report App</h1>
+//     <h2>This will be the landing page</h2>
+//     <h3>It will contain:</h3>
+//     <ul>
+//       <li>Sign-In for Authorized Users</li>
+//       <li>A Demo Version of the App</li>
+//     </ul>
+//     <Link to="/app" >Try out the App</Link>
+//   </div>
+// )
 
-let App = ({  pageDisplayed,
+let App = ({  params,
+              pageDisplayed,
               dispatch }) => {
+
+console.log('params:', params);
 
   const handleTabClick = (value, e) => {
     e.preventDefault()
