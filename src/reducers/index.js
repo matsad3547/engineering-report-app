@@ -158,13 +158,3 @@ export const combinedReducers = combineReducers({
   pageDisplayed,
   reports,
 })
-
-// Jesse's way of setting the metricValues state
-// return {
-//   ...metricValues,
-//
-//   [action.id]: {
-//     ...metricValues[action.id],
-//     action.metricValueUpdate,
-//   }
-// }

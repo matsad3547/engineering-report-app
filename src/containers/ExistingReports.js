@@ -25,8 +25,6 @@ const ReportsDisplay = ({ reports, status }) => {
     keys = keys.sort( (a, b) => b - a )
     const selectedKeys = keys.slice(firstReport, lastReport)
 
-
-
     return (
       <div className="existingReports">
         <h3>Most Recent Reports</h3>
@@ -41,13 +39,10 @@ const ReportsDisplay = ({ reports, status }) => {
         <a href="https://gist.githubusercontent.com/matsad3547/e1675a331b95073d4a22bddf8cc8785a/raw/49af3f939ffaf0928b229f6f4c652555eb64680e/data.csv" download >download</a>
         <RaisedButton
           label="download"
-          href="https://gist.githubusercontent.com/matsad3547/e1675a331b95073d4a22bddf8cc8785a/raw/49af3f939ffaf0928b229f6f4c652555eb64680e/data.csv"
           style={styles.button}
           onClick={download}
+          containerElement={ <a href="https://gist.githubusercontent.com/matsad3547/e1675a331b95073d4a22bddf8cc8785a/raw/49af3f939ffaf0928b229f6f4c652555eb64680e/data.csv" download >download</a> }
           />
-
-        <div className="download">
-        </div>
 
       </div>
     )
