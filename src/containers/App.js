@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-import { selectPage } from './actions'
+import { selectPage } from '../actions'
 
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -10,8 +10,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Tab, Tabs } from 'material-ui/Tabs'
 import SwipeableViews from 'react-swipeable-views'
 
-import NewReport from './containers/NewReport'
-import ExistingReports from './containers/ExistingReports'
+import NewReport from './NewReport'
+import ExistingReports from './ExistingReports'
 
 export const Home = () => (
   <div>
@@ -22,8 +22,6 @@ export const Home = () => (
 
 let App = ({  pageDisplayed,
               dispatch }) => {
-
-// console.log('reports at app:', reports);
 
   const handleTabClick = (value, e) => {
     e.preventDefault()
@@ -37,9 +35,7 @@ let App = ({  pageDisplayed,
   return (
     <MuiThemeProvider>
       <div className="app">
-        <Tabs
-          onChange={handleTabClick}
-          >
+        <Tabs>
           <Tab
             label="New Report"
             value={0}
