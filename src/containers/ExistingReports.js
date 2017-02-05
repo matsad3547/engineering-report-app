@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 const ReportsDisplay = ({ params, reports, status }) => {
 
-  console.log('params:', params);
+  // console.log('params:', params);
 
 
   const firstReport = 0
