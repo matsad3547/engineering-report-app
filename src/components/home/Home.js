@@ -13,14 +13,7 @@ const Home = () => {
         <li>Sign-In for Authorized Users</li>
         <li>A Demo Version of the App</li>
       </ul>
-      <ul>
-        <li>
-          <Link to="/app" >Try out the App</Link>
-        </li>
-        <li>
-          <Link to="/app/existing_reports" >Reports</Link>
-        </li>
-      </ul>
+      <Link to="/app" >Try out the App</Link>
     </div>
   )
 }

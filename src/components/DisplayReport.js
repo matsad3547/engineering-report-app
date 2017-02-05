@@ -1,9 +1,10 @@
 import React from 'react';
 
-const DisplayReport = ({ report }) => {
+const DisplayReport = ({ params }) => {
+  console.log('params at DisplayReport:', params);
   return(
     <div className="reportDisplay">
-      <h3>Displaying Report: {report}</h3>
+      <h3>Displaying Report: </h3>
     </div>
   )
 }

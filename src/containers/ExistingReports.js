@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
-const ReportsDisplay = ({ params, reports, status }) => {
+const ReportsDisplay = ({ reports, status }) => {
 
-  // console.log('params:', params);
+  // console.log('children:', children);
 
 
   const firstReport = 0
@@ -13,7 +13,6 @@ const ReportsDisplay = ({ params, reports, status }) => {
   const download = e => {
     e.preventDefault()
   }
-
 
   const styles = {
     button: {
