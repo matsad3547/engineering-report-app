@@ -5,44 +5,33 @@ import { Link } from 'react-router'
 import { selectPage } from '../actions'
 
 import './App.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import { Tab, Tabs } from 'material-ui/Tabs'
 import SwipeableViews from 'react-swipeable-views'
 
-import NewReport from './NewReport'
-import ExistingReports from './ExistingReports'
+// import NewReport from './NewReport'
+// import ExistingReports from './ExistingReports'
 
-// export const Home = () => (
-//   <div>
-//     <h1>Engineering Report App</h1>
-//     <h2>This will be the landing page</h2>
-//     <h3>It will contain:</h3>
-//     <ul>
-//       <li>Sign-In for Authorized Users</li>
-//       <li>A Demo Version of the App</li>
-//     </ul>
-//     <Link to="/app" >Try out the App</Link>
-//   </div>
-// )
+const App = ({ children }) => {
 
-let App = ({  params,
-              pageDisplayed,
-              dispatch }) => {
+  //  children ? children = children : children = Welcome
 
-console.log('params:', params);
+  console.log('children at App:', children);
 
-  const handleTabClick = (value, e) => {
-    e.preventDefault()
-    dispatch(selectPage(value))
-  }
+// let App = ({  pageDisplayed,
+//               dispatch }) => {
 
-  const handleSwipe = (value) => {
-    dispatch(selectPage(value))
-  }
+  // const handleTabClick = (value, e) => {
+  //   e.preventDefault()
+  //   dispatch(selectPage(value))
+  // }
+  //
+  // const handleSwipe = (value) => {
+  //   dispatch(selectPage(value))
+  // }
 
   return (
-    <MuiThemeProvider>
+
       <div className="app">
         <Tabs>
           <Tab
@@ -54,29 +43,40 @@ console.log('params:', params);
             value={1}
             containerElement={<Link to="/app/existing_reports"/>} />
         </Tabs>
-        <SwipeableViews
-          index={pageDisplayed}
-          onChangeIndex={handleSwipe}>
-          <div>
-            <NewReport />
-          </div>
-          <div>
-            <ExistingReports />
-          </div>
-      </SwipeableViews>
+        <SwipeableViews>
+          { children }
+
+        </SwipeableViews>
     </div>
-  </MuiThemeProvider>
+
   )
 }
+// 
+// const Welcome = () => (
+//   <div>
+//     <h1>Welcome to Engineering Report App</h1>
+//   </div>
+// )
+
+// <SwipeableViews
+//   index={pageDisplayed}
+//   onChangeIndex={handleSwipe}>
+//   <div>
+//     <NewReport />
+//   </div>
+//   <div>
+//     <ExistingReports />
+//   </div>
+// </SwipeableViews>
 
 const mapStateToProps = state => {
   return {
     pageDisplayed: state.pageDisplayed
   }
 }
-
-App = connect(
-  mapStateToProps,
-  )(App)
+//
+// App = connect(
+//   mapStateToProps,
+//   )(App)
 
 export default App;

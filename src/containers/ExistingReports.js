@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
-const ReportsDisplay = ({ reports, status }) => {
+const ReportsDisplay = ({ params, reports, status }) => {
+
+  console.log('params:', params);
+
 
   const firstReport = 0
   const lastReport = 10
@@ -77,6 +80,7 @@ export default ExistingReports
 
 // import RaisedButton from 'material-ui/RaisedButton'
 import Checkbox from 'material-ui/Checkbox'
+import { Link } from 'react-router'
 
 const ReportItem = ({ report, index }) => {
 
@@ -110,11 +114,9 @@ const ReportItem = ({ report, index }) => {
       <p>{`${index + 1}: `}{ date(report) }</p>
       <Checkbox
         label="Select to Download"
-
         onCheck={onCheck}
         style={styles.checkbox}
         value={report}
-
         />
       <div className="download">
       </div>
@@ -123,6 +125,7 @@ const ReportItem = ({ report, index }) => {
         style={styles.button}
         className="reportButton"
         onClick={viewReport}
+        containerElement={<Link to={`/app/existing_reports/${report}`}/>}
         />
     </div>
   )
