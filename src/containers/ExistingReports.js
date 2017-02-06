@@ -11,6 +11,19 @@ const ReportsDisplay = ({ children, reports, status }) => {
   const download = e => {
     e.preventDefault()
     console.log('download triggered');
+    const data = [['test1','test2', 'stuff'], ['things', 'stuff', 'poop']]
+    let csvContent = 'data:text/csv;charset=utf-8,'
+    data.forEach( (infoArray, index) => {
+      const dataString = infoArray.join(',')
+      csvContent += index < data.length ? dataString + '\n' : dataString
+    })
+    console.log('csv string:', csvContent);
+    const encodedUri = encodeURI(csvContent)
+    const link = document.createElement('a')
+    link.setAttribute('href', encodedUri)
+    link.setAttribute('download', 'test_data.csv')
+    document.body.appendChild(link)
+    link.click()
   }
 
   const styles = {

@@ -14,6 +14,7 @@ const ReportItem = ({ report, index }) => {
   const onCheck = e => {
     e.preventDefault()
     console.log('toggle value:', e.target.value)
+
   }
 
   const styles = {
