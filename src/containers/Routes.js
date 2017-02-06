@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import store from './store'
 
 import Home from '../components/home/Home'
-import DisplayReport from '../components/DisplayReport'
+import DisplayReport from '../containers/DisplayReport'
 import App from '../components/App'
 // import test from '../components/test'
 import NewReport from './NewReport'
@@ -25,6 +25,7 @@ const Routes = () => {
             <IndexRoute component={Home}></IndexRoute>
           </Route>
           <Route path="/app" component={App} >
+            
             <Route path="/app/new_report" component={NewReport} />
             <Route path="/app/existing_reports" component={ExistingReports} />
             <Route path="/app/existing_reports/:report" component={DisplayReport} />

@@ -5,9 +5,6 @@ import ReportItem from '../components/ReportItem'
 
 const ReportsDisplay = ({ children, reports, status }) => {
 
-  console.log('children:', children);
-
-
   const firstReport = 0
   const lastReport = 10
 

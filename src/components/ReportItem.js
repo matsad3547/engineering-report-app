@@ -11,11 +11,6 @@ const ReportItem = ({ report, index }) => {
 
   const date = report => new Date(+report).toString().slice(0, 24)
 
-  const viewReport = e => {
-    e.preventDefault()
-    console.log('view report clicked:', report);
-  }
-
   const onCheck = e => {
     e.preventDefault()
     console.log('toggle value:', e.target.value)
@@ -43,11 +38,10 @@ const ReportItem = ({ report, index }) => {
       <div className="download">
       </div>
       <RaisedButton
+        containerElement={<Link to={`/app/existing_reports/${report}`}/>}
         label="View Report"
         style={styles.button}
         className="reportButton"
-        onClick={viewReport}
-        containerElement={<Link to={`/app/existing_reports/${report}`}/>}
         />
     </div>
   )
