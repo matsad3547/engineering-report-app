@@ -6,6 +6,7 @@ import store from './store'
 import Home from '../components/home/Home'
 import DisplayReport from '../components/DisplayReport'
 import App from '../components/App'
+// import test from '../components/test'
 import NewReport from './NewReport'
 import ExistingReports from './ExistingReports'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -16,7 +17,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 const Routes = () => {
 
   return (
-    
+
     <Provider store={store} >
       <MuiThemeProvider>
         <Router history={browserHistory}>
@@ -25,9 +26,9 @@ const Routes = () => {
           </Route>
           <Route path="/app" component={App} >
             <Route path="/app/new_report" component={NewReport} />
-            <Route path="/app/existing_reports" component={ExistingReports} >
-              <Route path="app/exist_reports/*" component={DisplayReport} />
-            </Route>
+            <Route path="/app/existing_reports" component={ExistingReports} />
+            <Route path="/app/existing_reports/:report" component={DisplayReport} />
+
           </Route>
         </Router>
       </MuiThemeProvider>
