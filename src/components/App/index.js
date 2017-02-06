@@ -5,7 +5,7 @@ import './App.css';
 
 import { Tab, Tabs } from 'material-ui/Tabs'
 import SwipeableViews from 'react-swipeable-views'
-import Welcome from './Welcome'
+import Welcome from '../Welcome'
 
 const App = ({ children, location }) => {
 

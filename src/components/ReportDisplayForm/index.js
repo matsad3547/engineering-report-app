@@ -26,6 +26,7 @@ const ReportDisplayForm = ({  report,
               </tr>  )}
           </tbody>
         </table>
+        <br/>
         <hr/>
         <h4>Metric Values</h4>
         <table>
@@ -37,7 +38,7 @@ const ReportDisplayForm = ({  report,
               </tr>  )}
           </tbody>
         </table>
-
+        <br/>
         <hr/>
         <h4>Notes</h4>
         <p>{notes}</p>
@@ -53,5 +54,3 @@ const ReportDisplayForm = ({  report,
 }
 
 export default ReportDisplayForm
-
-        // {metricValArr.map( (c, i) => <p key={i}>{metricValues[i].name}: {metricValues[i].val}</p>)}
