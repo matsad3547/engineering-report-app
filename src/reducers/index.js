@@ -139,8 +139,13 @@ export const reports = (state = initReports, { type, reports, error }) => {
   }
 }
 
-export const queued = (state = [], action) => {
-  return state
+export const queued = (state = [], { type, report }) => {
+  switch (type) {
+    case 'QUEUE_REPORT':
+      return [...state, report]
+    default:
+    return state
+  }
 }
 
 export const combinedReducers = combineReducers({
@@ -149,4 +154,5 @@ export const combinedReducers = combineReducers({
   notes,
   previousMetricValues,
   reports,
+  queued,
 })

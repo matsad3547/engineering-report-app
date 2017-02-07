@@ -174,4 +174,12 @@ describe('queued() ', () => {
   test('should return an array by default', () => {
     expect(queued(undefined, action)).toEqual([])
   })
+
+  test('should return an array that includes an report property passed in when pass a type of "QUEUE_REPORT"', () => {
+    const action = {
+      type: 'QUEUE_REPORT',
+      report: 12345,
+    }
+    expect(queued(undefined, action)).toEqual(expect.arrayContaining([ 12345 ]))
+  })
 })
