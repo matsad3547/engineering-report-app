@@ -54,6 +54,7 @@ export const reportError = error => {
 
 export const queueReport = report => {
   return {
-    
+    type: 'QUEUE_REPORT',
+    report,
   }
 }

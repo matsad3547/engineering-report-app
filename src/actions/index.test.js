@@ -18,6 +18,7 @@ const metricValActionOutput = {
   val: 'cheese',
   name: 'Cheesiness',
 }
+
 describe('changeMetricVal() ', () => {
 
   test('should return an object', () => {
@@ -126,5 +127,13 @@ describe('queueReport() ', () => {
 
   test('should return an object', () => {
     expect(typeof(queueReport(undefined))).toBe('object')
+  })
+
+  test('should return an action type of "QUEUE_REPORT"', () => {
+    expect(queueReport(undefined).type).toBe('QUEUE_REPORT')
+  })
+
+  test('should return a second property of "report"', () => {
+    expect(Object.keys(queueReport(undefined))).toEqual(['type', 'report'])
   })
 })
