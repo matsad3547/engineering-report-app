@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import ReportItem from '../components/ReportItem'
 
-const ReportsDisplay = ({ children, reports, status }) => {
+const ReportsDisplay = ({ reports, status }) => {
 
   const firstReport = 0
   const lastReport = 10
@@ -41,8 +41,6 @@ const ReportsDisplay = ({ children, reports, status }) => {
 
     return (
       <div className="existingReports">
-
-        {children}
         <h3>Most Recent Reports</h3>
         <div className="reportList">
           {selectedKeys.map( (k, i) =>
@@ -75,8 +73,6 @@ const ReportsDisplay = ({ children, reports, status }) => {
     </div>
   )
 }
-
-
 
 const mapStateToProps = state => {
   return {

@@ -7,13 +7,17 @@ import Checkbox from 'material-ui/Checkbox'
 const ReportItem = ({ report, index }) => {
 
   // const media = media
-  // const checked = checked
+  let checked = report
 
   const date = report => new Date(+report).toString().slice(0, 24)
 
-  const onCheck = e => {
+
+  const onCheck = (e, i) => {
     e.preventDefault()
+    console.log('toggle event:', i);
     console.log('toggle value:', e.target.value)
+    // isInputChecked = false
+
 
   }
 
@@ -32,9 +36,9 @@ const ReportItem = ({ report, index }) => {
       <p>{`${index + 1}: `}{ date(report) }</p>
       <Checkbox
         label="Select to Download"
-        onCheck={onCheck}
         style={styles.checkbox}
-        value={report}
+        value={checked}
+        onCheck={onCheck}
         />
       <div className="download">
       </div>
