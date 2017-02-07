@@ -7,6 +7,7 @@ import {
   receiveReports,
   reportError,
   queueReport,
+  unqueueReport,
         } from './index.js'
 
 import {
@@ -135,5 +136,20 @@ describe('queueReport() ', () => {
 
   test('should return a second property of "report"', () => {
     expect(Object.keys(queueReport(undefined))).toEqual(['type', 'report'])
+  })
+})
+
+describe('unqueueReport() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(unqueueReport(undefined))).toBe('object')
+  })
+
+  test('should return an action type of "UNQUEUE_REPORT"', () => {
+    expect(unqueueReport(undefined).type).toBe('UNQUEUE_REPORT')
+  })
+
+  test('should also return a second property of "index"', () => {
+    expect(Object.keys(unqueueReport(undefined))).toEqual(['type', 'index'])
   })
 })

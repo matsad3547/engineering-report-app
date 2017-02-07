@@ -7,7 +7,7 @@ import Home from '../components/Home/'
 import DisplayReport from '../containers/DisplayReport'
 import App from '../components/App/'
 import NewReport from './NewReport'
-import ExistingReports from './ExistingReports'
+import ExistingReports from './ExistingReports/'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 // export const history = syncHistoryWithStore(browserHistory, store)

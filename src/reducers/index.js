@@ -139,10 +139,15 @@ export const reports = (state = initReports, { type, reports, error }) => {
   }
 }
 
-export const queued = (state = [], { type, report }) => {
+export const queued = (state = [], { type, report, index }) => {
   switch (type) {
     case 'QUEUE_REPORT':
       return [...state, report]
+    case 'UNQUEUE_REPORT':
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+      ]
     default:
     return state
   }

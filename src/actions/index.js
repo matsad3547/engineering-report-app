@@ -58,3 +58,10 @@ export const queueReport = report => {
     report,
   }
 }
+
+export const unqueueReport = index => {
+  return {
+    type: 'UNQUEUE_REPORT',
+    index,
+  }
+}

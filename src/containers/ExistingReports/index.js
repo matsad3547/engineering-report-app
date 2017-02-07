@@ -1,29 +1,42 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
-import ReportItem from '../components/ReportItem'
+import ReportItem from '../../components/ReportItem'
+import { queueReport, unqueueReport } from '../../actions/'
 
-const ReportsDisplay = ({ reports, status }) => {
+const parseCSV = data => {
+  let csvContent = 'data:text/csv;charset=utf-8,'
+  data.forEach( (arr, i) => {
+    const dataString = arr.join(',')
+    csvContent += i < data.length ? dataString + '\n' : dataString
+  })
+  return csvContent
+}
+
+const launchDownload = data => {
+  const csvContent = parseCSV(data)
+  const encodedUri = encodeURI(csvContent)
+  const link = document.createElement('a')
+  link.setAttribute('href', encodedUri)
+  link.setAttribute('download', 'test_data.csv')
+  document.body.appendChild(link)
+  link.click()
+}
+
+const ReportsDisplay = ({ reports,
+                          status,
+                          queued,
+                          queueReport,
+                          unqueueReport, }) => {
 
   const firstReport = 0
   const lastReport = 10
 
   const download = e => {
     e.preventDefault()
-    console.log('download triggered');
     const data = [['test1','test2', 'stuff'], ['things', 'stuff', 'poop']]
-    let csvContent = 'data:text/csv;charset=utf-8,'
-    data.forEach( (infoArray, index) => {
-      const dataString = infoArray.join(',')
-      csvContent += index < data.length ? dataString + '\n' : dataString
-    })
-    console.log('csv string:', csvContent);
-    const encodedUri = encodeURI(csvContent)
-    const link = document.createElement('a')
-    link.setAttribute('href', encodedUri)
-    link.setAttribute('download', 'test_data.csv')
-    document.body.appendChild(link)
-    link.click()
+    launchDownload(data)
+
   }
 
   const styles = {
@@ -45,10 +58,12 @@ const ReportsDisplay = ({ reports, status }) => {
         <div className="reportList">
           {selectedKeys.map( (k, i) =>
             <ReportItem
-
               key={i}
               report={k}
               index={i}
+              queued={queued}
+              queueReport={queueReport}
+              unqueueReport={unqueueReport}
               />)}
         </div>
 
@@ -78,11 +93,20 @@ const mapStateToProps = state => {
   return {
     reports: state.reports.reports,
     status: state.reports.status,
+    queued: state.queued,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    queueReport: report => dispatch(queueReport(report)),
+    unqueueReport: index => dispatch(unqueueReport(index)),
   }
 }
 
 const ExistingReports = connect(
   mapStateToProps,
+  mapDispatchToProps,
   )(ReportsDisplay)
 
 export default ExistingReports

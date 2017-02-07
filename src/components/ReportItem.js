@@ -4,19 +4,25 @@ import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 import Checkbox from 'material-ui/Checkbox'
 
-const ReportItem = ({ report, index }) => {
+const ReportItem = ({ report,
+                      index,
+                      queued,
+                      queueReport,
+                      unqueueReport, }) => {
 
-  let checked = report
+  const checked = queued.includes(report) ? true : false
 
-  const date = report => new Date(+report).toString().slice(0, 24)
+  const date = report => new Date(+report)
+                              .toString()
+                              .slice(0, 24)
 
   const onCheck = (e, i) => {
     e.preventDefault()
-    console.log('toggle event:', i);
-    console.log('toggle value:', e.target.value)
-    // isInputChecked = false
-
-
+    if (queued.includes(report)) {
+      let index = queued.indexOf(report)
+      unqueueReport(index)
+    }
+    else queueReport(report)
   }
 
   const styles = {
@@ -35,7 +41,7 @@ const ReportItem = ({ report, index }) => {
       <Checkbox
         label="Select to Download"
         style={styles.checkbox}
-        value={checked}
+        checked={checked}
         onCheck={onCheck}
         />
       <div className="download">
