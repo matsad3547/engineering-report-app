@@ -6,7 +6,7 @@ import {
   notes,
   newReportConfig,
   previousMetricValues,
-  pageDisplayed,
+  // pageDisplayed,
   reports,
       } from './index.js'
 
@@ -114,20 +114,6 @@ describe('previousMetricValues() ', () => {
 
   test('should return an empty array by default', () => {
     expect(previousMetricValues(undefined, 'TEST').length).toBe(0)
-  })
-})
-
-describe('pageDisplayed() ', () => {
-
-  test('should return a number by default', () => {
-    expect(typeof(pageDisplayed(undefined, 'TEST'))).toBe('number')
-  })
-  test('should return the number contained at action.output when given the action type "CHANGE_PAGE"', () => {
-    const action = {
-      type: 'CHANGE_PAGE',
-      output: 2,
-    }
-    expect(pageDisplayed(undefined, action)).toBe(2)
   })
 })
 

@@ -3,10 +3,10 @@ import {
   saveReportNotes,
   setNewReportConfig,
   saveReport,
-  selectPage,
   requestReports,
   receiveReports,
   reportError,
+  queueReport,
         } from './index.js'
 
 import {
@@ -72,17 +72,6 @@ describe('saveReport() ', () => {
   })
 })
 
-describe('selectPage() ', () => {
-
-  test('should return an object', () => {
-    expect(typeof(selectPage())).toBe('object')
-  })
-
-  test('should return an action type of "CHANGE_PAGE"', () => {
-    expect(selectPage(undefined).type).toBe('CHANGE_PAGE')
-  })
-})
-
 describe('requestReports() ', () => {
 
   test('should return an object', () => {
@@ -130,5 +119,12 @@ describe( 'getReports() ', () => {
 
   test('should do something', () => {
     expect(typeof(getReports('reports'))).toBe('function')
+  })
+})
+
+describe('queueReport() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(queueReport(undefined))).toBe('object')
   })
 })

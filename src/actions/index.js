@@ -32,13 +32,6 @@ export const saveReport = output => {
   }
 }
 
-export const selectPage = output => {
-  return {
-    type:'CHANGE_PAGE',
-    output,
-  }
-}
-
 export const requestReports = () => {
   return {
     type: 'REPORTS_REQUESTED',
@@ -56,5 +49,11 @@ export const reportError = error => {
   return {
     type: 'REPORTS_ERRORED',
     error
+  }
+}
+
+export const queueReport = report => {
+  return {
+    
   }
 }

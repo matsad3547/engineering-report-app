@@ -119,16 +119,6 @@ export const previousMetricValues = (state = [], { type, output, reports }) => {
   }
 }
 
-export const pageDisplayed = (state = 0, { type, output }) => {
-  switch (type) {
-    case 'CHANGE_PAGE':
-      return output
-
-    default:
-      return state
-  }
-}
-
 export const reports = (state = initReports, { type, reports, error }) => {
   switch (type) {
     case 'REPORTS_REQUESTED':
@@ -155,6 +145,5 @@ export const combinedReducers = combineReducers({
   metricValues,
   notes,
   previousMetricValues,
-  pageDisplayed,
   reports,
 })

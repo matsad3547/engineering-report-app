@@ -6,11 +6,9 @@ import Checkbox from 'material-ui/Checkbox'
 
 const ReportItem = ({ report, index }) => {
 
-  // const media = media
   let checked = report
 
   const date = report => new Date(+report).toString().slice(0, 24)
-
 
   const onCheck = (e, i) => {
     e.preventDefault()
