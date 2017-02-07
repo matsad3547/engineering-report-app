@@ -33,6 +33,7 @@ export const parseCSV = data => {
     const dataString = arr.join(',')
     csvContent += i < data.length ? dataString + '\n' : dataString
   })
+  console.log('csv:', csvContent);
   return csvContent
 }
 
@@ -46,13 +47,20 @@ const launchDownload = data => {
   link.click()
 }
 
-
+export const downloadQueued = (reports, queued) => {
+  const dataArr = queued.map( q => {
+    console.log('report:', reports[q].config);
+    return formatReport(reports[q])
+  })
+  launchDownload(dataArr)
+}
 
 const ReportsDisplay = ({ reports,
                           status,
                           queued,
                           queueReport,
-                          unqueueReport, }) => {
+                          unqueueReport,
+                          downloadQueued }) => {
 
   const firstReport = 0
   const lastReport = 10
@@ -60,7 +68,7 @@ const ReportsDisplay = ({ reports,
   const download = e => {
     e.preventDefault()
     const data = [['test1','test2', 'stuff'], ['things', 'stuff', 'poop']]
-    launchDownload(data)
+    downloadQueued(reports, queued)
 
   }
 
@@ -119,6 +127,7 @@ const mapStateToProps = state => {
     reports: state.reports.reports,
     status: state.reports.status,
     queued: state.queued,
+    downloadQueued: (reports, queued) => downloadQueued(reports, queued)
   }
 }
 

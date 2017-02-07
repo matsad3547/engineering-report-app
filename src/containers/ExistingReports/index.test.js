@@ -1,5 +1,6 @@
 import {  formatReport,
-          parseCSV, } from './index'
+          parseCSV,
+          downloadQueued, } from './index'
 
 describe('formatReport() ', () => {
 
@@ -85,3 +86,46 @@ describe('parseCSV() ', () => {
     expect(parseCSV(formatReport(obj))).toEqual(result)
   })
 })
+
+// describe('downloadQueued() ', () => {
+//
+//   test('should call formatReport()', () => {
+//     const arr = [1, 2]
+//     const mockReports = {
+//       1: {
+//         config: {
+//           a: 1,
+//         },
+//         metricValues: {
+//           0: {
+//             name: 'test1',
+//             val: 3,
+//           },
+//           1: {
+//             name: 'test2',
+//             val: 4,
+//           },
+//         },
+//         notes: 'this is a test string',
+//       },
+//       2: {
+//         config: {
+//           a: 2,
+//         },
+//         metricValues: {
+//           0: {
+//             name: 'test1',
+//             val: 4,
+//           },
+//           1: {
+//             name: 'test2',
+//             val: 5,
+//           },
+//         },
+//         notes: 'this is a test string',
+//       },
+//     }
+//     downloadQueued(mockReports, arr)
+//     expect(formatReport(mockReports[1])).toBeCalled()
+//   })
+// })
