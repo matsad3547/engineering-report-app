@@ -4,7 +4,30 @@ import RaisedButton from 'material-ui/RaisedButton'
 import ReportItem from '../../components/ReportItem'
 import { queueReport, unqueueReport } from '../../actions/'
 
-const parseCSV = data => {
+export const formatReport = report => {
+  let parsedReport = []
+  let keys = []
+  if (report.config) {
+    keys = Object.keys(report.config)
+    keys.map( k => {
+      parsedReport.push([k, report.config[k]])
+      return true
+    })
+  }
+  if (report.metricValues) {
+    keys = Object.keys(report.metricValues)
+    keys.map( k => {
+      parsedReport.push( [report.metricValues[k].name, report.metricValues[k].val])
+      return true
+    })
+  }
+  if (report.notes) {
+    parsedReport.push([report.notes])
+  }
+  return parsedReport
+}
+
+export const parseCSV = data => {
   let csvContent = 'data:text/csv;charset=utf-8,'
   data.forEach( (arr, i) => {
     const dataString = arr.join(',')
@@ -22,6 +45,8 @@ const launchDownload = data => {
   document.body.appendChild(link)
   link.click()
 }
+
+
 
 const ReportsDisplay = ({ reports,
                           status,
