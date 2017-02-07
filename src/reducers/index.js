@@ -14,6 +14,7 @@ const initReports = {
   reports: [],
   error: '',
 }
+
 export const metricNames = [
   'Awesomeness',
   'Coolness',
@@ -109,8 +110,6 @@ export const newReportConfig = (state = initReportConfig, action) => {
 
 export const previousMetricValues = (state = [], { type, output, reports }) => {
   switch (type) {
-    // case 'SAVE_REPORT_AND_RESET':
-    //   return output
     case 'REPORTS_RECEIVED':
     const lastReportKey = Object.keys(reports).sort( (a, b) => b - a )[0]
       return getMetricValArr(reports[lastReportKey].metricValues)
@@ -138,6 +137,10 @@ export const reports = (state = initReports, { type, reports, error }) => {
     default:
     return state
   }
+}
+
+export const queued = (state = [], action) => {
+  return state
 }
 
 export const combinedReducers = combineReducers({

@@ -6,8 +6,8 @@ import {
   notes,
   newReportConfig,
   previousMetricValues,
-  // pageDisplayed,
   reports,
+  queued,
       } from './index.js'
 
 const action = {
@@ -15,8 +15,6 @@ const action = {
   }
 
 let state = {}
-
-
 
 test('inital metric state is an object', () => {
   expect(typeof(initMetricState)).toBe('object')
@@ -169,4 +167,11 @@ describe('reports() ', () => {
     'errored')
   })
 
+})
+
+describe('queued() ', () => {
+
+  test('should return an array by default', () => {
+    expect(queued(undefined, action)).toEqual([])
+  })
 })
