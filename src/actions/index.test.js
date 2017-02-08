@@ -8,7 +8,7 @@ import {
   reportError,
   queueReport,
   unqueueReport,
-        } from './index.js'
+  clearQueue,} from './index.js'
 
 import {
   getReports,
@@ -151,5 +151,16 @@ describe('unqueueReport() ', () => {
 
   test('should also return a second property of "index"', () => {
     expect(Object.keys(unqueueReport(undefined))).toEqual(['type', 'index'])
+  })
+})
+
+describe('clearQueue() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(clearQueue())).toBe('object')
+  })
+
+  test('should return an action type of "CLEAR_QUEUE"', () => {
+    expect(clearQueue().type).toBe('CLEAR_QUEUE')
   })
 })

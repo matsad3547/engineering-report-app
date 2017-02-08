@@ -65,3 +65,9 @@ export const unqueueReport = index => {
     index,
   }
 }
+
+export const clearQueue = () => {
+  return {
+    type: 'CLEAR_QUEUE',
+  }
+}
