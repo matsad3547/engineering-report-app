@@ -4,21 +4,24 @@ import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 import Checkbox from 'material-ui/Checkbox'
 
-const ReportItem = ({ report,
+const ReportItem = ({ config,
+                      report,
                       index,
                       queued,
                       queueReport,
                       unqueueReport, }) => {
 
+  const { model, shortname, configNum } = config
+
   const checked = queued.includes(report) ? true : false
 
-  const date = report => new Date(+report)
-                              .toString()
-                              .slice(0, 24)
+  // const date = report => new Date(+report)
+  //                             .toString()
+  //                             .slice(0, 24)
 
   const onCheck = (e, i) => {
     e.preventDefault()
-    if (queued.includes(report)) {
+    if (checked) {
       let index = queued.indexOf(report)
       unqueueReport(index)
     }
@@ -37,7 +40,9 @@ const ReportItem = ({ report,
 
   return (
     <div className="reportItem">
-      <p>{`${index + 1}: `}{ date(report) }</p>
+      <p>{`${index + 1}. `}{model || '<model>'}: configuration {configNum || '<#>'}</p>
+
+      <p>{shortname || '<discription>'}</p>
       <Checkbox
         label="Select to Download"
         style={styles.checkbox}

@@ -39,6 +39,7 @@ const ReportsDisplay = ({ reports,
           {selectedKeys.map( (k, i) =>
             <ReportItem
               key={i}
+              config={reports[k].config}
               report={k}
               index={i}
               queued={queued}
