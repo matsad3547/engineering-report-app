@@ -148,6 +148,8 @@ export const queued = (state = [], { type, report, index }) => {
         ...state.slice(0, index),
         ...state.slice(index + 1)
       ]
+    case 'CLEAR_QUEUE':
+      return []
     default:
     return state
   }

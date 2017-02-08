@@ -5,9 +5,10 @@ import ReportItem from '../../components/ReportItem'
 const ReportsDisplay = ({ reports,
                           status,
                           queued,
+                          downloadQueued,
                           queueReport,
                           unqueueReport,
-                          downloadQueued }) => {
+                          clearQueue,}) => {
 
   const firstReport = 0
   const lastReport = 10
@@ -15,7 +16,7 @@ const ReportsDisplay = ({ reports,
   const download = e => {
     e.preventDefault()
     downloadQueued(reports, queued)
-
+    clearQueue()
   }
 
   const styles = {

@@ -175,11 +175,29 @@ describe('queued() ', () => {
     expect(queued(undefined, action)).toEqual([])
   })
 
-  test('should return an array that includes an report property passed in when pass a type of "QUEUE_REPORT"', () => {
+  test('should return an array that includes a report value passed in when passing a type of "QUEUE_REPORT"', () => {
     const action = {
       type: 'QUEUE_REPORT',
       report: 12345,
     }
     expect(queued(undefined, action)).toEqual(expect.arrayContaining([ 12345 ]))
+  })
+
+  test('should return an array with a report corresponding to an index removed when passing a type of "UNQUEUE_REPORT"', () => {
+    const action = {
+      type: 'UNQUEUE_REPORT',
+      index: 1,
+    }
+    const state = [123, 456]
+    const result = [123]
+    expect(queued(state, action)).toEqual(result)
+  })
+
+  test('should return an empty array when passed a type of "CLEAR_QUEUE"', () => {
+    const action = {
+      type: 'CLEAR_QUEUE',
+    }
+    const state = [123, 345]
+    expect(queued(state, action)).toEqual([])
   })
 })

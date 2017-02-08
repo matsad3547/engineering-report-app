@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { queueReport, unqueueReport } from '../../actions/'
+import { queueReport, unqueueReport, clearQueue } from '../../actions/'
 import ReportsDisplay from '../../components/ReportsDisplay'
 
 export const formatReport = report => {
@@ -26,7 +26,6 @@ export const formatReport = report => {
 }
 
 export const parseCSV = data => {
-  console.log('parsing csv');
   let csvContent = 'data:text/csv;charset=utf-8,'
   data.forEach( (arr, i) => {
     const dataString = arr.join(',')
@@ -65,6 +64,7 @@ const mapDispatchToProps = dispatch => {
   return {
     queueReport: report => dispatch(queueReport(report)),
     unqueueReport: index => dispatch(unqueueReport(index)),
+    clearQueue: () => dispatch(clearQueue())
   }
 }
 
