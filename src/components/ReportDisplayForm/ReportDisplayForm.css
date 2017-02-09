@@ -1,6 +1,8 @@
 .reportDisplay {
   box-sizing: border-box;
-  background-color: gray;
+  background-image:
+    linear-gradient(gray, black);
+  /*background-color: gray;*/
   color: white;
   min-height: 100vh;
   width: 100vw;

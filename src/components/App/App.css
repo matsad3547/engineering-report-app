@@ -12,7 +12,9 @@
 
 .existingReports {
   box-sizing: border-box;
-  background-color: gray;
+  background-image:
+    linear-gradient(gray, black 30%);
+  /*background-color: gray;*/
   color: white;
   min-height: 100vh;
   width: 100vw;
@@ -134,13 +136,24 @@ textarea {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  background-color: gray;
+  /*background-color: gray;*/
+  background-image:
+    linear-gradient(
+      gray, black 70%);
   color: white;
   height: 100vh;
 }
 
 .home h1, h2, h3, h4 {
   padding: .5em;
+}
+
+a {
+  color: white;
+}
+
+a:hover, a:focus {
+  color: #FF5722;
 }
 
 

@@ -10,6 +10,8 @@ import NewReport from './NewReport'
 import ExistingReports from './ExistingReports/'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+
+
 // export const history = syncHistoryWithStore(browserHistory, store)
 
 const Routes = () => {

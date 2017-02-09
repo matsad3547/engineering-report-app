@@ -36,6 +36,15 @@ const ReportItem = ({ config,
     checkbox: {
       marginBottom: 5,
     },
+    label: {
+      color: 'white',
+    },
+    checked: {
+      fill: 'white'
+    },
+    unchecked: {
+
+    }
   }
 
   return (
@@ -45,7 +54,9 @@ const ReportItem = ({ config,
       <p>{shortname || '<discription>'}</p>
       <Checkbox
         label="Select to Download"
+        labelStyle={styles.label}
         style={styles.checkbox}
+        iconStyle={!checked ? styles.checked : styles.unchecked}
         checked={checked}
         onCheck={onCheck}
         />
