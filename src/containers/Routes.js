@@ -9,8 +9,8 @@ import App from '../components/App/'
 import NewReport from './NewReport'
 import ExistingReports from './ExistingReports/'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
-
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import { muiTheme } from '../data/'
 
 // export const history = syncHistoryWithStore(browserHistory, store)
 
@@ -19,7 +19,7 @@ const Routes = () => {
   return (
 
     <Provider store={store} >
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <Router history={browserHistory}>
           <Route path="/" component={Home}>
             <IndexRoute component={Home}></IndexRoute>

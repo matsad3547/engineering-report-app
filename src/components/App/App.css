@@ -4,7 +4,9 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  background-color: #FAC72D;
+  background-image:
+    linear-gradient(gray, black 30%);
+  /*background-color: #FAC72D;*/
   width: 100vw;
   min-height: 100vh;
   padding: .5em;
@@ -130,7 +132,7 @@ textarea {
   width: 60%;
 }
 
-.home {
+.home, .welcome {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -141,18 +143,35 @@ textarea {
     linear-gradient(
       gray, black 70%);
   color: white;
+
+}
+
+.home {
   height: 100vh;
+}
+
+.welcome {
+  height: 85vh;
+  padding-bottom: 8em;
 }
 
 .home h1, h2, h3, h4 {
   padding: .5em;
 }
 
+.home h1 {
+  color: #FF9800;
+}
+
 a {
   color: white;
 }
 
-a:hover, a:focus {
+a:hover, a:active {
+  color: #FF5722;
+}
+
+a:active {
   color: #FF5722;
 }
 
