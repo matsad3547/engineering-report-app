@@ -2,26 +2,37 @@ import { connect } from 'react-redux'
 import { queueReport, unqueueReport, clearQueue } from '../../actions/'
 import ReportsDisplay from '../../components/ReportsDisplay'
 
-export const formatReport = report => {
+export const formatReports = (reports, queued) => {
   let parsedReport = []
-  let keys = []
-  if (report.config) {
-    keys = Object.keys(report.config)
-    keys.map( k => {
-      parsedReport.push([k, report.config[k]])
-      return true
-    })
-  }
-  if (report.metricValues) {
-    keys = Object.keys(report.metricValues)
-    keys.map( k => {
-      parsedReport.push( [report.metricValues[k].name, report.metricValues[k].val])
-      return true
-    })
-  }
-  if (report.notes) {
-    parsedReport.push([report.notes])
-  }
+  let count = 0
+  queued.map( (q, i) => {
+    if (reports[q].config) {
+      const configKeys = Object.keys(reports[q].config)
+      configKeys.map( (c, j) => {
+        i === 0 ? (parsedReport.push( [c, reports[q].config[c] ])) :
+         (parsedReport[j].push(reports[q].config[c]))
+        return true
+      })
+      count = configKeys.length
+    }
+
+    if (reports[q].metricValues) {
+      const mvKeys = Object.keys(reports[q].metricValues)
+      mvKeys.map( (k, j) => {
+        i === 0 ?
+        (parsedReport.push( [ reports[q].metricValues[k].name, reports[q].metricValues[k].val ])) :
+         (parsedReport[j + count].push(reports[q].metricValues[k].val))
+        return true
+      })
+    }
+
+    if (reports[q].notes) {
+      i === 0 ?
+      (parsedReport.push(['Notes', reports[q].notes])) :
+      (parsedReport[parsedReport.length - 1].push(reports[q].notes))
+    }
+  })
+
   return parsedReport
 }
 
@@ -44,11 +55,9 @@ const launchDownload = csvContent => {
 }
 
 export const downloadQueued = (reports, queued) => {
-  const dataStr = queued.map( q => {
-    let data = formatReport(reports[q])
-    return parseCSV(data)
-  })
-  launchDownload(dataStr)
+  const dataStr = formatReports(reports, queued)
+  const data = parseCSV(dataStr)
+  launchDownload(data)
 }
 
 const mapStateToProps = state => {
