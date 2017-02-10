@@ -12,7 +12,6 @@ const config = {
 const database = firebase
   .initializeApp(config)
   .database()
-  // .ref()
 
 export const auth = firebase
   .auth()

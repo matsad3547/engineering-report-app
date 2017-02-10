@@ -5,24 +5,22 @@ import ReportsDisplay from '../../components/ReportsDisplay'
 export const formatReports = (reports, queued) => {
   let parsedReport = []
   let count = 0
-  queued.map( (q, i) => {
+  queued.forEach( (q, i) => {
     if (reports[q].config) {
       const configKeys = Object.keys(reports[q].config)
-      configKeys.map( (c, j) => {
+      configKeys.forEach( (c, j) => {
         i === 0 ? (parsedReport.push( [c, reports[q].config[c] ])) :
          (parsedReport[j].push(reports[q].config[c]))
-        return true
       })
       count = configKeys.length
     }
 
     if (reports[q].metricValues) {
       const mvKeys = Object.keys(reports[q].metricValues)
-      mvKeys.map( (k, j) => {
+      mvKeys.forEach( (k, j) => {
         i === 0 ?
         (parsedReport.push( [ reports[q].metricValues[k].name, reports[q].metricValues[k].val ])) :
          (parsedReport[j + count].push(reports[q].metricValues[k].val))
-        return true
       })
     }
 
@@ -31,7 +29,6 @@ export const formatReports = (reports, queued) => {
       (parsedReport.push(['Notes', reports[q].notes])) :
       (parsedReport[parsedReport.length - 1].push(reports[q].notes))
     }
-    return true
   })
 
   return parsedReport
