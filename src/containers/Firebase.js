@@ -14,4 +14,7 @@ const database = firebase
   .database()
   // .ref()
 
+export const auth = firebase
+  .auth()
+
 export default database
