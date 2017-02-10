@@ -31,6 +31,7 @@ export const formatReports = (reports, queued) => {
       (parsedReport.push(['Notes', reports[q].notes])) :
       (parsedReport[parsedReport.length - 1].push(reports[q].notes))
     }
+    return true
   })
 
   return parsedReport

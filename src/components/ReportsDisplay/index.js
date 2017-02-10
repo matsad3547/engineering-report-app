@@ -1,5 +1,6 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton'
+import CircularProgress from 'material-ui/CircularProgress'
 import ReportItem from '../../components/ReportItem'
 
 const ReportsDisplay = ({ reports,
@@ -25,6 +26,10 @@ const ReportsDisplay = ({ reports,
       width: 250,
       margin: 10,
     },
+    spinner: {
+      size: 75,
+      thickness: 6,
+    }
   }
 
   if (status === 'received') {
@@ -66,6 +71,11 @@ const ReportsDisplay = ({ reports,
   return (
     <div className="existingReports">
       <h3>Reports are loading...</h3>
+      <CircularProgress
+        className="spinner"
+        thickness={styles.spinner.thickness}
+        size={styles.spinner.size}
+        />
     </div>
   )
 }

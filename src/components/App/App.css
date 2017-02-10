@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   justify-content: space-around;
   background-image:
-    linear-gradient(gray, black 30%);
+    linear-gradient(gray, black 40%);
   /*background-color: #FAC72D;*/
   width: 100vw;
   min-height: 100vh;
@@ -15,7 +15,7 @@
 .existingReports {
   box-sizing: border-box;
   background-image:
-    linear-gradient(gray, black 30%);
+    linear-gradient(gray, black 40%);
   /*background-color: gray;*/
   color: white;
   min-height: 100vh;
@@ -175,7 +175,9 @@ a:active {
   color: #FF5722;
 }
 
-
+.spinner {
+  padding-top: 8em;
+}
 /*@media (max-width: 425px) {
   .reportInput {
     margin: 0;
