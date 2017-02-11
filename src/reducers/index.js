@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { routerReducer } from 'react-router-redux'
 
 export const initVal = 5
 
@@ -162,4 +163,5 @@ export const combinedReducers = combineReducers({
   previousMetricValues,
   reports,
   queued,
+  routing: routerReducer,
 })

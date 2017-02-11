@@ -25,13 +25,12 @@ export const formatReports = (reports, queued) => {
       parsedReports[parsedReports.length - 1].push(reports[q].notes)
     }
   })
-
   return parsedReports
 }
 
 export const parseCSV = data => {
   const csvContent = data.reduce( (sum, arr, i) => {
-    return sum + ( i < data.length ? arr.join(',') + '\n' : arr.join(',') ) }, 'data:text/csv;charset=utf-8,')
+    return sum + (i < data.length ? arr.join(',') + '\n' : arr.join(',') )}, 'data:text/csv;charset=utf-8,')
   return csvContent
 }
 

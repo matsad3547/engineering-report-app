@@ -1,8 +1,9 @@
 import React from 'react';
-import { Router, IndexRoute, Route, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
-import store from './store'
+import { Router, IndexRoute, Route, browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 
+import store from './store'
 import Home from '../components/Home/'
 import DisplayReport from '../containers/DisplayReport'
 import App from '../components/App/'
@@ -12,7 +13,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { muiTheme } from '../data/'
 
-// export const history = syncHistoryWithStore(browserHistory, store)
+export const history = syncHistoryWithStore(browserHistory, store)
 
 const Routes = () => {
 
@@ -20,7 +21,7 @@ const Routes = () => {
 
     <Provider store={store} >
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-        <Router history={browserHistory}>
+        <Router history={history}>
           <Route path="/" component={Home}>
             <IndexRoute component={Home}></IndexRoute>
           </Route>
