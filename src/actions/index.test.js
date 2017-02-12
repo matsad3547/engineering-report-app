@@ -1,7 +1,7 @@
 import {
   changeMetricVal,
   saveReportNotes,
-  setNewReportConfig,
+  setReportConfig,
   saveReport,
   requestReports,
   receiveReports,
@@ -43,11 +43,11 @@ describe('saveReportNotes() ', () => {
   })
 })
 
-describe('setNewReportConfig() ', () => {
+describe('setReportConfig() ', () => {
 
   test ('action type should be "SET_NEW_REPORT_CONFIG"', () => {
     let output = {}
-    expect(setNewReportConfig(output).type).toBe('SET_NEW_REPORT_CONFIG')
+    expect(setReportConfig(output).type).toBe('SET_NEW_REPORT_CONFIG')
   })
 
   test ('should return an object with model, shortName, configNum, and ballast', () => {
@@ -59,7 +59,7 @@ describe('setNewReportConfig() ', () => {
       ballast: false,
     }
     let returnValues = Object.keys(output)
-    expect(Object.keys(setNewReportConfig(output))).toEqual(returnValues)
+    expect(Object.keys(setReportConfig(output))).toEqual(returnValues)
   })
 })
 

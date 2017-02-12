@@ -4,7 +4,7 @@ import {
   getUnchangedState,
   metricValues,
   notes,
-  newReportConfig,
+  reportConfig,
   previousMetricValues,
   reports,
   queued,
@@ -80,10 +80,10 @@ describe('notes() ', () => {
   })
 })
 
-describe('newReportConfig() ', () => {
+describe('reportConfig() ', () => {
 
   test('should return an object', () => {
-    expect(typeof(newReportConfig(undefined, 'TEST'))).toBe('object')
+    expect(typeof(reportConfig(undefined, 'TEST'))).toBe('object')
   })
 
   test ('should return an object with model, short name, config number, and ballast when given a action type of "SET_NEW_REPORT_CONFIG"', () => {
@@ -100,7 +100,7 @@ describe('newReportConfig() ', () => {
       configNum: 1,
       ballast: false,
     }
-    expect(newReportConfig({}, action)).toEqual(output)
+    expect(reportConfig({}, action)).toEqual(output)
   })
 })
 

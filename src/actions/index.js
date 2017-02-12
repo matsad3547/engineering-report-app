@@ -15,7 +15,7 @@ export const saveReportNotes = output => {
   }
 }
 
-export const setNewReportConfig = ({model, shortName, configNum, ballast}) => {
+export const setReportConfig = ({model, shortName, configNum, ballast}) => {
   return {
     type: 'SET_NEW_REPORT_CONFIG',
     model,

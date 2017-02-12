@@ -6,7 +6,7 @@ const config = {
   databaseURL: "https://engineering-report-app.firebaseio.com",
   storageBucket: "engineering-report-app.appspot.com",
   messagingSenderId: "4716609803"
-};
+}
 
 
 const database = firebase

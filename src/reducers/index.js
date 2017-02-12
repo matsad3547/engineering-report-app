@@ -91,7 +91,7 @@ export const notes = (state = '', { type, string }) => {
   }
 }
 
-export const newReportConfig = (state = initReportConfig, action) => {
+export const reportConfig = (state = initReportConfig, action) => {
 
   const { type, model, shortName, configNum, ballast } = action
   switch (type) {
@@ -157,7 +157,7 @@ export const queued = (state = [], { type, report, index }) => {
 }
 
 export const combinedReducers = combineReducers({
-  newReportConfig,
+  reportConfig,
   metricValues,
   notes,
   previousMetricValues,
