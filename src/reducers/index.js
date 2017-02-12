@@ -164,4 +164,4 @@ export const combinedReducers = combineReducers({
   reports,
   queued,
   routing: routerReducer,
-})
+  })

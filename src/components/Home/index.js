@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {
   margin: 12,
+  width: 200,
 };
 
 const Home = () => {

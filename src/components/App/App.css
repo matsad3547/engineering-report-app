@@ -137,13 +137,13 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
   /*background-color: gray;*/
+  color: white;
   background-image:
     linear-gradient(
       gray, black 70%);
-  color: white;
-
 }
 
 .home {
