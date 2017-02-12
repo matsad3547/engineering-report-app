@@ -8,7 +8,7 @@ import ReportInterface from '../components/ReportInterface'
 
 const mapStateToProps = state => {
   return {
-    config: state.newReportConfig,
+    config: state.reportConfig,
     metricValues: state.metricValues,
     notes: state.notes,
     previousMetricValues: state.previousMetricValues,

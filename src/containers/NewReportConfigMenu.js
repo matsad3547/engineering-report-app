@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 
-import { setNewReportConfig } from '../actions'
+import { setReportConfig } from '../actions'
 
 import ConfigForm from '../components/ConfigForm'
 
 const mapDispatchToProps = dispatch => {
   return {
-    configDispatch: (output) => dispatch(setNewReportConfig(output))
+    configDispatch: (output) => dispatch(setReportConfig(output))
   }
 }
 

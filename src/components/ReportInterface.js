@@ -5,7 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 import NewReportConfigMenu from '../containers/NewReportConfigMenu'
 import DropDownSliderInput from '../containers/DropDownSliderInput'
 import NoteField from '../containers/NoteField'
-import database from '../containers/Firebase'
+
+import database from '../utilities/firebase'
 
 
 const ReportInterface = ({  config,
@@ -16,12 +17,6 @@ const ReportInterface = ({  config,
                             getReports }) => {
 
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
-
-  // console.log('config:', config,
-  //   'metric values:', metricValues,
-  //   'notes:', notes,
-  //   'previousMetricValues:', previousMetricValues,
-  // );
 
   const submitReport = e => {
 
@@ -65,7 +60,7 @@ const ReportInterface = ({  config,
         value={metricValues[key].val}
         previousVal={previousMetricValues[i] ? previousMetricValues[i] : 4.5}
         />
-      
+
       )}
       <NoteField
         notes={notes}

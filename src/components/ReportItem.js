@@ -11,7 +11,8 @@ const ReportItem = ({ config,
                       queueReport,
                       unqueueReport, }) => {
 
-  const { model, shortname, configNum } = config
+  const { model, shortName, configNum } = config
+  console.log('shortname:',shortName);
 
   const checked = queued.includes(report) ? true : false
 
@@ -51,7 +52,7 @@ const ReportItem = ({ config,
     <div className="reportItem">
       <p>{`${index + 1}. `}{model || '<model>'}: configuration {configNum || '<#>'}</p>
 
-      <p>{shortname || '<discription>'}</p>
+      <p>desc: {shortName || '<description>'}</p>
       <Checkbox
         label="Select to Download"
         labelStyle={styles.label}
