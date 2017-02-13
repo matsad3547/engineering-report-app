@@ -27,7 +27,6 @@ const ReportInterface = ({  config,
       metricValues,
       notes,
     }
-    console.log('report key:', `test reports/${newReportKey}`);
     let updates = {}
     updates[`test reports/${newReportKey}`] = newReport
     database.ref().update(updates)

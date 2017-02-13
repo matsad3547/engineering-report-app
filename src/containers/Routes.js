@@ -7,6 +7,8 @@ import store from './store'
 import Home from '../components/Home/'
 import DisplayReport from '../containers/DisplayReport'
 import App from '../components/App/'
+import CreateUser from '../components/CreateUser'
+import LoginUser from '../components/LoginUser'
 import NewReport from './NewReport'
 import ExistingReports from './ExistingReports/'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -23,8 +25,12 @@ const Routes = () => {
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <Router history={history}>
           <Route path="/" component={Home}>
+
             <IndexRoute component={Home}></IndexRoute>
+
           </Route>
+          <Route path="/login_user" component={LoginUser} ></Route>
+          <Route path="/create_user" component={CreateUser} ></Route>
           <Route path="/app" component={App} >
 
             <Route path="/app/new_report" component={NewReport} />

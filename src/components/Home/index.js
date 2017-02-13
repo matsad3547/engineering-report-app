@@ -16,15 +16,17 @@ const Home = () => {
       <br />
       <RaisedButton
         label="Sign Up"
-        style={style} />
+        containerElement={<Link to="/create_user" ></Link>}
+        style={style}
+        />
       <RaisedButton
         label="Log In"
+        containerElement={<Link to="/login_user" ></Link>}
         style={style} />
       <RaisedButton
         label="Try the Demo"
-        containerElement={<Link to="/app" >
-          Try out the App</Link>}
-          style={style}/>
+        containerElement={<Link to="/app" ></Link>}
+        style={style}/>
     </div>
   )
 }

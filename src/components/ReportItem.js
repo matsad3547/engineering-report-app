@@ -12,7 +12,6 @@ const ReportItem = ({ config,
                       unqueueReport, }) => {
 
   const { model, shortName, configNum } = config
-  console.log('shortname:',shortName);
 
   const checked = queued.includes(report) ? true : false
 

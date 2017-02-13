@@ -1,19 +1,19 @@
-import { auth } from './Firebase'
+import { auth } from './firebase'
 
-console.log(auth)
+// console.log(auth)
 
-auth.signInWithEmailAndPassword(email, pass)
+// auth.signInWithEmailAndPassword(email, pass)
 
 // auth.createUserWithEmailAndPassword(email, pass)
 
 auth.onAuthStateChanged(firebaseUser => {
-  console.log('firebaseUser', firebaseUser);
+  // console.log('firebaseUser', firebaseUser);
 })
 
 export const signOut = () => auth.signOut()
 
 export const createUser = (email, pw) => {
   auth.createUserWithEmailAndPassword(email, pw)
-    .then(saveUser)
-    .catch( (err) = console.log('Oops!', err) )
+    .then()
+    // .catch( (error) = console.log('Oops!', error) )
 }

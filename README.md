@@ -21,3 +21,4 @@ This app is designed to allow test engineers to use a simple, configurable repor
 
 ###Interface
 * Using user feedback, build a more usable desktop version of the app.
+* Enable scrolling to show the next 10 reports
