@@ -15,5 +15,5 @@ export const signOut = () => auth.signOut()
 export const createUser = (email, pw) => {
   auth.createUserWithEmailAndPassword(email, pw)
     .then()
-    // .catch( (error) = console.log('Oops!', error) )
+    .catch( err => console.log('Oops!', err) )
 }

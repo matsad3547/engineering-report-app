@@ -71,3 +71,11 @@ export const clearQueue = () => {
     type: 'CLEAR_QUEUE',
   }
 }
+
+export const setUserData = ({ user, password }) => {
+  return {
+    type: 'SET_USER_DATA',
+    user,
+    password,
+  }
+}

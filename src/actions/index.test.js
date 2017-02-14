@@ -8,7 +8,8 @@ import {
   reportError,
   queueReport,
   unqueueReport,
-  clearQueue,} from './index.js'
+  clearQueue,
+  setUserData, } from './index.js'
 
 import {
   getReports,
@@ -162,5 +163,32 @@ describe('clearQueue() ', () => {
 
   test('should return an action type of "CLEAR_QUEUE"', () => {
     expect(clearQueue().type).toBe('CLEAR_QUEUE')
+  })
+})
+
+describe('setUserData() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(setUserData('test'))).toBe('object')
+  })
+
+  test('should return an action type of "SET_USER_DATA"', () => {
+    expect(setUserData('test').type).toBe('SET_USER_DATA')
+  })
+
+  test('should return a user and password', () => {
+
+    const output = {
+      user: 'name',
+      password: 'password1',
+    }
+
+    const result = {
+      type: 'SET_USER_DATA',
+      user: 'name',
+      password: 'password1',
+    }
+
+    expect(setUserData(output)).toEqual(result)
   })
 })
