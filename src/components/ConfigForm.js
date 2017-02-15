@@ -58,7 +58,8 @@ const ConfigForm = ({ config, configDispatch }) => {
   return (
     <div className="reportConfig">
       <div className="textInput">
-        <input type="text"
+        <input
+          type="text"
           placeholder="Model"
           value={model}
           onChange={onChange.model}

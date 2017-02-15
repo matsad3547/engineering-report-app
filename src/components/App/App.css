@@ -178,6 +178,12 @@ a:active {
 .spinner {
   padding-top: 8em;
 }
+
+
+.login > input {
+  width: 175px;
+  margin: .5em;
+}
 /*@media (max-width: 425px) {
   .reportInput {
     margin: 0;

@@ -72,10 +72,10 @@ export const clearQueue = () => {
   }
 }
 
-export const setUserData = ({ user, password }) => {
+export const setUserData = ({ email, password }) => {
   return {
     type: 'SET_USER_DATA',
-    user,
+    email,
     password,
   }
 }

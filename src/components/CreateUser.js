@@ -1,8 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { setUserData, clearUserData } from '../actions/'
+import createUser from '../utilities/auth'
 import RaisedButton from 'material-ui/RaisedButton'
-import { createUser } from '../utilities/auth'
 
-const CreateUser = ({email, password, userDispatch}) => {
+let CreateUser = ({ email,
+                    password,
+                    userDispatch,
+                    clearUserData,
+                      }) => {
 
   const styles = {
     button: {
@@ -11,41 +17,46 @@ const CreateUser = ({email, password, userDispatch}) => {
     }
   }
 
-  // const output = {
-  //   email,
-  //   password,
-  // }
+  const output = {
+    email,
+    password,
+  }
 
-  // const onChange = {
-  //   // email(e) {
-  //   //   e.preventDefault()
-  //   //   output.email = e.target.value
-  //   //   userDispatch(output)
-  //   // },
-  //   password(e) {
-  //     e.preventDefault()
-  //     output.password = e.target.value
-  //     userDispatch(output)
-  //   },
-  // }
+  const onChange = {
+
+    email(e) {
+      e.preventDefault()
+      output.email = e.target.value
+      userDispatch(output)
+    },
+    password(e) {
+      e.preventDefault()
+      output.password = e.target.value
+      userDispatch(output)
+    },
+  }
 
   const onClick = e => {
     e.preventDefault()
-    let email, password
-    console.log(email);
-    // createUser(email, password)
+    console.log('email:', email, 'password:', password);
+    createUser(email, password)
+    // clearUserData()
   }
 
   return (
     <div className="home">
-      <div className="textInput">
-        <input type="text"
-          placeholder="Email"
+      <div className="textInput login">
+        <input
+          type="text"
+          placeholder="E-mail Address"
           value={email}
+          onChange={onChange.email}
           />
-        <input type="text"
+        <input
+          type="text"
           placeholder="Password"
           value={password}
+          onChange={onChange.password}
           />
 
         <RaisedButton
@@ -53,11 +64,34 @@ const CreateUser = ({email, password, userDispatch}) => {
           label="Create User"
           style={styles.button}
           className="reportButton"
+          onClick={onClick}
           />
 
       </div>
     </div>
   )
 }
+
+
+const mapStateToProps = state => {
+
+  return {
+    email: state.user.email,
+    password: state.user.password,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+
+  return {
+    userDispatch: output => dispatch(setUserData(output)),
+    clearUserData: () => dispatch(clearUserData()),
+  }
+}
+
+CreateUser = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+    )(CreateUser)
 
 export default CreateUser

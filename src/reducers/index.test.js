@@ -212,11 +212,11 @@ describe('user() ', () => {
   test('should return "user" and "password" values when a type of "SET_USER_DATA" is submitted', () => {
     const action = {
       type: 'SET_USER_DATA',
-      user: 'email',
+      email: 'email',
       password: 'password1',
     }
     const state = {
-      user: 'email',
+      email: 'email',
       password: 'password1',
     }
     expect(user({}, action)).toEqual(state)
@@ -227,7 +227,7 @@ describe('user() ', () => {
       type: 'CLEAR_USER_DATA',
     }
     const state = {
-      user: 'email',
+      email: 'email',
       password: 'password1',
     }
     expect(user(state, action)).toEqual({})

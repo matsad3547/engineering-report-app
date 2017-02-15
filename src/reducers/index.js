@@ -36,6 +36,11 @@ export const metricNames = [
   'Blueness'
  ]
 
+const initUserState = {
+  email: '',
+  password: '',
+}
+
 const getInitMetricState = metricNames => {
   let initMetricState = {}
   metricNames.map( (name, i) => {
@@ -156,15 +161,15 @@ export const queued = (state = [], { type, report, index }) => {
   }
 }
 
-export const user = (state = {}, {type, user, password}) => {
+export const user = (state = initUserState, {type, email, password}) => {
   switch (type) {
     case 'SET_USER_DATA':
       return {
-        user,
+        email,
         password,
       }
     case 'CLEAR_USER_DATA':
-      return {}
+      return initUserState
     default:
       return state
   }
@@ -177,5 +182,6 @@ export const combinedReducers = combineReducers({
   previousMetricValues,
   reports,
   queued,
+  user,
   routing: routerReducer,
   })
