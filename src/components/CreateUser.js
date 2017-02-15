@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { setUserData, clearUserData } from '../actions/'
-import createUser from '../utilities/auth'
+import { createUser } from '../utilities/auth'
 import RaisedButton from 'material-ui/RaisedButton'
 
 let CreateUser = ({ email,
@@ -40,7 +40,7 @@ let CreateUser = ({ email,
     e.preventDefault()
     console.log('email:', email, 'password:', password);
     createUser(email, password)
-    // clearUserData()
+    clearUserData()
   }
 
   return (

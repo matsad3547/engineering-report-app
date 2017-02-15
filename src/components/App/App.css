@@ -179,6 +179,10 @@ a:active {
   padding-top: 8em;
 }
 
+.login {
+  text-align: center;
+  width: 100%;
+}
 
 .login > input {
   width: 175px;
