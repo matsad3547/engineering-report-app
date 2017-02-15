@@ -9,7 +9,9 @@ import {
   queueReport,
   unqueueReport,
   clearQueue,
-  setUserData, } from './index.js'
+  setUserData,
+  clearUserData,
+    } from './index.js'
 
 import {
   getReports,
@@ -190,5 +192,16 @@ describe('setUserData() ', () => {
     }
 
     expect(setUserData(output)).toEqual(result)
+  })
+})
+
+describe('clearUserData() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(clearUserData())).toBe('object')
+  })
+
+  test('should return a type of "CLEAR_USER_DATA"', () => {
+    expect(clearUserData().type).toBe('CLEAR_USER_DATA')
   })
 })

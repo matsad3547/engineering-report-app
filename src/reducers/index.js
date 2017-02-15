@@ -156,6 +156,20 @@ export const queued = (state = [], { type, report, index }) => {
   }
 }
 
+export const user = (state = {}, {type, user, password}) => {
+  switch (type) {
+    case 'SET_USER_DATA':
+      return {
+        user,
+        password,
+      }
+    case 'CLEAR_USER_DATA':
+      return {}
+    default:
+      return state
+  }
+}
+
 export const combinedReducers = combineReducers({
   reportConfig,
   metricValues,

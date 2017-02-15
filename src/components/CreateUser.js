@@ -38,27 +38,24 @@ const CreateUser = ({email, password, userDispatch}) => {
 
   return (
     <div className="home">
-        <div className="textInput">
-          <form onSubmit={onClick} >
+      <div className="textInput">
+        <input type="text"
+          placeholder="Email"
+          value={email}
+          />
+        <input type="text"
+          placeholder="Password"
+          value={password}
+          />
 
-            <input type="text"
-              placeholder="Email"
+        <RaisedButton
 
-              ref={ node => email = node }
-              />
-            <input type="text"
-              placeholder="Password"
-              ref={ node => password = node }
-              />
+          label="Create User"
+          style={styles.button}
+          className="reportButton"
+          />
 
-            <RaisedButton
-              
-              label="Create User"
-              style={styles.button}
-              className="reportButton"
-              />
-          </form>
-        </div>
+      </div>
     </div>
   )
 }

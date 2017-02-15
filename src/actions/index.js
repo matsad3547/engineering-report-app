@@ -79,3 +79,9 @@ export const setUserData = ({ user, password }) => {
     password,
   }
 }
+
+export const clearUserData = () => {
+  return {
+    type: 'CLEAR_USER_DATA',
+  }
+}

@@ -8,6 +8,7 @@ import {
   previousMetricValues,
   reports,
   queued,
+  user,
       } from './index.js'
 
 const action = {
@@ -199,5 +200,36 @@ describe('queued() ', () => {
     }
     const state = [123, 345]
     expect(queued(state, action)).toEqual([])
+  })
+})
+
+describe('user() ', () => {
+
+  test('should return an empty object by default', () => {
+    expect(user(undefined, action)).toEqual({})
+  })
+
+  test('should return "user" and "password" values when a type of "SET_USER_DATA" is submitted', () => {
+    const action = {
+      type: 'SET_USER_DATA',
+      user: 'email',
+      password: 'password1',
+    }
+    const state = {
+      user: 'email',
+      password: 'password1',
+    }
+    expect(user({}, action)).toEqual(state)
+  })
+
+  test('should delete user and password data upon action type of "CLEAR_USER_DATA"', () => {
+    const action = {
+      type: 'CLEAR_USER_DATA',
+    }
+    const state = {
+      user: 'email',
+      password: 'password1',
+    }
+    expect(user(state, action)).toEqual({})
   })
 })
