@@ -6,20 +6,17 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 let CreateUser = ({ email,
                     password,
+                    verified,
                     userDispatch,
                     clearUserData,
                       }) => {
 
-  const styles = {
-    button: {
-      height: 50,
-      margin: 12,
-    }
-  }
+  const userReady = (verified === password && password.length >= 6) ? false : true
 
   const output = {
     email,
     password,
+    verified,
   }
 
   const onChange = {
@@ -34,13 +31,32 @@ let CreateUser = ({ email,
       output.password = e.target.value
       userDispatch(output)
     },
+    verify(e) {
+      e.preventDefault()
+      output.verified = e.target.value
+      userDispatch(output)
+    }
   }
 
   const onClick = e => {
     e.preventDefault()
-    console.log('email:', email, 'password:', password);
-    createUser(email, password)
-    clearUserData()
+    if (password.length > 6) {
+      console.log('email:', email, 'password:', password);
+      createUser(email, password)
+      clearUserData()
+    }
+  }
+
+  const display = password.length > 0 && password.length < 6 ? 'block' : 'none'
+
+  const styles = {
+    button: {
+      height: 50,
+      margin: 12,
+    },
+    password: {
+      display: display
+    }
   }
 
   return (
@@ -58,9 +74,18 @@ let CreateUser = ({ email,
           value={password}
           onChange={onChange.password}
           />
+        <input
+          type="text"
+          placeholder="Verify Password"
+          value={verified}
+          onChange={onChange.verify}
+          />
+        <p
+          style={styles.password}
+          >Please enter a password greater than 6 characters long</p>
 
         <RaisedButton
-
+          disabled={userReady}
           label="Create User"
           style={styles.button}
           className="reportButton"
@@ -78,6 +103,7 @@ const mapStateToProps = state => {
   return {
     email: state.user.email,
     password: state.user.password,
+    verified: state.user.verified,
   }
 }
 

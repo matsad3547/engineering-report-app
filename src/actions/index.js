@@ -72,11 +72,12 @@ export const clearQueue = () => {
   }
 }
 
-export const setUserData = ({ email, password }) => {
+export const setUserData = ({ email, password, verified }) => {
   return {
     type: 'SET_USER_DATA',
     email,
     password,
+    verified,
   }
 }
 

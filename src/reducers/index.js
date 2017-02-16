@@ -39,6 +39,7 @@ export const metricNames = [
 const initUserState = {
   email: '',
   password: '',
+  verified: '',
 }
 
 const getInitMetricState = metricNames => {
@@ -161,12 +162,13 @@ export const queued = (state = [], { type, report, index }) => {
   }
 }
 
-export const user = (state = initUserState, {type, email, password}) => {
+export const user = (state = initUserState, {type, email, password, verified }) => {
   switch (type) {
     case 'SET_USER_DATA':
       return {
         email,
         password,
+        verified,
       }
     case 'CLEAR_USER_DATA':
       return initUserState
