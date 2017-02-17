@@ -209,15 +209,17 @@ describe('user() ', () => {
     expect(user(undefined, action)).toEqual({})
   })
 
-  test('should return "user" and "password" values when a type of "SET_USER_DATA" is submitted', () => {
+  test('should return "firstName", "lastName", "email", "password", and "verify" values when a type of "SET_USER_DATA" is submitted', () => {
     const action = {
       type: 'SET_USER_DATA',
       email: 'email',
       password: 'password1',
+      verify: 'password1',
     }
     const state = {
       email: 'email',
       password: 'password1',
+      verify: 'password1',
     }
     expect(user({}, action)).toEqual(state)
   })

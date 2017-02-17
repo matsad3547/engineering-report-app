@@ -28,7 +28,7 @@ const ReportInterface = ({  config,
       notes,
     }
     let updates = {}
-    updates[`test reports/${newReportKey}`] = newReport
+    updates[`demo/test reports/${newReportKey}`] = newReport
     database.ref().update(updates)
     saveReport()
     getReports()

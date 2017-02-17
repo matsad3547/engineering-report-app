@@ -1,4 +1,3 @@
-
 import { requestReports, receiveReports, reportError } from './index'
 import database from '../utilities/firebase'
 
@@ -6,10 +5,10 @@ export const getReports = (ref, action) => {
 
   let urlKey = ''
   if (ref === 'reports') {
-    urlKey = 'test reports'
+    urlKey = 'demo/test reports'
   }
   else {
-    urlKey = 'test reports/' + ref
+    urlKey = 'demo/test reports/' + ref
   }
   console.log('get reports called');
   return dispatch => {

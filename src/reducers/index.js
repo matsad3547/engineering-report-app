@@ -162,7 +162,7 @@ export const queued = (state = [], { type, report, index }) => {
   }
 }
 
-export const user = (state = initUserState, {type, email, password, verified }) => {
+export const user = (state = initUserState, {type, firstName, lastName, email, password, verified }) => {
   switch (type) {
     case 'SET_USER_DATA':
       return {

@@ -178,17 +178,23 @@ describe('setUserData() ', () => {
     expect(setUserData('test').type).toBe('SET_USER_DATA')
   })
 
-  test('should return a user and password', () => {
+  test('should return a first name, last name, email, and password with a match to verify password', () => {
 
     const output = {
-      user: 'name',
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'things',
       password: 'password1',
+      verify: 'password1',
     }
 
     const result = {
       type: 'SET_USER_DATA',
-      user: 'name',
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'things',
       password: 'password1',
+      verify: 'password1',
     }
 
     expect(setUserData(output)).toEqual(result)

@@ -4,7 +4,9 @@ import { setUserData, clearUserData } from '../actions/'
 import { createUser } from '../utilities/auth'
 import RaisedButton from 'material-ui/RaisedButton'
 
-let CreateUser = ({ email,
+let CreateUser = ({ firstName,
+                    lastName,
+                    email,
                     password,
                     verified,
                     userDispatch,
@@ -14,6 +16,8 @@ let CreateUser = ({ email,
   const userReady = (verified === password && password.length >= 6) ? false : true
 
   const output = {
+    firstName,
+    lastName,
     email,
     password,
     verified,
@@ -41,7 +45,6 @@ let CreateUser = ({ email,
   const onClick = e => {
     e.preventDefault()
     if (password.length > 6) {
-      console.log('email:', email, 'password:', password);
       createUser(email, password)
       clearUserData()
     }
@@ -62,6 +65,7 @@ let CreateUser = ({ email,
   return (
     <div className="home">
       <div className="textInput login">
+
         <input
           type="text"
           placeholder="E-mail Address"
