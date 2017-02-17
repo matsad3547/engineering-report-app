@@ -18,7 +18,7 @@ export const getReports = (ref, action) => {
       dispatch(receiveReports(reports))
       })
     .catch( err => {
-      console.log('An error occured while querying the database:', err);
+      console.log('An error occured while fetching reports from the database:', err);
       dispatch(reportError(err))
     })
   }

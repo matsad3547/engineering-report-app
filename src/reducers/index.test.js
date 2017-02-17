@@ -17,18 +17,10 @@ const action = {
 
 let state = {}
 
-test('inital metric state is an object', () => {
-  expect(typeof(initMetricState)).toBe('object')
-})
-
 describe('metricValues() ', () => {
 
   test('should return an object', () => {
     expect(typeof(metricValues({}, action))).toBe('object')
-  })
-
-  test('should return initMetricState given initial empty inputs', () => {
-    expect(metricValues(undefined, action)).toBe(initMetricState)
   })
 
   test('should return a state with an object composed of components of the action', () => {
@@ -206,7 +198,13 @@ describe('queued() ', () => {
 describe('user() ', () => {
 
   test('should return an empty object by default', () => {
-    expect(user(undefined, action)).toEqual({})
+
+    const result = {
+      email: '',
+      password: '',
+      verified: '',
+    }
+    expect(user(undefined, action)).toEqual(result)
   })
 
   test('should return "firstName", "lastName", "email", "password", and "verify" values when a type of "SET_USER_DATA" is submitted', () => {
@@ -214,12 +212,12 @@ describe('user() ', () => {
       type: 'SET_USER_DATA',
       email: 'email',
       password: 'password1',
-      verify: 'password1',
+      verified: 'password1',
     }
     const state = {
       email: 'email',
       password: 'password1',
-      verify: 'password1',
+      verified: 'password1',
     }
     expect(user({}, action)).toEqual(state)
   })
@@ -231,7 +229,13 @@ describe('user() ', () => {
     const state = {
       email: 'email',
       password: 'password1',
+      verified: 'password1'
     }
-    expect(user(state, action)).toEqual({})
+    const result = {
+      email: '',
+      password: '',
+      verified: '',
+    }
+    expect(user(state, action)).toEqual(result)
   })
 })

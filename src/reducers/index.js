@@ -16,25 +16,25 @@ const initReports = {
   error: '',
 }
 
-export const metricNames = [
-  'Awesomeness',
-  'Coolness',
-  'Sweetness',
-  'Desireablity',
-  'Cheesiness',
-  'Stuff',
-  'Worthwhile',
-  'Sleepy',
-  'Words',
-  'Chocolate',
-  'Swiftness',
-  'Leanness',
-  'Blackness',
-  'Whiteness',
-  'Redness',
-  'Brownness',
-  'Blueness'
- ]
+// export const metricNames = [
+//   'Awesomeness',
+//   'Coolness',
+//   'Sweetness',
+//   'Desireablity',
+//   'Cheesiness',
+//   'Stuff',
+//   'Worthwhile',
+//   'Sleepy',
+//   'Words',
+//   'Chocolate',
+//   'Swiftness',
+//   'Leanness',
+//   'Blackness',
+//   'Whiteness',
+//   'Redness',
+//   'Brownness',
+//   'Blueness'
+//  ]
 
 const initUserState = {
   email: '',
@@ -42,9 +42,10 @@ const initUserState = {
   verified: '',
 }
 
-const getInitMetricState = metricNames => {
+const getInitMetricState = keywords => {
+  console.log('keywords at getInitMetricState:', keywords);
   let initMetricState = {}
-  metricNames.map( (name, i) => {
+  keywords.map( (name, i) => {
     Object.assign( initMetricState, {
       [i]: {
         name,
@@ -56,21 +57,12 @@ const getInitMetricState = metricNames => {
   return initMetricState
 }
 
-export const initMetricState = getInitMetricState(metricNames)
-
-const getMetricValArr = (metricValues) => {
-  let metricValArr = []
-  for (let key in metricValues) {
-    if (metricValues.hasOwnProperty(key)){
-      metricValArr[key] = metricValues[key].val
-    }
-  }
-  return metricValArr
-}
-
-export const metricValues = (state = initMetricState, { type, id, name, val }) => {
+export const metricValues = (state = {}, { type, id, name, val, keywords }) => {
 
   switch (type) {
+    case 'KEYWORDS_RECEIVED':
+      return getInitMetricState(keywords)
+
     case 'CHANGE_METRIC_VAL':
     return { ...state,
               [id]: {
@@ -80,7 +72,7 @@ export const metricValues = (state = initMetricState, { type, id, name, val }) =
                   }
 
     case 'SAVE_REPORT_AND_RESET':
-    return initMetricState
+    return {}
     default:
     return state
   }
@@ -115,6 +107,15 @@ export const reportConfig = (state = initReportConfig, action) => {
   }
 }
 
+const getMetricValArr = metricValues => {
+  let metricValArr = []
+  for (let key in metricValues) {
+    if (metricValues.hasOwnProperty(key)){
+      metricValArr[key] = metricValues[key].val
+    }
+  }
+  return metricValArr
+}
 export const previousMetricValues = (state = [], { type, output, reports }) => {
   switch (type) {
     case 'REPORTS_RECEIVED':
@@ -162,7 +163,7 @@ export const queued = (state = [], { type, report, index }) => {
   }
 }
 
-export const user = (state = initUserState, {type, firstName, lastName, email, password, verified }) => {
+export const user = (state = initUserState, {type, email, password, verified }) => {
   switch (type) {
     case 'SET_USER_DATA':
       return {

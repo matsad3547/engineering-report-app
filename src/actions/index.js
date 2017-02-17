@@ -86,3 +86,23 @@ export const clearUserData = () => {
     type: 'CLEAR_USER_DATA',
   }
 }
+
+export const requestKeywords = () => {
+  return {
+    type: 'REQUEST_KEYWORDS',
+  }
+}
+
+export const receiveKeywords = keywords => {
+  return {
+    type: 'KEYWORDS_RECEIVED',
+    keywords,
+  }
+}
+
+export const keywordError = error => {
+  return {
+    type: 'KEYWORDS_ERRORED',
+    error,
+  }
+}

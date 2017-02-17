@@ -11,11 +11,18 @@ import {
   clearQueue,
   setUserData,
   clearUserData,
-    } from './index.js'
+  requestKeywords,
+  receiveKeywords,
+  keywordError,
+  } from './index.js'
 
 import {
   getReports,
-        } from './getReports'
+  } from './getReports'
+
+import {
+  getKeywords,
+  } from './getKeywords'
 
 const metricValActionOutput = {
   id: 1,
@@ -181,20 +188,16 @@ describe('setUserData() ', () => {
   test('should return a first name, last name, email, and password with a match to verify password', () => {
 
     const output = {
-      firstName: 'John',
-      lastName: 'Doe',
       email: 'things',
       password: 'password1',
-      verify: 'password1',
+      verified: 'password1',
     }
 
     const result = {
       type: 'SET_USER_DATA',
-      firstName: 'John',
-      lastName: 'Doe',
       email: 'things',
       password: 'password1',
-      verify: 'password1',
+      verified: 'password1',
     }
 
     expect(setUserData(output)).toEqual(result)
@@ -209,5 +212,53 @@ describe('clearUserData() ', () => {
 
   test('should return a type of "CLEAR_USER_DATA"', () => {
     expect(clearUserData().type).toBe('CLEAR_USER_DATA')
+  })
+})
+
+describe('requestKeywords() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(requestKeywords(undefined))).toBe('object')
+  })
+
+  test('should return an action type of "REQUEST_KEYWORDS"', () => {
+    expect(requestKeywords().type).toBe('REQUEST_KEYWORDS')
+  })
+})
+
+describe('receiveKeywords() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(receiveKeywords(undefined))).toBe('object')
+  })
+
+  test('should return an action type of "KEYWORDS_RECEIVED"', () => {
+    expect(receiveKeywords().type).toBe('KEYWORDS_RECEIVED')
+  })
+
+  test('should return a keyword variable passed into it', () => {
+    expect(receiveKeywords(['test1', 'test2']).keywords).toEqual(['test1', 'test2'])
+  })
+})
+
+describe('keywordError() ', () => {
+
+  test('should return an object', () => {
+    expect(typeof(keywordError())).toBe('object')
+  })
+
+  test('should return an action type of "KEYWORDS_ERRORED"', () => {
+    expect(keywordError().type).toBe('KEYWORDS_ERRORED')
+  })
+
+  test('should return any error passed in as a parameter', () => {
+    expect(keywordError('test').error).toBe('test')
+  })
+})
+
+describe( 'getKeywords() ', () => {
+
+  test('should do something', () => {
+    expect(typeof(getKeywords('demo'))).toBe('function')
   })
 })
