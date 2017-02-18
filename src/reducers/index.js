@@ -43,16 +43,14 @@ const initUserState = {
 }
 
 const getInitMetricState = keywords => {
-  console.log('keywords at getInitMetricState:', keywords);
   let initMetricState = {}
-  keywords.map( (name, i) => {
+  keywords.forEach( (name, i) => {
     Object.assign( initMetricState, {
       [i]: {
         name,
         val: initVal,
       }
     })
-    return true
   })
   return initMetricState
 }
@@ -116,6 +114,7 @@ const getMetricValArr = metricValues => {
   }
   return metricValArr
 }
+
 export const previousMetricValues = (state = [], { type, output, reports }) => {
   switch (type) {
     case 'REPORTS_RECEIVED':
