@@ -1,16 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-import { setUserData, clearUserData } from '../actions/'
 import { createUser } from '../utilities/auth'
 import RaisedButton from 'material-ui/RaisedButton'
 
-let CreateUser = ({ email,
-                    password,
-                    verified,
-                    userDispatch,
-                    clearUserData,
-                      }) => {
+const SignUp = ({ email,
+                  password,
+                  verified,
+                  userDispatch,
+                  clearUserData,
+                    }) => {
 
   const userReady = (verified === password && password.length >= 6) ? false : true
 
@@ -41,7 +39,7 @@ let CreateUser = ({ email,
 
   const onClick = e => {
     e.preventDefault()
-    if (userReady) {
+    if (!userReady) {
       // console.log('cheese');
       createUser(email, password)
       clearUserData()
@@ -100,27 +98,4 @@ let CreateUser = ({ email,
   )
 }
 
-
-const mapStateToProps = state => {
-
-  return {
-    email: state.user.email,
-    password: state.user.password,
-    verified: state.user.verified,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-
-  return {
-    userDispatch: output => dispatch(setUserData(output)),
-    clearUserData: () => dispatch(clearUserData()),
-  }
-}
-
-CreateUser = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-    )(CreateUser)
-
-export default CreateUser
+export default SignUp
