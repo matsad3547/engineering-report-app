@@ -35,7 +35,7 @@ const Routes = () => {
           <Route path="/create_user" component={CreateUser} ></Route>
           <Route path="/app" component={App} >
 
-            <Route path='/app/new_report/:dataset' component={NewReport} />
+            <Route path='/app/new_report' component={NewReport} />
             <Route path="/app/existing_reports" component={ExistingReports} />
             <Route path="/app/existing_reports/:report" component={DisplayReport} />
 

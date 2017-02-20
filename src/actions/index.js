@@ -106,3 +106,10 @@ export const keywordError = error => {
     error,
   }
 }
+
+export const setDataset = dataset => {
+  return {
+    type: 'SET_DATASET',
+    dataset,
+  }
+}

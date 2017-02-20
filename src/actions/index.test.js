@@ -14,6 +14,7 @@ import {
   requestKeywords,
   receiveKeywords,
   keywordError,
+  setDataset,
   } from './index.js'
 
 import {
@@ -260,5 +261,30 @@ describe( 'getKeywords() ', () => {
 
   test('should return a function', () => {
     expect(typeof(getKeywords('demo'))).toBe('function')
+  })
+})
+
+describe('setDataset() ', () => {
+
+  test('should return an object', () => {
+    const actual = typeof(setDataset(undefined))
+    const expected = 'object'
+    expect(actual).toBe(expected)
+  })
+
+  test('should return an object type of "SET_DATASET"', () => {
+    const actual = setDataset(undefined).type
+    const expected = 'SET_DATASET'
+    expect(actual).toBe(expected)
+  })
+
+  test('should return a dataset value passed in', () => {
+    const dataset = 'test'
+    const actual = setDataset(dataset)
+    const expected = {
+      type: 'SET_DATASET',
+      dataset: 'test',
+    }
+    expect(actual).toEqual(expected)
   })
 })

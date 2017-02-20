@@ -69,8 +69,6 @@ export const metricValues = (state = {}, { type, id, name, val, keywords }) => {
                     }
                   }
 
-    case 'SAVE_REPORT_AND_RESET':
-    return {}
     default:
     return state
   }
@@ -162,7 +160,7 @@ export const queued = (state = [], { type, report, index }) => {
   }
 }
 
-export const user = (state = initUserState, {type, email, password, verified }) => {
+export const user = (state = initUserState, { type, email, password, verified }) => {
   switch (type) {
     case 'SET_USER_DATA':
       return {
@@ -177,6 +175,16 @@ export const user = (state = initUserState, {type, email, password, verified }) 
   }
 }
 
+export const dataset = (state = '', { type, dataset }) => {
+  switch (type) {
+    case 'SET_DATASET':
+      return dataset
+
+    default:
+    return state
+  }
+}
+
 export const combinedReducers = combineReducers({
   reportConfig,
   metricValues,
@@ -185,5 +193,6 @@ export const combinedReducers = combineReducers({
   reports,
   queued,
   user,
+  dataset,
   routing: routerReducer,
   })

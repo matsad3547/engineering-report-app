@@ -2,18 +2,9 @@ import { auth } from './firebase'
 import store from '../containers/store'
 import { getReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
-
-
-
-
-// import { clearUserData } from '../actions/'
-// import { connect } from 'react-redux'
-
-// console.log(auth)
+import { setDataset } from '../actions/'
 
 export const signIn = (email, password) => auth.signInWithEmailAndPassword(email, password)
-
-// auth.createUserWithEmailAndPassword(email, pass)
 
 export const selectDataset = () => {
   let dataset = ''
@@ -27,10 +18,9 @@ export const selectDataset = () => {
     }
     store.dispatch(getReports(dataset))
     store.dispatch(getKeywords(dataset))
+    store.dispatch(setDataset(dataset))
   })
-  return dataset
 }
-
 
 export const signOut = () => auth.signOut()
 

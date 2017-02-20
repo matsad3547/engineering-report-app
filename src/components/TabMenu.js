@@ -3,7 +3,6 @@ import { Link } from 'react-router'
 import { Tab, Tabs } from 'material-ui/Tabs'
 
 const TabMenu = ({ dataset, pageDisplayed }) => {
-  console.log('dataset:', dataset);
 
   return(
     <Tabs
@@ -12,7 +11,7 @@ const TabMenu = ({ dataset, pageDisplayed }) => {
       <Tab
         label="New Report"
         value={1}
-        containerElement={<Link to={`/app/new_report/${dataset}`}/>} />
+        containerElement={<Link to={`/app/new_report`}/>} />
       <Tab
         label="Existing Reports"
         value={2}

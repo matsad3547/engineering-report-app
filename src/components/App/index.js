@@ -11,9 +11,7 @@ import TabMenu from '../TabMenu'
 
 const App = ({ children, location, }) => {
 
-  // selectDataset()
-  const dataset = selectDataset()
-  console.log('dataset at app:', dataset);
+  selectDataset()
 
   const pageDisplayed = location.pathname === '/app/new_report' ? 1 : 2
 
@@ -31,7 +29,6 @@ const App = ({ children, location, }) => {
         style={styles.appBar}
         />
       <TabMenu
-        dataset={dataset}
         pageDisplayed={pageDisplayed}/>
       <SwipeableViews>
 

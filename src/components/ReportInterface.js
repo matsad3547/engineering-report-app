@@ -16,6 +16,7 @@ const ReportInterface = ({  config,
                             dataset,
                             saveReport,
                             getReports }) => {
+  console.log(dataset);
 
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
 

@@ -9,6 +9,7 @@ import {
   reports,
   queued,
   user,
+  dataset,
       } from './index.js'
 
 const action = {
@@ -239,3 +240,24 @@ describe('user() ', () => {
     expect(user(state, action)).toEqual(result)
   })
 })
+
+describe('dataset() ', () => {
+
+  test('should output an empty string by default', () => {
+    const actual = dataset(undefined, 'test')
+    const expected = ''
+    expect(actual).toBe(expected)
+  })
+
+  test('should return a string passed in as an action', () => {
+    const state = ''
+    const action = {
+      type: 'SET_DATASET',
+      dataset: 'test'
+    }
+    const actual = dataset(undefined, action)
+    const expected = 'test'
+    expect(actual).toBe(expected)
+  })
+}
+)
