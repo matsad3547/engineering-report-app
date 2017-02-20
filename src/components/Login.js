@@ -1,14 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 import { signIn } from '../utilities/auth'
-import { setUserData, clearUserData } from '../actions/'
 import RaisedButton from 'material-ui/RaisedButton'
 
-let LoginUser = ({ email,
-                    password,
-                    userDispatch,
-                    clearUserData,
-                      }) => {
+const Login = ({  email,
+                  password,
+                  userDispatch,
+                  clearUserData,
+                    }) => {
 
   const output = {
     email,
@@ -33,6 +32,7 @@ let LoginUser = ({ email,
   if (password.length > 6) {
     signIn(email, password)
     clearUserData()
+    browserHistory.push('/app')
     }
   }
 
@@ -77,25 +77,4 @@ let LoginUser = ({ email,
   )
 }
 
-const mapStateToProps = state => {
-
-  return {
-    email: state.user.email,
-    password: state.user.password,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-
-  return {
-    userDispatch: output => dispatch(setUserData(output)),
-    clearUserData: () => dispatch(clearUserData()),
-  }
-}
-
-LoginUser = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LoginUser)
-
-export default LoginUser
+export default Login

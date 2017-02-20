@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 import { setUserData, clearUserData } from '../actions/'
 import { createUser } from '../utilities/auth'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -40,10 +41,11 @@ let CreateUser = ({ email,
 
   const onClick = e => {
     e.preventDefault()
-    if (password.length > 6) {
-      console.log('cheese');
+    if (userReady) {
+      // console.log('cheese');
       createUser(email, password)
       clearUserData()
+      browserHistory.goBack()
     }
   }
 
