@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router'
 import FontIcon from 'material-ui/FontIcon'
 import IconButton from 'material-ui/IconButton'
+import { muiTheme } from '../data/'
 
 const HomeButton = () => {
 
   const styles={
     icon: {
       fontSize: 20,
-      color: '#FFE0B2',
+      color: muiTheme.palette.primary3Color,
     },
     button: {
       width: 40,
