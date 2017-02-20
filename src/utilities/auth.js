@@ -1,4 +1,10 @@
 import { auth } from './firebase'
+import store from '../containers/store'
+import { getReports } from '../actions/getReports'
+import { getKeywords } from '../actions/getKeywords'
+
+
+
 
 // import { clearUserData } from '../actions/'
 // import { connect } from 'react-redux'
@@ -10,17 +16,19 @@ export const signIn = (email, password) => auth.signInWithEmailAndPassword(email
 // auth.createUserWithEmailAndPassword(email, pass)
 
 export const selectDataset = () => {
+  let dataset = ''
   auth.onAuthStateChanged( user => {
-    console.log('firebase user:', user);
+    // console.log('firebase user:', user);
     if (user) {
-
-      return 'authorized'
+      dataset = 'authorized'
     }
     else {
-      console.log('no user');
-      return 'demo'
+      dataset = 'demo'
     }
+    store.dispatch(getReports(dataset))
+    store.dispatch(getKeywords(dataset))
   })
+  return dataset
 }
 
 

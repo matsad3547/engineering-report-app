@@ -1,9 +1,6 @@
 import React from 'react';
 
-import store from '../../containers/store'
 import { selectDataset } from '../../utilities/auth'
-import { getReports } from '../../actions/getReports'
-import { getKeywords } from '../../actions/getKeywords'
 import './App.css';
 
 import AppBar from 'material-ui/AppBar'
@@ -14,11 +11,9 @@ import TabMenu from '../TabMenu'
 
 const App = ({ children, location, }) => {
 
+  // selectDataset()
   const dataset = selectDataset()
-  console.log('dataset:', dataset);
-
-  store.dispatch(getReports(dataset))
-  store.dispatch(getKeywords(dataset))
+  console.log('dataset at app:', dataset);
 
   const pageDisplayed = location.pathname === '/app/new_report' ? 1 : 2
 
@@ -36,6 +31,7 @@ const App = ({ children, location, }) => {
         style={styles.appBar}
         />
       <TabMenu
+        dataset={dataset}
         pageDisplayed={pageDisplayed}/>
       <SwipeableViews>
 

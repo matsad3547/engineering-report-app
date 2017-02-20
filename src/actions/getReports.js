@@ -4,7 +4,7 @@ import database from '../utilities/firebase'
 export const getReports = ref => {
 
   const urlKey = `${ref}/test reports`
-  console.log('url key:', urlKey);
+  // console.log('url key:', urlKey);
   // if (ref === 'reports') {
   //   urlKey = 'demo/test reports'
   // }
