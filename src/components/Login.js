@@ -1,7 +1,8 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
-import { signIn } from '../utilities/auth'
 import RaisedButton from 'material-ui/RaisedButton'
+import { signIn } from '../utilities/auth'
+import BottomNav from './BottomNav'
 
 const Login = ({  email,
                   password,
@@ -51,29 +52,33 @@ const Login = ({  email,
   }
 
   return (
-    <div className="home textInput login">
-      <h3>Please Log In</h3>
-      <input
-        type="text"
-        placeholder="E-mail Address"
-        value={email}
-        onChange={onChange.email}
-        />
-      <input
-        type="text"
-        placeholder="Password"
-        value={password}
-        onChange={onChange.password}
-        />
+    <div className="color ">
+      <div className="flexLayout login">
+        <h3>Please Log In</h3>
+        <input
+          type="text"
+          placeholder="E-mail Address"
+          value={email}
+          onChange={onChange.email}
+          />
+        <input
+          type="text"
+          placeholder="Password"
+          value={password}
+          onChange={onChange.password}
+          />
 
-      <RaisedButton
-        disabled={userReady}
-        label="Log In"
-        style={styles.button}
-        className="reportButton"
-        onClick={onClick}
-        />
+        <RaisedButton
+          disabled={userReady}
+          label="Log In"
+          style={styles.button}
+          className="reportButton"
+          onClick={onClick}
+          />
+      </div>
+      <BottomNav />
     </div>
+
   )
 }
 

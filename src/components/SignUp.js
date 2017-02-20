@@ -2,6 +2,7 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import { createUser } from '../utilities/auth'
 import RaisedButton from 'material-ui/RaisedButton'
+import BottomNav from './BottomNav'
 
 const SignUp = ({ email,
                   password,
@@ -40,7 +41,6 @@ const SignUp = ({ email,
   const onClick = e => {
     e.preventDefault()
     if (!userReady) {
-      // console.log('cheese');
       createUser(email, password)
       clearUserData()
       browserHistory.goBack()
@@ -60,9 +60,9 @@ const SignUp = ({ email,
   }
 
   return (
-    <div className="home">
-      <div className="textInput login">
-
+    <div className="color">
+      <div className="flexLayout login">
+        <h3>Please Sign Up</h3>
         <input
           type="text"
           placeholder="E-mail Address"
@@ -94,6 +94,7 @@ const SignUp = ({ email,
           />
 
       </div>
+      <BottomNav />
     </div>
   )
 }

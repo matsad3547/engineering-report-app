@@ -11,7 +11,7 @@ const style = {
 const Home = () => {
 
   return (
-    <div className="home">
+    <div className="color flexLayout home">
       <h1>Engineering Report App</h1>
       <br />
       <RaisedButton
