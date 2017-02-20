@@ -1,4 +1,5 @@
 import { auth } from './firebase'
+
 // import { clearUserData } from '../actions/'
 // import { connect } from 'react-redux'
 
@@ -8,9 +9,20 @@ export const signIn = (email, password) => auth.signInWithEmailAndPassword(email
 
 // auth.createUserWithEmailAndPassword(email, pass)
 
-auth.onAuthStateChanged(firebaseUser => {
-  // console.log('firebaseUser', firebaseUser);
-})
+export const selectDataset = () => {
+  auth.onAuthStateChanged( user => {
+    console.log('firebase user:', user);
+    if (user) {
+
+      return 'authorized'
+    }
+    else {
+      console.log('no user');
+      return 'demo'
+    }
+  })
+}
+
 
 export const signOut = () => auth.signOut()
 

@@ -129,7 +129,7 @@ describe('reportError() ', () => {
 
 describe( 'getReports() ', () => {
 
-  test('should do something', () => {
+  test('should do return a function', () => {
     expect(typeof(getReports('reports'))).toBe('function')
   })
 })
@@ -258,7 +258,7 @@ describe('keywordError() ', () => {
 
 describe( 'getKeywords() ', () => {
 
-  test('should do something', () => {
+  test('should return a function', () => {
     expect(typeof(getKeywords('demo'))).toBe('function')
   })
 })
