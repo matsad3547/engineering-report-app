@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { selectDataset } from '../../utilities/auth'
-import './App.css';
+import './Main.css';
 
 import AppBar from 'material-ui/AppBar'
 import SwipeableViews from 'react-swipeable-views'
@@ -9,7 +9,8 @@ import Welcome from '../Welcome'
 import HomeButton from '../HomeButton'
 import TabMenu from '../TabMenu'
 
-const App = ({ children, location, }) => {
+const Main = ({ dataset, children, location, }) => {
+  console.log('dataset:', dataset);
 
   selectDataset()
 
@@ -39,4 +40,4 @@ const App = ({ children, location, }) => {
   )
 }
 
-export default App;
+export default Main
