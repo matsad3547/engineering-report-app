@@ -15,7 +15,8 @@ const ReportInterface = ({  config,
                             previousMetricValues,
                             dataset,
                             saveReport,
-                            getReports }) => {
+                            getReports,
+                            getKeywords }) => {
 
   const keys = Object.keys(metricValues).sort( (a, b) => a - b)
 
@@ -33,6 +34,7 @@ const ReportInterface = ({  config,
     database.ref().update(updates)
     saveReport()
     getReports(dataset)
+    getKeywords(dataset)
   }
 
   const styles = {

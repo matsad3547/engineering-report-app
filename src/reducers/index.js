@@ -16,26 +16,6 @@ const initReports = {
   error: '',
 }
 
-// export const metricNames = [
-//   'Awesomeness',
-//   'Coolness',
-//   'Sweetness',
-//   'Desireablity',
-//   'Cheesiness',
-//   'Stuff',
-//   'Worthwhile',
-//   'Sleepy',
-//   'Words',
-//   'Chocolate',
-//   'Swiftness',
-//   'Leanness',
-//   'Blackness',
-//   'Whiteness',
-//   'Redness',
-//   'Brownness',
-//   'Blueness'
-//  ]
-
 const initUserState = {
   email: '',
   password: '',
@@ -59,7 +39,7 @@ export const metricValues = (state = {}, { type, id, name, val, keywords }) => {
 
   switch (type) {
     case 'KEYWORDS_RECEIVED':
-      return getInitMetricState(keywords)
+    return getInitMetricState(keywords)
 
     case 'CHANGE_METRIC_VAL':
     return { ...state,
@@ -68,7 +48,8 @@ export const metricValues = (state = {}, { type, id, name, val, keywords }) => {
                       val,
                     }
                   }
-
+    // case 'SAVE_REPORT_AND_RESET':
+    // return getInitMetricState(keywords)
     default:
     return state
   }

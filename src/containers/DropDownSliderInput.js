@@ -11,7 +11,7 @@ import Slider from 'material-ui/Slider'
 let DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
 
   const onChange = (e, input) => {
-    e.preventDefault()
+    e.preventDefault() //line 558
     let output = {
       id,
       val: input,
