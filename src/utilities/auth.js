@@ -9,7 +9,6 @@ export const signIn = (email, password) => auth.signInWithEmailAndPassword(email
 export const selectDataset = () => {
   let dataset = ''
   auth.onAuthStateChanged( user => {
-    // console.log('firebase user:', user);
     if (user) {
       dataset = 'authorized'
     }
@@ -23,6 +22,7 @@ export const selectDataset = () => {
 }
 
 export const signOut = () => auth.signOut()
+
 
 export const createUser = (email, pw) => {
   auth.createUserWithEmailAndPassword(email, pw)

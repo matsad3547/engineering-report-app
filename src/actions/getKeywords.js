@@ -1,11 +1,11 @@
 import { requestKeywords, receiveKeywords, keywordError } from './index'
 import database from '../utilities/firebase'
 
-export const getKeywords = path => {
-  console.log('get keywords called');
+export const getKeywords = ref => {
+
   return dispatch => {
     dispatch(requestKeywords())
-    return database.ref(`${path}/keywords`).once('value', snap => {
+    return database.ref(`${ref}/keywords`).once('value', snap => {
       const keywords = snap.val()
       dispatch(receiveKeywords(keywords))
       })
