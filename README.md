@@ -11,14 +11,21 @@ This app is designed to allow test engineers to use a simple, configurable repor
 * Queue and unqueue reports to be downloaded.
 * Download a selected list of reports as a .csv file in order from least to most recent.
 * An easy-to-use, intuitive mobile interface.
+* User create and sign-in with e-mail and password.
+* Unauthenticated demo version of the app with full functionality.
 
 ##Next Steps
+
+###Progressive Web App
+* Build service worker and PWA structure so that keywords and a certain number of existing reports are cached for immediate access even without internet connection.
+* Enable saving of reports without a connection so that cached reports will be pushed to online database when an internet connection is reestablished.
+
 ###Authentication
-* Authentication to limit access to the app data to only approved users
-* An accompanying unauthenticated demo version of the app.
-* Authentication-controlled database partitions to allow team leaders to configure the report format keywords while keeping these keywords private from other teams or unauthenticated users.
-* A configuration interface page to allow administrators to control the ability to define test parameter keywords and approve users for their teams.
+* A configuration system to approve users before signed up users are fully authenticated.
 
 ###Interface
 * Using user feedback, build a more usable desktop version of the app.
-* Enable scrolling to show the next 10 reports
+* Enable scrolling to show the next 10 reports.
+* Enable filtering and search to select reports for download and visualization.
+* Visualization package to show trends across selected reports.
+* Hidden passwords (asterisks vs. the actual letters)

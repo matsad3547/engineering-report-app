@@ -28,11 +28,10 @@ export const formatReports = (reports, queued) => {
   return parsedReports
 }
 
-export const parseCSV = data => {
-  const csvContent = data.reduce( (sum, arr, i) => {
+export const parseCSV = data => (
+  data.reduce( (sum, arr, i) => {
     return sum + (i < data.length ? arr.join(',') + '\n' : arr.join(',') )}, 'data:text/csv;charset=utf-8,')
-  return csvContent
-}
+  )
 
 const launchDownload = csvContent => {
   const encodedUri = encodeURI(csvContent)
