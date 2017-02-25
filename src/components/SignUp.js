@@ -2,7 +2,7 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import { createUser } from '../utilities/auth'
 import RaisedButton from 'material-ui/RaisedButton'
-import BottomNav from './BottomNav'
+import BackButton from './BackButton'
 
 const SignUp = ({ email,
                   password,
@@ -94,7 +94,7 @@ const SignUp = ({ email,
           />
 
       </div>
-      <BottomNav />
+      <BackButton />
     </div>
   )
 }

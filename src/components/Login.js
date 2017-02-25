@@ -2,7 +2,8 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 import { signIn } from '../utilities/auth'
-import BottomNav from './BottomNav'
+// import BottomNav from './BottomNav'
+import BackButton from './BackButton'
 
 const Login = ({  email,
                   password,
@@ -76,7 +77,7 @@ const Login = ({  email,
           onClick={onClick}
           />
       </div>
-      <BottomNav />
+      <BackButton />
     </div>
 
   )

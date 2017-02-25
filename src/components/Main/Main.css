@@ -147,6 +147,7 @@ textarea {
   background-image:
     linear-gradient(
       gray, black 70%);
+  height: 100vh;
 }
 
 .home {
@@ -183,7 +184,7 @@ a:active {
 }
 
 .login {
-  height: 89vh;
+  height: 88vh;
   padding-top: 3em;
 }
 
