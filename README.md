@@ -29,3 +29,4 @@ This app is designed to allow test engineers to use a simple, configurable repor
 * Enable filtering and search to select reports for download and visualization.
 * Visualization package to show trends across selected reports.
 * Hidden passwords (asterisks vs. the actual letters)
+* Add server to ensure reports can be shared among authenticated users.
