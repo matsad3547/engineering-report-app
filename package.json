@@ -4,7 +4,8 @@
   "private": true,
   "devDependencies": {
     "babel-preset-stage-1": "^6.22.0",
-    "rx3-scripts": "0.0.2"
+    "rx3-scripts": "0.0.2",
+    "sw-precache": "^5.0.0"
   },
   "dependencies": {
     "firebase": "^3.6.7",
@@ -23,7 +24,7 @@
   },
   "scripts": {
     "start": "rx3-scripts start",
-    "build": "rx3-scripts build",
+    "build": "rx3-scripts build && sw-precache --config=sw-precache-config.js",
     "test": "rx3-scripts test --env=jsdom",
     "eject": "rx3-scripts eject"
   }
