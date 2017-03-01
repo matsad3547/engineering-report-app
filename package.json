@@ -20,7 +20,8 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "sw-toolbox": "^3.6.0"
   },
   "scripts": {
     "start": "rx3-scripts start",
