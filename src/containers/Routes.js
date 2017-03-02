@@ -30,7 +30,7 @@ const Routes = ({ path,
     <Provider store={store} >
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <Router history={history}>
-          <Route path={path} component={component}>
+          <Route path="/" component={Home}>
 
             <IndexRoute component={Home}></IndexRoute>
 
@@ -61,4 +61,4 @@ const RouteMap = connect(
   mapStateToProps
   )(Routes)
 
-export default RouteMap
+export default Routes
