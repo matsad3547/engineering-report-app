@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { selectDataset } from '../../utilities/auth'
+// import { selectDataset } from '../../utilities/auth'
 import './Main.css';
 
 import AppBar from 'material-ui/AppBar'
@@ -12,7 +12,7 @@ import TabMenu from '../TabMenu'
 
 const Main = ({ dataset, children, location, }) => {
 
-  selectDataset()
+  // selectDataset()
 
   const pageDisplayed = location.pathname === '/app/new_report' ? 1 : 2
 

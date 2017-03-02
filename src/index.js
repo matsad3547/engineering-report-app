@@ -5,7 +5,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import './index.css';
 
-import Routes from './containers/Routes'
+import RouteMap from './containers/Routes'
 
 // if ('serviceWorker in navigator' && process.env.NODE_ENV === 'production') {
 //   window.addEventListener('load', function() {
@@ -15,4 +15,4 @@ import Routes from './containers/Routes'
 
 injectTapEventPlugin()
 
-ReactDOM.render( <Routes />, document.getElementById('root'))
+ReactDOM.render( <RouteMap />, document.getElementById('root'))

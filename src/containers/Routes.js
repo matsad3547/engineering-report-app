@@ -1,15 +1,16 @@
 import React from 'react';
-import { Provider } from 'react-redux'
+import { Provider, connect } from 'react-redux'
+
 import { Router, IndexRoute, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
-// import { selectDataset } from '../utilities/auth'
+import { selectDataset } from '../utilities/auth'
 
 import store from './store'
-import Home from '../components/Home/'
-import App from '../containers/App'
-import CreateUser from '../containers/CreateUser'
-import LoginUser from '../containers/LoginUser'
+import Home from './Home'
+import App from './App'
+import CreateUser from './CreateUser'
+import LoginUser from './LoginUser'
 import DisplayReport from './DisplayReport'
 import NewReport from './NewReport'
 import ExistingReports from './ExistingReports/'
@@ -17,16 +18,19 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { muiTheme } from '../data/'
 
+selectDataset()
+
 const history = syncHistoryWithStore(browserHistory, store)
 
-const Routes = () => {
+const Routes = ({ path,
+                  component }) => {
 
   return (
 
     <Provider store={store} >
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <Router history={history}>
-          <Route path="/" component={Home}>
+          <Route path={path} component={component}>
 
             <IndexRoute component={Home}></IndexRoute>
 
@@ -46,4 +50,15 @@ const Routes = () => {
   )
 }
 
-export default Routes
+const mapStateToProps = state => {
+  return {
+    path: state.dataset === 'authorized' ? '/app' : '/',
+    component: state.dataset === 'authorized' ? App : Home,
+  }
+}
+
+const RouteMap = connect(
+  mapStateToProps
+  )(Routes)
+
+export default RouteMap
