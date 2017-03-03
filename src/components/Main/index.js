@@ -10,7 +10,7 @@ import HomeButton from '../HomeButton'
 import TopMenu from '../TopMenu'
 import TabMenu from '../TabMenu'
 
-const Main = ({ dataset, children, location, }) => {
+const Main = ({ authState, children, location, }) => {
 
   // selectDataset()
 
@@ -26,7 +26,7 @@ const Main = ({ dataset, children, location, }) => {
 
     <div className="app">
       <AppBar
-        iconElementLeft={ dataset === 'authorized' ? <TopMenu /> : <HomeButton/>}
+        iconElementLeft={ authState === 'authorized' ? <TopMenu /> : <HomeButton/>}
         style={styles.appBar}
         />
       <TabMenu
