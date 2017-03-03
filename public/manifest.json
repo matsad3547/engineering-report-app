@@ -1,7 +1,7 @@
 {
   "short_name": "eng report app",
   "name": "Engineering Report App",
-  "start_url": "/?home=true",
+  "start_url": "https://engineering-report-app.herokuapp.com/",
   "icons": [
       {
           "src": "/android-chrome-192x192.png",
@@ -16,6 +16,5 @@
   ],
   "theme_color": "#000",
   "background_color": "#FF9800",
-  "display": "standalone",
-  "orientation:": "portrait"
+  "display": "standalone"
 }
