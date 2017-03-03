@@ -1,14 +1,15 @@
-import React from 'react';
+import React from 'react'
 import { Provider, connect } from 'react-redux'
 
 import { Router, IndexRoute, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
-import { selectDataset } from '../utilities/auth'
+import { loggedIn } from '../utilities/auth'
 
 import store from './store'
 import Home from './Home'
 import App from './App'
+import LandingRoute from './LandingRoute'
 import CreateUser from './CreateUser'
 import LoginUser from './LoginUser'
 import DisplayReport from './DisplayReport'
@@ -18,7 +19,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { muiTheme } from '../data/'
 
-selectDataset()
+loggedIn()
 
 const history = syncHistoryWithStore(browserHistory, store)
 

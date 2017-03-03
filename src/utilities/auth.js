@@ -2,22 +2,22 @@ import { auth } from './firebase'
 import store from '../containers/store'
 import { getReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
-import { setDataset } from '../actions/'
+import { setAuthState } from '../actions/'
 
 export const signIn = (email, password) => auth.signInWithEmailAndPassword(email, password)
 
-export const selectDataset = () => {
-  let dataset = ''
+export const loggedIn = () => {
+  let authState = ''
   auth.onAuthStateChanged( user => {
     if (user) {
-      dataset = 'authorized'
+      authState = 'authorized'
     }
     else {
-      dataset = 'demo'
+      authState = 'demo'
     }
-    store.dispatch(getReports(dataset))
-    store.dispatch(getKeywords(dataset))
-    store.dispatch(setDataset(dataset))
+    store.dispatch(getReports(authState))
+    store.dispatch(getKeywords(authState))
+    store.dispatch(setAuthState(authState))
   })
 }
 

@@ -107,9 +107,9 @@ export const keywordError = error => {
   }
 }
 
-export const setDataset = dataset => {
+export const setAuthState = authState => {
   return {
-    type: 'SET_DATASET',
-    dataset,
+    type: 'SET_AUTH_STATE',
+    authState,
   }
 }

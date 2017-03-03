@@ -14,7 +14,7 @@ import {
   requestKeywords,
   receiveKeywords,
   keywordError,
-  setDataset,
+  setAuthState,
   } from './index.js'
 
 import {
@@ -264,26 +264,26 @@ describe( 'getKeywords() ', () => {
   })
 })
 
-describe('setDataset() ', () => {
+describe('setAuthState() ', () => {
 
   test('should return an object', () => {
-    const actual = typeof(setDataset(undefined))
+    const actual = typeof(setAuthState(undefined))
     const expected = 'object'
     expect(actual).toBe(expected)
   })
 
-  test('should return an object type of "SET_DATASET"', () => {
-    const actual = setDataset(undefined).type
-    const expected = 'SET_DATASET'
+  test('should return an object type of "SET_AUTH_STATE"', () => {
+    const actual = setAuthState(undefined).type
+    const expected = 'SET_AUTH_STATE'
     expect(actual).toBe(expected)
   })
 
-  test('should return a dataset value passed in', () => {
-    const dataset = 'test'
-    const actual = setDataset(dataset)
+  test('should return a authState value passed in', () => {
+    const authState = 'test'
+    const actual = setAuthState(authState)
     const expected = {
-      type: 'SET_DATASET',
-      dataset: 'test',
+      type: 'SET_AUTH_STATE',
+      authState: 'test',
     }
     expect(actual).toEqual(expected)
   })
