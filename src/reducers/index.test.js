@@ -9,7 +9,7 @@ import {
   reports,
   queued,
   user,
-  dataset,
+  authState,
       } from './index.js'
 
 const action = {
@@ -241,10 +241,10 @@ describe('user() ', () => {
   })
 })
 
-describe('dataset() ', () => {
+describe('authState() ', () => {
 
   test('should output an empty string by default', () => {
-    const actual = dataset(undefined, 'test')
+    const actual = authState(undefined, 'test')
     const expected = ''
     expect(actual).toBe(expected)
   })
@@ -252,16 +252,12 @@ describe('dataset() ', () => {
   test('should return a string passed in as an action', () => {
     const state = ''
     const action = {
-      type: 'SET_DATASET',
-      dataset: 'test'
+      type: 'SET_AUTH_STATE',
+      authState: 'test'
     }
-    const actual = dataset(undefined, action)
+    const actual = authState(undefined, action)
     const expected = 'test'
     expect(actual).toBe(expected)
   })
 }
 )
-
-test('true is true', () => {
-  expect(true).toBe(true)
-})

@@ -156,13 +156,13 @@ export const user = (state = initUserState, { type, email, password, verified })
   }
 }
 
-export const dataset = (state = '', { type, dataset }) => {
+export const authState = (state = '', { type, authState }) => {
   switch (type) {
-    case 'SET_DATASET':
-      return dataset
+    case 'SET_AUTH_STATE':
+      return authState
 
     default:
-    return state
+      return state
   }
 }
 
@@ -174,6 +174,6 @@ export const combinedReducers = combineReducers({
   reports,
   queued,
   user,
-  dataset,
+  authState,
   routing: routerReducer,
   })
