@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Landing from '../components/Landing/'
+import UnAuthLanding from '../components/UnAuthLanding/'
 
 const mapStateToProps = (state, ownProps) => {
 
@@ -12,6 +12,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const Home = connect(
   mapStateToProps
-)(Landing)
+)(UnAuthLanding)
 
 export default Home

@@ -8,7 +8,7 @@ const style = {
   width: 250,
 };
 
-const Landing = () => {
+const UnAuthLanding = () => {
 
   return (
     <div className="color flexLayout home">
@@ -32,4 +32,4 @@ const Landing = () => {
 }
 
 
-export default Landing
+export default UnAuthLanding
