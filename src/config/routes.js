@@ -1,3 +1,5 @@
+// import { connect } from 'react-redux'
+import store from '../containers/store'
 
 import Home from '../containers/Home'
 import App from '../containers/App'
@@ -6,6 +8,23 @@ import LoginUser from '../containers/LoginUser'
 import DisplayReport from '../containers/DisplayReport'
 import NewReport from '../containers/NewReport'
 import ExistingReports from '../containers/ExistingReports/'
+
+const redirectToLogin = (nextState, replace) => {
+  if (!auth.loggedIn()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
+
+const redirectToDashboard = (nextState, replace) => {
+  if (auth.loggedIn()) {
+    replace('/')
+  }
+}
+
+store.subscribe( () => console.log(store.getState().authState) )
 
 const routes = [
   {
