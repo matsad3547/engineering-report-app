@@ -8,7 +8,7 @@ const style = {
   width: 250,
 };
 
-const UnAuthLanding = () => {
+const UnAuthLanding = ({ children }) => {
 
   return (
     <div className="color flexLayout home">
@@ -25,8 +25,9 @@ const UnAuthLanding = () => {
         style={style} />
       <RaisedButton
         label="Try the Demo"
-        containerElement={<Link to="/app" ></Link>}
+        containerElement={<Link to="/" ></Link>}
         style={style}/>
+
     </div>
   )
 }

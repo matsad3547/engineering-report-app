@@ -3,7 +3,7 @@ import Main from '../components/Main/'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    dataset: state.dataset,
+    authState: state.authState,
     children: ownProps.children,
     location: ownProps.location,
   }

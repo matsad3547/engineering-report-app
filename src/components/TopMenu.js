@@ -14,13 +14,12 @@ const TopMenu = () => {
   const onClick = e => {
     e.preventDefault()
     signOut()
-    browserHistory.push('/')
+    browserHistory.push('/unauth')
   }
 
   const styles={
     icon: {
       fontSize: 25,
-      // marginBottom: 30,
       color: muiTheme.palette.primary3Color,
     },
     button: {

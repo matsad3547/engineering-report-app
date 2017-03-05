@@ -8,7 +8,7 @@ const BackButton = () => {
 
   const goBack = e => {
     e.preventDefault()
-    browserHistory.goBack()
+    browserHistory.push('/unauth')
   }
 
   const styles={
