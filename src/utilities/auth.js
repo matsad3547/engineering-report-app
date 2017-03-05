@@ -1,5 +1,5 @@
 import { auth } from './firebase'
-import store from '../containers/store'
+import store from '../config/store'
 import { getReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
 import { setAuthState } from '../actions/'

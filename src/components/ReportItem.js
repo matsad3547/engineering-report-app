@@ -63,7 +63,7 @@ const ReportItem = ({ config,
       <div className="download">
       </div>
       <RaisedButton
-        containerElement={<Link to={`/app/existing_reports/${report}`}/>}
+        containerElement={<Link to={`/existing_reports/${report}`}/>}
         label="View Report"
         style={styles.button}
         className="reportButton"

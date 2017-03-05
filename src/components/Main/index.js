@@ -1,6 +1,5 @@
 import React from 'react'
 
-// import { selectDataset } from '../../utilities/auth'
 import './Main.css';
 
 import AppBar from 'material-ui/AppBar'
@@ -10,11 +9,12 @@ import HomeButton from '../HomeButton'
 import TopMenu from '../TopMenu'
 import TabMenu from '../TabMenu'
 
-const Main = ({ authState, children, location, }) => {
+const Main = ({ authState,
+                children,
+                location,
+                }) => {
 
-  // selectDataset()
-
-  const pageDisplayed = location.pathname === '/app/new_report' ? 1 : 2
+  const pageDisplayed = location.pathname === '/new_report' ? 1 : 2
 
   const styles = {
     appBar: {
