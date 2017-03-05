@@ -4,7 +4,7 @@ import './Main.css';
 
 import AppBar from 'material-ui/AppBar'
 import SwipeableViews from 'react-swipeable-views'
-import Welcome from '../Welcome'
+// import Welcome from '../Welcome'
 import HomeButton from '../HomeButton'
 import TopMenu from '../TopMenu'
 import TabMenu from '../TabMenu'
@@ -33,7 +33,7 @@ const Main = ({ authState,
         pageDisplayed={pageDisplayed}/>
       <SwipeableViews>
 
-        { children || <Welcome /> }
+        { children }
 
       </SwipeableViews>
     </div>

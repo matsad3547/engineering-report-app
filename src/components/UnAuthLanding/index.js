@@ -25,7 +25,7 @@ const UnAuthLanding = ({ children }) => {
         style={style} />
       <RaisedButton
         label="Try the Demo"
-        containerElement={<Link to="/" ></Link>}
+        containerElement={<Link to="/welcome" ></Link>}
         style={style}/>
 
     </div>

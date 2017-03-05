@@ -1,7 +1,7 @@
 import store from '../config/store'
 
 import UnAuthLanding from '../components/UnAuthLanding'
-// import Home from '../containers/Home'
+import Welcome from '../components/Welcome'
 import App from '../containers/App'
 import CreateUser from '../containers/CreateUser'
 import LoginUser from '../containers/LoginUser'
@@ -11,42 +11,39 @@ import ExistingReports from '../containers/ExistingReports/'
 
 const getRoutes = () => {
 
-  const authState = store.getState().authState
-  console.log('auth state:', authState);
-
-  const redirectToLogin = (nextState, replace) => {
-    if (authState !== 'authorized') {
+  const redirectToWelcome = (nextState, replace) => {
+    console.log('redirecting to welcome')
+    if (store.getState().authState === 'authorized') {
       replace({
-        pathname: '/unauth',
-        state: { nextPathname: nextState.location.pathname }
+        pathname: '/welcome',
+        // state: { nextPathname: nextState.location.pathname}
       })
     }
   }
 
-  const redirectToWelcome = (nextState, replace) => {
-   if (authState === 'authorized') {
-     replace('/')
-   }
+  const redirectToLogin = (nextState, replace) => {
+    console.log('redirecting to login')
+    if (store.getState().authState !== 'authorized') {
+      replace({
+        pathname: '/unauth',
+        // state: { nextPathname: nextState.location.pathname },
+      })
+    }
+
   }
+
+  // const redirectOnEnter = (nextState, replace) => {
+  //   console.log(store.getState().authState || 'nothing');
+  //   if (store.getState().authState === 'authorized') {
+  //     redirectToWelcome(nextState, replace)
+  //   }
+  //   else redirectToLogin(nextState, replace)
+  // }
 
   const routes = [
     {
-      onEnter: redirectToWelcome,
-      component: App,
-      childRoutes: [
-        { path: 'new_report', component: NewReport },
-        { path: 'existing_reports', component: ExistingReports },
-        { path: 'existing_reports/:report', component: DisplayReport },
-      ]
-    },
-    {
-      onEnter: redirectToLogin,
-      component: UnAuthLanding,
-    },
-    {
       path: '/unauth',
       component: UnAuthLanding,
-      indexRoute: { component: UnAuthLanding },
     },
     {
       path: '/login_user',
@@ -59,12 +56,29 @@ const getRoutes = () => {
     {
       path: '/',
       component: App,
+
+      indexRoute: {
+        component: Welcome,
+      },
       childRoutes: [
-        { path: 'new_report', component: NewReport },
-        { path: 'existing_reports', component: ExistingReports },
-        { path: 'existing_reports/:report', component: DisplayReport },
-      ]
-    },
+        {
+          path: 'welcome',
+          component: Welcome ,
+        },
+        {
+          path: 'new_report',
+          component: NewReport ,
+        },
+        {
+          path: 'existing_reports',
+          component: ExistingReports,
+        },
+        {
+          path: 'existing_reports/:report',
+          component: DisplayReport,
+        },
+      ],
+    }
   ]
 
   return routes
