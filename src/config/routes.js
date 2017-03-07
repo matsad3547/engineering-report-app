@@ -9,41 +9,77 @@ import DisplayReport from '../containers/DisplayReport'
 import NewReport from '../containers/NewReport'
 import ExistingReports from '../containers/ExistingReports/'
 
+
 const getRoutes = () => {
 
-  const redirectToWelcome = (nextState, replace) => {
-    console.log('redirecting to welcome')
+  const getAuthState = () => new Promise( (resolve, reject) => setTimeout( () => {
     if (store.getState().authState === 'authorized') {
-      replace({
-        pathname: '/welcome',
-        // state: { nextPathname: nextState.location.pathname}
-      })
+      console.log('authorized');
+      resolve('authorized')
     }
-  }
+    else {
+      console.log('fucked');
+      reject('nope')
+    }
+  }, 1000)
+)
 
-  const redirectToLogin = (nextState, replace) => {
-    console.log('redirecting to login')
-    if (store.getState().authState !== 'authorized') {
+
+
+  const redirectToWelcome = (nextState, replace, next) => {
+    // getAuthState()
+    //   .then(
+    //     () => next(),
+    //     () => {
+    //       replace('/ua')
+    //     }
+    //   )
+    //   .catch(
+    //     () => replace('/ua')
+    //   )
+    const authState = store.getState().authState
+    if (authState === 'authorized') {
+      console.log('auth state:', authState);
+      console.log('redirecting to login')
       replace({
-        pathname: '/unauth',
+        pathname: 'app',
         // state: { nextPathname: nextState.location.pathname },
       })
     }
 
   }
 
-  // const redirectOnEnter = (nextState, replace) => {
-  //   console.log(store.getState().authState || 'nothing');
-  //   if (store.getState().authState === 'authorized') {
-  //     redirectToWelcome(nextState, replace)
-  //   }
-  //   else redirectToLogin(nextState, replace)
-  // }
-
   const routes = [
+    // {
+    //   path: '/',
+    //   component: UnAuthLanding,
+    //   // indexRoute: {
+    //   //   component: Welcome,
+    //   },
+    //   onEnter: redirectToWelcome,
+    //   childRoutes: [
+    //     {
+    //       path: '/welcome',
+    //       component: Welcome ,
+    //     },
+    //     {
+    //       path: '/new_report',
+    //       component: NewReport ,
+    //     },
+    //     {
+    //       path: '/existing_reports',
+    //       component: ExistingReports,
+    //     },
+    //     {
+    //       path: '/existing_reports/:report',
+    //       component: DisplayReport,
+    //     },
+    //   ],
+    // },
     {
-      path: '/unauth',
+      path: '/',
       component: UnAuthLanding,
+      // onEnter: redirectToWelcome,
     },
     {
       path: '/login_user',
@@ -54,31 +90,26 @@ const getRoutes = () => {
       component: CreateUser,
     },
     {
-      path: '/',
+      path: 'app',
       component: App,
-
       indexRoute: {
         component: Welcome,
       },
       childRoutes: [
         {
-          path: 'welcome',
-          component: Welcome ,
-        },
-        {
-          path: 'new_report',
+          path: '/new_report',
           component: NewReport ,
         },
         {
-          path: 'existing_reports',
+          path: '/existing_reports',
           component: ExistingReports,
         },
         {
-          path: 'existing_reports/:report',
+          path: '/existing_reports/:report',
           component: DisplayReport,
         },
       ],
-    }
+    },
   ]
 
   return routes

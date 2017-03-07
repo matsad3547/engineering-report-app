@@ -20,7 +20,7 @@ const HomeButton = () => {
 
   return (
     <IconButton
-      containerElement={<Link to="/unauth"/>}
+      containerElement={<Link to="/"/>}
       iconStyle={styles.icon}
       style={styles.button} >
       <FontIcon
