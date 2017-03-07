@@ -38,11 +38,12 @@ const getRoutes = () => {
     //     () => replace('/ua')
     //   )
     const authState = store.getState().authState
+    // console.log('auth state:', authState);
     if (authState === 'authorized') {
       console.log('auth state:', authState);
       console.log('redirecting to login')
       replace({
-        pathname: 'app',
+        pathname: '/app',
         // state: { nextPathname: nextState.location.pathname },
       })
     }
@@ -50,32 +51,7 @@ const getRoutes = () => {
   }
 
   const routes = [
-    // {
-    //   path: '/',
-    //   component: UnAuthLanding,
-    //   // indexRoute: {
-    //   //   component: Welcome,
-    //   },
-    //   onEnter: redirectToWelcome,
-    //   childRoutes: [
-    //     {
-    //       path: '/welcome',
-    //       component: Welcome ,
-    //     },
-    //     {
-    //       path: '/new_report',
-    //       component: NewReport ,
-    //     },
-    //     {
-    //       path: '/existing_reports',
-    //       component: ExistingReports,
-    //     },
-    //     {
-    //       path: '/existing_reports/:report',
-    //       component: DisplayReport,
-    //     },
-    //   ],
-    // },
+
     {
       path: '/',
       component: UnAuthLanding,
@@ -90,22 +66,22 @@ const getRoutes = () => {
       component: CreateUser,
     },
     {
-      path: 'app',
+      path: 'app/',
       component: App,
       indexRoute: {
         component: Welcome,
       },
       childRoutes: [
         {
-          path: '/new_report',
+          path: '/app/new_report',
           component: NewReport ,
         },
         {
-          path: '/existing_reports',
+          path: '/app/existing_reports',
           component: ExistingReports,
         },
         {
-          path: '/existing_reports/:report',
+          path: '/app/existing_reports/:report',
           component: DisplayReport,
         },
       ],

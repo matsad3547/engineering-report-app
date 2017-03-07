@@ -4,7 +4,6 @@ import './Main.css';
 
 import AppBar from 'material-ui/AppBar'
 import SwipeableViews from 'react-swipeable-views'
-// import Welcome from '../Welcome'
 import HomeButton from '../HomeButton'
 import TopMenu from '../TopMenu'
 import TabMenu from '../TabMenu'
@@ -14,7 +13,9 @@ const Main = ({ authState,
                 location,
                 }) => {
 
-  const pageDisplayed = location.pathname === '/new_report' ? 1 : 2
+  console.log(location.pathname);
+
+  const pageDisplayed = location.pathname === '/app/new_report' ? 1 : 2
 
   const styles = {
     appBar: {
