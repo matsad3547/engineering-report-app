@@ -35,6 +35,21 @@ const getInitMetricState = keywords => {
   return initMetricState
 }
 
+export const resetMetricState = state => {
+  let newMetricState = {}
+  for(let k in state) {
+    if (state.hasOwnProperty(k)){
+      Object.assign(newMetricState, {
+        [k]: {
+          name: state[k].name,
+          val: initVal,
+        }
+      })
+    }
+  }
+  return newMetricState
+}
+
 export const metricValues = (state = {}, { type, id, name, val, keywords }) => {
 
   switch (type) {
@@ -49,7 +64,7 @@ export const metricValues = (state = {}, { type, id, name, val, keywords }) => {
                     }
                   }
     case 'SAVE_REPORT_AND_RESET':
-    return getInitMetricState(keywords)
+    return resetMetricState(state)
     default:
     return state
   }

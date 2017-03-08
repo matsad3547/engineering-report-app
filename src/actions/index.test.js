@@ -15,6 +15,7 @@ import {
   receiveKeywords,
   keywordError,
   setAuthState,
+  resetMetricState,
   } from './index.js'
 
 import {
