@@ -1,6 +1,6 @@
 import store from '../config/store'
 
-import UnAuthLanding from '../components/UnAuthLanding'
+import UnAuth from '../components/UnAuth'
 import Welcome from '../components/Welcome'
 import App from '../containers/App'
 import CreateUser from '../containers/CreateUser'
@@ -55,7 +55,7 @@ const getRoutes = () => {
 
     {
       path: '/',
-      component: UnAuthLanding,
+      component: UnAuth,
       onEnter: redirectToWelcome,
     },
     {
