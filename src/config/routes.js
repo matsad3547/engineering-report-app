@@ -9,45 +9,46 @@ import DisplayReport from '../containers/DisplayReport'
 import NewReport from '../containers/NewReport'
 import ExistingReports from '../containers/ExistingReports/'
 
-
 const getRoutes = () => {
 
-  const getAuthState = () => new Promise( (resolve, reject) => setTimeout( () => {
-    if (store.getState().authState === 'authorized') {
-      console.log('authorized');
-      resolve('authorized')
-    }
-    else {
-      console.log('fucked');
-      reject('nope')
-    }
-  }, 1000)
-)
+//   const getAuthState = () => new Promise( (resolve, reject) => () => {
+//     if (store.getState().authState === 'authorized') {
+//       console.log('authorized');
+//       resolve('authorized')
+//     }
+//     else {
+//       console.log('fucked');
+//       reject('nope')
+//     }
+//   }
+// )
 
+  const redirectToWelcome = (nextState, replace) => {
 
-
-  const redirectToWelcome = (nextState, replace, next) => {
-    // getAuthState()
-    //   .then(
-    //     () => next(),
-    //     () => {
-    //       replace('/ua')
-    //     }
-    //   )
-    //   .catch(
-    //     () => replace('/ua')
-    //   )
     const authState = store.getState().authState
-    // console.log('auth state:', authState);
-    if (authState === 'authorized') {
-      console.log('auth state:', authState);
-      console.log('redirecting to login')
-      replace({
-        pathname: '/app',
-        // state: { nextPathname: nextState.location.pathname },
-      })
-    }
+    // const getAuthState = () => {
+    //   // const authState = store.getState().authState
+    //   if (!store.getState().authState) {
+    //     setTimeout(getAuthState, 50)
+    //   }
+    //   else return store.getState().authState
+    // }
+    //
+    // const authState = getAuthState()
+    console.log('authState:', authState );
 
+
+      // setTimeout( () => {
+      //   authState = store.getState().authState
+      //   console.log('auth state:', authState)
+      // }, 250)
+
+
+    if (authState === 'authorized') {
+      console.log('if auth state:', authState)
+      console.log('redirecting to login')
+      replace('/app')
+    }
   }
 
   const routes = [
@@ -55,7 +56,7 @@ const getRoutes = () => {
     {
       path: '/',
       component: UnAuthLanding,
-      // onEnter: redirectToWelcome,
+      onEnter: redirectToWelcome,
     },
     {
       path: '/login_user',
@@ -96,3 +97,4 @@ store.subscribe(
 )
 
 export default getRoutes()
+// export default connect(state => state.authState)(getRoutes)
