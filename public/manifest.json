@@ -19,7 +19,7 @@
           "type": "image/png"
       }
   ],
-  "theme_color": "#FF9800",
+  "theme_color": "#000",
   "background_color": "#FF9800",
   "display": "standalone",
   "orientation": "portrait"

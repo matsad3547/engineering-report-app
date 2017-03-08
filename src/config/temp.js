@@ -105,3 +105,30 @@ export default {
 
   ]
 }
+
+const getAuthState = () => new Promise( (resolve, reject) => {
+  console.log('promising shit');
+    resolve( () => {
+      if (store.getState().authState.length > 0) {
+        console.log('resolving');
+        return store.getState().authState
+    }
+  })
+  // while (store.getState().authState.length === 0) // do nothing
+  console.log('getting nothing');
+})
+
+getAuthState()
+  .then( result => {
+    console.log('got results');
+    const authState = result()
+    if (authState !== 'authorized') {
+      console.log('redirecting to login')
+      console.log('auth state:', authState)
+      replace({
+        pathname: '/ua',
+        // state: { nextPathname: nextState.location.pathname },
+      })
+    }
+  })
+  .catch( err => console.log('There was an error:', err) )

@@ -14,7 +14,7 @@ const TopMenu = () => {
   const onClick = e => {
     e.preventDefault()
     signOut()
-    browserHistory.push('/unauth')
+    browserHistory.push('/')
   }
 
   const styles={

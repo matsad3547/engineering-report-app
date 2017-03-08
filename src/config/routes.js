@@ -1,7 +1,7 @@
 import store from '../config/store'
 
-import UnAuthLanding from '../components/UnAuthLanding'
-// import Home from '../containers/Home'
+import UnAuth from '../components/UnAuth'
+import Welcome from '../components/Welcome'
 import App from '../containers/App'
 import CreateUser from '../containers/CreateUser'
 import LoginUser from '../containers/LoginUser'
@@ -11,42 +11,28 @@ import ExistingReports from '../containers/ExistingReports/'
 
 const getRoutes = () => {
 
-  const authState = store.getState().authState
-  console.log('auth state:', authState);
+  const redirectToWelcome = (nextState, replace, cb) => {
 
-  const redirectToLogin = (nextState, replace) => {
-    if (authState !== 'authorized') {
-      replace({
-        pathname: '/unauth',
-        state: { nextPathname: nextState.location.pathname }
-      })
-    }
-  }
+    setTimeout(
+      () => {
+        console.log('enter timeout')
+        const { authState } = store.getState()
+        if (authState === 'authorized') {
+            console.log('if auth state:', authState)
+            console.log('redirecting to login')
+            replace('app/')
+          }
+        cb()
+      }, 300)
 
-  const redirectToWelcome = (nextState, replace) => {
-   if (authState === 'authorized') {
-     replace('/')
-   }
   }
 
   const routes = [
+
     {
+      path: '/',
+      component: UnAuth,
       onEnter: redirectToWelcome,
-      component: App,
-      childRoutes: [
-        { path: 'new_report', component: NewReport },
-        { path: 'existing_reports', component: ExistingReports },
-        { path: 'existing_reports/:report', component: DisplayReport },
-      ]
-    },
-    {
-      onEnter: redirectToLogin,
-      component: UnAuthLanding,
-    },
-    {
-      path: '/unauth',
-      component: UnAuthLanding,
-      indexRoute: { component: UnAuthLanding },
     },
     {
       path: '/login_user',
@@ -57,13 +43,25 @@ const getRoutes = () => {
       component: CreateUser,
     },
     {
-      path: '/',
+      path: 'app/',
       component: App,
+      indexRoute: {
+        component: Welcome,
+      },
       childRoutes: [
-        { path: 'new_report', component: NewReport },
-        { path: 'existing_reports', component: ExistingReports },
-        { path: 'existing_reports/:report', component: DisplayReport },
-      ]
+        {
+          path: '/app/new_report',
+          component: NewReport ,
+        },
+        {
+          path: '/app/existing_reports',
+          component: ExistingReports,
+        },
+        {
+          path: '/app/existing_reports/:report',
+          component: DisplayReport,
+        },
+      ],
     },
   ]
 
@@ -75,3 +73,4 @@ store.subscribe(
 )
 
 export default getRoutes()
+// export default connect(state => state.authState)(getRoutes)

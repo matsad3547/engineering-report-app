@@ -8,7 +8,7 @@ const style = {
   width: 250,
 };
 
-const UnAuthLanding = ({ children }) => {
+const UnAuth = ({ children }) => {
 
   return (
     <div className="color flexLayout home">
@@ -25,12 +25,11 @@ const UnAuthLanding = ({ children }) => {
         style={style} />
       <RaisedButton
         label="Try the Demo"
-        containerElement={<Link to="/" ></Link>}
+        containerElement={<Link to="app/" ></Link>}
         style={style}/>
 
     </div>
   )
 }
 
-
-export default UnAuthLanding
+export default UnAuth
