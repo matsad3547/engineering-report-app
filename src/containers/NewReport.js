@@ -11,7 +11,7 @@ const mapStateToProps = state => {
     metricValues: state.metricValues,
     notes: state.notes,
     previousMetricValues: state.previousMetricValues,
-    dataset: state.dataset,
+    authState: state.authState,
   }
 }
 

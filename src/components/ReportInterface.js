@@ -13,7 +13,7 @@ const ReportInterface = ({  config,
                             metricValues,
                             notes,
                             previousMetricValues,
-                            dataset,
+                            authState,
                             saveReport,
                             getReports,
                             getKeywords }) => {
@@ -30,11 +30,11 @@ const ReportInterface = ({  config,
       notes,
     }
     let updates = {}
-    updates[`${dataset}/test reports/${newReportKey}`] = newReport
+    updates[`${authState}/test reports/${newReportKey}`] = newReport
     database.ref().update(updates)
     saveReport()
-    getReports(dataset)
-    getKeywords(dataset)
+    getReports(authState)
+    getKeywords(authState)
   }
 
   const styles = {

@@ -48,8 +48,8 @@ export const metricValues = (state = {}, { type, id, name, val, keywords }) => {
                       val,
                     }
                   }
-    // case 'SAVE_REPORT_AND_RESET':
-    // return getInitMetricState(keywords)
+    case 'SAVE_REPORT_AND_RESET':
+    return getInitMetricState(keywords)
     default:
     return state
   }
