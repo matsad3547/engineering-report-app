@@ -34,7 +34,7 @@ const Login = ({  email,
   if (password.length > 6) {
     signIn(email, password)
     clearUserData()
-    browserHistory.push('/')
+    browserHistory.push('app/')
     }
   }
 

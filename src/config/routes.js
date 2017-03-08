@@ -11,44 +11,20 @@ import ExistingReports from '../containers/ExistingReports/'
 
 const getRoutes = () => {
 
-//   const getAuthState = () => new Promise( (resolve, reject) => () => {
-//     if (store.getState().authState === 'authorized') {
-//       console.log('authorized');
-//       resolve('authorized')
-//     }
-//     else {
-//       console.log('fucked');
-//       reject('nope')
-//     }
-//   }
-// )
+  const redirectToWelcome = (nextState, replace, cb) => {
 
-  const redirectToWelcome = (nextState, replace) => {
+    setTimeout(
+      () => {
+        console.log('enter timeout')
+        const { authState } = store.getState()
+        if (authState === 'authorized') {
+            console.log('if auth state:', authState)
+            console.log('redirecting to login')
+            replace('app/')
+          }
+        cb()
+      }, 300)
 
-    const authState = store.getState().authState
-    // const getAuthState = () => {
-    //   // const authState = store.getState().authState
-    //   if (!store.getState().authState) {
-    //     setTimeout(getAuthState, 50)
-    //   }
-    //   else return store.getState().authState
-    // }
-    //
-    // const authState = getAuthState()
-    console.log('authState:', authState );
-
-
-      // setTimeout( () => {
-      //   authState = store.getState().authState
-      //   console.log('auth state:', authState)
-      // }, 250)
-
-
-    if (authState === 'authorized') {
-      console.log('if auth state:', authState)
-      console.log('redirecting to login')
-      replace('/app')
-    }
   }
 
   const routes = [
