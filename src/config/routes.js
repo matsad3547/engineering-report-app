@@ -1,4 +1,5 @@
 import store from '../config/store'
+import { connect } from 'react-redux'
 
 import UnAuth from '../components/UnAuth'
 import Welcome from '../components/Welcome'
@@ -12,6 +13,18 @@ import ExistingReports from '../containers/ExistingReports/'
 const getRoutes = () => {
 
   const redirectToWelcome = (nextState, replace, cb) => {
+    // let i = 0
+    // while (store.getState().authState.length === 0) {
+    //   setTimeout(null, 10)
+    //   i++
+    //   console.log(i);
+    // }
+    // if (store.getState().authState === 'authorized') {
+    //   console.log('redirecting to welcome')
+    //   replace('app/')
+    //   cb()
+    // }
+    // console.log('time elapsed =', (i / 1000).toFixed(2))
 
     setTimeout(
       () => {
@@ -23,7 +36,7 @@ const getRoutes = () => {
             replace('app/')
           }
         cb()
-      }, 300)
+      }, 500)
 
   }
 
