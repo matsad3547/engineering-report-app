@@ -13,8 +13,6 @@ const Main = ({ authState,
                 location,
                 }) => {
 
-  console.log(location.pathname);
-
   const pageDisplayed = location.pathname === '/app/new_report' ? 1 : 2
 
   const styles = {

@@ -14,11 +14,11 @@ describe('formatReports() ', () => {
       1: {
           config: {
           a: 1,
-          b: 2,
+          c: 2,
         }
       }
     }
-    const result = [['a', 1], ['b', 2]]
+    const result = [['a', 1], ['c', 2]]
     expect(formatReports(reports, queued)).toEqual(result)
   })
 

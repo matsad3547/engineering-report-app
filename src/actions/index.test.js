@@ -280,11 +280,11 @@ describe('setAuthState() ', () => {
   })
 
   test('should return a authState value passed in', () => {
-    const authState = 'test'
+    const authState = 'dicks'
     const actual = setAuthState(authState)
     const expected = {
       type: 'SET_AUTH_STATE',
-      authState: 'test',
+      authState: 'dicks',
     }
     expect(actual).toEqual(expected)
   })
