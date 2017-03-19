@@ -14,6 +14,17 @@ const getRoutes = () => {
 
   const redirectToWelcome = (nextState, replace, cb) => {
 
+    // setTimeout(
+    //   () => {
+    //     console.log('enter timeout')
+    //     const { authState } = store.getState()
+    //     if (authState === 'authorized') {
+    //         console.log('if auth state:', authState)
+    //         console.log('redirecting to login')
+    //         replace('app/')
+    //       }
+    //     cb()
+    //   }, 500)
     auth.onAuthStateChanged( user => {
       if (user) {
         console.log('redirecting to login')
