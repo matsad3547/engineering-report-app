@@ -30,11 +30,14 @@ const getRoutes = () => {
         }
 
         else if (authState === 'authorized') {
-            replace('app/')
-            cb()
-            clearInterval(waitForStore)
-          }
-          
+          replace('app/')
+          cb()
+          clearInterval(waitForStore)
+        }
+        else if (authState === 'demo') {
+          cb()
+          clearInterval(waitForStore)
+        }
     }, intervalTime)
   }
 
