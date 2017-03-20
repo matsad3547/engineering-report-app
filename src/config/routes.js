@@ -21,6 +21,7 @@ const getRoutes = () => {
 
     const waitForStore = setInterval(
       () => {
+        console.log('entering timeout');
         times++
         const { authState } = store.getState()
 
