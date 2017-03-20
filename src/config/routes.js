@@ -1,5 +1,4 @@
 import store from '../config/store'
-import { auth } from '../utilities/firebase'
 
 import UnAuth from '../components/UnAuth'
 import Welcome from '../components/Welcome'
@@ -14,25 +13,29 @@ const getRoutes = () => {
 
   const redirectToWelcome = (nextState, replace, cb) => {
 
-    // setTimeout(
-    //   () => {
-    //     console.log('enter timeout')
-    //     const { authState } = store.getState()
-    //     if (authState === 'authorized') {
-    //         console.log('if auth state:', authState)
-    //         console.log('redirecting to login')
-    //         replace('app/')
-    //       }
-    //     cb()
-    //   }, 500)
-    auth.onAuthStateChanged( user => {
-      if (user) {
-        console.log('redirecting to login')
-        replace('app/')
-        cb()
-      }
-      else cb()
-    })
+    const intervalTime = 50
+
+    const maxTime = 5000
+
+    let times = 0
+
+    const waitForStore = setInterval(
+      () => {
+        times++
+        const { authState } = store.getState()
+
+        if ((times * intervalTime) > maxTime) {
+          cb()
+          clearInterval(waitForStore)
+        }
+
+        else if (authState === 'authorized') {
+            replace('app/')
+            cb()
+            clearInterval(waitForStore)
+          }
+          
+    }, intervalTime)
   }
 
   const routes = [
