@@ -1,3 +1,7 @@
+const store = require('./src/config/store')
+
+console.log('store');
+
 module.exports = {
   stripPrefix: 'build/',
   staticFileGlobs: [
