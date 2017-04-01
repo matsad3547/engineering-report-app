@@ -2,6 +2,7 @@ import store from '../config/store'
 
 import UnAuth from '../components/UnAuth'
 import Welcome from '../components/Welcome'
+import About from '../components/About'
 import App from '../containers/App'
 import CreateUser from '../containers/CreateUser'
 import LoginUser from '../containers/LoginUser'
@@ -75,6 +76,10 @@ const getRoutes = () => {
         {
           path: '/app/existing_reports/:report',
           component: DisplayReport,
+        },
+        {
+          path: '/app/about',
+          component: About,
         },
       ],
     },

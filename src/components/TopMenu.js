@@ -1,5 +1,5 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 
 import { signOut } from '../utilities/auth'
 import { muiTheme } from '../data/'
@@ -40,7 +40,6 @@ const TopMenu = () => {
 
   return (
     <IconMenu
-      onClick={onClick}
       iconButtonElement={
         <IconButton
           style={styles.button}
@@ -50,7 +49,11 @@ const TopMenu = () => {
       anchorOrigin={styles.anchor}
       targetOrigin={styles.target}>
       <MenuItem
+        onClick={onClick}
         primaryText="Sign Out"/>
+      <MenuItem
+        containerElement={<Link to="/app/about"/>}
+        primaryText="About"/>
     </IconMenu>
   )
 }
