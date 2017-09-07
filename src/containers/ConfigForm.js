@@ -1,7 +1,9 @@
-import React from 'react';
-
+import React from 'react'
+import { connect } from 'react-redux'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
+
+import { setReportConfig } from '../actions'
 
 const ConfigForm = ({ config, configDispatch }) => {
 
@@ -102,4 +104,13 @@ const ConfigForm = ({ config, configDispatch }) => {
   )
 }
 
-export default ConfigForm
+const mapDispatchToProps = dispatch => {
+  return {
+    configDispatch: (output) => dispatch(setReportConfig(output))
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  )(ConfigForm)

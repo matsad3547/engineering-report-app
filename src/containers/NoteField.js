@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 
 import { saveReportNotes } from '../actions'
 
-let NoteField = ({ notes, dispatch }) => {
+const NoteField = ({ notes, dispatch }) => {
   return (
     <div>
       <textarea
         onChange={ (e, input) => {
-          e.preventDefault()
-          let output = e.target.value
-          dispatch(saveReportNotes(output))
-        }
+            e.preventDefault()
+            let output = e.target.value
+            dispatch(saveReportNotes(output))
+          }
         }
         name="textArea"
         rows={10}
@@ -23,6 +23,4 @@ let NoteField = ({ notes, dispatch }) => {
   )
 }
 
-NoteField = connect()(NoteField)
-
-export default NoteField
+export default connect()(NoteField)

@@ -8,7 +8,7 @@ import MenuItem from 'material-ui/MenuItem'
 import Slider from 'material-ui/Slider'
 
 
-let DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
+const DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
 
   const onChange = (e, input) => {
     e.preventDefault() //line 558
@@ -68,6 +68,4 @@ let DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
   )
 }
 
-DropDownSliderInput = connect()(DropDownSliderInput)
-
-export default DropDownSliderInput
+export default connect()(DropDownSliderInput)

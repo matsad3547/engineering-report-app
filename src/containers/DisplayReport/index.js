@@ -1,10 +1,12 @@
-import React from 'react';
-import './ReportDisplayForm.css'
+import React from 'react'
+import { connect } from 'react-redux'
+import './DisplayReport.css'
 
-const ReportDisplayForm = ({  report,
-                              config,
-                              metricValues,
-                              notes }) => {
+const DisplayReport = ({  report,
+                          config,
+                          metricValues,
+                          notes
+                        }) => {
 
     const date = report => new Date(+report).toString().slice(0, 24)
 
@@ -53,4 +55,24 @@ const ReportDisplayForm = ({  report,
   )
 }
 
-export default ReportDisplayForm
+const mapStateToProps = (state, ownProps) => {
+
+  const report = ownProps.params.report
+
+  if (state.reports.status === 'received') {
+
+    const reportVals = state.reports.reports[report]
+
+    return {
+      report,
+      config: reportVals.config,
+      metricValues: reportVals.metricValues,
+      notes: reportVals.notes,
+    }
+  }
+
+  return {}
+
+}
+
+export default connect(mapStateToProps)(DisplayReport)

@@ -3,10 +3,10 @@ import store from '../config/store'
 import UnAuth from '../components/UnAuth'
 import Welcome from '../components/Welcome'
 import About from '../components/About'
-import App from '../containers/App'
+import App from '../containers/App/'
 import CreateUser from '../containers/CreateUser'
-import LoginUser from '../containers/LoginUser'
-import DisplayReport from '../containers/DisplayReport'
+import Login from '../containers/Login'
+import DisplayReport from '../containers/DisplayReport/'
 import NewReport from '../containers/NewReport'
 import ExistingReports from '../containers/ExistingReports/'
 
@@ -52,7 +52,7 @@ const getRoutes = () => {
     },
     {
       path: '/login_user',
-      component: LoginUser,
+      component: Login,
     },
     {
       path: '/create_user',

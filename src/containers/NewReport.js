@@ -1,8 +1,86 @@
+import React from 'react'
 import { connect } from 'react-redux'
+import RaisedButton from 'material-ui/RaisedButton'
+
+import database from '../utilities/firebase'
 import { saveReport } from '../actions'
 import { getReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
-import ReportInterface from '../components/ReportInterface'
+
+import ConfigForm from '../containers/ConfigForm'
+import DropDownSliderInput from '../containers/DropDownSliderInput'
+import NoteField from '../containers/NoteField'
+
+const NewReport = ({  config,
+                      metricValues,
+                      notes,
+                      previousMetricValues,
+                      authState,
+                      saveReport,
+                      getReports,
+                      getKeywords
+                    }) => {
+
+  const keys = Object.keys(metricValues).sort( (a, b) => a - b)
+
+  const submitReport = e => {
+
+    e.preventDefault()
+    const newReportKey = Date.now()
+    const newReport = {
+      config,
+      metricValues,
+      notes,
+    }
+    let updates = {}
+    updates[`${authState}/test reports/${newReportKey}`] = newReport
+    database.ref().update(updates)
+    saveReport()
+    getReports(authState)
+    getKeywords(authState)
+  }
+
+  const styles = {
+    button: {
+      height: 50,
+      margin: 12,
+    }
+  }
+
+  return (
+    <div className="reportInput">
+
+      <ConfigForm
+        config={config}
+        />
+
+      <hr/>
+
+      {keys.map( (key, i) =>
+
+        <DropDownSliderInput
+        key={i + 'b'}
+        id={key}
+        name={metricValues[key].name}
+        value={metricValues[key].val}
+        previousVal={previousMetricValues[i] ? previousMetricValues[i] : 4.5}
+        />
+
+      )}
+      <NoteField
+        notes={notes}
+        />
+
+      <RaisedButton
+        label="Save Report"
+        style={styles.button}
+        className="reportButton"
+        onClick={submitReport}
+        />
+
+    </div>
+  )
+}
 
 const mapStateToProps = state => {
 
@@ -24,9 +102,7 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-const NewReport = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  )(ReportInterface)
-
-export default NewReport
+  )(NewReport)

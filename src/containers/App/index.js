@@ -1,14 +1,14 @@
 import React from 'react'
-
-import './Main.css';
-
+import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar'
 import SwipeableViews from 'react-swipeable-views'
-import HomeButton from '../HomeButton'
-import TopMenu from '../TopMenu'
-import TabMenu from '../TabMenu'
+import './App.css'
 
-const Main = ({ authState,
+import HomeButton from '../../components/HomeButton'
+import TopMenu from '../../components/TopMenu'
+import TabMenu from '../../components/TabMenu'
+
+const App = ({ authState,
                 children,
                 location,
                 }) => {
@@ -39,4 +39,12 @@ const Main = ({ authState,
   )
 }
 
-export default Main
+const mapStateToProps = (state, ownProps) => {
+  return {
+    authState: state.authState,
+    children: ownProps.children,
+    location: ownProps.location,
+  }
+}
+
+export default connect(mapStateToProps)(App)
