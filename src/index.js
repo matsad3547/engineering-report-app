@@ -27,6 +27,6 @@ ReactDOM.render(
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <Router
           history={history}
-          routes={ routes } />
+          routes={routes} />
       </MuiThemeProvider>
     </Provider>, document.getElementById('root'))
