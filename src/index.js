@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import './index.css'
 
-import { loggedIn } from './utilities/auth'
+import { loggedIn } from './utils/auth'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { syncHistoryWithStore } from 'react-router-redux'
 

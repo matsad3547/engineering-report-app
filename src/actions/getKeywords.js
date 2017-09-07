@@ -1,5 +1,5 @@
 import { requestKeywords, receiveKeywords, keywordError } from './index'
-import database from '../utilities/firebase'
+import database from '../utils/firebase'
 
 export const getKeywords = ref => {
 

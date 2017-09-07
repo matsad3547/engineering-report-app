@@ -1,23 +1,21 @@
-import React from 'react';
+import React from 'react'
 import { Link } from 'react-router'
-
 import RaisedButton from 'material-ui/RaisedButton'
 import Checkbox from 'material-ui/Checkbox'
+
+import { date } from '../utils/'
 
 const ReportItem = ({ config,
                       report,
                       index,
                       queued,
                       queueReport,
-                      unqueueReport, }) => {
+                      unqueueReport,
+                    }) => {
 
   const { model, shortName, configNum } = config
 
   const checked = queued.includes(report) ? true : false
-
-  // const date = report => new Date(+report)
-  //                             .toString()
-  //                             .slice(0, 24)
 
   const onCheck = (e, i) => {
     e.preventDefault()
@@ -52,6 +50,8 @@ const ReportItem = ({ config,
       <p>{`${index + 1}. `}{model || '<model>'}: configuration {configNum || '<#>'}</p>
 
       <p>desc: {shortName || '<description>'}</p>
+      <p>{date(report)}</p>
+
       <Checkbox
         label="Select to Download"
         labelStyle={styles.label}

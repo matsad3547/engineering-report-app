@@ -1,5 +1,5 @@
 import { requestReports, receiveReports, reportError } from './index'
-import database from '../utilities/firebase'
+import database from '../utils/firebase'
 
 export const getReports = ref => {
 

@@ -2,13 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import './DisplayReport.css'
 
+import { date } from '../../utils/'
+
 const DisplayReport = ({  report,
                           config,
                           metricValues,
                           notes
                         }) => {
-
-    const date = report => new Date(+report).toString().slice(0, 24)
 
   if (!!config) {
 

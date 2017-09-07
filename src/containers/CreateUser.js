@@ -4,9 +4,7 @@ import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
 import { setUserData, clearUserData } from '../actions/'
-import { createUser } from '../utilities/auth'
-// import SignUp from '../components/SignUp'
-
+import { createUser } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
 const CreateUser = ({ email,

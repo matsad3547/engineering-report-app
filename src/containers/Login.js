@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
-// import Login from '../components/Login'
+
 import { setUserData, clearUserData } from '../actions/'
-import { signIn } from '../utilities/auth'
+import { signIn } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
 const Login = ({  email,

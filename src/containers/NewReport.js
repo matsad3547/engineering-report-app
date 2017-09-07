@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import database from '../utilities/firebase'
+import database from '../utils/firebase'
 import { saveReport } from '../actions'
 import { getReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
