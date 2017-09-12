@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, browserHistory } from 'react-router'
 
 import { signOut } from '../utils/auth'
-import { muiTheme } from '../data/'
+import { muiTheme } from '../config/'
 
 import FontIcon from 'material-ui/FontIcon'
 import IconMenu from 'material-ui/IconMenu'

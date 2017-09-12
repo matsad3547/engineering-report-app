@@ -9,7 +9,7 @@ import { setAuthState } from '../actions/'
 
 // var admin = require("firebase-admin");
 
-const serviceAccount = require('../config/engineering-report-app-firebase-adminsdk-yjkbx-d999ddf7b9.json')
+// const serviceAccount = require('../config/engineering-report-app-firebase-adminsdk-yjkbx-d999ddf7b9.json')
 
 
 // admin.initializeApp({

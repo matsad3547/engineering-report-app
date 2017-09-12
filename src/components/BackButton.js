@@ -2,7 +2,7 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import IconButton from 'material-ui/IconButton'
 import FontIcon from 'material-ui/FontIcon'
-import { muiTheme } from '../data/'
+import { muiTheme } from '../config/'
 
 const BackButton = () => {
 
