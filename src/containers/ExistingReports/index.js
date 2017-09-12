@@ -6,14 +6,14 @@ import CircularProgress from 'material-ui/CircularProgress'
 import { queueReport, unqueueReport, clearQueue } from '../../actions/'
 import ReportItem from '../../components/ReportItem'
 
-const ExistingReports = ({ reports,
-                          status,
-                          queued,
-                          downloadQueued,
-                          queueReport,
-                          unqueueReport,
-                          clearQueue,
-                        }) => {
+const ExistingReports = ({  reports,
+                            status,
+                            queued,
+                            downloadQueued,
+                            queueReport,
+                            unqueueReport,
+                            clearQueue,
+                          }) => {
 
   const firstReport = 0
   const lastReport = 10
