@@ -8,8 +8,8 @@
     "sw-precache": "^5.0.0"
   },
   "dependencies": {
+    "dns": "file:./src/config/dns",
     "firebase": "^3.6.7",
-    "firebase-admin": "^5.2.1",
     "material-design-icons": "^3.0.1",
     "material-ui": "^0.17.0",
     "react": "^15.4.2",
@@ -22,8 +22,7 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
-    "sw-toolbox": "^3.6.0",
-    "dns": "file:./src/config/dns"
+    "sw-toolbox": "^3.6.0"
   },
   "scripts": {
     "start": "rx3-scripts start",
