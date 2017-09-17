@@ -8,7 +8,6 @@
     "sw-precache": "^5.0.0"
   },
   "dependencies": {
-    "dns": "file:./src/config/dns",
     "firebase": "^3.6.7",
     "material-design-icons": "^3.0.1",
     "material-ui": "^0.17.0",
