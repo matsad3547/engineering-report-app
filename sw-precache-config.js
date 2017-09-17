@@ -1,4 +1,4 @@
-const store = require('./src/config/store')
+// const store = require('./src/config/store')
 
 console.log('store');
 
