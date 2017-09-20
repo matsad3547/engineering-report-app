@@ -83,13 +83,13 @@ const CreateUser = ({ email,
       <div className="flexLayout login">
         <h3>Please Sign Up</h3>
         <DropDownMenu
-          className="team"
+          className="dropdown team"
           onChange={onChange.team}
           value={team}
           labelStyle={styles.label}
           style={styles.menu}
           >
-          <MenuItem primaryText={'...'} label={'Choose a team'} value={''} />
+          <MenuItem primaryText={''} label={'Choose a team'} value={''} />
           <MenuItem primaryText={2} label={2} value={2}/>
           <MenuItem primaryText={3} label={3} value={3}/>
           <MenuItem primaryText={4} label={4} value={4}/>

@@ -215,16 +215,28 @@ describe('user() ', () => {
   test('should return "firstName", "lastName", "email", "password", and "verify" values when a type of "SET_USER_DATA" is submitted', () => {
     const action = {
       type: 'SET_USER_DATA',
-      email: 'email',
-      password: 'password1',
-      verifyPassword: 'password1',
+      team: 'test1',
+      displayName: 'test2',
+      email: 'test3',
+      uid: 'test4',
     }
     const state = {
-      email: 'email',
-      password: 'password1',
-      verifyPassword: 'password1',
+      team: '',
+      displayName: '',
+      email: '',
+      password: '',
+      verifyPassword: '',
+      uid: null,
     }
-    expect(user({}, action)).toEqual(state)
+    const expected = {
+      team: 'test1',
+      displayName: 'test2',
+      email: 'test3',
+      uid: 'test4',
+      password: '',
+      verifyPassword: '',
+    }
+    expect(user(state, action)).toEqual(expected)
   })
 
   test('should replace property passed in upon action type of "SET_USER_PROPERTY"', () => {

@@ -7,15 +7,19 @@ import { setAuthState, setUserData } from '../actions/'
 export const signIn = (email, password) => auth.signInWithEmailAndPassword(email, password)
 
 export const loggedIn = () => {
-  let authState, uid, displayName, team
+
+  let authState
 
   auth.onAuthStateChanged( user => {
     if (user) {
+      const { team,
+              displayName,
+              email,
+              uid,
+            } = user
       console.log('user:', user);
       authState = 'authorized'
-      displayName = user.displayName
-      uid = user.uid
-      store.dispatch(setUserData({displayName, uid, team}))
+      store.dispatch(setUserData({team, displayName, email, uid, }))
     }
     else {
       authState = 'demo'

@@ -20,9 +20,9 @@ const initUserState = {
   team: '',
   displayName: '',
   email: '',
+  uid: null,
   password: '',
   verifyPassword: '',
-  uid: null,
 }
 
 const getInitMetricState = keywords => {
@@ -164,9 +164,9 @@ export const user = (state = initUserState, action) => {
             team,
             displayName,
             email,
+            uid,
             password,
             verifyPassword,
-            uid,
           } = action
   switch (type) {
     case 'SET_USER_DATA':
@@ -174,8 +174,6 @@ export const user = (state = initUserState, action) => {
       return {
         ...state,
         email,
-        password,
-        verifyPassword,
         uid,
         displayName,
         team,

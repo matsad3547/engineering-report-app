@@ -46,10 +46,15 @@ const ConfigForm = ({ config, configDispatch }) => {
   }
 
   const styles = {
-    menu: {
+    config: {
       backgroundColor: 'white',
       height: 30,
       width: 75,
+    },
+    ballast: {
+      backgroundColor: 'white',
+      height: 30,
+      width: 68,
     },
     label: {
       fontSize: 15,
@@ -78,10 +83,11 @@ const ConfigForm = ({ config, configDispatch }) => {
       <div className="muiInput">
         <h4>Config</h4>
         <DropDownMenu
+          className="dropdown"
           onChange={onChange.configNum}
           value={configNum}
           labelStyle={styles.label}
-          style={styles.menu}
+          style={styles.config}
           >
           <MenuItem primaryText={1} label={1} value={1}/>
           <MenuItem primaryText={2} label={2} value={2}/>
@@ -92,10 +98,11 @@ const ConfigForm = ({ config, configDispatch }) => {
       <div className="muiInput">
         <h4>Ballast</h4>
         <DropDownMenu
+          className="dropdown"
           onChange={onChange.ballast}
           value={ballast}
           labelStyle={styles.label}
-          style={styles.menu}>
+          style={styles.ballast}>
           <MenuItem primaryText={'No'} label={'No'} value={'No'}/>
           <MenuItem primaryText={'Yes'} label={'Yes'} value={'Yes'}/>
         </DropDownMenu>

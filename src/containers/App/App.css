@@ -64,6 +64,9 @@ input {
   width: 40%;
   margin: .5em;
 }
+.muiInput h4 {
+  padding: .5em .5em .5em 0;
+}
 
 .textInput > input {
   width: 100%;
@@ -193,13 +196,12 @@ a:active {
   margin: .5em;
 }
 
-.team > div > div:nth-child(2n) {
-  /*color: #757575 !important;*/
-  font-size: 16px !important;
+.dropdown > div > div:nth-child(2n) {
+  font-size: 1em !important;
   padding-left: 2px !important;
   text-align: left !important;
 }
-.team > div > button {
+.dropdown > div > button {
   right: -10px !important;
   top: 0 !important;
 }
