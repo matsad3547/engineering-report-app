@@ -17,9 +17,12 @@ const initReports = {
 }
 
 const initUserState = {
+  team: '',
+  displayName: '',
   email: '',
   password: '',
-  verified: '',
+  verifyPassword: '',
+  uid: null,
 }
 
 const getInitMetricState = keywords => {
@@ -156,16 +159,41 @@ export const queued = (state = [], { type, report, index }) => {
   }
 }
 
-export const user = (state = initUserState, { type, email, password, verified }) => {
+export const user = (state = initUserState, action) => {
+  const  {  type,
+            team,
+            displayName,
+            email,
+            password,
+            verifyPassword,
+            uid,
+          } = action
   switch (type) {
     case 'SET_USER_DATA':
+
       return {
+        ...state,
         email,
         password,
-        verified,
+        verifyPassword,
+        uid,
+        displayName,
+        team,
+      }
+    case 'SET_USER_PROPERTY':
+    const key = Object.keys(action).filter( k => k !== 'type')
+      return {
+        ...state,
+        [key]: action[key],
       }
     case 'CLEAR_USER_DATA':
-      return initUserState
+      return {
+        ...state,
+        password: '',
+        verifyPassword: '',
+        email: '',
+        displayName: '',
+      }
     default:
       return state
   }

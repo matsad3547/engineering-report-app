@@ -2,43 +2,48 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
+import DropDownMenu from 'material-ui/DropDownMenu'
+import MenuItem from 'material-ui/MenuItem'
 
-import { setUserData, clearUserData } from '../actions/'
+import { setUserProperty, clearUserData } from '../actions/'
 import { createUser } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
 const CreateUser = ({ email,
+                      displayName,
+                      team,
                       password,
-                      verified,
+                      verifyPassword,
                       userDispatch,
+                      setUserProperty,
                       clearUserData,
                         }) => {
 
-  const userReady = (verified === password && password.length >= 6) ? false : true
-
-  const output = {
-    email,
-    password,
-    verified,
-  }
+  const userReady = (verifyPassword === password && password.length >= 6) ? false : true
 
   const onChange = {
-
+    team(e, k, p) {
+      e.preventDefault()
+      // output.configNum = p
+      // configDispatch(output)
+      setUserProperty({team: p})
+    },
     email(e) {
       e.preventDefault()
-      output.email = e.target.value
-      userDispatch(output)
+      setUserProperty({email: e.target.value})
+    },
+    displayName(e) {
+      e.preventDefault()
+      setUserProperty({displayName: e.target.value})
     },
     password(e) {
       e.preventDefault()
-      output.password = e.target.value
-      userDispatch(output)
+      setUserProperty({password: e.target.value})
     },
-    verify(e) {
+    verifyPassword(e) {
       e.preventDefault()
-      output.verified = e.target.value
-      userDispatch(output)
-    }
+      setUserProperty({verifyPassword: e.target.value})
+    },
   }
 
   const onClick = e => {
@@ -58,19 +63,48 @@ const CreateUser = ({ email,
       margin: 12,
     },
     password: {
-      display: display
-    }
+      display,
+    },
+    menu: {
+      backgroundColor: 'white',
+      height: 30,
+      width: 180,
+      marginBottom: 6,
+    },
+    label: {
+      fontSize: 15,
+      lineHeight: 2,
+      color: team === '' ? '#757575' : '#000',
+    },
   }
 
   return (
     <div className="color">
       <div className="flexLayout login">
         <h3>Please Sign Up</h3>
+        <DropDownMenu
+          className="team"
+          onChange={onChange.team}
+          value={team}
+          labelStyle={styles.label}
+          style={styles.menu}
+          >
+          <MenuItem primaryText={'...'} label={'Choose a team'} value={''} />
+          <MenuItem primaryText={2} label={2} value={2}/>
+          <MenuItem primaryText={3} label={3} value={3}/>
+          <MenuItem primaryText={4} label={4} value={4}/>
+        </DropDownMenu>
         <input
           type="email"
           placeholder="E-mail Address"
           value={email}
           onChange={onChange.email}
+          />
+        <input
+          type="text"
+          placeholder="Name"
+          value={displayName}
+          onChange={onChange.displayName}
           />
         <input
           type="password"
@@ -81,8 +115,8 @@ const CreateUser = ({ email,
         <input
           type="password"
           placeholder="Verify Password"
-          value={verified}
-          onChange={onChange.verify}
+          value={verifyPassword}
+          onChange={onChange.verifyPassword}
           />
         <p
           style={styles.password}
@@ -95,7 +129,6 @@ const CreateUser = ({ email,
           className="reportButton"
           onClick={onClick}
           />
-
       </div>
       <BackButton />
     </div>
@@ -104,20 +137,27 @@ const CreateUser = ({ email,
 
 const mapStateToProps = state => {
 
+  const { email,
+          displayName,
+          team,
+          password,
+          verifyPassword,
+        } = state.user
+
   return {
-    email: state.user.email,
-    password: state.user.password,
-    verified: state.user.verified,
+    email,
+    displayName,
+    team,
+    password,
+    verifyPassword,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => ({
+  setUserProperty: property => dispatch(setUserProperty(property)),
+  clearUserData: () => dispatch(clearUserData()),
+})
 
-  return {
-    userDispatch: output => dispatch(setUserData(output)),
-    clearUserData: () => dispatch(clearUserData()),
-  }
-}
 
 export default connect(
   mapStateToProps,

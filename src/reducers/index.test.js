@@ -204,7 +204,10 @@ describe('user() ', () => {
     const result = {
       email: '',
       password: '',
-      verified: '',
+      verifyPassword: '',
+      uid: null,
+      displayName: '',
+      team: '',
     }
     expect(user(undefined, action)).toEqual(result)
   })
@@ -214,14 +217,39 @@ describe('user() ', () => {
       type: 'SET_USER_DATA',
       email: 'email',
       password: 'password1',
-      verified: 'password1',
+      verifyPassword: 'password1',
     }
     const state = {
       email: 'email',
       password: 'password1',
-      verified: 'password1',
+      verifyPassword: 'password1',
     }
     expect(user({}, action)).toEqual(state)
+  })
+
+  test('should replace property passed in upon action type of "SET_USER_PROPERTY"', () => {
+    const action = {
+      type: 'SET_USER_PROPERTY',
+      email: 'test',
+    }
+    const state = {
+      email: '',
+      password: '',
+      verifyPassword: '',
+      uid: null,
+      displayName: '',
+      team: '',
+    }
+    const actual = user(state, action)
+    const expected = {
+      email: 'test',
+      password: '',
+      verifyPassword: '',
+      uid: null,
+      displayName: '',
+      team: '',
+    }
+    expect(actual).toEqual(expected)
   })
 
   test('should delete user and password data upon action type of "CLEAR_USER_DATA"', () => {
@@ -231,12 +259,16 @@ describe('user() ', () => {
     const state = {
       email: 'email',
       password: 'password1',
-      verified: 'password1'
+      verifyPassword: 'password1',
+      uid: null,
+      displayName: 'Peter Parker',
     }
     const result = {
       email: '',
       password: '',
-      verified: '',
+      verifyPassword: '',
+      uid: null,
+      displayName: '',
     }
     expect(user(state, action)).toEqual(result)
   })

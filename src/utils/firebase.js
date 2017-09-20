@@ -8,12 +8,9 @@ const config = {
   messagingSenderId: "4716609803"
 }
 
-// console.log(firebase.initializeApp)
 const database = firebase
   .initializeApp(config)
   .database()
-  // .ref()
-  // .child('testTeam')
 
 export const auth = firebase
   .auth()

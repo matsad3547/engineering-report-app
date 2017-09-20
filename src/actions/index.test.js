@@ -10,6 +10,7 @@ import {
   unqueueReport,
   clearQueue,
   setUserData,
+  setUserProperty,
   clearUserData,
   requestKeywords,
   receiveKeywords,
@@ -203,6 +204,17 @@ describe('setUserData() ', () => {
     }
 
     expect(setUserData(output)).toEqual(result)
+  })
+})
+
+describe('setUserProperty()', () => {
+  test('should return a type of "SET_USER_PROPERTY" ', () => {
+    const actual = setUserProperty({email: 'test'})
+    const expected = {
+      type: 'SET_USER_PROPERTY',
+      email: 'test',
+    }
+    expect(actual).toEqual(expected)
   })
 })
 

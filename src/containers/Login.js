@@ -3,31 +3,25 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import { setUserData, clearUserData } from '../actions/'
+import { setUserProperty, clearUserData } from '../actions/'
 import { signIn } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
 const Login = ({  email,
                   password,
                   userDispatch,
+                  setUserProperty,
                   clearUserData,
                     }) => {
-
-  const output = {
-    email,
-    password,
-  }
 
   const onChange = {
     email(e) {
       e.preventDefault()
-      output.email = e.target.value
-      userDispatch(output)
+      setUserProperty({email: e.target.value})
     },
     password(e) {
       e.preventDefault()
-      output.password = e.target.value
-      userDispatch(output)
+      setUserProperty({password: e.target.value})
     },
   }
 
@@ -93,13 +87,11 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => ({
+  setUserProperty: property => dispatch(setUserProperty(property)),
+  clearUserData: () => dispatch(clearUserData()),
+})
 
-  return {
-    userDispatch: output => dispatch(setUserData(output)),
-    clearUserData: () => dispatch(clearUserData()),
-  }
-}
 
 export default connect(
   mapStateToProps,

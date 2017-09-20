@@ -2,15 +2,20 @@ import { auth } from './firebase'
 import store from '../config/store'
 import { getReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
-import { setAuthState } from '../actions/'
+import { setAuthState, setUserData } from '../actions/'
 
 export const signIn = (email, password) => auth.signInWithEmailAndPassword(email, password)
 
 export const loggedIn = () => {
-  let authState = ''
+  let authState, uid, displayName, team
+
   auth.onAuthStateChanged( user => {
     if (user) {
+      console.log('user:', user);
       authState = 'authorized'
+      displayName = user.displayName
+      uid = user.uid
+      store.dispatch(setUserData({displayName, uid, team}))
     }
     else {
       authState = 'demo'
