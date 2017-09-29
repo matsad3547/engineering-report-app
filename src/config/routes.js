@@ -5,6 +5,7 @@ import Welcome from '../components/Welcome'
 import About from '../components/About'
 import App from '../containers/App/'
 import CreateUser from '../containers/CreateUser'
+import CreateTeam from '../containers/CreateTeam'
 import Login from '../containers/Login'
 import DisplayReport from '../containers/DisplayReport/'
 import NewReport from '../containers/NewReport'
@@ -57,6 +58,10 @@ const getRoutes = () => {
     {
       path: '/create_user',
       component: CreateUser,
+    },
+    {
+      path: '/create_team',
+      component: CreateTeam,
     },
     {
       path: 'app/',
