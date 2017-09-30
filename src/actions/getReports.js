@@ -16,30 +16,49 @@ export const getReports = team => {
     })
   }
 }
-export const getFilteredReports = team => {
+
+export const getFilteredReports = (team, n = 10) => {
 
   return (dispatch, getState) => {
     const { displayName, uid, admin } = getState().user
     dispatch(requestReports())
     if (team === 'demo' || admin) {
-      return database.ref(`${team}/test reports`).once('value', snap => {
+      return database.ref(`${team}/test reports`).limitToLast(n).once('value', snap => {
         const reportsFiltered = snap.val()
         console.log('reports at get reports:', reportsFiltered, '\nadmin?', admin, '\nuid:', uid, '\nteam:', team)
       })
       .catch( err => {
-        console.log('An error occured while fetching reports from the database:', err);
+        console.error('An error occured while fetching reports from the database:', err);
         dispatch(reportError(err))
       })
     }
     else {
-      return database.ref(`${team}/test reports`).orderByChild('uid').equalTo(uid).once('value', snap => {
+      return database.ref(`${team}/test reports`).orderByChild('uid').equalTo(uid).limitToLast(n).once('value', snap => {
         const reportsFiltered = snap.val()
         console.log('reports at get reports:', reportsFiltered, '\nadmin?', admin, '\nuid:', uid, '\nteam:', team);
       })
       .catch( err => {
-        console.log('An error occured while fetching reports from the database:', err);
+        console.error('An error occured while fetching reports from the database:', err);
         dispatch(reportError(err))
       })
     }
+  }
+}
+
+export const getTeams = () => {
+
+  return dispatch => {
+    // const { displayName, uid, admin } = getState().user
+    // dispatch(requestReports())
+    return database.ref().once('value', snap => {
+      const teams = Object.keys(snap.val())
+                      .filter( t => t !== 'demo' )
+      console.log('teams:', teams);
+      // dispatch(receiveReports(reports))
+      })
+    .catch( err => {
+      console.error('An error occured while fetching teams from the database:', err);
+      dispatch(reportError(err))
+    })
   }
 }

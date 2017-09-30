@@ -26,6 +26,13 @@ const initUserState = {
   admin: false,
 }
 
+const initDataState = {
+  loading: false,
+  loaded: false,
+  error: null,
+  teams: [],
+}
+
 const getInitMetricState = keywords => {
   let initMetricState = {}
   keywords.forEach( (name, i) => {

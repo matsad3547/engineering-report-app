@@ -1,6 +1,6 @@
 import { auth } from './firebase'
 import store from '../config/store'
-import { getReports, getFilteredReports } from '../actions/getReports'
+import { getReports, getFilteredReports, getTeams } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
 import { setAuthState, setUserData } from '../actions/'
 
@@ -36,6 +36,7 @@ export const loggedIn = () => {
     store.dispatch(getFilteredReports(team))
     store.dispatch(getKeywords(team))
     store.dispatch(setAuthState(team))
+    store.dispatch(getTeams())
   })
 }
 
