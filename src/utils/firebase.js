@@ -15,4 +15,8 @@ const database = firebase
 export const auth = firebase
   .auth()
 
+export const getTeams = () => database.ref()
+                                .once('value', snap => snap.val() )
+
+
 export default database

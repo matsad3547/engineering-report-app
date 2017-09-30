@@ -1,39 +1,53 @@
 import { auth } from './firebase'
 import store from '../config/store'
-import { getReports } from '../actions/getReports'
+import { getReports, getFilteredReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
 import { setAuthState, setUserData } from '../actions/'
 
-export const signIn = (email, password) => auth.signInWithEmailAndPassword(email, password)
+export const signIn = (email, password) => {
+  auth.signInWithEmailAndPassword(email, password)
+  //get auth token
+  //load auth token into local storage
+  loggedIn()
+}
+
+export const checkAuthStatus = () => {
+  //get token?
+  //verify token is the same?
+  //check auth status
+}
 
 export const loggedIn = () => {
-
-  let authState
-
+  let team
   auth.onAuthStateChanged( user => {
     if (user) {
-      const { team,
-              displayName,
+      const { displayName,
               email,
               uid,
             } = user
       console.log('user:', user);
-      authState = 'authorized'
+      team = 'authorized'
       store.dispatch(setUserData({team, displayName, email, uid, }))
     }
     else {
-      authState = 'demo'
+      team = 'demo'
     }
-    store.dispatch(getReports(authState))
-    store.dispatch(getKeywords(authState))
-    store.dispatch(setAuthState(authState))
+    store.dispatch(getReports(team))
+    store.dispatch(getFilteredReports(team))
+    store.dispatch(getKeywords(team))
+    store.dispatch(setAuthState(team))
   })
 }
 
-export const signOut = () => auth.signOut()
+export const signOut = () => {
+  //delete auth token from local storage
+  auth.signOut()
+}
 
 export const createUser = (email, pw) => {
   auth.createUserWithEmailAndPassword(email, pw)
-    .then()
+    .then(
+      //update user properties
+    )
     .catch( err => console.error('Oops!', err.message) )
 }

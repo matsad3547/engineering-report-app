@@ -23,6 +23,7 @@ const initUserState = {
   uid: null,
   password: '',
   verifyPassword: '',
+  admin: false,
 }
 
 const getInitMetricState = keywords => {

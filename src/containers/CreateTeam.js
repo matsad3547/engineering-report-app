@@ -17,7 +17,7 @@ const CreateTeam = ({ email,
                       userDispatch,
                       setUserProperty,
                       clearUserData,
-                        }) => {
+                    }) => {
 
   const userReady = (verifyPassword === password && password.length >= 6) ? false : true
 

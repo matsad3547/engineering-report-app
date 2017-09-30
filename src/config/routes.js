@@ -44,7 +44,7 @@ const getRoutes = () => {
     }, intervalTime)
   }
 
-  const routes = [
+  return [
 
     {
       path: '/',
@@ -89,8 +89,6 @@ const getRoutes = () => {
       ],
     },
   ]
-
-  return routes
 }
 
 store.subscribe(

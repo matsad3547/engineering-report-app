@@ -8,28 +8,25 @@ const style = {
   width: 250,
 };
 
-const UnAuth = ({ children }) => {
+const UnAuth = () => (
+  <div className="color flexLayout home">
+    <h1>Engineering Report App</h1>
+    <br />
+    <RaisedButton
+      label="Sign Up"
+      containerElement={<Link to="/create_user" ></Link>}
+      style={style}
+      />
+    <RaisedButton
+      label="Log In"
+      containerElement={<Link to="/login_user" ></Link>}
+      style={style} />
+    <RaisedButton
+      label="Try the Demo"
+      containerElement={<Link to="app/" ></Link>}
+      style={style}/>
+  </div>
+)
 
-  return (
-    <div className="color flexLayout home">
-      <h1>Engineering Report App</h1>
-      <br />
-      <RaisedButton
-        label="Sign Up"
-        containerElement={<Link to="/create_user" ></Link>}
-        style={style}
-        />
-      <RaisedButton
-        label="Log In"
-        containerElement={<Link to="/login_user" ></Link>}
-        style={style} />
-      <RaisedButton
-        label="Try the Demo"
-        containerElement={<Link to="app/" ></Link>}
-        style={style}/>
-
-    </div>
-  )
-}
 
 export default UnAuth

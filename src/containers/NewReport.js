@@ -15,7 +15,7 @@ const NewReport = ({  config,
                       metricValues,
                       notes,
                       previousMetricValues,
-                      authState,
+                      team,
                       saveReport,
                       getReports,
                       getKeywords
@@ -33,11 +33,11 @@ const NewReport = ({  config,
       notes,
     }
     let updates = {}
-    updates[`${authState}/test reports/${newReportKey}`] = newReport
+    updates[`${team}/test reports/${newReportKey}`] = newReport
     database.ref().update(updates)
     saveReport()
-    getReports(authState)
-    getKeywords(authState)
+    getReports(team)
+    getKeywords(team)
   }
 
   const styles = {
@@ -53,7 +53,6 @@ const NewReport = ({  config,
       <ConfigForm
         config={config}
         />
-
       <hr/>
 
       {keys.map( (key, i) =>
@@ -84,12 +83,19 @@ const NewReport = ({  config,
 
 const mapStateToProps = state => {
 
+  const { reportConfig,
+          metricValues,
+          notes,
+          previousMetricValues ,
+        } = state
+  const { team } = state.user
+
   return {
-    config: state.reportConfig,
-    metricValues: state.metricValues,
-    notes: state.notes,
-    previousMetricValues: state.previousMetricValues,
-    authState: state.authState,
+    config: reportConfig,
+    metricValues,
+    notes,
+    previousMetricValues,
+    team,
   }
 }
 
@@ -97,8 +103,8 @@ const mapDispatchToProps = dispatch => {
 
   return {
     saveReport: () => dispatch(saveReport()),
-    getReports: (dataset) => dispatch(getReports(dataset)),
-    getKeywords: (dataset) => dispatch(getKeywords(dataset)),
+    getReports: team => dispatch(getReports(team)),
+    getKeywords: team => dispatch(getKeywords(team)),
     }
 }
 

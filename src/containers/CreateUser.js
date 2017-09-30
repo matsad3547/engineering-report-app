@@ -24,8 +24,6 @@ const CreateUser = ({ email,
   const onChange = {
     team(e, k, p) {
       e.preventDefault()
-      // output.configNum = p
-      // configDispatch(output)
       setUserProperty({team: p})
     },
     email(e) {
