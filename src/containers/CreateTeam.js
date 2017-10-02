@@ -2,8 +2,6 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
-import DropDownMenu from 'material-ui/DropDownMenu'
-import MenuItem from 'material-ui/MenuItem'
 
 import { setUserProperty, clearUserData } from '../actions/'
 import { createUser } from '../utils/auth'
@@ -23,7 +21,7 @@ const CreateTeam = ({ email,
 
   const onChange = {
 
-    email(e) {
+    team(e) {
       e.preventDefault()
       setUserProperty({team: e.target.value})
     },

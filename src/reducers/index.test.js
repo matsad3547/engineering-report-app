@@ -11,6 +11,7 @@ import {
   user,
   authState,
   resetMetricState,
+  data,
       } from './index.js'
 
 const action = {
@@ -101,12 +102,48 @@ describe('reportConfig() ', () => {
 
 describe('previousMetricValues() ', () => {
 
-  test('should return an object (which is actually an array)', () => {
-    expect(typeof(previousMetricValues(undefined, 'TEST'))).toBe('object')
+  test('should return an array', () => {
+    const actual = Array.isArray(previousMetricValues(undefined, 'TEST'))
+    const expected = true
+    expect(actual).toEqual(expected)
   })
 
   test('should return an empty array by default', () => {
-    expect(previousMetricValues(undefined, 'TEST').length).toBe(0)
+    const actual = previousMetricValues(undefined, 'TEST').length
+    const expected = 0
+    expect(actual).toBe(expected)
+  })
+
+  test('should return an array of values in the same order they are found in the `metricValues` array of the most recent report in response to the action type "REPORTS_RECEIVED"', () => {
+    const reports = {
+      233: {
+        metricValues: []
+      },
+      234: {
+        metricValues: [
+          {
+            name: 'a',
+            val: 2,
+          },
+          {
+            name: 'b',
+            val: 4,
+          },
+          {
+            name: 'c',
+            val: 6,
+          },
+        ]
+      }
+    }
+
+    const state = [1, 3, 5,]
+    const action = {
+      type: 'REPORTS_RECEIVED',
+      reports,
+    }
+    const actual = previousMetricValues(state, action)
+    const expected = [2, 4, 6,]
   })
 })
 
@@ -199,7 +236,7 @@ describe('queued() ', () => {
 
 describe('user() ', () => {
 
-  test('should return an empty object by default', () => {
+  test('should return an initial object by default', () => {
 
     const result = {
       email: '',
@@ -208,6 +245,7 @@ describe('user() ', () => {
       uid: null,
       displayName: '',
       team: '',
+      admin: false,
     }
     expect(user(undefined, action)).toEqual(result)
   })
@@ -304,8 +342,7 @@ describe('authState() ', () => {
     const expected = 'test'
     expect(actual).toBe(expected)
   })
-}
-)
+})
 
 describe('resetMetricState() ', () => {
 
@@ -348,6 +385,82 @@ describe('resetMetricState() ', () => {
         name: 'test2',
         val: 5,
       },
+    }
+    expect(actual).toEqual(expected)
+  })
+})
+
+describe('data() ', () => {
+  test('should return an initial data state object by default', () => {
+    const actual = data(undefined, 'test')
+    const expected = {
+      loading: false,
+      loaded: false,
+      error: {},
+    }
+    expect(actual).toEqual(expected)
+  })
+
+  test('should return an error object in response to an action type of "SET_DATA_ERROR"', () => {
+    const action = {
+      type: 'SET_DATA_ERROR',
+      testErr: 'test',
+    }
+    const state = {
+      loading: false,
+      loaded: false,
+      error: {},
+    }
+    const actual = data(state, action)
+    const expected = {
+        loading: false,
+        loaded: false,
+        error: {
+          testErr: 'test',
+        },
+      }
+    expect(actual).toEqual(expected)
+  })
+
+  test('should add to an error object in response to an action type of "SET_DATA_ERROR"', () => {
+    const action = {
+      type: 'SET_DATA_ERROR',
+      test2Err: 'test2',
+    }
+    const state = {
+      loading: false,
+      loaded: false,
+      error: {
+        testErr: 'test',
+      },
+    }
+    const actual = data(state, action)
+    const expected = {
+        loading: false,
+        loaded: false,
+        error: {
+          testErr: 'test',
+          test2Err: 'test2',
+        },
+      }
+    expect(actual).toEqual(expected)
+  })
+
+  test('should set the other data properties in response to "SET_DATA_PROPERTY"', () => {
+    const action = {
+      type: 'SET_DATA_PROPERTY',
+      loading: true,
+    }
+    const state = {
+      loading: false,
+      loaded: false,
+      error: {},
+    }
+    const actual = data(state, action)
+    const expected = {
+      loading: true,
+      loaded: false,
+      error: {},
     }
     expect(actual).toEqual(expected)
   })

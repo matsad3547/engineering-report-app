@@ -16,6 +16,7 @@ const NewReport = ({  config,
                       notes,
                       previousMetricValues,
                       team,
+                      uid,
                       saveReport,
                       getReports,
                       getKeywords
@@ -31,13 +32,15 @@ const NewReport = ({  config,
       config,
       metricValues,
       notes,
+      uid,
     }
     let updates = {}
     updates[`${team}/test reports/${newReportKey}`] = newReport
-    database.ref().update(updates)
+    database.ref()
+      .update(updates)
     saveReport()
     getReports(team)
-    getKeywords(team)
+    // getKeywords(team)
   }
 
   const styles = {
@@ -88,7 +91,7 @@ const mapStateToProps = state => {
           notes,
           previousMetricValues ,
         } = state
-  const { team } = state.user
+  const { team, uid } = state.user
 
   return {
     config: reportConfig,
@@ -96,6 +99,7 @@ const mapStateToProps = state => {
     notes,
     previousMetricValues,
     team,
+    uid,
   }
 }
 

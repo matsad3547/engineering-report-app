@@ -28,5 +28,4 @@ const UnAuth = () => (
   </div>
 )
 
-
 export default UnAuth

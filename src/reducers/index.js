@@ -29,37 +29,24 @@ const initUserState = {
 const initDataState = {
   loading: false,
   loaded: false,
-  error: null,
-  teams: [],
+  error: {},
 }
 
-const getInitMetricState = keywords => {
-  let initMetricState = {}
-  keywords.forEach( (name, i) => {
-    Object.assign( initMetricState, {
-      [i]: {
-        name,
-        val: initVal,
-      }
-    })
-  })
-  return initMetricState
-}
-
-export const resetMetricState = state => {
-  let newMetricState = {}
-  for(let k in state) {
-    if (state.hasOwnProperty(k)){
-      Object.assign(newMetricState, {
-        [k]: {
-          name: state[k].name,
-          val: initVal,
-        }
-      })
-    }
+const getInitMetricState = keywords => keywords.reduce( (obj, k, i) => ({
+  ...obj,
+  [i]: {
+    name: k,
+    val: initVal,
   }
-  return newMetricState
-}
+}), {})
+
+export const resetMetricState = state => Object.keys(state).reduce( (obj, k) => ({
+    ...obj,
+    [k]: {
+      name: state[k].name,
+      val: initVal,
+    }
+  }), {})
 
 export const metricValues = (state = {}, { type, id, name, val, keywords }) => {
 
@@ -110,21 +97,13 @@ export const reportConfig = (state = initReportConfig, action) => {
   }
 }
 
-const getMetricValArr = metricValues => {
-  let metricValArr = []
-  for (let key in metricValues) {
-    if (metricValues.hasOwnProperty(key)){
-      metricValArr[key] = metricValues[key].val
-    }
-  }
-  return metricValArr
-}
-
 export const previousMetricValues = (state = [], { type, output, reports }) => {
   switch (type) {
     case 'REPORTS_RECEIVED':
-    const lastReportKey = Object.keys(reports).sort( (a, b) => b - a )[0]
-      return getMetricValArr(reports[lastReportKey].metricValues)
+    const lastReportKey = Object.keys(reports)
+                            .sort( (a, b) => b - a )[0]
+      return Object.keys(reports[lastReportKey].metricValues)
+        .map( k => reports[lastReportKey].metricValues[k].val)
     default:
       return state
   }
@@ -210,6 +189,28 @@ export const authState = (state = '', { type, authState }) => {
     case 'SET_AUTH_STATE':
       return authState
 
+    default:
+      return state
+  }
+}
+
+export const data = (state = initDataState, action) => {
+  const key = Object.keys(action)
+                .filter( k => k !== 'type')[0]
+  switch (action.type) {
+    case 'SET_DATA_ERROR':
+      return {
+        ...state,
+        error: {
+          ...state.error,
+          [key]: action[key],
+        }
+      }
+    case 'SET_DATA_PROPERTY':
+      return {
+        ...state,
+        [key]: action[key]
+      }
     default:
       return state
   }

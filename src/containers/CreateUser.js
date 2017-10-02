@@ -6,7 +6,6 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 
 import { setUserProperty, clearUserData } from '../actions/'
-import { getTeams } from '../actions/getReports'
 import { createUser } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
@@ -19,8 +18,6 @@ const CreateUser = ({ email,
                       setUserProperty,
                       clearUserData,
                         }) => {
-
-                          getTeams()
 
   const userReady = (verifyPassword === password && password.length >= 6) ? false : true
 
@@ -157,6 +154,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
   clearUserData: () => dispatch(clearUserData()),
+  // getTeams: () => dispatch(getTeams()),
 })
 
 

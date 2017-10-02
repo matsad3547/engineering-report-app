@@ -7,7 +7,8 @@ import { date } from '../../utils/'
 const DisplayReport = ({  report,
                           config,
                           metricValues,
-                          notes
+                          notes,
+                          displayName,
                         }) => {
 
   if (!!config) {
@@ -18,6 +19,10 @@ const DisplayReport = ({  report,
     return(
       <div className="reportDisplay">
         <h3>Report From {date(report)}</h3>
+        <h4>Author</h4>
+        {displayName ? displayName : '<name is not available>'}
+        <br/>
+        <hr/>
         <h4>Configuration Values</h4>
         <table>
           <tbody>
@@ -68,6 +73,7 @@ const mapStateToProps = (state, ownProps) => {
       config: reportVals.config,
       metricValues: reportVals.metricValues,
       notes: reportVals.notes,
+      displayName: state.user.displayName,
     }
   }
 

@@ -8,6 +8,7 @@ export const signIn = (email, password) => {
   auth.signInWithEmailAndPassword(email, password)
   //get auth token
   //load auth token into local storage
+  // localStorage.setItem('token', fbToken)
   loggedIn()
 }
 
@@ -41,7 +42,7 @@ export const loggedIn = () => {
 }
 
 export const signOut = () => {
-  //delete auth token from local storage
+  localStorage.setItem('token', null)
   auth.signOut()
 }
 

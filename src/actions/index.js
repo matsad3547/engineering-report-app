@@ -98,3 +98,19 @@ export const setAuthState = authState => ({
   type: 'SET_AUTH_STATE',
   authState,
 })
+
+export const setDataProperty = property => {
+  const key = Object.keys(property)[0]
+  return {
+    type: 'SET_DATA_PROPERTY',
+    [key]: property[key]
+  }
+}
+
+export const setDataError = error => {
+  const key = Object.keys(error)[0]
+  return {
+    type: 'SET_DATA_ERROR',
+    [key]: error[key],
+  }
+}

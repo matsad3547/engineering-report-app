@@ -20,7 +20,7 @@ const ReportItem = ({ config,
   const onCheck = (e, i) => {
     e.preventDefault()
     if (checked) {
-      let index = queued.indexOf(report)
+      const index = queued.indexOf(report)
       unqueueReport(index)
     }
     else queueReport(report)

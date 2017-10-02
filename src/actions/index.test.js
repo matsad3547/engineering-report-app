@@ -17,6 +17,8 @@ import {
   keywordError,
   setAuthState,
   resetMetricState,
+  setDataProperty,
+  setDataError,
   } from './index.js'
 
 import {
@@ -297,6 +299,44 @@ describe('setAuthState() ', () => {
     const expected = {
       type: 'SET_AUTH_STATE',
       authState: 'dicks',
+    }
+    expect(actual).toEqual(expected)
+  })
+})
+
+describe('setDataProperty()', () => {
+  test('should return a type of "SET_DATA_PROPERTY"', () => {
+    const actual = setDataProperty({}).type
+    const expected = "SET_DATA_PROPERTY"
+    expect(actual).toEqual(expected)
+  })
+
+  test('should return a data property object passed in', () => {
+    const error = {loading: true}
+    const actual = setDataProperty(error)
+    const expected = {
+      type: "SET_DATA_PROPERTY",
+      loading: true,
+    }
+    expect(actual).toEqual(expected)
+  })
+})
+
+describe('setDataError()', () => {
+  test('should return a type of "SET_DATA_ERROR"', () => {
+    const actual = setDataError({}).type
+    const expected = 'SET_DATA_ERROR'
+    expect(actual).toEqual(expected)
+  })
+
+  test('should return an error object passed in with a type of "SET_DATA_ERROR"', () => {
+    const error = {
+      testErr: 'test',
+    }
+    const actual = setDataError(error)
+    const expected = {
+      type: 'SET_DATA_ERROR',
+      testErr: 'test',
     }
     expect(actual).toEqual(expected)
   })
