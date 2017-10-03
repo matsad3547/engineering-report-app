@@ -239,24 +239,28 @@ describe('user() ', () => {
   test('should return an initial object by default', () => {
 
     const result = {
+      team: '',
+      displayName: '',
       email: '',
+      uid: null,
       password: '',
       verifyPassword: '',
-      uid: null,
-      displayName: '',
-      team: '',
       admin: false,
+      approved: false,
+      teams: [],
     }
     expect(user(undefined, action)).toEqual(result)
   })
 
-  test('should return "firstName", "lastName", "email", "password", and "verify" values when a type of "SET_USER_DATA" is submitted', () => {
+  test('should return "team", "displayName", "email", "uid", "admin", and "approved" values when a type of "SET_USER_DATA" is submitted', () => {
     const action = {
       type: 'SET_USER_DATA',
       team: 'test1',
       displayName: 'test2',
       email: 'test3',
       uid: 'test4',
+      admin: true,
+      approved: true,
     }
     const state = {
       team: '',
@@ -265,6 +269,9 @@ describe('user() ', () => {
       password: '',
       verifyPassword: '',
       uid: null,
+      admin: false,
+      approved: false,
+      teams: []
     }
     const expected = {
       team: 'test1',
@@ -273,6 +280,9 @@ describe('user() ', () => {
       uid: 'test4',
       password: '',
       verifyPassword: '',
+      admin: true,
+      approved: true,
+      teams: [],
     }
     expect(user(state, action)).toEqual(expected)
   })
@@ -307,42 +317,48 @@ describe('user() ', () => {
       type: 'CLEAR_USER_DATA',
     }
     const state = {
+      team: 'test1',
+      displayName: 'Peter Parker',
       email: 'email',
+      uid: '38394a;ljdfald',
       password: 'password1',
       verifyPassword: 'password1',
-      uid: null,
-      displayName: 'Peter Parker',
+      admin: true,
+      approved: true,
     }
     const result = {
+      team: '',
+      displayName: '',
       email: '',
+      uid: null,
       password: '',
       verifyPassword: '',
-      uid: null,
-      displayName: '',
+      admin: false,
+      approved: false,
     }
     expect(user(state, action)).toEqual(result)
   })
 })
 
-describe('authState() ', () => {
-
-  test('should output an empty string by default', () => {
-    const actual = authState(undefined, 'test')
-    const expected = ''
-    expect(actual).toBe(expected)
-  })
-
-  test('should return a string passed in as an action', () => {
-    const state = ''
-    const action = {
-      type: 'SET_AUTH_STATE',
-      authState: 'test'
-    }
-    const actual = authState(undefined, action)
-    const expected = 'test'
-    expect(actual).toBe(expected)
-  })
-})
+// describe('authState() ', () => {
+//
+//   test('should output an empty string by default', () => {
+//     const actual = authState(undefined, 'test')
+//     const expected = ''
+//     expect(actual).toBe(expected)
+//   })
+//
+//   test('should return a string passed in as an action', () => {
+//     const state = ''
+//     const action = {
+//       type: 'SET_AUTH_STATE',
+//       authState: 'test'
+//     }
+//     const actual = authState(undefined, action)
+//     const expected = 'test'
+//     expect(actual).toBe(expected)
+//   })
+// })
 
 describe('resetMetricState() ', () => {
 

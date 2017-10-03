@@ -5,7 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 
-import { setUserProperty, clearUserData } from '../actions/'
+import { setUserProperty } from '../actions/'
+import { getTeams } from '../actions/getReports'
 import { createUser } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
@@ -14,10 +15,13 @@ const CreateUser = ({ email,
                       team,
                       password,
                       verifyPassword,
+                      teams,
                       userDispatch,
                       setUserProperty,
                       clearUserData,
-                        }) => {
+                    }) => {
+
+  getTeams()
 
   const userReady = (verifyPassword === password && password.length >= 6) ? false : true
 
@@ -47,8 +51,8 @@ const CreateUser = ({ email,
   const onClick = e => {
     e.preventDefault()
     if (!userReady) {
-      createUser(email, password)
-      clearUserData()
+      createUser()
+      // clearUs erData()
       browserHistory.goBack()
     }
   }
@@ -67,7 +71,7 @@ const CreateUser = ({ email,
       backgroundColor: 'white',
       height: 30,
       width: 180,
-      marginBottom: 6,
+      marginBottom: 20,
     },
     label: {
       fontSize: 15,
@@ -88,9 +92,8 @@ const CreateUser = ({ email,
           style={styles.menu}
           >
           <MenuItem primaryText={''} label={'Choose a team'} value={''} />
-          <MenuItem primaryText={2} label={2} value={2}/>
-          <MenuItem primaryText={3} label={3} value={3}/>
-          <MenuItem primaryText={4} label={4} value={4}/>
+          { teams.map( (t, i) => <MenuItem key={`team-${i}`} primaryText={t} label={t} value={t}/> )}
+
         </DropDownMenu>
         <input
           type="email"
@@ -140,6 +143,7 @@ const mapStateToProps = state => {
           team,
           password,
           verifyPassword,
+          teams,
         } = state.user
 
   return {
@@ -148,12 +152,13 @@ const mapStateToProps = state => {
     team,
     password,
     verifyPassword,
+    teams,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
-  clearUserData: () => dispatch(clearUserData()),
+  // clearUserData: () => dispatch(clearUserData()),
   // getTeams: () => dispatch(getTeams()),
 })
 
@@ -162,3 +167,7 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(CreateUser)
+//
+// <MenuItem primaryText={2} label={2} value={2}/>
+// <MenuItem primaryText={3} label={3} value={3}/>
+// <MenuItem primaryText={4} label={4} value={4}/>

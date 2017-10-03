@@ -24,6 +24,8 @@ const initUserState = {
   password: '',
   verifyPassword: '',
   admin: false,
+  approved: false,
+  teams: [],
 }
 
 const initDataState = {
@@ -152,21 +154,24 @@ export const user = (state = initUserState, action) => {
             displayName,
             email,
             uid,
-            password,
-            verifyPassword,
+            admin,
+            approved,
           } = action
   switch (type) {
     case 'SET_USER_DATA':
 
       return {
         ...state,
+        team,
+        displayName,
         email,
         uid,
-        displayName,
-        team,
+        admin,
+        approved,
       }
     case 'SET_USER_PROPERTY':
-    const key = Object.keys(action).filter( k => k !== 'type')
+    const key = Object.keys(action)
+                  .filter( k => k !== 'type')
       return {
         ...state,
         [key]: action[key],
@@ -174,25 +179,29 @@ export const user = (state = initUserState, action) => {
     case 'CLEAR_USER_DATA':
       return {
         ...state,
+        team: '',
+        displayName: '',
+        email: '',
+        uid: null,
         password: '',
         verifyPassword: '',
-        email: '',
-        displayName: '',
+        admin: false,
+        approved: false,
       }
     default:
       return state
   }
 }
 
-export const authState = (state = '', { type, authState }) => {
-  switch (type) {
-    case 'SET_AUTH_STATE':
-      return authState
-
-    default:
-      return state
-  }
-}
+// export const authState = (state = '', { type, authState }) => {
+//   switch (type) {
+//     case 'SET_AUTH_STATE':
+//       return authState
+//
+//     default:
+//       return state
+//   }
+// }
 
 export const data = (state = initDataState, action) => {
   const key = Object.keys(action)
@@ -224,6 +233,6 @@ export const combinedReducers = combineReducers({
   reports,
   queued,
   user,
-  authState,
+  data,
   routing: routerReducer,
   })

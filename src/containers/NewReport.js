@@ -35,7 +35,7 @@ const NewReport = ({  config,
       uid,
     }
     let updates = {}
-    updates[`${team}/test reports/${newReportKey}`] = newReport
+    updates[`teams/${team}/test reports/${newReportKey}`] = newReport
     database.ref()
       .update(updates)
     saveReport()

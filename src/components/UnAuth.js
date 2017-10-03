@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 const style = {
   margin: 12,
   width: 250,
-};
+}
 
 const UnAuth = () => (
   <div className="color flexLayout home">

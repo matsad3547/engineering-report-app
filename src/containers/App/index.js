@@ -8,10 +8,10 @@ import HomeButton from '../../components/HomeButton'
 import TopMenu from '../../components/TopMenu'
 import TabMenu from '../../components/TabMenu'
 
-const App = ({ authState,
+const App = ({  team,
                 children,
                 location,
-                }) => {
+              }) => {
 
   const pageDisplayed = location.pathname === '/app/new_report' ? 1 : 2
 
@@ -25,7 +25,7 @@ const App = ({ authState,
 
     <div className="app">
       <AppBar
-        iconElementLeft={ authState === 'authorized' ? <TopMenu /> : <HomeButton/>}
+        iconElementLeft={ team !== 'demo' ? <TopMenu /> : <HomeButton/>}
         style={styles.appBar}
         />
       <TabMenu
@@ -41,7 +41,7 @@ const App = ({ authState,
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    authState: state.authState,
+    team: state.user.team,
     children: ownProps.children,
     location: ownProps.location,
   }

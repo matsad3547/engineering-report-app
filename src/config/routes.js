@@ -12,6 +12,7 @@ import NewReport from '../containers/NewReport'
 import ExistingReports from '../containers/ExistingReports/'
 
 const getRoutes = () => {
+  //TODO Refactor this to check local storage for valid token
 
   const redirectToWelcome = (nextState, replace, cb) => {
 
@@ -25,19 +26,21 @@ const getRoutes = () => {
       () => {
         console.log('entering timeout');
         times++
-        const { authState } = store.getState()
+        const { team } = store.getState().user
 
         if ((times * intervalTime) > maxTime) {
           cb()
           clearInterval(waitForStore)
         }
 
-        else if (authState === 'authorized') {
+        else if (team === 'Test Team') {
+          console.log('at test team');
           replace('app/')
           cb()
           clearInterval(waitForStore)
         }
-        else if (authState === 'demo') {
+        else if (team === 'demo') {
+          console.log('at demo');
           cb()
           clearInterval(waitForStore)
         }
