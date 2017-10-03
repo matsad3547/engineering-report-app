@@ -9,10 +9,9 @@ import BackButton from '../components/BackButton'
 
 const Login = ({  email,
                   password,
-                  userDispatch,
                   setUserProperty,
                   clearUserData,
-                    }) => {
+                }) => {
 
   const onChange = {
     email(e) {
@@ -75,15 +74,16 @@ const Login = ({  email,
       </div>
       <BackButton />
     </div>
-
   )
 }
 
 const mapStateToProps = state => {
 
+  const { email, password } = state.user
+
   return {
-    email: state.user.email,
-    password: state.user.password,
+    email,
+    password,
   }
 }
 

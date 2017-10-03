@@ -89,18 +89,6 @@ describe('saveReport() ', () => {
   })
 })
 
-describe('requestReports() ', () => {
-
-  test('should return an object', () => {
-    expect(typeof(requestReports(undefined))).toBe('object')
-  })
-
-  test('should return an action type of "REPORTS_REQUESTED"', () => {
-    expect(requestReports().type).toBe('REPORTS_REQUESTED')
-  })
-
-})
-
 describe('receiveReports() ', () => {
 
   test('should return an object', () => {
@@ -115,21 +103,6 @@ describe('receiveReports() ', () => {
     expect(receiveReports('test').reports).toBe('test')
   })
 
-})
-
-describe('reportError() ', () => {
-
-  test('should return an object', () => {
-    expect(typeof(reportError())).toBe('object')
-  })
-
-  test('should return an action type of "REPORTS_ERRORED"', () => {
-    expect(reportError().type).toBe('REPORTS_ERRORED')
-  })
-
-  test('should return any error passed in as a parameter', () => {
-    expect(reportError('test').error).toBe('test')
-  })
 })
 
 describe( 'getReports() ', () => {
@@ -190,19 +163,25 @@ describe('setUserData() ', () => {
     expect(setUserData('test').type).toBe('SET_USER_DATA')
   })
 
-  test('should return a first name, last name, email, and password with a match to verify password', () => {
+  test('should return `team`, `displayName`, `email`, `uid`, `admin`, and `approved` ', () => {
 
     const output = {
-      email: 'things',
-      password: 'password1',
-      verified: 'password1',
+      team: 'test',
+      displayName: 'test',
+      email: 'test',
+      uid: 'test',
+      admin: true,
+      approved: true,
     }
 
     const result = {
       type: 'SET_USER_DATA',
-      email: 'things',
-      password: 'password1',
-      verified: 'password1',
+      team: 'test',
+      displayName: 'test',
+      email: 'test',
+      uid: 'test',
+      admin: true,
+      approved: true,
     }
 
     expect(setUserData(output)).toEqual(result)
@@ -231,17 +210,6 @@ describe('clearUserData() ', () => {
   })
 })
 
-describe('requestKeywords() ', () => {
-
-  test('should return an object', () => {
-    expect(typeof(requestKeywords(undefined))).toBe('object')
-  })
-
-  test('should return an action type of "REQUEST_KEYWORDS"', () => {
-    expect(requestKeywords().type).toBe('REQUEST_KEYWORDS')
-  })
-})
-
 describe('receiveKeywords() ', () => {
 
   test('should return an object', () => {
@@ -257,50 +225,10 @@ describe('receiveKeywords() ', () => {
   })
 })
 
-describe('keywordError() ', () => {
-
-  test('should return an object', () => {
-    expect(typeof(keywordError())).toBe('object')
-  })
-
-  test('should return an action type of "KEYWORDS_ERRORED"', () => {
-    expect(keywordError().type).toBe('KEYWORDS_ERRORED')
-  })
-
-  test('should return any error passed in as a parameter', () => {
-    expect(keywordError('test').error).toBe('test')
-  })
-})
-
 describe( 'getKeywords() ', () => {
 
   test('should return a function', () => {
     expect(typeof(getKeywords('demo'))).toBe('function')
-  })
-})
-
-describe('setAuthState() ', () => {
-
-  test('should return an object', () => {
-    const actual = typeof(setAuthState(undefined))
-    const expected = 'object'
-    expect(actual).toBe(expected)
-  })
-
-  test('should return an object type of "SET_AUTH_STATE"', () => {
-    const actual = setAuthState(undefined).type
-    const expected = 'SET_AUTH_STATE'
-    expect(actual).toBe(expected)
-  })
-
-  test('should return a authState value passed in', () => {
-    const authState = 'dicks'
-    const actual = setAuthState(authState)
-    const expected = {
-      type: 'SET_AUTH_STATE',
-      authState: 'dicks',
-    }
-    expect(actual).toEqual(expected)
   })
 })
 

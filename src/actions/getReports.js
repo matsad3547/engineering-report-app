@@ -5,14 +5,14 @@ import {  receiveReports,
           setDataError,
         } from './index'
 
-
 import database from '../utils/firebase'
 
-export const getReports = team => {
+export const getReports = () => {
 
   return (dispatch, getState) => {
     dispatch(setDataProperty({loaded: false}))
     dispatch(setDataProperty({loading: true}))
+    const { team } = getState().user
     return database.ref(`teams/${team}/test reports`)
             .once('value', snap => {
       const reports = snap.val()
@@ -28,10 +28,10 @@ export const getReports = team => {
   }
 }
 
-export const getFilteredReports = (team, n = 10) => {
+export const getFilteredReports = (n = 10) => {
 
   return (dispatch, getState) => {
-    const { uid, admin } = getState().user
+    const { team, uid, admin } = getState().user
     dispatch(setDataProperty({loaded: false}))
     dispatch(setDataProperty({loading: true}))
     if (team === 'demo' || admin) {

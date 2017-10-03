@@ -1,12 +1,14 @@
 import { receiveKeywords, setDataProperty, setDataError } from './index'
 import database from '../utils/firebase'
 
-export const getKeywords = team => {
+export const getKeywords = () => {
 
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { team } = getState().user
     dispatch(setDataProperty({loaded: false}))
     dispatch(setDataProperty({loading: true}))
-    return database.ref(`teams/${team}/keywords`).once('value', snap => {
+    return database.ref(`teams/${team}/keywords`)
+            .once('value', snap => {
       const keywords = snap.val()
       dispatch(receiveKeywords(keywords))
       dispatch(setDataProperty({loaded: true}))

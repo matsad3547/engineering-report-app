@@ -83,7 +83,13 @@ export const notes = (state = '', { type, string }) => {
 
 export const reportConfig = (state = initReportConfig, action) => {
 
-  const { type, model, shortName, configNum, ballast } = action
+  const { type,
+          model,
+          shortName,
+          configNum,
+          ballast
+        } = action
+
   switch (type) {
     case 'SET_NEW_REPORT_CONFIG':
       return {
@@ -193,16 +199,6 @@ export const user = (state = initUserState, action) => {
   }
 }
 
-// export const authState = (state = '', { type, authState }) => {
-//   switch (type) {
-//     case 'SET_AUTH_STATE':
-//       return authState
-//
-//     default:
-//       return state
-//   }
-// }
-
 export const data = (state = initDataState, action) => {
   const key = Object.keys(action)
                 .filter( k => k !== 'type')[0]
@@ -226,13 +222,13 @@ export const data = (state = initDataState, action) => {
 }
 
 export const combinedReducers = combineReducers({
-  reportConfig,
-  metricValues,
-  notes,
-  previousMetricValues,
-  reports,
-  queued,
-  user,
-  data,
-  routing: routerReducer,
+    reportConfig,
+    metricValues,
+    notes,
+    previousMetricValues,
+    reports,
+    queued,
+    user,
+    data,
+    routing: routerReducer,
   })

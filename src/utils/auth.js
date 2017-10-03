@@ -2,7 +2,7 @@ import database, { auth }  from './firebase'
 import store from '../config/store'
 import { getReports, getFilteredReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
-import { setAuthState, setUserData, clearUserData } from '../actions/'
+import { setUserData, clearUserData } from '../actions/'
 
 export const signIn = (email, password) => {
   auth.signInWithEmailAndPassword(email, password)
@@ -30,11 +30,10 @@ export const loggedIn = () => {
       database.ref(`users/${uid}`)
         .once('value', snap => {
         const {
+          team,
           admin,
           approved,
         } = snap.val()
-        team = snap.val().team
-        console.log('team:', team);
 
         dispatch(setUserData({
             team,
@@ -45,20 +44,21 @@ export const loggedIn = () => {
             approved,
           })
         )
-        dispatch(getReports(team))
-        dispatch(getFilteredReports(team))
-        dispatch(getKeywords(team))
       })
-
-      // team = 'Test Team'
+      .then( () => {
+        dispatch(getReports())
+        dispatch(getFilteredReports(team))
+        dispatch(getKeywords())
+      })
     }
     else {
-      team = 'demo'
+      dispatch(setUserData({
+          team: 'demo',
+        })
+      )
+      dispatch(getReports())
+      dispatch(getKeywords())
     }
-    dispatch(getReports(team))
-    dispatch(getFilteredReports(team))
-    dispatch(getKeywords(team))
-    // dispatch(setAuthState(team))
   })
 }
 

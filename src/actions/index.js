@@ -24,18 +24,9 @@ export const saveReport = output => ({
   output,
 })
 
-export const requestReports = () => ({
-  type: 'REPORTS_REQUESTED',
-})
-
 export const receiveReports = reports => ({
   type: 'REPORTS_RECEIVED',
   reports,
-})
-
-export const reportError = error => ({
-  type: 'REPORTS_ERRORED',
-  error,
 })
 
 export const queueReport = report => ({
@@ -52,20 +43,20 @@ export const clearQueue = () => ({
   type: 'CLEAR_QUEUE',
 })
 
-export const setUserData = ({ email,
-                              password,
-                              verified,
-                              uid,
+export const setUserData = ({ team,
                               displayName,
-                              team,
+                              email,
+                              uid,
+                              admin,
+                              approved,
                             }) => ({
   type: 'SET_USER_DATA',
-  email,
-  password,
-  verified,
-  uid,
-  displayName,
   team,
+  displayName,
+  email,
+  uid,
+  admin,
+  approved,
 })
 
 export const setUserProperty = (property) => {
@@ -80,23 +71,9 @@ export const clearUserData = () => ({
   type: 'CLEAR_USER_DATA',
 })
 
-export const requestKeywords = () => ({
-  type: 'REQUEST_KEYWORDS',
-})
-
 export const receiveKeywords = keywords => ({
   type: 'KEYWORDS_RECEIVED',
   keywords,
-})
-
-export const keywordError = error => ({
-  type: 'KEYWORDS_ERRORED',
-  error,
-})
-
-export const setAuthState = authState => ({
-  type: 'SET_AUTH_STATE',
-  authState,
 })
 
 export const setDataProperty = property => {
