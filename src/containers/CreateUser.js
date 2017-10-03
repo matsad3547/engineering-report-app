@@ -52,7 +52,6 @@ const CreateUser = ({ email,
     e.preventDefault()
     if (!userReady) {
       createUser()
-      // clearUs erData()
       browserHistory.goBack()
     }
   }

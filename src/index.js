@@ -15,7 +15,7 @@ import routes from './config/routes'
 import { muiTheme } from './config/'
 
 
-loggedIn()
+loggedIn() //TODO get rid of this silliness
 injectTapEventPlugin()
 
 const history = syncHistoryWithStore(browserHistory, store)

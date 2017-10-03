@@ -50,14 +50,18 @@ export const loggedIn = () => {
         dispatch(getFilteredReports(team))
         dispatch(getKeywords())
       })
+      console.log('at user');
     }
     else {
       dispatch(setUserData({
           team: 'demo',
+          email: '',
+          displayName: '',
         })
       )
       dispatch(getReports())
       dispatch(getKeywords())
+      console.log('at else');
     }
   })
 }
