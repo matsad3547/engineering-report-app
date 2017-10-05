@@ -16,6 +16,8 @@ const CreateUser = ({ email,
                       password,
                       verifyPassword,
                       teams,
+                      loading,
+                      error,
                       userDispatch,
                       setUserProperty,
                       clearUserData,
@@ -146,6 +148,11 @@ const mapStateToProps = state => {
           teams,
         } = state.user
 
+  const {
+    loading,
+    error,
+  } = state.data
+
   return {
     email,
     displayName,
@@ -153,6 +160,8 @@ const mapStateToProps = state => {
     password,
     verifyPassword,
     teams,
+    loading,
+    error,
   }
 }
 

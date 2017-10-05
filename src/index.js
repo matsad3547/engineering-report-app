@@ -9,12 +9,15 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import './index.css'
 
-
 import store from './config/store'
 import { routes } from './config/routes'
 import { muiTheme } from './config/'
 
+import { setData } from './utils/auth'
+
 injectTapEventPlugin()
+
+store.dispatch(setData())
 
 const history = syncHistoryWithStore(browserHistory, store)
 

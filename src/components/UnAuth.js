@@ -1,14 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { connect } from 'react-redux'
 
 import RaisedButton from 'material-ui/RaisedButton'
 
 import { setData } from '../utils/auth'
 
-const UnAuth = ({ dispatch }) => {
-
-  dispatch(setData())
+const UnAuth = () => {
 
   const style = {
     margin: 12,
@@ -36,4 +33,4 @@ const UnAuth = ({ dispatch }) => {
   )
 }
 
-export default connect()(UnAuth)
+export default UnAuth
