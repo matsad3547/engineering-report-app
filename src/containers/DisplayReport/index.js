@@ -64,22 +64,15 @@ const mapStateToProps = (state, ownProps) => {
 
   const report = ownProps.params.report
 
-  if (state.reports.status === 'received') {
+  const reportVals = state.reports.reports[report]
 
-    const reportVals = state.reports.reports[report]
-    console.log('report at mstp:',report, '\nreportVals:', reportVals);
-
-    return {
-      report,
-      config: reportVals.config,
-      metricValues: reportVals.metricValues,
-      notes: reportVals.notes,
-      displayName: state.user.displayName,
-    }
+  return {
+    report,
+    config: reportVals.config,
+    metricValues: reportVals.metricValues,
+    notes: reportVals.notes,
+    displayName: state.user.displayName,
   }
-
-  return {}
-
 }
 
 export default connect(mapStateToProps)(DisplayReport)
