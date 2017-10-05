@@ -40,7 +40,7 @@ export const getFilteredReports = (n = 10) => {
               .once('value', snap => {
         const reportsFiltered = snap.val()
         console.log('reports at get reports:', reportsFiltered, '\nadmin?', admin, '\nuid:', uid, '\nteam:', team)
-        // dispatch(receiveReports(reports))
+        // dispatch(receiveReports(reports, n))
         // dispatch(setDataProperty({loading: false}))
         // dispatch(setDataProperty({loaded: true}))
       })

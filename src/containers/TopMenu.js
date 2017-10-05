@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link, browserHistory } from 'react-router'
+import { Link } from 'react-router'
+import { connect } from 'react-redux'
 
 import { signOut } from '../utils/auth'
 import { muiTheme } from '../config/'
@@ -9,12 +10,11 @@ import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
 
-const TopMenu = () => {
+const TopMenu = ({ dispatch }) => {
 
   const onClick = e => {
     e.preventDefault()
-    signOut()
-    browserHistory.push('/')
+    dispatch(signOut())
   }
 
   const styles={
@@ -58,4 +58,4 @@ const TopMenu = () => {
   )
 }
 
-export default TopMenu
+export default connect()(TopMenu)

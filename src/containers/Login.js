@@ -11,6 +11,7 @@ const Login = ({  email,
                   password,
                   setUserProperty,
                   clearUserData,
+                  signIn,
                 }) => {
 
   const onChange = {
@@ -90,6 +91,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
   clearUserData: () => dispatch(clearUserData()),
+  signIn: (email, password) => dispatch(signIn(email, password)),
 })
 
 

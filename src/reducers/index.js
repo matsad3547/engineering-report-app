@@ -11,9 +11,8 @@ const initReportConfig = {
 }
 
 const initReports = {
-  status: 'not requested',
+  n: 0,
   reports: [],
-  error: '',
 }
 
 const initUserState = {
@@ -117,21 +116,12 @@ export const previousMetricValues = (state = [], { type, output, reports }) => {
   }
 }
 
-export const reports = (state = initReports, { type, reports, error }) => {
+export const reports = (state = initReports, { type, reports, n }) => {
   switch (type) {
-    case 'REPORTS_REQUESTED':
-    return {
-      status: 'requested',
-    }
     case 'REPORTS_RECEIVED':
     return {
-      status: 'received',
+      n,
       reports,
-    }
-    case 'REPORTS_ERRORED':
-    return {
-      status: 'errored',
-      error,
     }
     default:
     return state

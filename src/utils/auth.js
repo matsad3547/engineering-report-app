@@ -1,15 +1,23 @@
 import database, { auth }  from './firebase'
-import store from '../config/store'
+import { browserHistory } from 'react-router'
+
 import { getReports, getFilteredReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
-import { setUserData, clearUserData } from '../actions/'
+import { setUserData, clearUserData, setDataError } from '../actions/'
 
 export const signIn = (email, password) => {
-  auth.signInWithEmailAndPassword(email, password)
-  //TODO get auth token
-  //TODO load auth token into local storage
-  // localStorage.setItem('token', fbToken)
-  loggedIn()
+
+  return dispatch => {
+    auth.signInWithEmailAndPassword(email, password)
+    .then( jwt => {
+      localStorage.setItem('jwt', JSON.stringify(jwt))
+      dispatch(setData())
+    })
+    .catch( err => {
+      console.error('There was a error signing in:', err.message)
+      dispatch(setDataError({signInErr: err}))
+    })
+  }
 }
 
 export const checkAuthStatus = () => {
@@ -18,23 +26,23 @@ export const checkAuthStatus = () => {
   //TODO check auth status
 }
 
-export const loggedIn = () => {
-  let team
-  const { dispatch } = store
-  auth.onAuthStateChanged( user => {
-    if (user) {
-      const { displayName,
-              email,
-              uid,
-            } = user
+export const setData = () => {
+  return dispatch => {
+    const token = localStorage.getItem('jwt')
+    if (token){
+      const {
+        displayName,
+        email,
+        uid,
+      } = JSON.parse(token)
+
       database.ref(`users/${uid}`)
-        .once('value', snap => {
+      .once('value', snap => {
         const {
           team,
           admin,
           approved,
         } = snap.val()
-
         dispatch(setUserData({
             team,
             displayName,
@@ -47,55 +55,67 @@ export const loggedIn = () => {
       })
       .then( () => {
         dispatch(getReports())
-        dispatch(getFilteredReports(team))
+        dispatch(getFilteredReports())
         dispatch(getKeywords())
       })
-      console.log('at user');
+      .catch( err => {
+        console.error('There was a error retrieving your user data:', err.message)
+        dispatch(setDataError({userErr: err}))
+      })
     }
     else {
       dispatch(setUserData({
-          team: 'demo',
-          email: '',
-          displayName: '',
-        })
-      )
+            team: 'demo',
+            email: '',
+            displayName: '',
+          })
+        )
       dispatch(getReports())
       dispatch(getKeywords())
-      console.log('at else');
     }
-  })
+  }
 }
 
 export const signOut = () => {
-  localStorage.setItem('token', null)
-  auth.signOut()
+  return dispatch => {
+    localStorage.removeItem('jwt')
+    auth.signOut()
+    .then( () => browserHistory.push('/') )
+    .catch( err => {
+      console.error('There was a error signing out:', err.message)
+      dispatch(setDataError({signOutErr: err}))
+    })
+  }
 }
 
 export const createUser = () => {
 
-  const { dispatch, getState } = store
+  return (dispatch, getState) => {
+    const { displayName,
+      email,
+      password,
+      team,
+    } = getState().user
 
-  const { displayName,
-          email,
-          password,
-          team,
-        } = getState().user
-
-  auth.createUserWithEmailAndPassword(email, password)
+    auth.createUserWithEmailAndPassword(email, password)
     .then( user => {
       user.updateProfile({
         displayName,
       })
       const { uid } = user
-      let userInfo = {}
+      const userInfo = {}
       userInfo[`users/${uid}`] = {
         team,
         admin: false,
         approved: false,
       }
       database.ref()
-        .update(userInfo)
+      .update(userInfo)
       dispatch(clearUserData())
     })
-    .catch( err => console.error('Oops!', err.message) )
+    .catch( err => {
+      console.error('There was a error creating an account:', err.message)
+      dispatch(setDataError({signOutErr: err}))
+    })
+  }
 }

@@ -153,19 +153,20 @@ describe('reports() ', () => {
     expect(typeof(reports(undefined, 'test'))).toBe('object')
   })
 
-  test('should return a status of "requested" given an action type of "REPORTS_REQUESTED"', () => {
+  // test('should return a status of "requested" given an action type of "REPORTS_REQUESTED"', () => {
+  //
+  //   const action = { type: 'REPORTS_REQUESTED' }
+  //
+  //   expect(reports(undefined, action).status).toBe('requested')
+  // })
 
-    const action = { type: 'REPORTS_REQUESTED' }
-
-    expect(reports(undefined, action).status).toBe('requested')
-  })
-
-  test('should return a status of "received" given an action type of "REPORTS_RECEIVED"', () => {
-
-    const action = { type: 'REPORTS_RECEIVED' }
-
-    expect(reports(undefined, action).status).toBe('received')
-  })
+  // test('should return a status of "received" given an action type of "REPORTS_RECEIVED"', () => {
+  //
+  //   const action = { type: 'REPORTS_RECEIVED' }
+  //   const actual = reports(undefined, action)
+  //
+  //   expect(reports(undefined, action).status).toBe('received')
+  // })
 
   test('should return reports passed in as a parameter an action type of "REPORTS_RECEIVED"', () => {
 
@@ -173,31 +174,49 @@ describe('reports() ', () => {
       type: 'REPORTS_RECEIVED',
       reports: ['test'],
     }
+    const actual = reports(undefined, action).reports
+    const expected = ['test']
 
-    expect(reports(undefined, action).reports).toEqual(['test'])
+    expect(actual).toEqual(expected)
   })
 
-  test('should return an error passed in as a parameter an action type of "REPORT_ERRORED"', () => {
+  test('should return the number of reports passed in as a parameter an action type of "REPORTS_RECEIVED"', () => {
 
     const action = {
-      type: 'REPORTS_ERRORED',
-      error: 'test error',
+      type: 'REPORTS_RECEIVED',
+      reports: ['test'],
+      n: 10,
+    }
+    const actual = reports(undefined, action)
+    const expected = {
+      reports: ['test'],
+      n: 10,
     }
 
-    expect(reports(undefined, action).error).toEqual(
-    'test error')
+    expect(actual).toEqual(expected)
   })
 
-  test('should return an status of "erroed" passed when passed an action type of "REPORTS_ERRORED"', () => {
+  // test('should return an error passed in as a parameter an action type of "REPORT_ERRORED"', () => {
+  //
+  //   const action = {
+  //     type: 'REPORTS_ERRORED',
+  //     error: 'test error',
+  //   }
+  //
+  //   expect(reports(undefined, action).error).toEqual(
+  //   'test error')
+  // })
 
-    const action = {
-      type: 'REPORTS_ERRORED',
-      error: 'test error',
-    }
-
-    expect(reports(undefined, action).status).toEqual(
-    'errored')
-  })
+  // test('should return an status of "erroed" passed when passed an action type of "REPORTS_ERRORED"', () => {
+  //
+  //   const action = {
+  //     type: 'REPORTS_ERRORED',
+  //     error: 'test error',
+  //   }
+  //
+  //   expect(reports(undefined, action).status).toEqual(
+  //   'errored')
+  // })
 
 })
 
@@ -339,26 +358,6 @@ describe('user() ', () => {
     expect(user(state, action)).toEqual(result)
   })
 })
-
-// describe('authState() ', () => {
-//
-//   test('should output an empty string by default', () => {
-//     const actual = authState(undefined, 'test')
-//     const expected = ''
-//     expect(actual).toBe(expected)
-//   })
-//
-//   test('should return a string passed in as an action', () => {
-//     const state = ''
-//     const action = {
-//       type: 'SET_AUTH_STATE',
-//       authState: 'test'
-//     }
-//     const actual = authState(undefined, action)
-//     const expected = 'test'
-//     expect(actual).toBe(expected)
-//   })
-// })
 
 describe('resetMetricState() ', () => {
 

@@ -67,6 +67,7 @@ const mapStateToProps = (state, ownProps) => {
   if (state.reports.status === 'received') {
 
     const reportVals = state.reports.reports[report]
+    console.log('report at mstp:',report, '\nreportVals:', reportVals);
 
     return {
       report,

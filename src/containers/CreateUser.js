@@ -19,6 +19,7 @@ const CreateUser = ({ email,
                       userDispatch,
                       setUserProperty,
                       clearUserData,
+                      getTeams,
                     }) => {
 
   getTeams()
@@ -157,6 +158,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
+  getTeams: () => dispatch(getTeams()),
   // clearUserData: () => dispatch(clearUserData()),
   // getTeams: () => dispatch(getTeams()),
 })

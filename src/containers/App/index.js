@@ -5,8 +5,9 @@ import SwipeableViews from 'react-swipeable-views'
 import './App.css'
 
 import HomeButton from '../../components/HomeButton'
-import TopMenu from '../../components/TopMenu'
 import TabMenu from '../../components/TabMenu'
+
+import TopMenu from '../../containers/TopMenu'
 
 const App = ({  team,
                 children,
