@@ -1,8 +1,9 @@
 import database, { auth }  from './firebase'
 import { browserHistory } from 'react-router'
 
-import { getReports, getFilteredReports } from '../actions/getReports'
-import { getKeywords } from '../actions/getKeywords'
+import { getReports } from '../actions/getReports'
+import { getTeams } from '../actions/getTeams'
+import { getKeywords} from '../actions/getKeywords'
 import { setUserData, clearUserData, setDataError } from '../actions/'
 
 export const signIn = (email, password) => {
@@ -55,7 +56,6 @@ export const setData = () => {
       })
       .then( () => {
         dispatch(getReports())
-        dispatch(getFilteredReports())
         dispatch(getKeywords())
       })
       .catch( err => {
@@ -64,15 +64,16 @@ export const setData = () => {
       })
     }
     else {
-      dispatch(setUserData({
-            team: 'demo',
-            email: '',
-            displayName: '',
-          })
-        )
+      // dispatch(setUserData({
+      //       team: 'demo',
+      //       email: '',
+      //       displayName: '',
+      //     })
+      //   )
       dispatch(getReports())
       dispatch(getKeywords())
     }
+    dispatch(getTeams())
   }
 }
 
@@ -92,10 +93,10 @@ export const createUser = () => {
 
   return (dispatch, getState) => {
     const { displayName,
-      email,
-      password,
-      team,
-    } = getState().user
+            email,
+            password,
+            team,
+          } = getState().user
 
     auth.createUserWithEmailAndPassword(email, password)
     .then( user => {
@@ -111,7 +112,10 @@ export const createUser = () => {
       }
       database.ref()
       .update(userInfo)
+    })
+    .then( () => {
       dispatch(clearUserData())
+      auth.signOut()
     })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)

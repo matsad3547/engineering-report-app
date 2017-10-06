@@ -16,7 +16,7 @@ const initReports = {
 }
 
 const initUserState = {
-  team: '',
+  team: 'demo',
   displayName: '',
   email: '',
   uid: null,
@@ -28,7 +28,7 @@ const initUserState = {
 }
 
 const initDataState = {
-  loading: false,
+  dataIsFresh: false,
   loaded: false,
   error: {},
 }
@@ -105,9 +105,11 @@ export const reportConfig = (state = initReportConfig, action) => {
 }
 
 export const previousMetricValues = (state = [], { type, output, reports }) => {
-  switch (type) {
-    case 'REPORTS_RECEIVED':
+
+  switch (true) {
+    case type === 'REPORTS_RECEIVED' && reports:
     const lastReportKey = Object.keys(reports)
+                            .map( k => parseInt(k, 10) )
                             .sort( (a, b) => b - a )[0]
       return Object.keys(reports[lastReportKey].metricValues)
         .map( k => reports[lastReportKey].metricValues[k].val)
@@ -175,7 +177,7 @@ export const user = (state = initUserState, action) => {
     case 'CLEAR_USER_DATA':
       return {
         ...state,
-        team: '',
+        team: 'demo',
         displayName: '',
         email: '',
         uid: null,

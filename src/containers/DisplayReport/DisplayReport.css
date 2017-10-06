@@ -23,3 +23,7 @@
 .reportDisplay h1, h2, h3, h4 {
   text-align: center;
 }
+
+.author {
+  margin: 0 0 .5em 1.9em;
+}

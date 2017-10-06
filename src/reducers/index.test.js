@@ -173,6 +173,7 @@ describe('reports() ', () => {
     const action = {
       type: 'REPORTS_RECEIVED',
       reports: ['test'],
+      n: 10,
     }
     const actual = reports(undefined, action).reports
     const expected = ['test']
@@ -195,29 +196,6 @@ describe('reports() ', () => {
 
     expect(actual).toEqual(expected)
   })
-
-  // test('should return an error passed in as a parameter an action type of "REPORT_ERRORED"', () => {
-  //
-  //   const action = {
-  //     type: 'REPORTS_ERRORED',
-  //     error: 'test error',
-  //   }
-  //
-  //   expect(reports(undefined, action).error).toEqual(
-  //   'test error')
-  // })
-
-  // test('should return an status of "erroed" passed when passed an action type of "REPORTS_ERRORED"', () => {
-  //
-  //   const action = {
-  //     type: 'REPORTS_ERRORED',
-  //     error: 'test error',
-  //   }
-  //
-  //   expect(reports(undefined, action).status).toEqual(
-  //   'errored')
-  // })
-
 })
 
 describe('queued() ', () => {
@@ -258,7 +236,7 @@ describe('user() ', () => {
   test('should return an initial object by default', () => {
 
     const result = {
-      team: '',
+      team: 'demo',
       displayName: '',
       email: '',
       uid: null,
@@ -346,7 +324,7 @@ describe('user() ', () => {
       approved: true,
     }
     const result = {
-      team: '',
+      team: 'demo',
       displayName: '',
       email: '',
       uid: null,
@@ -409,7 +387,7 @@ describe('data() ', () => {
   test('should return an initial data state object by default', () => {
     const actual = data(undefined, 'test')
     const expected = {
-      loading: false,
+      dataIsFresh: false,
       loaded: false,
       error: {},
     }
@@ -422,14 +400,14 @@ describe('data() ', () => {
       testErr: 'test',
     }
     const state = {
+      dataIsFresh: false,
       loading: false,
-      loaded: false,
       error: {},
     }
     const actual = data(state, action)
     const expected = {
+        dataIsFresh: false,
         loading: false,
-        loaded: false,
         error: {
           testErr: 'test',
         },
@@ -443,16 +421,16 @@ describe('data() ', () => {
       test2Err: 'test2',
     }
     const state = {
+      dataIsFresh: false,
       loading: false,
-      loaded: false,
       error: {
         testErr: 'test',
       },
     }
     const actual = data(state, action)
     const expected = {
+        dataIsFresh: false,
         loading: false,
-        loaded: false,
         error: {
           testErr: 'test',
           test2Err: 'test2',
@@ -467,14 +445,14 @@ describe('data() ', () => {
       loading: true,
     }
     const state = {
+      dataIsFresh: false,
       loading: false,
-      loaded: false,
       error: {},
     }
     const actual = data(state, action)
     const expected = {
+      dataIsFresh: false,
       loading: true,
-      loaded: false,
       error: {},
     }
     expect(actual).toEqual(expected)

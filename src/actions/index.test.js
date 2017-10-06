@@ -99,8 +99,14 @@ describe('receiveReports() ', () => {
     expect(receiveReports().type).toBe('REPORTS_RECEIVED')
   })
 
-  test('should return a report variable passed into it', () => {
-    expect(receiveReports('test').reports).toBe('test')
+  test('should return a report variable passed into it and number', () => {
+    const actual = receiveReports('test', 10)
+    const expected = {
+      type: 'REPORTS_RECEIVED',
+      reports: 'test',
+      n: 10,
+    }
+    expect(actual).toEqual(expected)
   })
 
 })

@@ -3,8 +3,6 @@ import { Link } from 'react-router'
 
 import RaisedButton from 'material-ui/RaisedButton'
 
-import { setData } from '../utils/auth'
-
 const UnAuth = () => {
 
   const style = {

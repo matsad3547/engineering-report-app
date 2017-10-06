@@ -6,7 +6,6 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 
 import { setUserProperty } from '../actions/'
-import { getTeams } from '../actions/getReports'
 import { createUser } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
@@ -18,15 +17,11 @@ const CreateUser = ({ email,
                       teams,
                       loading,
                       error,
-                      userDispatch,
                       setUserProperty,
-                      clearUserData,
-                      getTeams,
+                      createUser,
                     }) => {
 
-  getTeams()
-
-  const userReady = (verifyPassword === password && password.length >= 6) ? false : true
+  const userReady = verifyPassword === password && password.length >= 6 ? true : false
 
   const onChange = {
     team(e, k, p) {
@@ -53,7 +48,7 @@ const CreateUser = ({ email,
 
   const onClick = e => {
     e.preventDefault()
-    if (!userReady) {
+    if (userReady) {
       createUser()
       browserHistory.goBack()
     }
@@ -126,7 +121,7 @@ const CreateUser = ({ email,
           >Please enter a password greater than 6 characters long</p>
 
         <RaisedButton
-          disabled={userReady}
+          disabled={!userReady}
           label="Create User"
           style={styles.button}
           className="reportButton"
@@ -148,10 +143,7 @@ const mapStateToProps = state => {
           teams,
         } = state.user
 
-  const {
-    loading,
-    error,
-  } = state.data
+  const { loading, error, } = state.data
 
   return {
     email,
@@ -167,17 +159,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
-  getTeams: () => dispatch(getTeams()),
-  // clearUserData: () => dispatch(clearUserData()),
-  // getTeams: () => dispatch(getTeams()),
+  createUser: () => dispatch(createUser()),
 })
-
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(CreateUser)
-//
-// <MenuItem primaryText={2} label={2} value={2}/>
-// <MenuItem primaryText={3} label={3} value={3}/>
-// <MenuItem primaryText={4} label={4} value={4}/>

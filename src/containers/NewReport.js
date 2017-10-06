@@ -22,7 +22,8 @@ const NewReport = ({  config,
                       getKeywords
                     }) => {
 
-  const keys = Object.keys(metricValues).sort( (a, b) => a - b)
+  const keys = Object.keys(metricValues)
+                .sort( (a, b) => a - b)
 
   const submitReport = e => {
 
@@ -39,8 +40,7 @@ const NewReport = ({  config,
     database.ref()
       .update(updates)
     saveReport()
-    getReports(team)
-    // getKeywords(team)
+    getReports()
   }
 
   const styles = {

@@ -19,16 +19,21 @@ const DisplayReport = ({  report,
     return(
       <div className="reportDisplay">
         <h3>Report From {date(report)}</h3>
-        <h4>Author</h4>
-        {displayName ? displayName : '<name is not available>'}
-        <br/>
+
+        <table className="author">
+          <tr>
+            <td>Author:</td>
+            <td>{displayName ? displayName : '<name is not available>'}</td>
+          </tr>
+        </table>
         <hr/>
         <h4>Configuration Values</h4>
         <table>
           <tbody>
             {configVals.map( (val, i) =>
-              <tr key={i+'a'}><td key={i+'b'}>{val}:</td>
-              <td key={i+'c'}
+              <tr key={i+'a'}>
+                <td key={i+'b'}>{val}:</td>
+                <td key={i+'c'}
                 className="val">{config[val]}</td>
               </tr>  )}
           </tbody>

@@ -24,9 +24,10 @@ export const saveReport = output => ({
   output,
 })
 
-export const receiveReports = reports => ({
+export const receiveReports = (reports, n) => ({
   type: 'REPORTS_RECEIVED',
   reports,
+  n,
 })
 
 export const queueReport = report => ({
