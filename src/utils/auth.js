@@ -64,12 +64,6 @@ export const setData = () => {
       })
     }
     else {
-      // dispatch(setUserData({
-      //       team: 'demo',
-      //       email: '',
-      //       displayName: '',
-      //     })
-      //   )
       dispatch(getReports())
       dispatch(getKeywords())
     }

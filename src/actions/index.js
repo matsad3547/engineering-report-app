@@ -24,10 +24,11 @@ export const saveReport = output => ({
   output,
 })
 
-export const receiveReports = (reports, n) => ({
+export const receiveReports = (reports, n, allReports) => ({
   type: 'REPORTS_RECEIVED',
   reports,
   n,
+  allReports,
 })
 
 export const queueReport = report => ({
@@ -90,5 +91,13 @@ export const setDataError = error => {
   return {
     type: 'SET_DATA_ERROR',
     [key]: error[key],
+  }
+}
+
+export const setReportProperty = property => {
+  const key = Object.keys(property)[0]
+  return {
+    type: 'SET_REPORT_PROPERTY',
+    [key]: property[key],
   }
 }

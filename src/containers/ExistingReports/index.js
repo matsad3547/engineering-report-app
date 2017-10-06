@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
-
+import Checkbox from 'material-ui/Checkbox'
 
 import { queueReport, unqueueReport, clearQueue } from '../../actions/'
 import { getReports } from '../../actions/getReports'
@@ -11,18 +11,16 @@ import { downloadQueued } from '../../utils/'
 
 const ExistingReports = ({  reports,
                             n,
-                            status,
+                            allReports,
                             queued,
                             loading,
                             error,
+                            admin,
                             queueReport,
                             unqueueReport,
                             clearQueue,
                             getReports,
                           }) => {
-
-  // const firstReport = 0
-  // const lastReport = 10
 
   const download = e => {
     e.preventDefault()
@@ -32,7 +30,20 @@ const ExistingReports = ({  reports,
 
   const getNextReports = e => {
     e.preventDefault()
-    getReports(n + 10)
+    getReports(n + 10, allReports)
+  }
+
+  const onCheck = (e, i) => {
+    e.preventDefault()
+    if (allReports) {
+      console.log('all reports is true');
+      getReports(n, false)
+    }
+
+    else {
+      console.log('at else');
+      getReports(n, true)
+    }
   }
 
   const styles = {
@@ -40,9 +51,18 @@ const ExistingReports = ({  reports,
       height: 50,
       width: 250,
       margin: 10,
-    }
+    },
+    checkbox: {
+      marginBottom: 5,
+    },
+    label: {
+      color: 'white',
+    },
+    checked: {
+      fill: 'white'
+    },
   }
-  console.log('reports:', reports);
+
 
   if (loading) {
     return (
@@ -67,13 +87,19 @@ const ExistingReports = ({  reports,
     const reportKeys = Object.keys(reports)
                   .map( k => parseInt(k, 10) )
                   .sort( (a, b) => b - a )
-                  console.log('key length:', reportKeys.length);
-
-    // const selectedKeys = keys.slice(firstReport, lastReport)
 
     return (
       <div className="existingReports">
         <h3>Most Recent Reports</h3>
+        { admin ?
+          <Checkbox
+            label="Get reports from all team members"
+            labelStyle={styles.label}
+            style={styles.checkbox}
+            iconStyle={!allReports ? styles.checked : styles.unchecked}
+            checked={allReports}
+            onCheck={onCheck}
+            /> : '' }
         <div className="reportList">
           {reportKeys.map( (k, i) =>
             <ReportItem
@@ -104,14 +130,16 @@ const ExistingReports = ({  reports,
 
 const mapStateToProps = state => {
 
-  const { reports, queued, data } = state
+  const { reports, queued, data, user } = state
 
   return {
     reports: reports.reports,
     n: reports.n,
+    allReports: reports.allReports,
     queued,
     loading: data.loading,
     error: data.error,
+    admin: user.admin,
   }
 }
 
@@ -120,7 +148,7 @@ const mapDispatchToProps = dispatch => {
     queueReport: report => dispatch(queueReport(report)),
     unqueueReport: index => dispatch(unqueueReport(index)),
     clearQueue: () => dispatch(clearQueue()),
-    getReports: n => dispatch(getReports(n)),
+    getReports: (n, allReports) => dispatch(getReports(n, allReports)),
   }
 }
 

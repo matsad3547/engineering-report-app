@@ -3,19 +3,15 @@ import {
   saveReportNotes,
   setReportConfig,
   saveReport,
-  requestReports,
   receiveReports,
-  reportError,
   queueReport,
   unqueueReport,
+  setReportProperty,
   clearQueue,
   setUserData,
   setUserProperty,
   clearUserData,
-  requestKeywords,
   receiveKeywords,
-  keywordError,
-  setAuthState,
   resetMetricState,
   setDataProperty,
   setDataError,
@@ -100,15 +96,39 @@ describe('receiveReports() ', () => {
   })
 
   test('should return a report variable passed into it and number', () => {
-    const actual = receiveReports('test', 10)
+    const actual = receiveReports('test', 10, false)
     const expected = {
       type: 'REPORTS_RECEIVED',
       reports: 'test',
       n: 10,
+      allReports: false,
     }
     expect(actual).toEqual(expected)
   })
+})
 
+describe('setReportProperty()', () => {
+
+  test('should return an object', () => {
+    const actual = typeof setReportProperty({test: 'test'})
+    const expected = 'object'
+    expect(actual).toEqual(expected)
+  })
+
+  test('should return a type of "SET_REPORT_PROPERTY"', () => {
+    const actual = setReportProperty({test: 'test'}).type
+    const expected = 'SET_REPORT_PROPERTY'
+    expect(actual).toEqual(expected)
+  })
+
+  test('should return an object of "SET_REPORT_PROPERTY" with a key of the property passed in', () => {
+    const actual = setReportProperty({test: 'test'})
+    const expected = {
+      type: 'SET_REPORT_PROPERTY',
+      test: 'test',
+    }
+    expect(actual).toEqual(expected)
+  })
 })
 
 describe( 'getReports() ', () => {

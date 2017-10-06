@@ -187,11 +187,13 @@ describe('reports() ', () => {
       type: 'REPORTS_RECEIVED',
       reports: ['test'],
       n: 10,
+      allReports: true,
     }
     const actual = reports(undefined, action)
     const expected = {
       reports: ['test'],
       n: 10,
+      allReports: true,
     }
 
     expect(actual).toEqual(expected)

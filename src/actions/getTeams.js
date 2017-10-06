@@ -14,7 +14,7 @@ export const getTeams = () => {
             .once('value', snap => {
       const teams = Object.keys(snap.val())
                       .filter( t => t !== 'demo' )
-      console.log('teams:', teams);
+      
       dispatch(setUserProperty({teams,}))
       dispatch(setDataProperty({loading: false}))
       dispatch(setDataProperty({dataIsFresh: true}))

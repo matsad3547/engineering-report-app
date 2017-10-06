@@ -40,9 +40,6 @@ const ReportItem = ({ config,
     checked: {
       fill: 'white'
     },
-    unchecked: {
-
-    }
   }
 
   return (

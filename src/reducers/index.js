@@ -13,6 +13,7 @@ const initReportConfig = {
 const initReports = {
   n: 0,
   reports: [],
+  allReports: false,
 }
 
 const initUserState = {
@@ -118,12 +119,13 @@ export const previousMetricValues = (state = [], { type, output, reports }) => {
   }
 }
 
-export const reports = (state = initReports, { type, reports, n }) => {
+export const reports = (state = initReports, { type, reports, n, allReports }) => {
   switch (type) {
     case 'REPORTS_RECEIVED':
     return {
       n,
       reports,
+      allReports,
     }
     default:
     return state
