@@ -36,12 +36,9 @@ const ExistingReports = ({  reports,
   const onCheck = (e, i) => {
     e.preventDefault()
     if (allReports) {
-      console.log('all reports is true');
       getReports(n, false)
     }
-
     else {
-      console.log('at else');
       getReports(n, true)
     }
   }
@@ -53,7 +50,7 @@ const ExistingReports = ({  reports,
       margin: 10,
     },
     checkbox: {
-      marginBottom: 5,
+      padding: '.5em',
     },
     label: {
       color: 'white',
@@ -62,7 +59,6 @@ const ExistingReports = ({  reports,
       fill: 'white'
     },
   }
-
 
   if (loading) {
     return (
@@ -91,16 +87,16 @@ const ExistingReports = ({  reports,
     return (
       <div className="existingReports">
         <h3>Most Recent Reports</h3>
+        <div className="reportList">
         { admin ?
           <Checkbox
-            label="Get reports from all team members"
+            label="Get all team member reports"
             labelStyle={styles.label}
             style={styles.checkbox}
             iconStyle={!allReports ? styles.checked : styles.unchecked}
             checked={allReports}
             onCheck={onCheck}
             /> : '' }
-        <div className="reportList">
           {reportKeys.map( (k, i) =>
             <ReportItem
               key={i}
@@ -111,19 +107,18 @@ const ExistingReports = ({  reports,
               queueReport={queueReport}
               unqueueReport={unqueueReport}
               />)}
-            </div>
-
-            <RaisedButton
-              label="download"
-              style={styles.button}
-              onClick={download}
-              />
-            <RaisedButton
-              label="get next 10 reports"
-              style={styles.button}
-              onClick={getNextReports}
-              />
-          </div>
+        </div>
+        <RaisedButton
+          label="download"
+          style={styles.button}
+          onClick={download}
+          />
+        <RaisedButton
+          label="get next 10 reports"
+          style={styles.button}
+          onClick={getNextReports}
+          />
+      </div>
     )
   }
 }
