@@ -23,6 +23,7 @@ const NewReport = ({  config,
                     }) => {
 
   const keys = Object.keys(metricValues)
+                .map( k => parseInt(k, 10) )
                 .sort( (a, b) => a - b)
 
   const submitReport = e => {

@@ -79,7 +79,8 @@ export const receiveKeywords = keywords => ({
 })
 
 export const setDataProperty = property => {
-  const key = Object.keys(property)[0]
+  const key = Object.keys(property)
+                .filter( k => k !== 'type' )[0]
   return {
     type: 'SET_DATA_PROPERTY',
     [key]: property[key]
@@ -87,7 +88,8 @@ export const setDataProperty = property => {
 }
 
 export const setDataError = error => {
-  const key = Object.keys(error)[0]
+  const key = Object.keys(error)
+                .filter( k => k !== 'type' )[0]
   return {
     type: 'SET_DATA_ERROR',
     [key]: error[key],
@@ -95,9 +97,24 @@ export const setDataError = error => {
 }
 
 export const setReportProperty = property => {
-  const key = Object.keys(property)[0]
+  const key = Object.keys(property)
+                .filter( k => k !== 'type' )[0]
   return {
     type: 'SET_REPORT_PROPERTY',
     [key]: property[key],
   }
 }
+
+export const setNewTeamProperty = property => {
+  const key = Object.keys(property)
+                .filter( k => k !== 'type' )[0]
+  return {
+    type: 'SET_NEW_TEAM_PROPERTY',
+    [key]: property[key],
+  }
+}
+
+export const setNewTeamKeyword = keyword => ({
+  type: 'SET_NEW_TEAM_KEYWORD',
+  keyword,
+})

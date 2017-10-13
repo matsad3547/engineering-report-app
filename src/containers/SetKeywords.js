@@ -1,12 +1,13 @@
 import React from 'react'
+import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import { setUserProperty } from '../actions/'
-import { createTeam } from '../utils/auth'
+import { setUserProperty, clearUserData } from '../actions/'
+import { createUser } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
-const CreateTeam = ({ email,
+const SetKeywords = ({ email,
                       displayName,
                       newTeam,
                       password,
@@ -46,6 +47,7 @@ const CreateTeam = ({ email,
     e.preventDefault()
     if (!userReady) {
       // createTeam()
+      browserHistory.push('/app/set_keywords')
     }
   }
 
@@ -75,8 +77,7 @@ const CreateTeam = ({ email,
   return (
     <div className="color">
       <div className="flexLayout login">
-        <h3>Please Create a Team</h3>
-        <h4>You will be the new Team Admin</h4>
+        <h3>Please set your team's evaluation criteria</h3>
 
         <input
           type="text"
@@ -145,11 +146,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
-  createTeam: () => dispatch(createTeam()),
+  // createTeam: () => dispatch(createTeam()),
 })
 
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CreateTeam)
+)(SetKeywords)

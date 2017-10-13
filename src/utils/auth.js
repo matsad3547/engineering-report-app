@@ -106,10 +106,64 @@ export const createUser = () => {
       }
       database.ref()
       .update(userInfo)
+      .then( () => {
+        database.ref('users')
+        .orderByChild('team')
+        .equalTo(team)
+        .once('value', snap => {
+          const members = snap.val()
+          const adminUID = Object.keys(members)
+                            .filter( k => members[k].admin === true)[0]
+          const adminEmail = members[adminUID].email
+
+          console.log('admin:', adminUID, '\nteam:', team, '\nemail:', adminEmail);
+          //TODO figure out how to notify admin of new user
+        })
+      })
     })
     .then( () => {
       dispatch(clearUserData())
       auth.signOut()
+    })
+    .catch( err => {
+      console.error('There was a error creating an account:', err.message)
+      dispatch(setDataError({signOutErr: err}))
+    })
+  }
+}
+
+export const createTeam = () => {
+
+  return (dispatch, getState) => {
+    const { displayName,
+            email,
+            password,
+            newTeam,
+          } = getState().user
+
+    auth.createUserWithEmailAndPassword(email, password)
+    .then( user => {
+      user.updateProfile({
+        displayName,
+      })
+
+      //TODO Add data to local storage token
+      const { uid } = user
+      const adminInfo = {}
+      adminInfo[`users/${uid}`] = {
+        team: newTeam,
+        admin: true,
+        approved: true,
+        
+         //TODO Should I make them go through the step of getting an e-mail before letting them create a team?
+      }
+      database.ref()
+      .update(adminInfo)
+      //TODO Add team entry
+    })
+    .then( () => {
+      dispatch(clearUserData())
+      browserHistory.push('/app/set_keywords')
     })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)

@@ -9,6 +9,7 @@ import Login from '../containers/Login'
 import DisplayReport from '../containers/DisplayReport/'
 import NewReport from '../containers/NewReport'
 import ExistingReports from '../containers/ExistingReports/'
+import SetKeywords from '../containers/SetKeywords'
 
 const redirectToWelcome = (nextState, replace, cb) => {
 
@@ -61,6 +62,10 @@ export const routes = [
       {
         path: '/app/about',
         component: About,
+      },
+      {
+        path: '/app/set_keywords',
+        component: SetKeywords,
       },
     ],
   },

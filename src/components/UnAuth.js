@@ -15,6 +15,11 @@ const UnAuth = () => {
       <h1>Engineering Report App</h1>
       <br />
       <RaisedButton
+        label="Create a Team"
+        containerElement={<Link to="/create_team" ></Link>}
+        style={style}
+        />
+      <RaisedButton
         label="Sign Up"
         containerElement={<Link to="/create_user" ></Link>}
         style={style}

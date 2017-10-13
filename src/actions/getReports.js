@@ -6,7 +6,6 @@ import {  receiveReports,
 import database from '../utils/firebase'
 
 export const getReports = (n = 10, allReports = false) => {
-console.log('all reports:', allReports);
   return (dispatch, getState) => {
     const { team, uid, admin } = getState().user
     dispatch(setDataProperty({dataIsFresh: false}))

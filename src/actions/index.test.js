@@ -15,6 +15,8 @@ import {
   resetMetricState,
   setDataProperty,
   setDataError,
+  setNewTeamProperty,
+  setNewTeamKeyword,
   } from './index.js'
 
 import {
@@ -291,6 +293,31 @@ describe('setDataError()', () => {
     const expected = {
       type: 'SET_DATA_ERROR',
       testErr: 'test',
+    }
+    expect(actual).toEqual(expected)
+  })
+})
+
+describe('setNewTeamProperty()', () => {
+
+  test('should return an object with a type of "SET_NEW_TEAM_PROPERTY" and a key value property', () => {
+    const property = {name: 'test'}
+    const actual = setNewTeamProperty(property)
+    const expected = {
+      type: 'SET_NEW_TEAM_PROPERTY',
+      name: 'test',
+    }
+    expect(actual).toEqual(expected)
+  })
+})
+
+describe('setNewTeamKeyword()', () => {
+
+  test('should return an object with a type of "SET_NEW_TEAM_KEYWORD" and a property with a key of `keyword`', () => {
+    const actual = setNewTeamKeyword('test')
+    const expected = {
+      type: 'SET_NEW_TEAM_KEYWORD',
+      keyword: 'test',
     }
     expect(actual).toEqual(expected)
   })

@@ -34,6 +34,12 @@ const initDataState = {
   error: {},
 }
 
+const initNewTeamState = {
+  name: '',
+  keyword: '',
+  keywords: [],
+}
+
 const getInitMetricState = keywords => keywords.reduce( (obj, k, i) => ({
   ...obj,
   [i]: {
@@ -42,13 +48,14 @@ const getInitMetricState = keywords => keywords.reduce( (obj, k, i) => ({
   }
 }), {})
 
-export const resetMetricState = state => Object.keys(state).reduce( (obj, k) => ({
-    ...obj,
-    [k]: {
-      name: state[k].name,
-      val: initVal,
-    }
-  }), {})
+export const resetMetricState = state => Object.keys(state)
+  .reduce( (obj, k) => ({
+      ...obj,
+      [k]: {
+        name: state[k].name,
+        val: initVal,
+      }
+    }), {})
 
 export const metricValues = (state = {}, { type, id, name, val, keywords }) => {
 
@@ -150,6 +157,7 @@ export const queued = (state = [], { type, report, index }) => {
 
 export const user = (state = initUserState, action) => {
   const  {  type,
+            newTeam,
             team,
             displayName,
             email,
@@ -212,6 +220,21 @@ export const data = (state = initDataState, action) => {
       }
     default:
       return state
+  }
+}
+
+export const newTeamConfig = (state = initNewTeamState, action) => {
+  const key = Object.keys(action)
+                .filter( k => k !== 'type')[0]
+  switch(action.type){
+    case 'SET_NEW_TEAM_PROPERTY':
+    return {
+      ...state,
+      [key]: action[key],
+    }
+
+  default:
+    return state
   }
 }
 
