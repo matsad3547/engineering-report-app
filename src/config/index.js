@@ -8,3 +8,42 @@ export const muiTheme = {
     accent3Color: '#FF5722',
   }
 }
+
+export const initVal = 5
+
+export const initReportConfig = {
+  model: '',
+  shortName: '',
+  configNum: 1,
+  ballast: 'No',
+}
+
+export const initReports = {
+  n: 0,
+  reports: [],
+  allReports: false,
+}
+
+export const initUserState = {
+  team: 'demo',
+  displayName: '',
+  email: '',
+  uid: null,
+  password: '',
+  verifyPassword: '',
+  admin: false,
+  approved: false,
+  teams: [],
+}
+
+export const initDataState = {
+  dataIsFresh: false,
+  loaded: false,
+  error: {},
+}
+
+export const initNewTeamState = {
+  name: '',
+  keyword: '',
+  keywords: [],
+}

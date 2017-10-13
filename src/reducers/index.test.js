@@ -10,7 +10,6 @@ import {
   queued,
   user,
   authState,
-  resetMetricState,
   data,
   newTeamConfig,
 } from './index.js'
@@ -325,51 +324,6 @@ describe('user() ', () => {
   })
 })
 
-describe('resetMetricState() ', () => {
-
-  test('should return an object', () => {
-    const actual = resetMetricState({})
-    const expected = {}
-    expect(actual).toEqual(expected)
-  })
-
-  test('should take an object and return an object with the same keys', () => {
-    const testState = {
-      a: {
-        name: 'test',
-        val: 5,
-      },
-    }
-    const actual = Object.keys(resetMetricState(testState).a)
-    const expected = ['name', 'val']
-    expect(actual).toEqual(expected)
-  })
-
-  test('should swap out values for all entries in the metric values', () => {
-    const testState = {
-      a: {
-        name: 'test1',
-        val: 3,
-      },
-      b: {
-        name: 'test2',
-        val: 8,
-      },
-    }
-    const actual = resetMetricState(testState)
-    const expected = {
-      a: {
-        name: 'test1',
-        val: 5,
-      },
-      b: {
-        name: 'test2',
-        val: 5,
-      },
-    }
-    expect(actual).toEqual(expected)
-  })
-})
 
 describe('data() ', () => {
   test('should return an initial data state object by default', () => {
@@ -459,9 +413,9 @@ describe('newTeamConfig()', () => {
     expect(actual).toEqual(expected)
   })
 
-  test('should return a state with a modified property in response to an action type of "SET_NEW_TEAM_PROPERTY"', () => {
+  test('should return a state with a new property in response to an action type of "SET_NEW_TEAM_PROPERTY"', () => {
     const state = {
-      name: '',
+      name: 'words',
     }
     const action = {
       type: 'SET_NEW_TEAM_PROPERTY',
@@ -470,6 +424,36 @@ describe('newTeamConfig()', () => {
     const actual = newTeamConfig(state, action)
     const expected = {
       name: 'test',
+    }
+    expect(actual).toEqual(expected)
+  })
+
+  test('should add a keyword to the keyword array in response to an action type of "SET_NEW_TEAM_KEYWORD"', () => {
+    const state = {
+      keywords: [],
+    }
+    const action = {
+      type: 'SET_NEW_TEAM_KEYWORD',
+      keyword: 'test',
+    }
+    const actual = newTeamConfig(state, action)
+    const expected = {
+      keywords: ['test'],
+    }
+    expect(actual).toEqual(expected)
+  })
+
+  test('should remove a keyword from the keyword array in response to an action type of "SET_NEW_TEAM_KEYWORD" if it is already in there', () => {
+    const state = {
+      keywords: ['test', 'cheese'],
+    }
+    const action = {
+      type: 'SET_NEW_TEAM_KEYWORD',
+      keyword: 'test',
+    }
+    const actual = newTeamConfig(state, action)
+    const expected = {
+      keywords: ['cheese'],
     }
     expect(actual).toEqual(expected)
   })

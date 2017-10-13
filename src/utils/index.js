@@ -1,3 +1,7 @@
+import {
+  initVal,
+} from '../config/'
+
 export const date = unixDate => new Date(parseInt(unixDate, 0))
                                   .toString()
                                   .slice(0, 24)
@@ -47,3 +51,20 @@ export const downloadQueued = (reports, queued) => {
   const data = parseCSV(dataStr)
   launchDownload(data)
 }
+
+export const getInitMetricState = keywords => keywords.reduce( (obj, k, i) => ({
+  ...obj,
+  [i]: {
+    name: k,
+    val: initVal,
+  }
+}), {})
+
+export const resetMetricState = state => Object.keys(state)
+  .reduce( (obj, k) => ({
+      ...obj,
+      [k]: {
+        name: state[k].name,
+        val: initVal,
+      }
+    }), {})

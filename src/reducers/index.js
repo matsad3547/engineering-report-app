@@ -1,61 +1,19 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-export const initVal = 5
+import {
+  initVal,
+  initReportConfig,
+  initReports,
+  initUserState,
+  initDataState,
+  initNewTeamState,
+} from '../config/'
 
-const initReportConfig = {
-  model: '',
-  shortName: '',
-  configNum: 1,
-  ballast: 'No',
-}
-
-const initReports = {
-  n: 0,
-  reports: [],
-  allReports: false,
-}
-
-const initUserState = {
-  team: 'demo',
-  displayName: '',
-  email: '',
-  uid: null,
-  password: '',
-  verifyPassword: '',
-  admin: false,
-  approved: false,
-  teams: [],
-}
-
-const initDataState = {
-  dataIsFresh: false,
-  loaded: false,
-  error: {},
-}
-
-const initNewTeamState = {
-  name: '',
-  keyword: '',
-  keywords: [],
-}
-
-const getInitMetricState = keywords => keywords.reduce( (obj, k, i) => ({
-  ...obj,
-  [i]: {
-    name: k,
-    val: initVal,
-  }
-}), {})
-
-export const resetMetricState = state => Object.keys(state)
-  .reduce( (obj, k) => ({
-      ...obj,
-      [k]: {
-        name: state[k].name,
-        val: initVal,
-      }
-    }), {})
+import {
+  getInitMetricState,
+  resetMetricState,
+} from '../utils/'
 
 export const metricValues = (state = {}, { type, id, name, val, keywords }) => {
 
@@ -179,7 +137,7 @@ export const user = (state = initUserState, action) => {
       }
     case 'SET_USER_PROPERTY':
     const key = Object.keys(action)
-                  .filter( k => k !== 'type')
+                  .filter( k => k !== 'type' )
       return {
         ...state,
         [key]: action[key],
@@ -203,7 +161,7 @@ export const user = (state = initUserState, action) => {
 
 export const data = (state = initDataState, action) => {
   const key = Object.keys(action)
-                .filter( k => k !== 'type')[0]
+                .filter( k => k !== 'type' )[0]
   switch (action.type) {
     case 'SET_DATA_ERROR':
       return {
@@ -225,13 +183,35 @@ export const data = (state = initDataState, action) => {
 
 export const newTeamConfig = (state = initNewTeamState, action) => {
   const key = Object.keys(action)
-                .filter( k => k !== 'type')[0]
+                .filter( k => k !== 'type' )[0]
   switch(action.type){
     case 'SET_NEW_TEAM_PROPERTY':
-    return {
-      ...state,
-      [key]: action[key],
-    }
+      return {
+        ...state,
+        [key]: action[key],
+      }
+
+    case 'SET_NEW_TEAM_KEYWORD':
+
+      if(state.keywords.includes(action.keyword)){
+        const index = state.keywords.indexOf(action.keyword)
+        return {
+          ...state,
+          keywords: [
+            ...state.keywords.slice(0, index),
+            ...state.keywords.slice(index + 1),
+          ]
+        }
+      }
+      else {
+        return {
+          ...state,
+          keywords: [
+            ...state.keywords,
+            action.keyword,
+          ],
+        }
+      }
 
   default:
     return state
@@ -247,5 +227,6 @@ export const combinedReducers = combineReducers({
     queued,
     user,
     data,
+    newTeamConfig,
     routing: routerReducer,
   })

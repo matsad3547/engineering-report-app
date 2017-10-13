@@ -2,17 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import { setUserProperty } from '../actions/'
+import { setUserProperty, setNewTeamProperty } from '../actions/'
 import { createTeam } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
 const CreateTeam = ({ email,
                       displayName,
-                      newTeam,
+                      name,
                       password,
                       verifyPassword,
                       userDispatch,
                       setUserProperty,
+                      setNewTeamProperty,
                       createTeam,
                     }) => {
 
@@ -20,9 +21,9 @@ const CreateTeam = ({ email,
 
   const onChange = {
 
-    newTeam(e) {
+    name(e) {
       e.preventDefault()
-      setUserProperty({newTeam: e.target.value})
+      setNewTeamProperty({name: e.target.value})
     },
     email(e) {
       e.preventDefault()
@@ -68,7 +69,7 @@ const CreateTeam = ({ email,
     label: {
       fontSize: 15,
       lineHeight: 2,
-      color: newTeam === '' ? '#757575' : '#000',
+      color: name === '' ? '#757575' : '#000',
     },
   }
 
@@ -81,8 +82,8 @@ const CreateTeam = ({ email,
         <input
           type="text"
           placeholder="Team Name"
-          value={newTeam}
-          onChange={onChange.newTeam}
+          value={name}
+          onChange={onChange.name}
           />
         <input
           type="email"
@@ -127,17 +128,19 @@ const CreateTeam = ({ email,
 
 const mapStateToProps = state => {
 
-  const { email,
-          displayName,
-          newTeam,
-          password,
-          verifyPassword,
-        } = state.user
+  const {
+    email,
+    displayName,
+    password,
+    verifyPassword,
+  } = state.user
+
+  const { name } = state.newTeamConfig
 
   return {
     email,
     displayName,
-    newTeam,
+    name,
     password,
     verifyPassword,
   }
@@ -145,6 +148,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
+  setNewTeamProperty: property => dispatch(setNewTeamProperty(property)),
   createTeam: () => dispatch(createTeam()),
 })
 

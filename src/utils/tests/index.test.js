@@ -1,6 +1,9 @@
-import {  formatReports,
-          parseCSV,
-          downloadQueued, } from './index'
+import {
+  formatReports,
+  parseCSV,
+  downloadQueued,
+  resetMetricState,
+} from '../index'
 
 describe('formatReports() ', () => {
 
@@ -253,5 +256,51 @@ describe('parseCSV() ', () => {
     }
     const result = 'data:text/csv;charset=utf-8,a,1,2\ntest1,3,4\ntest2,4,5\nNotes,this is a test string,this is another test string\n'
     expect(parseCSV(formatReports(reports, queued))).toEqual(result)
+  })
+})
+
+describe('resetMetricState() ', () => {
+
+  test('should return an object', () => {
+    const actual = resetMetricState({})
+    const expected = {}
+    expect(actual).toEqual(expected)
+  })
+
+  test('should take an object and return an object with the same keys', () => {
+    const testState = {
+      a: {
+        name: 'test',
+        val: 5,
+      },
+    }
+    const actual = Object.keys(resetMetricState(testState).a)
+    const expected = ['name', 'val']
+    expect(actual).toEqual(expected)
+  })
+
+  test('should swap out values for all entries in the metric values', () => {
+    const testState = {
+      a: {
+        name: 'test1',
+        val: 3,
+      },
+      b: {
+        name: 'test2',
+        val: 8,
+      },
+    }
+    const actual = resetMetricState(testState)
+    const expected = {
+      a: {
+        name: 'test1',
+        val: 5,
+      },
+      b: {
+        name: 'test2',
+        val: 5,
+      },
+    }
+    expect(actual).toEqual(expected)
   })
 })
