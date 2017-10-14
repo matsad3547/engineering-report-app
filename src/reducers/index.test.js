@@ -406,7 +406,7 @@ describe('team()', () => {
     expect(actual).toEqual(expected)
   })
 
-  test('should return a state with a new property in response to an action type of "SET_NEW_TEAM_PROPERTY"', () => {
+  test('should return a state with a new property in response to an action type of "SET_TEAM_PROPERTY"', () => {
     const state = {
       team: 'words',
     }
@@ -421,7 +421,7 @@ describe('team()', () => {
     expect(actual).toEqual(expected)
   })
 
-  test('should add a keyword to the keyword array in response to an action type of "SET_NEW_TEAM_KEYWORD"', () => {
+  test('should add a keyword to the keyword array in response to an action type of "SET_TEAM_KEYWORD"', () => {
     const state = {
       keywords: [],
     }
@@ -436,7 +436,22 @@ describe('team()', () => {
     expect(actual).toEqual(expected)
   })
 
-  test('should remove a keyword from the keyword array in response to an action type of "SET_NEW_TEAM_KEYWORD" if it is already in there', () => {
+  test('should add a keyword to the beginning of the keyword array in response to an action type of "SET_TEAM_KEYWORD"', () => {
+    const state = {
+      keywords: ['cheese'],
+    }
+    const action = {
+      type: 'SET_TEAM_KEYWORD',
+      keyword: 'test',
+    }
+    const actual = team(state, action)
+    const expected = {
+      keywords: ['test', 'cheese'],
+    }
+    expect(actual).toEqual(expected)
+  })
+
+  test('should remove a keyword from the keyword array in response to an action type of "SET_TEAM_KEYWORD" if it is already in there', () => {
     const state = {
       keywords: ['test', 'cheese'],
     }
@@ -462,6 +477,24 @@ describe('team()', () => {
     const actual = team(state, action)
     const expected = {
       keywords: ['test', 'cheese'],
+    }
+    expect(actual).toEqual(expected)
+  })
+
+  test('should reset to init values in response to an action type of "CLEAR_USER_DATA"', () => {
+    const state = {
+      team: 'test',
+      keyword: 'cheese',
+      keywords: ['a', 'b']
+    }
+    const action = {
+      type: 'CLEAR_USER_DATA'
+    }
+    const actual = team(state, action)
+    const expected = {
+      team: 'demo',
+      keyword: '',
+      keywords: [],
     }
     expect(actual).toEqual(expected)
   })

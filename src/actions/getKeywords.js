@@ -10,6 +10,7 @@ export const getKeywords = () => {
     return database.ref(`teams/${team}/keywords`)
             .once('value', snap => {
       const keywords = snap.val()
+                        .filter( k => k !== 'ph' )
       dispatch(receiveKeywords(keywords))
       dispatch(setDataProperty({loaded: true}))
       dispatch(setDataProperty({loading: false}))

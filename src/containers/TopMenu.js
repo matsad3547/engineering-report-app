@@ -48,9 +48,9 @@ const TopMenu = ({ admin, signOut }) => {
         </IconButton>}
       anchorOrigin={styles.anchor}
       targetOrigin={styles.target}>
-      <MenuItem
+      { admin ? <MenuItem
         containerElement={<Link to="/app/set_keywords"/>}
-        primaryText="Set Keywords"/>
+        primaryText="Add/Remove Keywords"/> : ''}
       <MenuItem
         containerElement={<Link to="/app/about"/>}
         primaryText="About"/>

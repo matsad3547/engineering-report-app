@@ -3,9 +3,12 @@ import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
 import database from '../utils/firebase'
+
 import { saveReport } from '../actions'
 import { getReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
+
+import Loading from '../components/Loading'
 
 import ConfigForm from '../containers/ConfigForm'
 import DropDownSliderInput from '../containers/DropDownSliderInput'
@@ -17,6 +20,7 @@ const NewReport = ({  config,
                       previousMetricValues,
                       team,
                       uid,
+                      loading,
                       saveReport,
                       getReports,
                       getKeywords
@@ -49,6 +53,12 @@ const NewReport = ({  config,
       height: 50,
       margin: 12,
     }
+  }
+
+  if(loading) {
+    return (
+      <Loading message={'Loading...'}/>
+    )
   }
 
   return (
@@ -90,9 +100,12 @@ const mapStateToProps = state => {
   const { reportConfig,
           metricValues,
           notes,
-          previousMetricValues ,
+          previousMetricValues,
         } = state
+
   const { team, uid } = state.user
+
+  const { loading } = state.data
 
   return {
     config: reportConfig,
@@ -101,6 +114,7 @@ const mapStateToProps = state => {
     previousMetricValues,
     team,
     uid,
+    loading,
   }
 }
 

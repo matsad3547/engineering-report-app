@@ -204,8 +204,8 @@ export const team = (state = initTeamState, action) => {
         return {
           ...state,
           keywords: [
-            ...state.keywords,
             action.keyword,
+            ...state.keywords,
           ],
         }
       }
@@ -215,6 +215,9 @@ export const team = (state = initTeamState, action) => {
         ...state,
         keywords: action.keywords,
       }
+
+    case 'CLEAR_USER_DATA':
+      return initTeamState
 
     default:
       return state

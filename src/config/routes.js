@@ -1,8 +1,8 @@
-import Welcome from '../components/Welcome'
 import About from '../components/About'
 import UnAuth from '../components/UnAuth'
 
 import App from '../containers/App/'
+import Welcome from '../containers/Welcome'
 import CreateUser from '../containers/CreateUser'
 import CreateTeam from '../containers/CreateTeam'
 import Login from '../containers/Login'
@@ -42,7 +42,7 @@ export const routes = [
   },
   {
     path: '/set_keywords',
-    component: CreateTeam,
+    component: SetKeywords,
   },
   {
     path: 'app/',

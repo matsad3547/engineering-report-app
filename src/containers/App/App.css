@@ -205,6 +205,26 @@ a:active {
   right: -10px !important;
   top: 0 !important;
 }
+.editKeywords {
+  box-sizing: border-box;
+  background-image:
+    linear-gradient(gray, black 40%);
+  color: white;
+  min-height: 100vh;
+  width: 100vw;
+  padding: .5em;
+  margin-bottom: -100px;
+  padding-bottom: 100px;
+  text-align: center;
+}
+
+.keyword {
+  box-sizing: border-box;
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  padding: .5em 1.2em;
+}
 /*@media (max-width: 425px) {
   .reportInput {
     margin: 0;

@@ -45,15 +45,13 @@ export const clearQueue = () => ({
   type: 'CLEAR_QUEUE',
 })
 
-export const setUserData = ({ team,
-                              displayName,
+export const setUserData = ({ displayName,
                               email,
                               uid,
                               admin,
                               approved,
                             }) => ({
   type: 'SET_USER_DATA',
-  team,
   displayName,
   email,
   uid,

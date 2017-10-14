@@ -194,7 +194,6 @@ describe('setUserData() ', () => {
   test('should return `team`, `displayName`, `email`, `uid`, `admin`, and `approved` ', () => {
 
     const output = {
-      team: 'test',
       displayName: 'test',
       email: 'test',
       uid: 'test',
@@ -204,8 +203,7 @@ describe('setUserData() ', () => {
 
     const result = {
       type: 'SET_USER_DATA',
-      team: 'test',
-      displayName: 'test',
+        displayName: 'test',
       email: 'test',
       uid: 'test',
       admin: true,

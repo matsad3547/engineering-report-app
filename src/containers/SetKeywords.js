@@ -1,110 +1,135 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import { setUserProperty, clearUserData } from '../actions/'
+import Loading from '../components/Loading'
+
+import { setTeamProperty, setTeamKeyword } from '../actions/'
 import BackButton from '../components/BackButton'
 
-const SetKeywords = ({ email,
-                      displayName,
-                      newTeam,
-                      password,
-                      verifyPassword,
-                      userDispatch,
-                      setUserProperty,
-                      createTeam,
-                    }) => {
-
-  const userReady = (verifyPassword === password && password.length >= 6) ? false : true
+const SetKeywords = ({  keyword,
+                        keywords,
+                        loading,
+                        location,
+                        setTeamProperty,
+                        setTeamKeyword,
+                        // saveKeywords,
+                      }) => {
+  const creatingTeam = location.pathname === '/app/set_keywords' ? false : true
 
   const onChange = {
-
-    newTeam(e) {
+    keyword(e) {
       e.preventDefault()
-      setUserProperty({newTeam: e.target.value})
-    },
-    email(e) {
-      e.preventDefault()
-      setUserProperty({email: e.target.value})
-    },
-    displayName(e) {
-      e.preventDefault()
-      setUserProperty({displayName: e.target.value})
-    },
-    password(e) {
-      e.preventDefault()
-      setUserProperty({password: e.target.value})
-    },
-    verifyPassword(e) {
-      e.preventDefault()
-      setUserProperty({verifyPassword: e.target.value})
+      setTeamProperty({keyword: e.target.value})
     },
   }
 
-  const onClick = e => {
-    e.preventDefault()
-    if (!userReady) {
-      // createTeam()
-      browserHistory.push('/app/set_keywords')
+  const onClick = {
+    save(e) {
+      e.preventDefault()
+      console.log('saving keywords');
+      // saveKeywords()
+    },
+    delete(e, w) {
+      e.preventDefault()
+      setTeamKeyword(w)
+    },
+    add(e, w) {
+      e.preventDefault()
+      setTeamKeyword(w)
+      setTeamProperty({keyword: ''})
     }
   }
-
-  const display = password.length > 0 && password.length < 6 ? 'block' : 'none'
 
   const styles = {
     button: {
       height: 50,
       margin: 12,
     },
-    password: {
-      display,
+    deleteButton: {
+      height: 25,
+      width: 100,
+      marginLeft: 10
     },
-    menu: {
-      backgroundColor: 'white',
-      height: 30,
-      width: 180,
-      marginBottom: 6,
+    addButton: {
+      height: 25,
+      width: 75,
+      marginLeft: 10,
     },
-    label: {
-      fontSize: 15,
-      lineHeight: 2,
-      color: newTeam === '' ? '#757575' : '#000',
-    },
+  }
+
+  if(loading) {
+    return (
+      <Loading message={'Loading...'}/>
+    )
   }
 
   return (
     <div className="color">
-      <div className="flexLayout login">
-        <h3>Please set your team's evaluation criteria keywords</h3>
-
-
-
-        <RaisedButton
-
-          label="Save"
-          style={styles.button}
-          className="reportButton"
-          onClick={onClick}
+      <div className="editKeywords">
+        {creatingTeam ?
+          <h3>Please set your team's evaluation criteria keywords</h3> :
+          <h3>Add or Remove Keywords</h3>
+        }
+        <input
+          type="text"
+          placeholder="New Keyword"
+          value={keyword}
+          onChange={onChange.keyword}
           />
-      </div>
-      <BackButton />
+        <RaisedButton
+          onClick={(e, w = keyword) => onClick.add(e, w)}
+          label="add"
+          style={styles.addButton}
+          className="reportButton"
+          />
+        { keywords ?
+          <div>
+            <h4>Keyword List</h4>
+            <p>(keyword changes will not appear in reports until they are saved)</p>
+            { keywords.map( (k, i) =>
+              <div key={`kw-${i}`} className="keyword">
+                {k}
+                <RaisedButton
+                  key={`db-${i}`}
+                  onClick={(e, w = k) => onClick.delete(e, w)}
+                  label="Delete"
+                  style={styles.deleteButton}
+                  className="reportButton"
+                  />
+              </div>
+            )}
+            <RaisedButton
+              label="Save"
+              style={styles.button}
+              className="reportButton"
+              onClick={onClick.save}
+              />
+          </div> : ''
+        }
+        </div>
+      {creatingTeam ? <BackButton /> : ''}
     </div>
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
 
   const { keyword, keywords } = state.team
+
+  const { loading } = state.data
 
   return {
     keyword,
     keywords,
+    loading,
+    location: ownProps.location,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  setUserProperty: property => dispatch(setUserProperty(property)),
+  setTeamProperty: property => dispatch(setTeamProperty(property)),
+  setTeamKeyword: keyword => dispatch(setTeamKeyword(keyword)),
   // saveKeywords: () => dispatch(saveKeywords()),
 })
 

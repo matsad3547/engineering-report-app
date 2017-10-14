@@ -13,7 +13,7 @@ const CreateTeam = ({ email,
                       verifyPassword,
                       userDispatch,
                       setUserProperty,
-                      setNewTeamProperty,
+                      setTeamProperty,
                       createTeam,
                     }) => {
 
@@ -82,7 +82,7 @@ const CreateTeam = ({ email,
         <input
           type="text"
           placeholder="Team Name"
-          value={team}
+          value={team === 'demo' ? '' : team}
           onChange={onChange.team}
           />
         <input
@@ -135,7 +135,7 @@ const mapStateToProps = state => {
     verifyPassword,
   } = state.user
 
-  const { team } = state.teamConfig
+  const { team } = state.team
 
   return {
     email,

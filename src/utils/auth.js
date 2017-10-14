@@ -34,8 +34,9 @@ export const checkAuthStatus = () => {
 
 export const setData = (str = '') => {
   return dispatch => {
+
     const token = localStorage.getItem('jwt')
-    console.log('is there a fucking token???', token, '\nstring:', str);
+
     if (token){
       const {
         displayName,
@@ -81,7 +82,10 @@ export const signOut = () => {
   return dispatch => {
     localStorage.removeItem('jwt')
     auth.signOut()
-    .then( () => browserHistory.push('/') )
+    .then( () => {
+      dispatch(clearUserData())
+      browserHistory.push('/')
+    })
     .catch( err => {
       console.error('There was a error signing out:', err.message)
       dispatch(setDataError({signOutErr: err}))
@@ -147,13 +151,11 @@ export const createTeam = () => {
       password,
     } = getState().user
 
-    const { team } = getState().teamConfig
+    const { team } = getState().team
 
     auth.createUserWithEmailAndPassword(email, password)
       .then( user => {
-      user.updateProfile({
-        displayName,
-      })
+
       const { uid, email } = user
 
       const adminInfo = {}
@@ -166,9 +168,9 @@ export const createTeam = () => {
 
       const teamInfo = {}
       teamInfo[`/${team}`] = {
-        keywords: ['pc'],
+        keywords: ['ph'],
         'test reports': {
-          '000': 'pc',
+          '000': 'ph',
         },
       }
 
@@ -178,13 +180,17 @@ export const createTeam = () => {
       .update(teamInfo)
       dispatch(clearUserData())
       dispatch(setTeamProperty({team: ''}))
-    })
-    .then( () => auth.onAuthStateChanged( jwt => {
-        localStorage.setItem('jwt', JSON.stringify(jwt))
-        dispatch(setData())
-        browserHistory.push('/set_keywords')
+
+      user.updateProfile({
+        displayName,
       })
-    )
+      .then( () => auth.onAuthStateChanged( jwt => {
+          localStorage.setItem('jwt', JSON.stringify(jwt))
+          dispatch(setData())
+          browserHistory.push('/set_keywords')
+        })
+      )
+    })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
       dispatch(setDataError({signOutErr: err}))
