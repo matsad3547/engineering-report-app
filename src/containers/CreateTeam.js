@@ -8,7 +8,7 @@ import BackButton from '../components/BackButton'
 
 const CreateTeam = ({ email,
                       displayName,
-                      name,
+                      team,
                       password,
                       verifyPassword,
                       userDispatch,
@@ -21,9 +21,9 @@ const CreateTeam = ({ email,
 
   const onChange = {
 
-    name(e) {
+    team(e) {
       e.preventDefault()
-      setNewTeamProperty({name: e.target.value})
+      setNewTeamProperty({team: e.target.value})
     },
     email(e) {
       e.preventDefault()
@@ -46,7 +46,7 @@ const CreateTeam = ({ email,
   const onClick = e => {
     e.preventDefault()
     if (!userReady) {
-      // createTeam()
+      createTeam()
     }
   }
 
@@ -69,7 +69,7 @@ const CreateTeam = ({ email,
     label: {
       fontSize: 15,
       lineHeight: 2,
-      color: name === '' ? '#757575' : '#000',
+      color: team === '' ? '#757575' : '#000',
     },
   }
 
@@ -82,8 +82,8 @@ const CreateTeam = ({ email,
         <input
           type="text"
           placeholder="Team Name"
-          value={name}
-          onChange={onChange.name}
+          value={team}
+          onChange={onChange.team}
           />
         <input
           type="email"
@@ -135,12 +135,12 @@ const mapStateToProps = state => {
     verifyPassword,
   } = state.user
 
-  const { name } = state.newTeamConfig
+  const { team } = state.newTeamConfig
 
   return {
     email,
     displayName,
-    name,
+    team,
     password,
     verifyPassword,
   }

@@ -43,7 +43,7 @@ export const initDataState = {
 }
 
 export const initNewTeamState = {
-  name: '',
+  team: '',
   keyword: '',
   keywords: [],
 }

@@ -301,11 +301,11 @@ describe('setDataError()', () => {
 describe('setNewTeamProperty()', () => {
 
   test('should return an object with a type of "SET_NEW_TEAM_PROPERTY" and a key value property', () => {
-    const property = {name: 'test'}
+    const property = {team: 'test'}
     const actual = setNewTeamProperty(property)
     const expected = {
       type: 'SET_NEW_TEAM_PROPERTY',
-      name: 'test',
+      team: 'test',
     }
     expect(actual).toEqual(expected)
   })

@@ -135,31 +135,44 @@ export const createUser = () => {
 export const createTeam = () => {
 
   return (dispatch, getState) => {
-    const { displayName,
-            email,
-            password,
-            newTeam,
-          } = getState().user
+    const {
+      displayName,
+      email,
+      password,
+    } = getState().user
+
+    const { team } = getState().newTeamConfig
 
     auth.createUserWithEmailAndPassword(email, password)
-    .then( user => {
+      .then( user => {
       user.updateProfile({
         displayName,
       })
+      const { uid, email } = user
 
-      //TODO Add data to local storage token
-      const { uid } = user
       const adminInfo = {}
       adminInfo[`users/${uid}`] = {
-        team: newTeam,
+        team,
         admin: true,
         approved: true,
-        
-         //TODO Should I make them go through the step of getting an e-mail before letting them create a team?
+        email,
       }
+
+      const teamInfo = {}
+      teamInfo[`/${team}`] = {
+        keywords: ['pc'],
+        'test reports': {
+          '000': 'pc',
+        },
+      }
+
       database.ref()
       .update(adminInfo)
-      //TODO Add team entry
+      database.ref('teams')
+      .update(teamInfo)
+    })
+    .then( jwt => {
+      localStorage.setItem('jwt', JSON.stringify(jwt))
     })
     .then( () => {
       dispatch(clearUserData())
@@ -168,6 +181,7 @@ export const createTeam = () => {
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
       dispatch(setDataError({signOutErr: err}))
+      dispatch(clearUserData())
     })
   }
 }

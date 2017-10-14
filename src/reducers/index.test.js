@@ -324,7 +324,6 @@ describe('user() ', () => {
   })
 })
 
-
 describe('data() ', () => {
   test('should return an initial data state object by default', () => {
     const actual = data(undefined, 'test')
@@ -406,7 +405,7 @@ describe('newTeamConfig()', () => {
   test('should return an init state object by default', () => {
     const actual = newTeamConfig(undefined, 'test')
     const expected = {
-      name: '',
+      team: '',
       keyword: '',
       keywords: [],
     }
@@ -415,15 +414,15 @@ describe('newTeamConfig()', () => {
 
   test('should return a state with a new property in response to an action type of "SET_NEW_TEAM_PROPERTY"', () => {
     const state = {
-      name: 'words',
+      team: 'words',
     }
     const action = {
       type: 'SET_NEW_TEAM_PROPERTY',
-      name: 'test'
+      team: 'test'
     }
     const actual = newTeamConfig(state, action)
     const expected = {
-      name: 'test',
+      team: 'test',
     }
     expect(actual).toEqual(expected)
   })
