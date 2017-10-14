@@ -171,9 +171,11 @@ export const createTeam = () => {
       database.ref('teams')
       .update(teamInfo)
     })
-    .then( jwt => {
-      localStorage.setItem('jwt', JSON.stringify(jwt))
-    })
+    .then( () => auth.onAuthStateChanged( jwt => {
+        localStorage.setItem('jwt', JSON.stringify(jwt))
+        setData()
+      })
+    )
     .then( () => {
       dispatch(clearUserData())
       browserHistory.push('/app/set_keywords')
