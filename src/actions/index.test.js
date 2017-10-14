@@ -15,8 +15,8 @@ import {
   resetMetricState,
   setDataProperty,
   setDataError,
-  setNewTeamProperty,
-  setNewTeamKeyword,
+  setTeamProperty,
+  setTeamKeyword,
   } from './index.js'
 
 import {
@@ -249,7 +249,9 @@ describe('receiveKeywords() ', () => {
   })
 
   test('should return a keyword variable passed into it', () => {
-    expect(receiveKeywords(['test1', 'test2']).keywords).toEqual(['test1', 'test2'])
+    const actual = receiveKeywords(['test1', 'test2']).keywords
+    const expected = ['test1', 'test2']
+    expect(actual).toEqual(expected)
   })
 })
 
@@ -298,25 +300,25 @@ describe('setDataError()', () => {
   })
 })
 
-describe('setNewTeamProperty()', () => {
+describe('setTeamProperty()', () => {
 
-  test('should return an object with a type of "SET_NEW_TEAM_PROPERTY" and a key value property', () => {
+  test('should return an object with a type of "SET_TEAM_PROPERTY" and a key value property', () => {
     const property = {team: 'test'}
-    const actual = setNewTeamProperty(property)
+    const actual = setTeamProperty(property)
     const expected = {
-      type: 'SET_NEW_TEAM_PROPERTY',
+      type: 'SET_TEAM_PROPERTY',
       team: 'test',
     }
     expect(actual).toEqual(expected)
   })
 })
 
-describe('setNewTeamKeyword()', () => {
+describe('setTeamKeyword()', () => {
 
-  test('should return an object with a type of "SET_NEW_TEAM_KEYWORD" and a property with a key of `keyword`', () => {
-    const actual = setNewTeamKeyword('test')
+  test('should return an object with a type of "SET_TEAM_KEYWORD" and a property with a key of `keyword`', () => {
+    const actual = setTeamKeyword('test')
     const expected = {
-      type: 'SET_NEW_TEAM_KEYWORD',
+      type: 'SET_TEAM_KEYWORD',
       keyword: 'test',
     }
     expect(actual).toEqual(expected)

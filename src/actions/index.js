@@ -105,16 +105,16 @@ export const setReportProperty = property => {
   }
 }
 
-export const setNewTeamProperty = property => {
+export const setTeamProperty = property => {
   const key = Object.keys(property)
                 .filter( k => k !== 'type' )[0]
   return {
-    type: 'SET_NEW_TEAM_PROPERTY',
+    type: 'SET_TEAM_PROPERTY',
     [key]: property[key],
   }
 }
 
-export const setNewTeamKeyword = keyword => ({
-  type: 'SET_NEW_TEAM_KEYWORD',
+export const setTeamKeyword = keyword => ({
+  type: 'SET_TEAM_KEYWORD',
   keyword,
 })

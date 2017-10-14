@@ -10,11 +10,11 @@ import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
 
-const TopMenu = ({ dispatch }) => {
+const TopMenu = ({ admin, signOut }) => {
 
   const onClick = e => {
     e.preventDefault()
-    dispatch(signOut())
+    signOut()
   }
 
   const styles={
@@ -49,13 +49,27 @@ const TopMenu = ({ dispatch }) => {
       anchorOrigin={styles.anchor}
       targetOrigin={styles.target}>
       <MenuItem
-        onClick={onClick}
-        primaryText="Sign Out"/>
+        containerElement={<Link to="/app/set_keywords"/>}
+        primaryText="Set Keywords"/>
       <MenuItem
         containerElement={<Link to="/app/about"/>}
         primaryText="About"/>
+      <MenuItem
+        onClick={onClick}
+        primaryText="Sign Out"/>
     </IconMenu>
   )
 }
 
-export default connect()(TopMenu)
+const mapStateToProps = state => ({
+  admin: state.user.admin,
+})
+
+const mapDispatchToProps = dispatch => ({
+  signOut: () => dispatch(signOut()),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TopMenu)

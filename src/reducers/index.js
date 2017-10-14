@@ -2,12 +2,11 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
 import {
-  initVal,
   initReportConfig,
   initReports,
   initUserState,
   initDataState,
-  initNewTeamState,
+  initTeamState,
 } from '../config/'
 
 import {
@@ -115,7 +114,6 @@ export const queued = (state = [], { type, report, index }) => {
 
 export const user = (state = initUserState, action) => {
   const  {  type,
-            newTeam,
             team,
             displayName,
             email,
@@ -145,7 +143,6 @@ export const user = (state = initUserState, action) => {
     case 'CLEAR_USER_DATA':
       return {
         ...state,
-        team: 'demo',
         displayName: '',
         email: '',
         uid: null,
@@ -181,17 +178,17 @@ export const data = (state = initDataState, action) => {
   }
 }
 
-export const newTeamConfig = (state = initNewTeamState, action) => {
+export const team = (state = initTeamState, action) => {
   const key = Object.keys(action)
                 .filter( k => k !== 'type' )[0]
   switch(action.type){
-    case 'SET_NEW_TEAM_PROPERTY':
+    case 'SET_TEAM_PROPERTY':
       return {
         ...state,
         [key]: action[key],
       }
 
-    case 'SET_NEW_TEAM_KEYWORD':
+    case 'SET_TEAM_KEYWORD':
 
       if(state.keywords.includes(action.keyword)){
         const index = state.keywords.indexOf(action.keyword)
@@ -213,8 +210,14 @@ export const newTeamConfig = (state = initNewTeamState, action) => {
         }
       }
 
-  default:
-    return state
+    case 'KEYWORDS_RECEIVED':
+      return {
+        ...state,
+        keywords: action.keywords,
+      }
+
+    default:
+      return state
   }
 }
 
@@ -227,6 +230,6 @@ export const combinedReducers = combineReducers({
     queued,
     user,
     data,
-    newTeamConfig,
+    team,
     routing: routerReducer,
   })

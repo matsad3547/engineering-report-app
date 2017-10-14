@@ -4,7 +4,12 @@ import { browserHistory } from 'react-router'
 import { getReports } from '../actions/getReports'
 import { getTeams } from '../actions/getTeams'
 import { getKeywords} from '../actions/getKeywords'
-import { setUserData, clearUserData, setDataError } from '../actions/'
+import {
+  setUserData,
+  clearUserData,
+  setDataError,
+  setTeamProperty,
+} from '../actions/'
 
 export const signIn = (email, password) => {
 
@@ -27,9 +32,10 @@ export const checkAuthStatus = () => {
   //TODO check auth status
 }
 
-export const setData = () => {
+export const setData = (str = '') => {
   return dispatch => {
     const token = localStorage.getItem('jwt')
+    console.log('is there a fucking token???', token, '\nstring:', str);
     if (token){
       const {
         displayName,
@@ -45,7 +51,6 @@ export const setData = () => {
           approved,
         } = snap.val()
         dispatch(setUserData({
-            team,
             displayName,
             email,
             uid,
@@ -53,6 +58,7 @@ export const setData = () => {
             approved,
           })
         )
+        dispatch(setTeamProperty({team,}))
       })
       .then( () => {
         dispatch(getReports())
@@ -141,7 +147,7 @@ export const createTeam = () => {
       password,
     } = getState().user
 
-    const { team } = getState().newTeamConfig
+    const { team } = getState().teamConfig
 
     auth.createUserWithEmailAndPassword(email, password)
       .then( user => {
@@ -170,16 +176,15 @@ export const createTeam = () => {
       .update(adminInfo)
       database.ref('teams')
       .update(teamInfo)
+      dispatch(clearUserData())
+      dispatch(setTeamProperty({team: ''}))
     })
     .then( () => auth.onAuthStateChanged( jwt => {
         localStorage.setItem('jwt', JSON.stringify(jwt))
-        setData()
+        dispatch(setData())
+        browserHistory.push('/set_keywords')
       })
     )
-    .then( () => {
-      dispatch(clearUserData())
-      browserHistory.push('/app/set_keywords')
-    })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
       dispatch(setDataError({signOutErr: err}))

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import { setUserProperty, setNewTeamProperty } from '../actions/'
+import { setUserProperty, setTeamProperty } from '../actions/'
 import { createTeam } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
@@ -23,7 +23,7 @@ const CreateTeam = ({ email,
 
     team(e) {
       e.preventDefault()
-      setNewTeamProperty({team: e.target.value})
+      setTeamProperty({team: e.target.value})
     },
     email(e) {
       e.preventDefault()
@@ -135,7 +135,7 @@ const mapStateToProps = state => {
     verifyPassword,
   } = state.user
 
-  const { team } = state.newTeamConfig
+  const { team } = state.teamConfig
 
   return {
     email,
@@ -148,7 +148,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
-  setNewTeamProperty: property => dispatch(setNewTeamProperty(property)),
+  setTeamProperty: property => dispatch(setTeamProperty(property)),
   createTeam: () => dispatch(createTeam()),
 })
 

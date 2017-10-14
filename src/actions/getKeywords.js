@@ -4,7 +4,7 @@ import database from '../utils/firebase'
 export const getKeywords = () => {
 
   return (dispatch, getState) => {
-    const { team } = getState().user
+    const { team } = getState().team
     dispatch(setDataProperty({loaded: false}))
     dispatch(setDataProperty({loading: true}))
     return database.ref(`teams/${team}/keywords`)

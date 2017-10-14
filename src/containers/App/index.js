@@ -42,7 +42,7 @@ const App = ({  team,
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    team: state.user.team,
+    team: state.team.team,
     children: ownProps.children,
     location: ownProps.location,
   }

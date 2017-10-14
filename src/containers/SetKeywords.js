@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
 import { setUserProperty, clearUserData } from '../actions/'
-import { createUser } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
 const SetKeywords = ({ email,
@@ -77,45 +76,13 @@ const SetKeywords = ({ email,
   return (
     <div className="color">
       <div className="flexLayout login">
-        <h3>Please set your team's evaluation criteria</h3>
+        <h3>Please set your team's evaluation criteria keywords</h3>
 
-        <input
-          type="text"
-          placeholder="Team Name"
-          value={newTeam}
-          onChange={onChange.newTeam}
-          />
-        <input
-          type="email"
-          placeholder="E-mail Address"
-          value={email}
-          onChange={onChange.email}
-          />
-        <input
-          type="text"
-          placeholder="Name"
-          value={displayName}
-          onChange={onChange.displayName}
-          />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={onChange.password}
-          />
-        <input
-          type="password"
-          placeholder="Verify Password"
-          value={verifyPassword}
-          onChange={onChange.verifyPassword}
-          />
-        <p
-          style={styles.password}
-          >Please enter a password greater than 6 characters long</p>
+
 
         <RaisedButton
-          disabled={userReady}
-          label="Create Team"
+
+          label="Save"
           style={styles.button}
           className="reportButton"
           onClick={onClick}
@@ -128,25 +95,17 @@ const SetKeywords = ({ email,
 
 const mapStateToProps = state => {
 
-  const { email,
-          displayName,
-          newTeam,
-          password,
-          verifyPassword,
-        } = state.user
+  const { keyword, keywords } = state.team
 
   return {
-    email,
-    displayName,
-    newTeam,
-    password,
-    verifyPassword,
+    keyword,
+    keywords,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
-  // createTeam: () => dispatch(createTeam()),
+  // saveKeywords: () => dispatch(saveKeywords()),
 })
 
 

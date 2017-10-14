@@ -7,7 +7,8 @@ import database from '../utils/firebase'
 
 export const getReports = (n = 10, allReports = false) => {
   return (dispatch, getState) => {
-    const { team, uid, admin } = getState().user
+    const { uid, admin } = getState().user
+    const { team } = getState().team
     dispatch(setDataProperty({dataIsFresh: false}))
     dispatch(setDataProperty({loading: true}))
     if (team === 'demo' || (admin && allReports)) {

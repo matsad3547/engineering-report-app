@@ -25,7 +25,6 @@ export const initReports = {
 }
 
 export const initUserState = {
-  team: 'demo',
   displayName: '',
   email: '',
   uid: null,
@@ -42,8 +41,8 @@ export const initDataState = {
   error: {},
 }
 
-export const initNewTeamState = {
-  team: '',
+export const initTeamState = {
+  team: 'demo',
   keyword: '',
   keywords: [],
 }

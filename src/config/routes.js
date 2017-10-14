@@ -41,6 +41,10 @@ export const routes = [
     component: CreateTeam,
   },
   {
+    path: '/set_keywords',
+    component: CreateTeam,
+  },
+  {
     path: 'app/',
     component: App,
     indexRoute: {
