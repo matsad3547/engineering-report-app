@@ -37,7 +37,7 @@ export const initUserState = {
 
 export const initDataState = {
   dataIsFresh: false,
-  loaded: false,
+  loading: false,
   error: {},
 }
 

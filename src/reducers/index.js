@@ -69,15 +69,19 @@ export const reportConfig = (state = initReportConfig, action) => {
   }
 }
 
-export const previousMetricValues = (state = [], { type, output, reports }) => {
-
+export const previousMetricValues = (state = [], action) => {
+  const { type } = action
   switch (true) {
-    case type === 'REPORTS_RECEIVED' && reports:
+    case type === 'REPORTS_RECEIVED':
+    const { reports } = action
+
     const lastReportKey = Object.keys(reports)
                             .map( k => parseInt(k, 10) )
                             .sort( (a, b) => b - a )[0]
+
       return Object.keys(reports[lastReportKey].metricValues)
         .map( k => reports[lastReportKey].metricValues[k].val)
+
     default:
       return state
   }

@@ -2,18 +2,23 @@ import React from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
+import database from '../utils/firebase'
+
 import Loading from '../components/Loading'
 
 import { setTeamProperty, setTeamKeyword } from '../actions/'
+
+import { getKeywords } from '../actions/getKeywords'
 import BackButton from '../components/BackButton'
 
-const SetKeywords = ({  keyword,
+const SetKeywords = ({  team,
+                        keyword,
                         keywords,
                         loading,
                         location,
                         setTeamProperty,
                         setTeamKeyword,
-                        // saveKeywords,
+                        getKeywords,
                       }) => {
   const creatingTeam = location.pathname === '/app/set_keywords' ? false : true
 
@@ -26,9 +31,13 @@ const SetKeywords = ({  keyword,
 
   const onClick = {
     save(e) {
-      e.preventDefault()
       console.log('saving keywords');
-      // saveKeywords()
+      e.preventDefault()
+      const updates = {}
+      updates[`teams/${team}/keywords`] = keywords
+      database.ref()
+        .update(updates)
+      getKeywords()
     },
     delete(e, w) {
       e.preventDefault()
@@ -115,11 +124,12 @@ const SetKeywords = ({  keyword,
 
 const mapStateToProps = (state, ownProps) => {
 
-  const { keyword, keywords } = state.team
+  const { team, keyword, keywords } = state.team
 
   const { loading } = state.data
 
   return {
+    team,
     keyword,
     keywords,
     loading,
@@ -130,7 +140,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => ({
   setTeamProperty: property => dispatch(setTeamProperty(property)),
   setTeamKeyword: keyword => dispatch(setTeamKeyword(keyword)),
-  // saveKeywords: () => dispatch(saveKeywords()),
+  getKeywords: () => dispatch(getKeywords())
 })
 
 

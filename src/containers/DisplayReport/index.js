@@ -21,10 +21,12 @@ const DisplayReport = ({  report,
         <h3>Report From {date(report)}</h3>
 
         <table className="author">
-          <tr>
-            <td>Author:</td>
-            <td>{displayName ? displayName : '<name is not available>'}</td>
-          </tr>
+          <tbody>            
+            <tr>
+              <td>Author:</td>
+              <td>{displayName ? displayName : '<name is not available>'}</td>
+            </tr>
+          </tbody>
         </table>
         <hr/>
         <h4>Configuration Values</h4>

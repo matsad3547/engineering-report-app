@@ -323,7 +323,7 @@ describe('data() ', () => {
     const actual = data(undefined, 'test')
     const expected = {
       dataIsFresh: false,
-      loaded: false,
+      loading: false,
       error: {},
     }
     expect(actual).toEqual(expected)

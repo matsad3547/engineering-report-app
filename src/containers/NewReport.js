@@ -40,7 +40,7 @@ const NewReport = ({  config,
       notes,
       uid,
     }
-    let updates = {}
+    const updates = {}
     updates[`teams/${team}/test reports/${newReportKey}`] = newReport
     database.ref()
       .update(updates)
@@ -103,7 +103,9 @@ const mapStateToProps = state => {
           previousMetricValues,
         } = state
 
-  const { team, uid } = state.user
+  const { uid } = state.user
+
+  const { team } = state.team
 
   const { loading } = state.data
 
