@@ -9,6 +9,7 @@ const DisplayReport = ({  report,
                           metricValues,
                           notes,
                           displayName,
+                          team,
                         }) => {
 
   if (!!config) {
@@ -20,15 +21,18 @@ const DisplayReport = ({  report,
       <div className="reportDisplay">
         <h3>Report From {date(report)}</h3>
 
-        <table className="author">
-          <tbody>            
-            <tr>
-              <td>Author:</td>
-              <td>{displayName ? displayName : '<name is not available>'}</td>
-            </tr>
-          </tbody>
-        </table>
-        <hr/>
+        { team !== 'demo' ?
+          <div>
+            <table className="author">
+              <tbody>
+                <tr>
+                  <td>Author:</td>
+                  <td>{displayName ? displayName : '<name is not available>'}</td>
+                </tr>
+              </tbody>
+            </table>
+            <hr/>
+          </div> : ''}
         <h4>Configuration Values</h4>
         <table>
           <tbody>
@@ -79,6 +83,7 @@ const mapStateToProps = (state, ownProps) => {
     metricValues: reportVals.metricValues,
     notes: reportVals.notes,
     displayName: state.user.displayName,
+    team: state.team.team,
   }
 }
 

@@ -20,11 +20,12 @@ export const getReports = (n = 10, allReports = false) => {
       return database.ref(`teams/${team}/test reports`)
               .limitToLast(n)
               .once('value', snap => {
-        const reports = Object.keys(snap.val())
-                        .filter( k => k !== '000')
-                        .reduce( (obj, k) => ({
-                          [k]: snap.val()[k]
-                        }), {})
+                const reports = Object.keys(snap.val())
+                                .filter( k => k !== '000')
+                                .reduce( (obj, k) => ({
+                                  ...obj,
+                                  [k]: snap.val()[k]
+                                }), {})
 
         dispatch(receiveReports(reports, n, allReports,))
         dispatch(setDataProperty({loading: false}))

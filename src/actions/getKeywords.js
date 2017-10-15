@@ -5,14 +5,14 @@ export const getKeywords = () => {
 
   return (dispatch, getState) => {
     const { team } = getState().team
-    dispatch(setDataProperty({loaded: false}))
+    dispatch(setDataProperty({dataIsFresh: false}))
     dispatch(setDataProperty({loading: true}))
     return database.ref(`teams/${team}/keywords`)
             .once('value', snap => {
       const keywords = snap.val()
                         .filter( k => k !== 'ph' )
       dispatch(receiveKeywords(keywords))
-      dispatch(setDataProperty({loaded: true}))
+      dispatch(setDataProperty({dataIsFresh: true}))
       dispatch(setDataProperty({loading: false}))
       })
     .catch( err => {
