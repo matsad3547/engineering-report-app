@@ -32,7 +32,7 @@ export const checkAuthStatus = () => {
   //TODO check auth status
 }
 
-export const setData = (str = '') => {
+export const setData = () => {
   return dispatch => {
 
     const token = localStorage.getItem('jwt')
@@ -80,10 +80,13 @@ export const setData = (str = '') => {
 
 export const signOut = () => {
   return dispatch => {
-    localStorage.removeItem('jwt')
     auth.signOut()
     .then( () => {
       dispatch(clearUserData())
+    })
+    .then( () => localStorage.removeItem('jwt') )
+    .then( () => {
+      dispatch(setData())
       browserHistory.push('/')
     })
     .catch( err => {

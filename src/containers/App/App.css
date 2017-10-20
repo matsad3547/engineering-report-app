@@ -93,7 +93,7 @@ hr {
 }
 
 .slider {
-  touch-action: auto;
+  touch-action: none;
   display: inline-block;
   width: 100%;
   text-align: center;
