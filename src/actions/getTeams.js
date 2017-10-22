@@ -10,11 +10,9 @@ export const getTeams = () => {
   return dispatch => {
     dispatch(setDataProperty({dataIsFresh: false}))
     dispatch(setDataProperty({loading: true}))
-    return database.ref('teams/')
+    return database.ref('team_names')
             .once('value', snap => {
-      const teams = Object.keys(snap.val())
-                      .filter( t => t !== 'demo' )
-      
+      const teams = snap.val()
       dispatch(setUserProperty({teams,}))
       dispatch(setDataProperty({loading: false}))
       dispatch(setDataProperty({dataIsFresh: true}))

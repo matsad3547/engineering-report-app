@@ -152,6 +152,7 @@ export const createTeam = () => {
       displayName,
       email,
       password,
+      teams,
     } = getState().user
 
     const { team } = getState().team
@@ -162,7 +163,7 @@ export const createTeam = () => {
       const { uid, email } = user
 
       const adminInfo = {}
-      adminInfo[`users/${uid}`] = {
+      adminInfo[`/${uid}`] = {
         team,
         admin: true,
         approved: true,
@@ -177,10 +178,13 @@ export const createTeam = () => {
         },
       }
 
-      database.ref()
+      const teamNames = [...teams, team]
+
+      database.ref('users')
       .update(adminInfo)
       database.ref('teams')
       .update(teamInfo)
+
       dispatch(clearUserData())
       dispatch(setTeamProperty({team: ''}))
 
@@ -193,6 +197,10 @@ export const createTeam = () => {
           browserHistory.push('/set_keywords')
         })
       )
+      .then( () => {
+        database.ref()
+        .update({'team_names': teamNames})
+      })
     })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
