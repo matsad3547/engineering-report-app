@@ -88,7 +88,7 @@ const CreateUser = ({ email,
           labelStyle={styles.label}
           style={styles.menu}
           >
-          <MenuItem primaryText={''} label={'Choose a team'} value={''} />
+          <MenuItem primaryText={'<none selected>'} label={'Choose a team'} value={''} />
           { teams.map( (t, i) => <MenuItem key={`team-${i}`} primaryText={t} label={t} value={t}/> )}
 
         </DropDownMenu>

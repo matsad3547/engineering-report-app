@@ -31,7 +31,6 @@ const SetKeywords = ({  team,
 
   const onClick = {
     save(e) {
-      console.log('saving keywords');
       e.preventDefault()
       const updates = {}
       updates[`teams/${team}/keywords`] = keywords

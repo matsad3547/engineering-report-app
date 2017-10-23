@@ -38,6 +38,7 @@ export const setData = () => {
     const token = localStorage.getItem('jwt')
 
     if (token){
+      console.log('token:', token, typeof token);
       const {
         displayName,
         email,
@@ -81,9 +82,7 @@ export const setData = () => {
 export const signOut = () => {
   return dispatch => {
     auth.signOut()
-    .then( () => {
-      dispatch(clearUserData())
-    })
+    .then( () => dispatch(clearUserData()) )
     .then( () => localStorage.removeItem('jwt') )
     .then( () => {
       dispatch(setData())
@@ -191,16 +190,16 @@ export const createTeam = () => {
       user.updateProfile({
         displayName,
       })
+      .then( () => {
+        database.ref()
+        .update({'team_names': teamNames})
+      })
       .then( () => auth.onAuthStateChanged( jwt => {
           localStorage.setItem('jwt', JSON.stringify(jwt))
           dispatch(setData())
           browserHistory.push('/set_keywords')
         })
       )
-      .then( () => {
-        database.ref()
-        .update({'team_names': teamNames})
-      })
     })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)

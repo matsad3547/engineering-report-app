@@ -231,6 +231,7 @@ describe('user() ', () => {
       admin: false,
       approved: false,
       teams: [],
+      team: '',
     }
     expect(user(undefined, action)).toEqual(result)
   })
@@ -304,6 +305,7 @@ describe('user() ', () => {
       verifyPassword: 'password1',
       admin: true,
       approved: true,
+      team: 'test',
     }
     const result = {
       displayName: '',
@@ -313,6 +315,7 @@ describe('user() ', () => {
       verifyPassword: '',
       admin: false,
       approved: false,
+      team: '',
     }
     expect(user(state, action)).toEqual(result)
   })

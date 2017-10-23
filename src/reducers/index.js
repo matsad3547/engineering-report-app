@@ -74,13 +74,15 @@ export const previousMetricValues = (state = [], action) => {
   switch (true) {
     case type === 'REPORTS_RECEIVED':
     const { reports } = action
-
-    const lastReportKey = Object.keys(reports)
-                            .map( k => parseInt(k, 10) )
-                            .sort( (a, b) => b - a )[0]
+    if (reports){
+      const lastReportKey = Object.keys(reports)
+      .map( k => parseInt(k, 10) )
+      .sort( (a, b) => b - a )[0]
 
       return Object.keys(reports[lastReportKey].metricValues)
-        .map( k => reports[lastReportKey].metricValues[k].val)
+      .map( k => reports[lastReportKey].metricValues[k].val)
+    }
+    else return state
 
     default:
       return state
@@ -154,6 +156,7 @@ export const user = (state = initUserState, action) => {
         verifyPassword: '',
         admin: false,
         approved: false,
+        team: '',
       }
     default:
       return state
