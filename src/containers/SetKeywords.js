@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
+import { Link } from 'react-router'
 
 import database from '../utils/firebase'
 
@@ -108,11 +109,20 @@ const SetKeywords = ({  team,
               </div>
             )}
             <RaisedButton
+              disabled={keywords.length === 0}
               label="Save"
               style={styles.button}
               className="reportButton"
               onClick={onClick.save}
               />
+            {creatingTeam ?
+              <RaisedButton
+                disabled={keywords.length === 0}
+                label="Done"
+                containerElement={<Link to="/app/" ></Link>}
+                className="reportButton"
+                style={styles.button}
+                /> : ''}
           </div> : ''
         }
         </div>

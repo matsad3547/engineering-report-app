@@ -15,16 +15,16 @@ export const signIn = (email, password) => {
 
   return dispatch => {
     auth.signInWithEmailAndPassword(email, password)
-    .then( jwt => {
-      localStorage.setItem('jwt', JSON.stringify(jwt))
-      dispatch(setData())
-    })
+    .then( () => dispatch(setData()) )
     .catch( err => {
       console.error('There was a error signing in:', err.message)
       dispatch(setDataError({signInErr: err}))
     })
   }
 }
+
+export const userKey = Object.keys(window.localStorage)
+                        .filter( k => k.startsWith('firebase:authUser') )[0]
 
 export const checkAuthStatus = () => {
   //TODO get token?
@@ -33,12 +33,14 @@ export const checkAuthStatus = () => {
 }
 
 export const setData = () => {
+
   return dispatch => {
 
-    const token = localStorage.getItem('jwt')
+    const token = localStorage.getItem(userKey)
+
+    // console.log('user key:', userKey, '\ntoken:', token);
 
     if (token){
-      console.log('token:', token, typeof token);
       const {
         displayName,
         email,
@@ -83,7 +85,6 @@ export const signOut = () => {
   return dispatch => {
     auth.signOut()
     .then( () => dispatch(clearUserData()) )
-    .then( () => localStorage.removeItem('jwt') )
     .then( () => {
       dispatch(setData())
       browserHistory.push('/')
@@ -173,7 +174,12 @@ export const createTeam = () => {
       teamInfo[`/${team}`] = {
         keywords: ['ph'],
         'test reports': {
-          '000': 'ph',
+          '000': {
+            config: 'ph',
+            metricValues: 'ph',
+            uid: 'ph',
+            notes: 'ph',
+          },
         },
       }
 
@@ -194,8 +200,7 @@ export const createTeam = () => {
         database.ref()
         .update({'team_names': teamNames})
       })
-      .then( () => auth.onAuthStateChanged( jwt => {
-          localStorage.setItem('jwt', JSON.stringify(jwt))
+      .then( () => auth.onAuthStateChanged( () => {
           dispatch(setData())
           browserHistory.push('/set_keywords')
         })

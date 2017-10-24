@@ -1,3 +1,5 @@
+import { userKey } from '../utils/auth'
+
 import About from '../components/About'
 import UnAuth from '../components/UnAuth'
 
@@ -13,7 +15,7 @@ import SetKeywords from '../containers/SetKeywords'
 
 const redirectToWelcome = (nextState, replace, cb) => {
 
-  if (localStorage.getItem('jwt')) {
+  if (localStorage.getItem(userKey)) {
     replace('app/')
     cb()
   }
