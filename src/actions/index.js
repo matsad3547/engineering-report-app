@@ -50,6 +50,7 @@ export const setUserData = ({ displayName,
                               uid,
                               admin,
                               approved,
+                              team,
                             }) => ({
   type: 'SET_USER_DATA',
   displayName,
@@ -57,6 +58,7 @@ export const setUserData = ({ displayName,
   uid,
   admin,
   approved,
+  team,
 })
 
 export const setUserProperty = (property) => {

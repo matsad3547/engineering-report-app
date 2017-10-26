@@ -5,9 +5,10 @@ import { Link } from 'react-router'
 
 import database from '../utils/firebase'
 
-import Loading from '../components/Loading'
-
-import { setTeamProperty, setTeamKeyword } from '../actions/'
+import {
+  setTeamProperty,
+  setTeamKeyword,
+} from '../actions/'
 
 import { getKeywords } from '../actions/getKeywords'
 import BackButton from '../components/BackButton'
@@ -21,6 +22,7 @@ const SetKeywords = ({  team,
                         setTeamKeyword,
                         getKeywords,
                       }) => {
+                        
   const creatingTeam = location.pathname === '/app/set_keywords' ? false : true
 
   const onChange = {
@@ -65,12 +67,6 @@ const SetKeywords = ({  team,
       width: 75,
       marginLeft: 10,
     },
-  }
-
-  if(loading) {
-    return (
-      <Loading message={'Loading...'}/>
-    )
   }
 
   return (
@@ -133,7 +129,12 @@ const SetKeywords = ({  team,
 
 const mapStateToProps = (state, ownProps) => {
 
-  const { team, keyword, keywords } = state.team
+  const {
+    keyword,
+    keywords,
+  } = state.teamConfig
+
+  const { team } = state.user
 
   const { loading } = state.data
 

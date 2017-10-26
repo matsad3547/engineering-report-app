@@ -5,13 +5,14 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { setUserProperty, setTeamProperty } from '../actions/'
 import { createTeam } from '../utils/auth'
 import BackButton from '../components/BackButton'
+import Loading from '../components/Loading'
 
 const CreateTeam = ({ email,
                       displayName,
                       team,
                       password,
                       verifyPassword,
-                      userDispatch,
+                      loading,
                       setUserProperty,
                       setTeamProperty,
                       createTeam,
@@ -73,57 +74,63 @@ const CreateTeam = ({ email,
     },
   }
 
-  return (
-    <div className="color">
-      <div className="flexLayout login">
-        <h3>Please Create a Team</h3>
-        <h4>You will be the new Team Admin</h4>
+  if(loading) {
+    return (
+      <Loading message={'Creating your team...'}/>
+    )
+  }
+  else {
+    return (
+      <div className="color">
+        <div className="flexLayout login">
+          <h3>Please Create a Team</h3>
+          <h4>You will be the new Team Admin</h4>
+          <input
+            type="text"
+            placeholder="Team Name"
+            value={team === 'demo' ? '' : team}
+            onChange={onChange.team}
+            />
+          <input
+            type="email"
+            placeholder="E-mail Address"
+            value={email}
+            onChange={onChange.email}
+            />
+          <input
+            type="text"
+            placeholder="Name"
+            value={displayName}
+            onChange={onChange.displayName}
+            />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={onChange.password}
+            />
+          <input
+            type="password"
+            placeholder="Verify Password"
+            value={verifyPassword}
+            onChange={onChange.verifyPassword}
+            />
+          <p
+            style={styles.password}
+            >Please enter a password greater than 6 characters long</p>
 
-        <input
-          type="text"
-          placeholder="Team Name"
-          value={team === 'demo' ? '' : team}
-          onChange={onChange.team}
-          />
-        <input
-          type="email"
-          placeholder="E-mail Address"
-          value={email}
-          onChange={onChange.email}
-          />
-        <input
-          type="text"
-          placeholder="Name"
-          value={displayName}
-          onChange={onChange.displayName}
-          />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={onChange.password}
-          />
-        <input
-          type="password"
-          placeholder="Verify Password"
-          value={verifyPassword}
-          onChange={onChange.verifyPassword}
-          />
-        <p
-          style={styles.password}
-          >Please enter a password greater than 6 characters long</p>
-
-        <RaisedButton
-          disabled={userReady}
-          label="Create Team"
-          style={styles.button}
-          className="reportButton"
-          onClick={onClick}
-          />
+          <RaisedButton
+            disabled={userReady}
+            label="Create Team"
+            style={styles.button}
+            className="reportButton"
+            onClick={onClick}
+            />
+        </div>
+        <BackButton />
       </div>
-      <BackButton />
-    </div>
-  )
+    )
+  }
 }
 
 const mapStateToProps = state => {
@@ -135,7 +142,9 @@ const mapStateToProps = state => {
     verifyPassword,
   } = state.user
 
-  const { team } = state.team
+  const { loading } = state.data
+
+  const { team } = state.teamConfig
 
   return {
     email,
@@ -143,6 +152,7 @@ const mapStateToProps = state => {
     team,
     password,
     verifyPassword,
+    loading,
   }
 }
 

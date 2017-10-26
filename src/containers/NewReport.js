@@ -8,8 +8,6 @@ import { saveReport } from '../actions'
 import { getReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
 
-import Loading from '../components/Loading'
-
 import ConfigForm from '../containers/ConfigForm'
 import DropDownSliderInput from '../containers/DropDownSliderInput'
 import NoteField from '../containers/NoteField'
@@ -20,7 +18,8 @@ const NewReport = ({  config,
                       previousMetricValues,
                       team,
                       uid,
-                      loading,
+                      keywords,
+                      keywordsErr,
                       saveReport,
                       getReports,
                       getKeywords
@@ -55,9 +54,19 @@ const NewReport = ({  config,
     }
   }
 
-  if(loading) {
+  if (keywordsErr) {
+      return (
+        <div className="existingReports">
+          <h3>Keyword loading has failed, sorry!</h3>
+          <p>{keywordsErr}</p>
+        </div>
+    )
+  }
+  else if (keywords.length === 0) {
     return (
-      <Loading message={'Loading...'}/>
+      <div className="existingReports">
+        <h3>No keywords have been set</h3>
+      </div>
     )
   }
 
@@ -97,17 +106,23 @@ const NewReport = ({  config,
 
 const mapStateToProps = state => {
 
-  const { reportConfig,
-          metricValues,
-          notes,
-          previousMetricValues,
-        } = state
+  const {
+    reportConfig,
+    metricValues,
+    notes,
+    previousMetricValues,
+  } = state
 
-  const { uid } = state.user
+  const {
+    uid,
+    team,
+  } = state.user
 
-  const { team } = state.team
+  const { error } = state.data
 
-  const { loading } = state.data
+  const { keywordsErr } = error
+
+  const { keywords } = state.teamConfig
 
   return {
     config: reportConfig,
@@ -116,7 +131,8 @@ const mapStateToProps = state => {
     previousMetricValues,
     team,
     uid,
-    loading,
+    keywords,
+    keywordsErr,
   }
 }
 

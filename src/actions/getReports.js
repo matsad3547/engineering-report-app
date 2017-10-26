@@ -9,12 +9,11 @@ export const getReports = (n = 10, allReports = false) => {
 
   return (dispatch, getState) => {
 
-    const { uid, admin } = getState().user
-
-    const { team } = getState().team
-
-    dispatch(setDataProperty({dataIsFresh: false}))
-    dispatch(setDataProperty({loading: true}))
+    const {
+      uid,
+      admin,
+      team,
+    } = getState().user
 
     if (team === 'demo' || (admin && allReports)) {
       return database.ref(`teams/${team}/test reports`)
@@ -28,8 +27,6 @@ export const getReports = (n = 10, allReports = false) => {
                                 }), {})
 
         dispatch(receiveReports(reports, n, allReports,))
-        dispatch(setDataProperty({loading: false}))
-        dispatch(setDataProperty({dataIsFresh: true}))
       })
       .catch( err => {
         console.error('An error occured while fetching reports from the database:', err);
@@ -46,8 +43,6 @@ export const getReports = (n = 10, allReports = false) => {
         const reports = snap.val()
 
         dispatch(receiveReports(reports, n, allReports))
-        dispatch(setDataProperty({loading: false}))
-        dispatch(setDataProperty({dataIsFresh: true}))
       })
       .catch( err => {
         console.error('An error occured while fetching reports from the database:', err);

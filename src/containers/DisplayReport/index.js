@@ -83,7 +83,7 @@ const mapStateToProps = (state, ownProps) => {
     metricValues: reportVals.metricValues,
     notes: reportVals.notes,
     displayName: state.user.displayName,
-    team: state.team.team,
+    team: state.user.team,
   }
 }
 

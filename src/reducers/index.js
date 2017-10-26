@@ -156,7 +156,7 @@ export const user = (state = initUserState, action) => {
         verifyPassword: '',
         admin: false,
         approved: false,
-        team: '',
+        team: 'demo',
       }
     default:
       return state
@@ -185,7 +185,7 @@ export const data = (state = initDataState, action) => {
   }
 }
 
-export const team = (state = initTeamState, action) => {
+export const teamConfig = (state = initTeamState, action) => {
   const key = Object.keys(action)
                 .filter( k => k !== 'type' )[0]
   switch(action.type){
@@ -240,6 +240,6 @@ export const combinedReducers = combineReducers({
     queued,
     user,
     data,
-    team,
+    teamConfig,
     routing: routerReducer,
   })

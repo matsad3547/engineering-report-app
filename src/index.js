@@ -13,11 +13,11 @@ import store from './config/store'
 import { routes } from './config/routes'
 import { muiTheme } from './config/'
 
-import { setData } from './utils/auth'
+import { checkAuthStatus } from './utils/auth'
 
 injectTapEventPlugin()
 
-store.dispatch(setData())
+store.dispatch(checkAuthStatus())
 
 const history = syncHistoryWithStore(browserHistory, store)
 

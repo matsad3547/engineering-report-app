@@ -33,7 +33,7 @@ export const initUserState = {
   admin: false,
   approved: false,
   teams: [],
-  team: '',
+  team: 'demo',
 }
 
 export const initDataState = {
@@ -43,7 +43,7 @@ export const initDataState = {
 }
 
 export const initTeamState = {
-  team: 'demo',
+  team: '',
   keyword: '',
   keywords: [],
 }

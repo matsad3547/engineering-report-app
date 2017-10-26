@@ -6,15 +6,13 @@ import Checkbox from 'material-ui/Checkbox'
 import { queueReport, unqueueReport, clearQueue } from '../../actions/'
 import { getReports } from '../../actions/getReports'
 import ReportItem from '../../components/ReportItem'
-import Loading from '../../components/Loading'
 import { downloadQueued } from '../../utils/'
 
 const ExistingReports = ({  reports,
                             n,
                             allReports,
                             queued,
-                            loading,
-                            error,
+                            reportErr,
                             admin,
                             queueReport,
                             unqueueReport,
@@ -60,15 +58,11 @@ const ExistingReports = ({  reports,
     },
   }
 
-  if (loading) {
-    return (
-      <Loading message={'Reports are loading...'}/>
-    )
-  }
-  else if (error.reportErr) {
+if (reportErr) {
     return (
       <div className="existingReports">
         <h3>Report loading has failed, sorry!</h3>
+        <p>{reportErr}</p>
       </div>
     )
   }
@@ -127,13 +121,15 @@ const mapStateToProps = state => {
 
   const { reports, queued, data, user } = state
 
+  const { reportErr } = data.error
+
   return {
     reports: reports.reports,
     n: reports.n,
     allReports: reports.allReports,
     queued,
     loading: data.loading,
-    error: data.error,
+    reportErr,
     admin: user.admin,
   }
 }

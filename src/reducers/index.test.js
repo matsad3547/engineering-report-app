@@ -11,7 +11,7 @@ import {
   user,
   authState,
   data,
-  team,
+  teamConfig,
 } from './index.js'
 
 const action = {
@@ -231,7 +231,7 @@ describe('user() ', () => {
       admin: false,
       approved: false,
       teams: [],
-      team: '',
+      team: 'demo',
     }
     expect(user(undefined, action)).toEqual(result)
   })
@@ -244,6 +244,7 @@ describe('user() ', () => {
       uid: 'test4',
       admin: true,
       approved: true,
+      team: 'test',
     }
     const state = {
       displayName: '',
@@ -253,6 +254,7 @@ describe('user() ', () => {
       uid: null,
       admin: false,
       approved: false,
+      team: '',
       teams: []
     }
     const expected = {
@@ -263,6 +265,7 @@ describe('user() ', () => {
       verifyPassword: '',
       admin: true,
       approved: true,
+      team: 'test',
       teams: [],
     }
     expect(user(state, action)).toEqual(expected)
@@ -315,7 +318,7 @@ describe('user() ', () => {
       verifyPassword: '',
       admin: false,
       approved: false,
-      team: '',
+      team: 'demo',
     }
     expect(user(state, action)).toEqual(result)
   })
@@ -397,12 +400,12 @@ describe('data() ', () => {
   })
 })
 
-describe('team()', () => {
+describe('teamConfig()', () => {
 
   test('should return an init state object by default', () => {
-    const actual = team(undefined, 'test')
+    const actual = teamConfig(undefined, 'test')
     const expected = {
-      team: 'demo',
+      team: '',
       keyword: '',
       keywords: [],
     }
@@ -417,7 +420,7 @@ describe('team()', () => {
       type: 'SET_TEAM_PROPERTY',
       team: 'test'
     }
-    const actual = team(state, action)
+    const actual = teamConfig(state, action)
     const expected = {
       team: 'test',
     }
@@ -432,7 +435,7 @@ describe('team()', () => {
       type: 'SET_TEAM_KEYWORD',
       keyword: 'test',
     }
-    const actual = team(state, action)
+    const actual = teamConfig(state, action)
     const expected = {
       keywords: ['test'],
     }
@@ -447,7 +450,7 @@ describe('team()', () => {
       type: 'SET_TEAM_KEYWORD',
       keyword: 'test',
     }
-    const actual = team(state, action)
+    const actual = teamConfig(state, action)
     const expected = {
       keywords: ['test', 'cheese'],
     }
@@ -462,7 +465,7 @@ describe('team()', () => {
       type: 'SET_TEAM_KEYWORD',
       keyword: 'test',
     }
-    const actual = team(state, action)
+    const actual = teamConfig(state, action)
     const expected = {
       keywords: ['cheese'],
     }
@@ -477,7 +480,7 @@ describe('team()', () => {
       type: 'KEYWORDS_RECEIVED',
       keywords: ['test', 'cheese'],
     }
-    const actual = team(state, action)
+    const actual = teamConfig(state, action)
     const expected = {
       keywords: ['test', 'cheese'],
     }
@@ -493,9 +496,9 @@ describe('team()', () => {
     const action = {
       type: 'CLEAR_USER_DATA'
     }
-    const actual = team(state, action)
+    const actual = teamConfig(state, action)
     const expected = {
-      team: 'demo',
+      team: '',
       keyword: '',
       keywords: [],
     }

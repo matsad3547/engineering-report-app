@@ -7,6 +7,7 @@ import { getKeywords} from '../actions/getKeywords'
 import {
   setUserData,
   clearUserData,
+  setDataProperty,
   setDataError,
   setTeamProperty,
 } from '../actions/'
@@ -14,11 +15,30 @@ import {
 export const signIn = (email, password) => {
 
   return dispatch => {
+
+    dispatch(setDataProperty({loading: true}))
+
     auth.signInWithEmailAndPassword(email, password)
-    .then( () => dispatch(setData()) )
+    .then( user => dispatch(setData(user)) )
     .catch( err => {
       console.error('There was a error signing in:', err.message)
       dispatch(setDataError({signInErr: err}))
+    })
+  }
+}
+
+export const signOut = () => {
+
+  return dispatch => {
+
+    auth.signOut()
+    .then( () => dispatch(clearUserData()) )
+    .then( () => {
+      browserHistory.push('/')
+    })
+    .catch( err => {
+      console.error('There was a error signing out:', err.message)
+      dispatch(setDataError({signOutErr: err}))
     })
   }
 }
@@ -27,71 +47,65 @@ export const userKey = Object.keys(window.localStorage)
                         .filter( k => k.startsWith('firebase:authUser') )[0]
 
 export const checkAuthStatus = () => {
-  //TODO get token?
-  //TODO verify token is the same?
-  //TODO check auth status
-}
-
-export const setData = () => {
 
   return dispatch => {
 
-    const token = localStorage.getItem(userKey)
-
-    // console.log('user key:', userKey, '\ntoken:', token);
-
-    if (token){
-      const {
-        displayName,
-        email,
-        uid,
-      } = JSON.parse(token)
-
-      database.ref(`users/${uid}`)
-      .once('value', snap => {
-        const {
-          team,
-          admin,
-          approved,
-        } = snap.val()
-        dispatch(setUserData({
-            displayName,
-            email,
-            uid,
-            admin,
-            approved,
-          })
-        )
-        dispatch(setTeamProperty({team,}))
-      })
-      .then( () => {
+    auth.onAuthStateChanged( user => {
+      if(user) {
+        dispatch(setData(user))
+      }
+      else {
         dispatch(getReports())
         dispatch(getKeywords())
-      })
-      .catch( err => {
-        console.error('There was a error retrieving your user data:', err.message)
-        dispatch(setDataError({userErr: err}))
-      })
-    }
-    else {
-      dispatch(getReports())
-      dispatch(getKeywords())
-    }
-    dispatch(getTeams())
+        dispatch(getTeams())
+      }
+    })
   }
 }
 
-export const signOut = () => {
+export const setData = user => {
+
   return dispatch => {
-    auth.signOut()
-    .then( () => dispatch(clearUserData()) )
+
+    dispatch(setDataProperty({loading: true}))
+    dispatch(setDataProperty({dataIsFresh: false}))
+
+    const {
+      displayName,
+      email,
+      uid,
+    } = user
+
+    database.ref(`users/${uid}`)
+    .once('value', snap => {
+      const {
+        team,
+        admin,
+        approved,
+      } = snap.val()
+
+      dispatch(setUserData({
+          displayName,
+          email,
+          uid,
+          admin,
+          approved,
+          team,
+        })
+      )
+    })
     .then( () => {
-      dispatch(setData())
-      browserHistory.push('/')
+      dispatch(getReports())
+      dispatch(getKeywords())
+      dispatch(getTeams())
+    })
+    .then( () => {
+      dispatch(setDataProperty({loading: false}))
+      dispatch(setDataProperty({dataIsFresh: true}))
     })
     .catch( err => {
-      console.error('There was a error signing out:', err.message)
-      dispatch(setDataError({signOutErr: err}))
+      console.error('There was a error retrieving your user data:', err.message)
+      dispatch(setDataError({userErr: err}))
     })
   }
 }
@@ -148,6 +162,7 @@ export const createUser = () => {
 export const createTeam = () => {
 
   return (dispatch, getState) => {
+
     const {
       displayName,
       email,
@@ -155,7 +170,7 @@ export const createTeam = () => {
       teams,
     } = getState().user
 
-    const { team } = getState().team
+    const { team } = getState().teamConfig
 
     auth.createUserWithEmailAndPassword(email, password)
       .then( user => {
@@ -190,7 +205,6 @@ export const createTeam = () => {
       database.ref('teams')
       .update(teamInfo)
 
-      dispatch(clearUserData())
       dispatch(setTeamProperty({team: ''}))
 
       user.updateProfile({
@@ -199,13 +213,10 @@ export const createTeam = () => {
       .then( () => {
         database.ref()
         .update({'team_names': teamNames})
+        dispatch(clearUserData())
       })
-      .then( () => auth.onAuthStateChanged( () => {
-          dispatch(setData())
-          browserHistory.push('/set_keywords')
-        })
-      )
     })
+    .then( () => browserHistory.push('/set_keywords') )
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
       dispatch(setDataError({signOutErr: err}))

@@ -6,12 +6,14 @@ import './App.css'
 
 import HomeButton from '../../components/HomeButton'
 import TabMenu from '../../components/TabMenu'
+import Loading from '../../components/Loading'
 
 import TopMenu from '../../containers/TopMenu'
 
 const App = ({  team,
                 children,
                 location,
+                loading,
               }) => {
 
   const pageDisplayed = location.pathname === '/app/new_report' ? 1 : 2
@@ -22,8 +24,12 @@ const App = ({  team,
     }
   }
 
+  if(loading) {
+    return (
+      <Loading message={'Loading your data...'}/>
+    )
+  }
   return(
-
     <div className="app">
       <AppBar
         iconElementLeft={ team !== 'demo' ? <TopMenu /> : <HomeButton/>}
@@ -42,9 +48,10 @@ const App = ({  team,
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    team: state.team.team,
+    team: state.user.team,
     children: ownProps.children,
     location: ownProps.location,
+    loading: state.data.loading,
   }
 }
 
