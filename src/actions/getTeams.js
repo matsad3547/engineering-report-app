@@ -13,6 +13,7 @@ export const getTeams = () => {
             .once('value', snap => {
       const teams = snap.val()
       dispatch(setUserProperty({teams,}))
+      dispatch(setDataProperty({loading: false}))
       })
     .catch( err => {
       console.error('An error occured while fetching teams from the database:', err);

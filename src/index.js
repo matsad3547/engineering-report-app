@@ -13,11 +13,31 @@ import store from './config/store'
 import { routes } from './config/routes'
 import { muiTheme } from './config/'
 
-import { checkAuthStatus } from './utils/auth'
+import { auth }  from './utils/firebase'
+import { setData } from './utils/auth'
+
+import { getReports } from './actions/getReports'
+import { getTeams } from './actions/getTeams'
+import { getKeywords} from './actions/getKeywords'
+
 
 injectTapEventPlugin()
+console.log('at index');
+// store.dispatch(checkAuthStatus())
 
-store.dispatch(checkAuthStatus())
+auth.onAuthStateChanged( user => {
+    if(user) {
+      console.log('at if user');
+      store.dispatch(setData(user))
+    }
+    else {
+      store.dispatch(getReports())
+      store.dispatch(getKeywords())
+      store.dispatch(getTeams())
+    }
+  })
+
+
 
 const history = syncHistoryWithStore(browserHistory, store)
 

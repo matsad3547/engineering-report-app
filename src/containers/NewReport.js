@@ -4,7 +4,10 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import database from '../utils/firebase'
 
-import { saveReport } from '../actions'
+import {
+  saveReport,
+  setDataProperty,
+ } from '../actions'
 import { getReports } from '../actions/getReports'
 import { getKeywords } from '../actions/getKeywords'
 
@@ -22,7 +25,8 @@ const NewReport = ({  config,
                       keywordsErr,
                       saveReport,
                       getReports,
-                      getKeywords
+                      getKeywords,
+                      setDataProperty,
                     }) => {
 
   const keys = Object.keys(metricValues)
@@ -32,6 +36,7 @@ const NewReport = ({  config,
   const submitReport = e => {
 
     e.preventDefault()
+    setDataProperty({loading: true})
     const newReportKey = Date.now()
     const newReport = {
       config,
@@ -45,6 +50,7 @@ const NewReport = ({  config,
       .update(updates)
     saveReport()
     getReports()
+    setDataProperty({loading: false})
   }
 
   const styles = {
@@ -142,7 +148,8 @@ const mapDispatchToProps = dispatch => {
     saveReport: () => dispatch(saveReport()),
     getReports: team => dispatch(getReports(team)),
     getKeywords: team => dispatch(getKeywords(team)),
-    }
+    setDataProperty: property => dispatch(setDataProperty(property)),
+  }
 }
 
 export default connect(

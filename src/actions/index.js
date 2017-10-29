@@ -73,6 +73,7 @@ export const clearUserData = () => ({
   type: 'CLEAR_USER_DATA',
 })
 
+
 export const receiveKeywords = keywords => ({
   type: 'KEYWORDS_RECEIVED',
   keywords,
@@ -117,4 +118,8 @@ export const setTeamProperty = property => {
 export const setTeamKeyword = keyword => ({
   type: 'SET_TEAM_KEYWORD',
   keyword,
+})
+
+export const resetLoginData = () => ({
+  type: 'RESET_LOGIN',
 })

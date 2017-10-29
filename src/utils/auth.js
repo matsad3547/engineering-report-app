@@ -4,12 +4,14 @@ import { browserHistory } from 'react-router'
 import { getReports } from '../actions/getReports'
 import { getTeams } from '../actions/getTeams'
 import { getKeywords} from '../actions/getKeywords'
+
 import {
   setUserData,
   clearUserData,
   setDataProperty,
   setDataError,
   setTeamProperty,
+  resetLoginData,
 } from '../actions/'
 
 export const signIn = (email, password) => {
@@ -19,9 +21,9 @@ export const signIn = (email, password) => {
     dispatch(setDataProperty({loading: true}))
 
     auth.signInWithEmailAndPassword(email, password)
-    .then( user => dispatch(setData(user)) )
     .catch( err => {
       console.error('There was a error signing in:', err.message)
+      dispatch(setDataProperty({loading: false}))
       dispatch(setDataError({signInErr: err}))
     })
   }
@@ -38,6 +40,7 @@ export const signOut = () => {
     })
     .catch( err => {
       console.error('There was a error signing out:', err.message)
+      dispatch(setDataProperty({loading: false}))
       dispatch(setDataError({signOutErr: err}))
     })
   }
@@ -46,35 +49,19 @@ export const signOut = () => {
 export const userKey = Object.keys(window.localStorage)
                         .filter( k => k.startsWith('firebase:authUser') )[0]
 
-export const checkAuthStatus = () => {
-
-  return dispatch => {
-
-    auth.onAuthStateChanged( user => {
-      if(user) {
-        dispatch(setData(user))
-      }
-      else {
-        dispatch(getReports())
-        dispatch(getKeywords())
-        dispatch(getTeams())
-      }
-    })
-  }
-}
-
 export const setData = user => {
-
   return dispatch => {
+    console.log('setting the fucking data!', user, '\nuser.displayName:', user.providerData);
 
     dispatch(setDataProperty({loading: true}))
-    dispatch(setDataProperty({dataIsFresh: false}))
 
     const {
       displayName,
       email,
       uid,
     } = user
+
+    console.log('display name?', displayName, '\nemail?', email, '\nuid?', uid);
 
     database.ref(`users/${uid}`)
     .once('value', snap => {
@@ -99,13 +86,10 @@ export const setData = user => {
       dispatch(getKeywords())
       dispatch(getTeams())
     })
-    .then( () => {
-      dispatch(setDataProperty({loading: false}))
-      dispatch(setDataProperty({dataIsFresh: true}))
-    })
     .catch( err => {
       console.error('There was a error retrieving your user data:', err.message)
       dispatch(setDataError({userErr: err}))
+      dispatch(setDataProperty({loading: false}))
     })
   }
 }
@@ -204,6 +188,8 @@ export const createTeam = () => {
       .update(adminInfo)
       database.ref('teams')
       .update(teamInfo)
+      database.ref()
+      .update({'team_names': teamNames})
 
       dispatch(setTeamProperty({team: ''}))
 
@@ -211,12 +197,18 @@ export const createTeam = () => {
         displayName,
       })
       .then( () => {
-        database.ref()
-        .update({'team_names': teamNames})
-        dispatch(clearUserData())
+        dispatch(resetLoginData())
+        browserHistory.push('/set_keywords')
       })
     })
-    .then( () => browserHistory.push('/set_keywords') )
+    // .then( () => {
+    //   // const user = auth.currentUser
+    //   // console.log('user at .then:', user);
+    //   // dispatch(setData(user))
+    //   // auth.onAuthStateChanged( user => {
+    //   //   console.log('user at then:', user);
+    //   // })
+    // })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
       dispatch(setDataError({signOutErr: err}))

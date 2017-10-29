@@ -10,10 +10,13 @@ import Loading from '../../components/Loading'
 
 import TopMenu from '../../containers/TopMenu'
 
+// import { checkAuthStatus } from '../../utils/auth'
+
 const App = ({  team,
                 children,
                 location,
                 loading,
+                dispatch,
               }) => {
 
   const pageDisplayed = location.pathname === '/app/new_report' ? 1 : 2
@@ -23,6 +26,9 @@ const App = ({  team,
       height: 50,
     }
   }
+  // console.log('at app');
+
+  // dispatch(checkAuthStatus())
 
   if(loading) {
     return (

@@ -17,6 +17,7 @@ import {
   setDataError,
   setTeamProperty,
   setTeamKeyword,
+  resetLoginData,
   } from './index.js'
 
 import {
@@ -318,6 +319,16 @@ describe('setTeamKeyword()', () => {
     const expected = {
       type: 'SET_TEAM_KEYWORD',
       keyword: 'test',
+    }
+    expect(actual).toEqual(expected)
+  })
+})
+
+describe('resetLoginData()', () => {
+  test('returns an action of "RESET_LOGIN"', () => {
+    const actual = resetLoginData()
+    const expected = {
+      type: 'RESET_LOGIN',
     }
     expect(actual).toEqual(expected)
   })

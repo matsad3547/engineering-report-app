@@ -3,7 +3,12 @@ import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import Checkbox from 'material-ui/Checkbox'
 
-import { queueReport, unqueueReport, clearQueue } from '../../actions/'
+import {
+  queueReport,
+  unqueueReport,
+  clearQueue,
+  setDataProperty,
+} from '../../actions/'
 import { getReports } from '../../actions/getReports'
 import ReportItem from '../../components/ReportItem'
 import { downloadQueued } from '../../utils/'
@@ -28,17 +33,21 @@ const ExistingReports = ({  reports,
 
   const getNextReports = e => {
     e.preventDefault()
+    setDataProperty({loading: true})
     getReports(n + 10, allReports)
+    setDataProperty({loading: false})
   }
 
   const onCheck = (e, i) => {
     e.preventDefault()
+    setDataProperty({loading: true})
     if (allReports) {
       getReports(n, false)
     }
     else {
       getReports(n, true)
     }
+    setDataProperty({loading: false})
   }
 
   const styles = {
@@ -140,6 +149,7 @@ const mapDispatchToProps = dispatch => {
     unqueueReport: index => dispatch(unqueueReport(index)),
     clearQueue: () => dispatch(clearQueue()),
     getReports: (n, allReports) => dispatch(getReports(n, allReports)),
+    setDataProperty: property => dispatch(setDataProperty(property)),
   }
 }
 

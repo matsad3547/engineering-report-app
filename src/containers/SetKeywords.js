@@ -8,6 +8,7 @@ import database from '../utils/firebase'
 import {
   setTeamProperty,
   setTeamKeyword,
+  setDataProperty,
 } from '../actions/'
 
 import { getKeywords } from '../actions/getKeywords'
@@ -21,8 +22,9 @@ const SetKeywords = ({  team,
                         setTeamProperty,
                         setTeamKeyword,
                         getKeywords,
+                        setDataProperty,
                       }) => {
-                        
+
   const creatingTeam = location.pathname === '/app/set_keywords' ? false : true
 
   const onChange = {
@@ -34,12 +36,14 @@ const SetKeywords = ({  team,
 
   const onClick = {
     save(e) {
+      setDataProperty({loading: true})
       e.preventDefault()
       const updates = {}
       updates[`teams/${team}/keywords`] = keywords
       database.ref()
         .update(updates)
       getKeywords()
+      setDataProperty({loading: false})
     },
     delete(e, w) {
       e.preventDefault()
@@ -150,7 +154,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => ({
   setTeamProperty: property => dispatch(setTeamProperty(property)),
   setTeamKeyword: keyword => dispatch(setTeamKeyword(keyword)),
-  getKeywords: () => dispatch(getKeywords())
+  getKeywords: () => dispatch(getKeywords()),
+  setDataProperty: property => dispatch(setDataProperty(property)),
 })
 
 

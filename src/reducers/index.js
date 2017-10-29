@@ -158,6 +158,14 @@ export const user = (state = initUserState, action) => {
         approved: false,
         team: 'demo',
       }
+
+    case 'RESET_LOGIN':
+      return {
+        ...state,
+        password: '',
+        verifyPassword: '',
+      }
+      
     default:
       return state
   }

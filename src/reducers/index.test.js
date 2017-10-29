@@ -322,6 +322,33 @@ describe('user() ', () => {
     }
     expect(user(state, action)).toEqual(result)
   })
+
+  test('should delete  password data upon action type of "RESET_LOGIN"', () => {
+    const action = {
+      type: 'RESET_LOGIN',
+    }
+    const state = {
+      displayName: 'Peter Parker',
+      email: 'email',
+      uid: '38394a;ljdfald',
+      password: 'password1',
+      verifyPassword: 'password1',
+      admin: true,
+      approved: true,
+      team: 'test',
+    }
+    const result = {
+      displayName: 'Peter Parker',
+      email: 'email',
+      uid: '38394a;ljdfald',
+      password: '',
+      verifyPassword: '',
+      admin: true,
+      approved: true,
+      team: 'test',
+    }
+    expect(user(state, action)).toEqual(result)
+  })
 })
 
 describe('data() ', () => {

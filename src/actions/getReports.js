@@ -27,6 +27,7 @@ export const getReports = (n = 10, allReports = false) => {
                                 }), {})
 
         dispatch(receiveReports(reports, n, allReports,))
+        dispatch(setDataProperty({loading: false}))
       })
       .catch( err => {
         console.error('An error occured while fetching reports from the database:', err);
@@ -43,6 +44,7 @@ export const getReports = (n = 10, allReports = false) => {
         const reports = snap.val()
 
         dispatch(receiveReports(reports, n, allReports))
+        dispatch(setDataProperty({loading: false}))
       })
       .catch( err => {
         console.error('An error occured while fetching reports from the database:', err);

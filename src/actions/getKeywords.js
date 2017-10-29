@@ -1,4 +1,9 @@
-import { receiveKeywords, setDataProperty, setDataError } from './index'
+import {
+  receiveKeywords,
+  setDataProperty,
+  setDataError,
+} from './index'
+
 import database from '../utils/firebase'
 
 export const getKeywords = () => {
@@ -11,6 +16,7 @@ export const getKeywords = () => {
       const keywords = snap.val()
                         .filter( k => k !== 'ph' )
       dispatch(receiveKeywords(keywords))
+      dispatch(setDataProperty({loading: false}))
       })
     .catch( err => {
       console.error('an error occurred while fetching keywords from the database:', err);
