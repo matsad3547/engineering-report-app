@@ -51,7 +51,6 @@ export const userKey = Object.keys(window.localStorage)
 
 export const setData = user => {
   return dispatch => {
-    console.log('setting the fucking data!', user, '\nuser.displayName:', user.providerData);
 
     dispatch(setDataProperty({loading: true}))
 
@@ -60,8 +59,6 @@ export const setData = user => {
       email,
       uid,
     } = user
-
-    console.log('display name?', displayName, '\nemail?', email, '\nuid?', uid);
 
     database.ref(`users/${uid}`)
     .once('value', snap => {
@@ -201,14 +198,6 @@ export const createTeam = () => {
         browserHistory.push('/set_keywords')
       })
     })
-    // .then( () => {
-    //   // const user = auth.currentUser
-    //   // console.log('user at .then:', user);
-    //   // dispatch(setData(user))
-    //   // auth.onAuthStateChanged( user => {
-    //   //   console.log('user at then:', user);
-    //   // })
-    // })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
       dispatch(setDataError({signOutErr: err}))
