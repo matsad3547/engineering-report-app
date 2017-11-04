@@ -1,3 +1,5 @@
+export const version = '0.1.2'
+
 export const muiTheme = {
   palette: {
     primary1Color: '#FF9800',

@@ -20,7 +20,6 @@ import { getReports } from './actions/getReports'
 import { getTeams } from './actions/getTeams'
 import { getKeywords} from './actions/getKeywords'
 
-
 injectTapEventPlugin()
 
 auth.onAuthStateChanged( user => {

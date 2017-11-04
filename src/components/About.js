@@ -1,11 +1,12 @@
-import React from 'react';
+import React from 'react'
+import { version } from '../config/'
 
 const About = () => (
   <div className="color flexLayout about">
     <h3>Engineering Report App</h3>
     <p>Built to help test engineers in the field.</p>
     <br/>
-    <p>version 0.1.2</p>
+    <p>version {version}</p>
     <br/>
     <p>Please see the latest changes <a href="https://github.com/matsad3547/engineering-report-app/blob/master/README.md" target="_blank" rel="noopener noreferrer">here</a></p>
     <br/>

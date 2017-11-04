@@ -3,6 +3,8 @@ import { Link } from 'react-router'
 
 import RaisedButton from 'material-ui/RaisedButton'
 
+import { version } from '../config/'
+
 const UnAuth = () => {
 
   const style = {
@@ -32,6 +34,7 @@ const UnAuth = () => {
         label="Try the Demo"
         containerElement={<Link to="app/" ></Link>}
         style={style}/>
+      <p className="footer">version {version}</p>
     </div>
   )
 }
