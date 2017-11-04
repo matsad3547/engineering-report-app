@@ -1,11 +1,15 @@
 import React from 'react';
 
 const About = () => (
-  <div className="color flexLayout welcome">
+  <div className="color flexLayout about">
     <h3>Engineering Report App</h3>
     <p>Built to help test engineers in the field.</p>
     <br/>
-    <p>version 0.01.01</p>
+    <p>version 0.1.2</p>
+    <br/>
+    <p>Please see the latest changes <a href="https://github.com/matsad3547/engineering-report-app/blob/master/README.md" target="_blank" rel="noopener noreferrer">here</a></p>
+    <br/>
+    <p>Please log any bugs or request features <a href="https://github.com/matsad3547/engineering-report-app/issues" target="_blank" rel="noopener noreferrer">here</a></p>
   </div>
 )
 

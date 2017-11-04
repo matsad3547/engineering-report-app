@@ -175,6 +175,11 @@ textarea {
   padding-bottom: 8em;
 }
 
+.about {
+  height: 85vh;
+  padding: 0 1.5em 8em 1.5em;
+}
+
 .home h1, h2, h3, h4 {
   padding: .5em;
 }

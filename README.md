@@ -2,6 +2,19 @@
 
 This app is designed to allow test engineers to use a simple, configurable report interface to record data on mobile devices, enter data offline, and add to a database that can be accessed later. The app will be responsive to work well in mobile and desktop configurations.
 
+## Most Recent Changes
+
+* Team creation
+* Improved loading and error notifications
+* Optional loading for reports above the initial 10 available
+* Team admin functionality
+* Users can now select an existing team at signup
+
+###Admin Features
+
+* Add/delete keywords
+* Optionally view reports from all team members
+
 ## Current Features
 
 * Record values for keywords on a 1-9 scale, record configuration values for each report, and record notes for each report.
@@ -13,6 +26,8 @@ This app is designed to allow test engineers to use a simple, configurable repor
 * An easy-to-use, intuitive mobile interface.
 * User create and sign-in with e-mail and password.
 * Unauthenticated demo version of the app with full functionality.
+* Basic Progressive Web App functionality
+* Select reports for downloading
 
 ## Next Steps
 
@@ -25,8 +40,4 @@ This app is designed to allow test engineers to use a simple, configurable repor
 
 ### Interface
 * Using user feedback, build a more usable desktop version of the app.
-* Enable scrolling to show the next 10 reports.
-* Enable filtering and search to select reports for download and visualization.
 * Visualization package to show trends across selected reports.
-* Hidden passwords (asterisks vs. the actual letters)
-* Add server to ensure reports can be shared among authenticated users.
