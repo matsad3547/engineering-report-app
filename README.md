@@ -9,6 +9,7 @@ This app is designed to allow test engineers to use a simple, configurable repor
 * Optional loading for reports above the initial 10 available
 * Team admin functionality
 * Users can now select an existing team at signup
+* Https redirect
 
 ###Admin Features
 

@@ -13,6 +13,7 @@
     "material-ui": "^0.17.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-https-redirect": "^1.0.9",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.7",
@@ -30,6 +31,12 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "collectCoverageFrom": ["**/*.{js,jsx}", "!**/node_modules/**", "!**/build/**", "!**/git/**", "!**/public/**"]
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/build/**",
+      "!**/git/**",
+      "!**/public/**"
+    ]
   }
 }

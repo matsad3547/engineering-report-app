@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, browserHistory } from 'react-router'
+import HttpsRedirect from 'react-https-redirect'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -37,9 +38,11 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
   <Provider store={store} >
+    <HttpsRedirect>      
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <Router
           history={history}
           routes={routes} />
       </MuiThemeProvider>
+    </HttpsRedirect>
     </Provider>, document.getElementById('root'))
