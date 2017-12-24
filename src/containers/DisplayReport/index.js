@@ -11,10 +11,8 @@ const DisplayReport = ({  report,
                           displayName,
                           team,
                         }) => {
-
   if (!!config) {
 
-    const configVals = Object.keys(config)
     const metricValArr = Object.keys(metricValues)
 
     return(
@@ -36,12 +34,22 @@ const DisplayReport = ({  report,
         <h4>Configuration Values</h4>
         <table>
           <tbody>
-            {configVals.map( (val, i) =>
-              <tr key={i+'a'}>
-                <td key={i+'b'}>{val}:</td>
-                <td key={i+'c'}
-                className="val">{config[val]}</td>
-              </tr>  )}
+            <tr>
+              <td>model:</td>
+              <td className="val">{config.model}</td>
+            </tr>
+            <tr>
+              <td>description:</td>
+              <td className="val">{config.shortName}</td>
+            </tr>
+            <tr>
+              <td>config:</td>
+              <td className="val">{config.configNum}</td>
+            </tr>
+            <tr>
+              <td>ballast:</td>
+              <td className="val">{config.ballast}</td>
+            </tr>
           </tbody>
         </table>
         <br/>
@@ -64,7 +72,6 @@ const DisplayReport = ({  report,
     )
   }
   return (
-
     <div className="reportDisplay">
       <h4>Report From {date(report)} is loading...</h4>
     </div>
@@ -75,7 +82,12 @@ const mapStateToProps = (state, ownProps) => {
 
   const report = ownProps.params.report
 
-  const reportVals = state.reports.reports[report]
+  // const reportVals = state.reports.reports[report]
+  const reportVals =  Array.isArray(state.reports.reports) ? {
+    config: null,
+    metricValues: null,
+    notes: null,
+  } : state.reports.reports[report]
 
   return {
     report,

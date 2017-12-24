@@ -2,6 +2,7 @@ import React from 'react'
 import { version } from '../config/'
 
 const About = () => (
+  
   <div className="color flexLayout about">
     <h3>Engineering Report App</h3>
     <p>Built to help test engineers in the field.</p>

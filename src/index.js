@@ -38,7 +38,7 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
   <Provider store={store} >
-    <HttpsRedirect>      
+    <HttpsRedirect>
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <Router
           history={history}

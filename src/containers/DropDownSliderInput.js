@@ -23,8 +23,9 @@ const DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
   const styles = {
     label: {
       fontSize: 15,
-      paddingLeft: 15,
-      paddingRight: 15,
+      padding: '.5em 1em 0 1em',
+      // paddingLeft: 15,
+      // paddingRight: 15,
       lineHeight: 1,
     },
     menu: {

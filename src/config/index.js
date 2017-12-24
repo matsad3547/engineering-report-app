@@ -1,4 +1,4 @@
-export const version = '0.1.8'
+export const version = '0.1.9'
 
 export const muiTheme = {
   palette: {
@@ -49,3 +49,5 @@ export const initTeamState = {
   keyword: '',
   keywords: [],
 }
+
+export const configVals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

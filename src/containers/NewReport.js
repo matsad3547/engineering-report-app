@@ -42,7 +42,7 @@ const NewReport = ({  config,
       config,
       metricValues,
       notes,
-      uid,
+      uid: team === 'demo' ? 12345 : uid,
     }
     const updates = {}
     updates[`teams/${team}/test reports/${newReportKey}`] = newReport
@@ -142,15 +142,14 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => ({
 
-  return {
-    saveReport: () => dispatch(saveReport()),
-    getReports: team => dispatch(getReports(team)),
-    getKeywords: team => dispatch(getKeywords(team)),
-    setDataProperty: property => dispatch(setDataProperty(property)),
-  }
-}
+  saveReport: () => dispatch(saveReport()),
+  getReports: team => dispatch(getReports(team)),
+  getKeywords: team => dispatch(getKeywords(team)),
+  setDataProperty: property => dispatch(setDataProperty(property)),
+})
+
 
 export default connect(
   mapStateToProps,

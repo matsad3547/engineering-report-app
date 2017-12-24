@@ -33,8 +33,7 @@ export const formatReports = (reports, queued) => {
 }
 
 export const parseCSV = data => (
-  data.reduce( (sum, arr, i) => {
-    return sum + (i < data.length ? arr.join(',') + '\n' : arr.join(',') )}, 'data:text/csv;charset=utf-8,')
+  data.reduce( (sum, arr, i) => sum + (i < data.length ? arr.join(',') + '\n' : arr.join(',') ), 'data:text/csv;charset=utf-8,')
   )
 
 const launchDownload = csvContent => {
