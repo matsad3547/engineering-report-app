@@ -82,18 +82,14 @@ const mapStateToProps = (state, ownProps) => {
 
   const report = ownProps.params.report
 
-  // const reportVals = state.reports.reports[report]
-  const reportVals =  Array.isArray(state.reports.reports) ? {
-    config: null,
-    metricValues: null,
-    notes: null,
-  } : state.reports.reports[report]
+  const reportVals =  state.reports.reports ?
+   state.reports.reports[report] : null
 
   return {
     report,
-    config: reportVals.config,
-    metricValues: reportVals.metricValues,
-    notes: reportVals.notes,
+    config: reportVals ? reportVals.config : null,
+    metricValues: reportVals ? reportVals.metricValues : null,
+    notes: reportVals ? reportVals.notes : null,
     displayName: state.user.displayName,
     team: state.user.team,
   }

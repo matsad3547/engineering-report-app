@@ -36,10 +36,12 @@ auth.onAuthStateChanged( user => {
 
 const history = syncHistoryWithStore(browserHistory, store)
 
+const theme = getMuiTheme(muiTheme) 
+
 ReactDOM.render(
   <Provider store={store} >
     <HttpsRedirect>
-      <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
+      <MuiThemeProvider muiTheme={theme}>
         <Router
           history={history}
           routes={routes} />

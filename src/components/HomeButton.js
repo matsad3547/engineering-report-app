@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { Link } from 'react-router'
 import FontIcon from 'material-ui/FontIcon'
 import IconButton from 'material-ui/IconButton'

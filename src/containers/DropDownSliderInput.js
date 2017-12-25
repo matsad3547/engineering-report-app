@@ -11,7 +11,6 @@ import Slider from 'material-ui/Slider'
 const DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
 
   const onChange = (e, input) => {
-    // e.preventDefault() //line 558
     const output = {
       id,
       val: input,
@@ -24,8 +23,6 @@ const DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
     label: {
       fontSize: 15,
       padding: '.5em 1em 0 1em',
-      // paddingLeft: 15,
-      // paddingRight: 15,
       lineHeight: 1,
     },
     menu: {
@@ -35,8 +32,7 @@ const DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
     },
     customWidth: {
       width: 200,
-
-    }
+    },
   }
 
   return (
@@ -55,6 +51,7 @@ const DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
           value={1}
           label={name}
           className="dropDownMenu">
+
           <h2>{name}</h2>
           <Slider
             step={0.25}

@@ -76,7 +76,7 @@ const ConfigForm = ({ config, configDispatch }) => {
       <div className="textInput">
         <input
           type="text"
-          placeholder="Short Name"
+          placeholder="Description"
           value={shortName}
           onChange={onChange.shortName}
           />
@@ -89,6 +89,7 @@ const ConfigForm = ({ config, configDispatch }) => {
           value={configNum}
           labelStyle={styles.label}
           style={styles.config}
+          maxHeight={200}
           >
           {configVals.map( n => <MenuItem
             key={`config-${n}`}

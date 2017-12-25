@@ -8,7 +8,7 @@ export const muiTheme = {
     accent1Color: '#FF5722',
     accent2Color: '#757575',
     accent3Color: '#FF5722',
-  }
+  },
 }
 
 export const initVal = 5
@@ -22,7 +22,7 @@ export const initReportConfig = {
 
 export const initReports = {
   n: 0,
-  reports: [],
+  reports: null,
   allReports: false,
 }
 
