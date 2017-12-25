@@ -45,6 +45,35 @@ describe('formatReports() ', () => {
     expect(formatReports(reports, queued)).toEqual(result)
   })
 
+  test('should convert multiple config objects to an array of arrays and putt stuff in the right order', () => {
+    const queued = [1, 2]
+    const reports = {
+      1: {
+        config: {
+          ballast: 'No',
+          configNum: 2,
+          model: 'Panigale',
+          shortName: 'test1',
+        },
+      },
+      2: {
+        config: {
+          ballast: 'Yes',
+          configNum: 3,
+          model: 'Panigale',
+          shortName: 'test2',
+        },
+      }
+    }
+    const result = [
+      ['model', 'Panigale', 'Panigale'],
+      ['shortName', 'test1', 'test2'],
+      ['configNum', 2, 3],
+      ['ballast', 'No', 'Yes'],
+    ]
+    expect(formatReports(reports, queued)).toEqual(result)
+  })
+
   test('should convert a metric values object to an array of arrays', () => {
     const queued = [1]
     const reports = {

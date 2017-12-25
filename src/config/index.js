@@ -1,4 +1,4 @@
-export const version = '0.1.9'
+export const version = '0.1.10'
 
 export const muiTheme = {
   palette: {
@@ -19,6 +19,8 @@ export const initReportConfig = {
   configNum: 1,
   ballast: 'No',
 }
+
+export const configOrder = ['m', 's', 'c', 'b',]
 
 export const initReports = {
   n: 0,

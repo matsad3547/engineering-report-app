@@ -1,5 +1,6 @@
 import {
   initVal,
+  configOrder,
 } from '../config/'
 
 export const date = unixDate => new Date(parseInt(unixDate, 0))
@@ -10,9 +11,11 @@ export const formatReports = (reports, queued) => {
   let parsedReports = []
   let count = 0
   queued.forEach( (q, i) => {
-    count = Object.keys(reports[q].config || {}).reduce((sum, c, j) => {
+    count = Object.keys(reports[q].config || {})
+                  .sort( (a, b) => configOrder.indexOf(a[0]) < configOrder.indexOf(b[0]) ? -1 : 1)
+                  .reduce((sum, c, j) => {
     if (i === 0) parsedReports.push([c])
-    parsedReports[j].push(reports[q].config[c]);
+    parsedReports[j].push(reports[q].config[c])
     return sum + 1
   }, 0)
 
