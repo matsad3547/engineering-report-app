@@ -4,6 +4,8 @@ import './DisplayReport.css'
 
 import { date } from '../../utils/'
 
+import { configOrder } from '../../config'
+
 const DisplayReport = ({  report,
                           config,
                           metricValues,
@@ -14,6 +16,10 @@ const DisplayReport = ({  report,
   if (!!config) {
 
     const metricValArr = Object.keys(metricValues)
+    const configVals = Object.keys(config)
+                        .sort( (a, b) => configOrder.indexOf(a[0]) < configOrder.indexOf(b[0]) ? -1 : 1)
+
+    console.log('config vals:', configVals);
 
     return(
       <div className="reportDisplay">
@@ -34,22 +40,12 @@ const DisplayReport = ({  report,
         <h4>Configuration Values</h4>
         <table>
           <tbody>
-            <tr>
-              <td>model:</td>
-              <td className="val">{config.model}</td>
-            </tr>
-            <tr>
-              <td>description:</td>
-              <td className="val">{config.shortName}</td>
-            </tr>
-            <tr>
-              <td>config:</td>
-              <td className="val">{config.configNum}</td>
-            </tr>
-            <tr>
-              <td>ballast:</td>
-              <td className="val">{config.ballast}</td>
-            </tr>
+            {configVals.map( (c, i) =>
+              <tr key={`config-${i}`}>
+                <td>{c}:</td>
+                <td className="val">{config[c]}</td>
+              </tr>
+            )}
           </tbody>
         </table>
         <br/>
