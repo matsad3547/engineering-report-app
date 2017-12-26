@@ -9,7 +9,7 @@ import {
   clearQueue,
   setDataProperty,
 } from '../../actions/'
-import { getReports } from '../../actions/getReports'
+import getReports from '../../actions/getReports'
 import ReportItem from '../../components/ReportItem'
 import { downloadQueued } from '../../utils/'
 

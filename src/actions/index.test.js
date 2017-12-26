@@ -20,13 +20,9 @@ import {
   resetLoginData,
   } from './index.js'
 
-import {
-  getReports,
-  } from './getReports'
+import getReports from './getReports'
 
-import {
-  getKeywords,
-  } from './getKeywords'
+import getKeywords from './getKeywords'
 
 const metricValActionOutput = {
   id: 1,

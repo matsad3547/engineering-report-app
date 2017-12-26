@@ -6,7 +6,7 @@ import {
 
 import database from '../utils/firebase'
 
-export const getKeywords = () => {
+const getKeywords = () => {
 
   return (dispatch, getState) => {
     const { team } = getState().user
@@ -25,3 +25,5 @@ export const getKeywords = () => {
     })
   }
 }
+
+export default getKeywords

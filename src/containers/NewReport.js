@@ -8,8 +8,8 @@ import {
   saveReport,
   setDataProperty,
  } from '../actions'
-import { getReports } from '../actions/getReports'
-import { getKeywords } from '../actions/getKeywords'
+import getReports from '../actions/getReports'
+import getKeywords from '../actions/getKeywords'
 
 import ConfigForm from '../containers/ConfigForm'
 import DropDownSliderInput from '../containers/DropDownSliderInput'

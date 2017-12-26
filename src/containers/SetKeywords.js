@@ -11,7 +11,7 @@ import {
   setDataProperty,
 } from '../actions/'
 
-import { getKeywords } from '../actions/getKeywords'
+import getKeywords from '../actions/getKeywords'
 import BackButton from '../components/BackButton'
 
 const SetKeywords = ({  team,

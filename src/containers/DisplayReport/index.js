@@ -19,8 +19,6 @@ const DisplayReport = ({  report,
     const configVals = Object.keys(config)
                         .sort( (a, b) => configOrder.indexOf(a[0]) < configOrder.indexOf(b[0]) ? -1 : 1)
 
-    console.log('config vals:', configVals);
-
     return(
       <div className="reportDisplay">
         <h3>Report From {date(report)}</h3>

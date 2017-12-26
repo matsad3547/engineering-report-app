@@ -1,9 +1,9 @@
 import database, { auth }  from './firebase'
 import { browserHistory } from 'react-router'
 
-import { getReports } from '../actions/getReports'
-import { getTeams } from '../actions/getTeams'
-import { getKeywords} from '../actions/getKeywords'
+import getReports from '../actions/getReports'
+import getTeams from '../actions/getTeams'
+import getKeywords from '../actions/getKeywords'
 
 import {
   setUserData,

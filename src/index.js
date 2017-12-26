@@ -5,6 +5,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, browserHistory } from 'react-router'
 import HttpsRedirect from 'react-https-redirect'
+import dotenv from 'dotenv'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -17,9 +18,15 @@ import { muiTheme } from './config/'
 import { auth }  from './utils/firebase'
 import { setData } from './utils/auth'
 
-import { getReports } from './actions/getReports'
-import { getTeams } from './actions/getTeams'
-import { getKeywords} from './actions/getKeywords'
+import getReports from './actions/getReports'
+import getTeams from './actions/getTeams'
+import getKeywords from './actions/getKeywords'
+import getWeather from './actions/getWeather'
+
+dotenv.config()
+console.log('process:', process.env);
+
+getWeather()
 
 injectTapEventPlugin()
 
@@ -31,12 +38,13 @@ auth.onAuthStateChanged( user => {
     store.dispatch(getReports())
     store.dispatch(getKeywords())
     store.dispatch(getTeams())
+    // store.dispatch(getWeather())
   }
 })
 
 const history = syncHistoryWithStore(browserHistory, store)
 
-const theme = getMuiTheme(muiTheme) 
+const theme = getMuiTheme(muiTheme)
 
 ReactDOM.render(
   <Provider store={store} >

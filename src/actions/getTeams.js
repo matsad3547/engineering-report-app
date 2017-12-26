@@ -5,7 +5,7 @@ import {  setUserProperty,
 
 import database from '../utils/firebase'
 
-export const getTeams = () => {
+const getTeams = () => {
 
   return dispatch => {
 
@@ -22,3 +22,5 @@ export const getTeams = () => {
     })
   }
 }
+
+export default getTeams

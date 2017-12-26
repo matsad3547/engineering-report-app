@@ -5,7 +5,7 @@ import {  receiveReports,
 
 import database from '../utils/firebase'
 
-export const getReports = (n = 10, allReports = false) => {
+const getReports = (n = 10, allReports = false) => {
 
   return (dispatch, getState) => {
 
@@ -54,3 +54,5 @@ export const getReports = (n = 10, allReports = false) => {
     }
   }
 }
+
+export default getReports
