@@ -45,7 +45,7 @@ describe('formatReports() ', () => {
     expect(formatReports(reports, queued)).toEqual(result)
   })
 
-  test('should convert multiple config objects to an array of arrays and putt stuff in the right order', () => {
+  test('should convert multiple config objects to an array of arrays and put stuff in the right order', () => {
     const queued = [1, 2]
     const reports = {
       1: {
@@ -160,6 +160,10 @@ describe('formatReports() ', () => {
           },
         },
         notes: 'this is a test string',
+        weather: {
+          weather: 'testy',
+          temp_f: 54,
+        },
       }
     }
     const result = [
@@ -167,6 +171,7 @@ describe('formatReports() ', () => {
       ['test1', 3],
       ['test2', 4],
       ['Notes', 'this is a test string'],
+      ['Weather',`"=""weather":"testy","temp_f":54""`],
     ]
     expect(formatReports(reports, queued)).toEqual(result)
   })
@@ -191,6 +196,10 @@ describe('formatReports() ', () => {
           },
         },
         notes: 'this is a test string',
+        weather: {
+          weather: 'testy',
+          temp_f: 54,
+        },
       },
       2: {
         config: {
@@ -208,6 +217,10 @@ describe('formatReports() ', () => {
           },
         },
         notes: 'this is a second test string',
+        weather: {
+          weather: 'testier',
+          temp_f: 65,
+        },
       },
     }
     const result = [
@@ -216,6 +229,7 @@ describe('formatReports() ', () => {
       ['test1', 3, 4],
       ['test2', 4, 5],
       ['Notes', 'this is a test string', 'this is a second test string'],
+      ['Weather',`"=""weather":"testy","temp_f":54""`,`"=""weather":"testier","temp_f":65""`],
     ]
     expect(formatReports(reports, queued)).toEqual(result)
   })

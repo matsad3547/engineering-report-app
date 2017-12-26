@@ -31,6 +31,11 @@ export const formatReports = (reports, queued) => {
       if (i === 0) parsedReports.push(['Notes'])
       parsedReports[parsedReports.length - 1].push(reports[q].notes)
     }
+
+    if (reports[q].weather) {
+      if (i === 0) parsedReports.push(['Weather'])
+      parsedReports[parsedReports.length - 1].push(`"="${JSON.stringify(reports[q].weather, )}""`.replace(/("{|}")/gi,'"'))
+    }
   })
   return parsedReports
 }

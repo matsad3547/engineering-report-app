@@ -10,6 +10,7 @@ This app is designed to allow test engineers to use a simple, configurable repor
 * Team admin functionality
 * Users can now select an existing team at signup
 * Https redirect (not recognized in audit :confused: )
+* Weather using geolocation added to reports
 
 ### Admin Features
 
