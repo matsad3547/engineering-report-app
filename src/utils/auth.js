@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import getReports from '../actions/getReports'
 import getTeams from '../actions/getTeams'
 import getKeywords from '../actions/getKeywords'
+import getWeather from '../actions/getWeather'
 
 import {
   setUserData,
@@ -82,6 +83,7 @@ export const setData = user => {
       dispatch(getReports())
       dispatch(getKeywords())
       dispatch(getTeams())
+      dispatch(getWeather())
     })
     .catch( err => {
       console.error('There was a error retrieving your user data:', err.message)

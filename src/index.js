@@ -24,9 +24,6 @@ import getKeywords from './actions/getKeywords'
 import getWeather from './actions/getWeather'
 
 dotenv.config()
-console.log('process:', process.env);
-
-getWeather()
 
 injectTapEventPlugin()
 
@@ -38,7 +35,7 @@ auth.onAuthStateChanged( user => {
     store.dispatch(getReports())
     store.dispatch(getKeywords())
     store.dispatch(getTeams())
-    // store.dispatch(getWeather())
+    store.dispatch(getWeather())
   }
 })
 

@@ -123,3 +123,8 @@ export const setTeamKeyword = keyword => ({
 export const resetLoginData = () => ({
   type: 'RESET_LOGIN',
 })
+
+export const setWeatherData = weather => ({
+  type: 'SET_WEATHER_DATA',
+  weather,
+})

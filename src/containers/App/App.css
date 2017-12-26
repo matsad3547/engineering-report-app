@@ -69,6 +69,31 @@
   width: 100%;
 }
 
+.weather {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  color: white;
+  font-size: .8em;
+}
+.weather table {
+  width: 100%;
+  padding: .5em 0 0 5%;
+}
+.wu-img {
+  display: inline-flex;
+  width: 100%;
+  justify-content: flex-end;
+  margin-right: .6em;
+}
+.wu-img p {
+  font-size: .75em;
+  margin-top: 1em;
+}
+
 input {
   font-size: 1em;
 }

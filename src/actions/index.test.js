@@ -18,6 +18,7 @@ import {
   setTeamProperty,
   setTeamKeyword,
   resetLoginData,
+  setWeatherData,
   } from './index.js'
 
 import getReports from './getReports'
@@ -325,6 +326,40 @@ describe('resetLoginData()', () => {
     const actual = resetLoginData()
     const expected = {
       type: 'RESET_LOGIN',
+    }
+    expect(actual).toEqual(expected)
+  })
+})
+
+describe('setWeatherData()', () => {
+  test('should return an action type of "SET_WEATHER_DATA"', () => {
+    const actual = setWeatherData().type
+    const expected = 'SET_WEATHER_DATA'
+    expect(actual).toEqual(expected)
+  })
+
+  test('should pass in any weather object along with the type', () => {
+    const weather = {
+      relative_humidity: "87%",
+      weather: "Overcast",
+      temp_f: 23.4,
+      wind_dir: "SE",
+      wind_gust_mph: 0,
+      wind_mph: 0,
+      location: "Driggs, ID",
+    }
+    const actual = setWeatherData(weather)
+    const expected = {
+      type: 'SET_WEATHER_DATA',
+      weather: {
+        relative_humidity: "87%",
+        weather: "Overcast",
+        temp_f: 23.4,
+        wind_dir: "SE",
+        wind_gust_mph: 0,
+        wind_mph: 0,
+        location: "Driggs, ID",
+      },
     }
     expect(actual).toEqual(expected)
   })

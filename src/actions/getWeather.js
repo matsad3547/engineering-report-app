@@ -1,3 +1,62 @@
+import {
+  setDataProperty,
+  setDataError,
+  setWeatherData,
+} from './index'
+
 const wundergroundApiKey = process.env.REACT_APP_WUNDERGROUND_API_KEY
 
-export default () => console.log('wunderground:', wundergroundApiKey);
+const getWeather = () => {
+
+  return (dispatch, getState) => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition( pos => {
+        const lat = pos.coords.latitude
+        const lng = pos.coords.longitude
+        fetch(`http://api.wunderground.com/api/${wundergroundApiKey}/conditions/q/${lat},${lng}.json`)
+        .then( res => res.json() )
+        .then( res => {
+          console.log('weather:', res.current_observation)
+
+          const weatherData = res.current_observation
+
+          const {
+            relative_humidity,
+            weather,
+            temp_f,
+            wind_dir,
+            wind_gust_mph,
+            wind_mph,
+            image,
+          } = weatherData
+
+          const locale = weatherData.display_location.full
+
+          dispatch(setWeatherData({
+                relative_humidity,
+                weather,
+                temp_f,
+                wind_dir,
+                wind_gust_mph,
+                wind_mph,
+                image,
+                locale,
+              })
+            )
+         })
+        .catch( err => {
+          console.error('an error occurred while fetching weather:', err);
+          dispatch(setDataError({weatherErr: err}))
+          dispatch(setDataProperty({loading: false}))
+        })
+      })
+    }
+    else {
+      console.error('location and weather are not available');
+      dispatch(setDataError({weatherErr: 'location not available'}))
+      dispatch(setDataProperty({loading: false}))
+    }
+  }
+}
+
+export default getWeather

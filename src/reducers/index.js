@@ -165,7 +165,7 @@ export const user = (state = initUserState, action) => {
         password: '',
         verifyPassword: '',
       }
-      
+
     default:
       return state
   }
@@ -239,6 +239,17 @@ export const teamConfig = (state = initTeamState, action) => {
   }
 }
 
+export const weather = (state = null, {type, weather}) => {
+
+  switch (type) {
+    case 'SET_WEATHER_DATA':
+      return {
+        ...weather
+      }
+    default:
+      return state
+  }
+}
 export const combinedReducers = combineReducers({
     reportConfig,
     metricValues,
@@ -249,5 +260,6 @@ export const combinedReducers = combineReducers({
     user,
     data,
     teamConfig,
+    weather,
     routing: routerReducer,
   })

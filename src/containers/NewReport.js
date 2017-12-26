@@ -23,6 +23,8 @@ const NewReport = ({  config,
                       uid,
                       keywords,
                       keywordsErr,
+                      weather,
+                      weatherErr,
                       saveReport,
                       getReports,
                       getKeywords,
@@ -85,7 +87,6 @@ const NewReport = ({  config,
       <hr/>
 
       {keys.map( (key, i) =>
-
         <DropDownSliderInput
         key={i + 'b'}
         id={key}
@@ -93,12 +94,53 @@ const NewReport = ({  config,
         value={metricValues[key].val}
         previousVal={previousMetricValues[i] ? previousMetricValues[i] : 4.5}
         />
-
       )}
       <NoteField
         notes={notes}
         />
+      {weather ?
+        <div  className="weather">
+          <hr/>
+          <table>
+            <tbody>
+              <tr>
+                {weather.weather ?
+                  <td>{weather.weather}</td> : <td></td>
+                }
+                {weather.temp_f ?
+                  <td>{weather.temp_f}&#8457;</td> : <td></td>
+                }
+                {weather.relative_humidity ?
+                  <td>{weather.relative_humidity}</td> : <td></td>
+                }
+                <td>Humidity</td>
+              </tr>
+              <tr>
+                <td>Wind avg/gust(mph)</td>
+                {weather.wind_mph !== undefined ?
+                  <td>{weather.wind_mph}</td> : <td></td>
+                }
+                {weather.wind_gust_mph !== undefined  ?
+                  <td>{weather.wind_gust_mph}</td> : <td></td>
+                }
+                {weather.wind_dir !== undefined ?
+                  <td>{weather.wind_dir}</td> : <td></td>
+                }
+              </tr>
 
+
+            </tbody>
+          </table>
+          <div className="wu-img">
+            <p>Powered by</p>
+            <img
+              src={weather.image.url}
+              height={30}
+              alt="Wunderground"></img>
+          </div>
+          <hr/>
+        </div>
+       : ''}
       <RaisedButton
         label="Save Report"
         style={styles.button}
@@ -117,6 +159,7 @@ const mapStateToProps = state => {
     metricValues,
     notes,
     previousMetricValues,
+    weather,
   } = state
 
   const {
@@ -126,7 +169,10 @@ const mapStateToProps = state => {
 
   const { error } = state.data
 
-  const { keywordsErr } = error
+  const {
+    keywordsErr,
+    weatherErr,
+  } = error
 
   const { keywords } = state.teamConfig
 
@@ -139,6 +185,8 @@ const mapStateToProps = state => {
     uid,
     keywords,
     keywordsErr,
+    weather,
+    weatherErr,
   }
 }
 
@@ -149,7 +197,6 @@ const mapDispatchToProps = dispatch => ({
   getKeywords: team => dispatch(getKeywords(team)),
   setDataProperty: property => dispatch(setDataProperty(property)),
 })
-
 
 export default connect(
   mapStateToProps,

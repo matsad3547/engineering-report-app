@@ -12,6 +12,7 @@ import {
   authState,
   data,
   teamConfig,
+  weather,
 } from './index.js'
 
 const action = {
@@ -528,6 +529,40 @@ describe('teamConfig()', () => {
       team: '',
       keyword: '',
       keywords: [],
+    }
+    expect(actual).toEqual(expected)
+  })
+})
+
+describe('weather()', () => {
+  test('should return `null` by default', () => {
+    const actual = weather(undefined, test)
+    const expected = null
+    expect(actual).toEqual(expected)
+  })
+
+  test('should return a weather object in response to an action type of "SET_WEATHER_DATA"', () => {
+    const action = {
+      type: 'SET_WEATHER_DATA',
+      weather: {        
+        relative_humidity: "87%",
+        weather: "Overcast",
+        temp_f: 23.4,
+        wind_dir: "SE",
+        wind_gust_mph: 0,
+        wind_mph: 0,
+        location: "Driggs, ID",
+      }
+    }
+    const actual = weather(undefined, action)
+    const expected = {
+      relative_humidity: "87%",
+      weather: "Overcast",
+      temp_f: 23.4,
+      wind_dir: "SE",
+      wind_gust_mph: 0,
+      wind_mph: 0,
+      location: "Driggs, ID",
     }
     expect(actual).toEqual(expected)
   })
