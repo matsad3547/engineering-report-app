@@ -16,8 +16,6 @@ const getWeather = () => {
         fetch(`http://api.wunderground.com/api/${wundergroundApiKey}/conditions/q/${lat},${lng}.json`)
         .then( res => res.json() )
         .then( res => {
-          console.log('weather:', res.current_observation)
-
           const weatherData = res.current_observation
 
           const {

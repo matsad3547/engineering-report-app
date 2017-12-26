@@ -10,6 +10,7 @@ const DisplayReport = ({  report,
                           config,
                           metricValues,
                           notes,
+                          weather,
                           displayName,
                           team,
                         }) => {
@@ -18,6 +19,8 @@ const DisplayReport = ({  report,
     const metricValArr = Object.keys(metricValues)
     const configVals = Object.keys(config)
                         .sort( (a, b) => configOrder.indexOf(a[0]) < configOrder.indexOf(b[0]) ? -1 : 1)
+
+    const weatherVals = weather ? Object.keys(weather) : null
 
     return(
       <div className="reportDisplay">
@@ -62,6 +65,25 @@ const DisplayReport = ({  report,
         <hr/>
         <h4>Notes</h4>
         <p>{notes}</p>
+        {weather ?
+          <div>
+            <br/>
+            <hr/>
+            <h4>Weather</h4>
+            <table>
+              <tbody>
+                {weatherVals.map( (w, i) =>
+                  <tr key={`weather-${i}`}>
+                    <td>{w}:</td>
+                    <td className="val">{weather[w]}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div> : ''
+        }
+        <br/>
+        <hr/>
       </div>
     )
   }
@@ -84,6 +106,7 @@ const mapStateToProps = (state, ownProps) => {
     config: reportVals ? reportVals.config : null,
     metricValues: reportVals ? reportVals.metricValues : null,
     notes: reportVals ? reportVals.notes : null,
+    weather: reportVals ? reportVals.weather : null,
     displayName: state.user.displayName,
     team: state.user.team,
   }

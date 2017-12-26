@@ -11,9 +11,10 @@ import {
 import getReports from '../actions/getReports'
 import getKeywords from '../actions/getKeywords'
 
-import ConfigForm from '../containers/ConfigForm'
-import DropDownSliderInput from '../containers/DropDownSliderInput'
-import NoteField from '../containers/NoteField'
+import ConfigForm from './ConfigForm'
+import DropDownSliderInput from './DropDownSliderInput'
+import NoteField from './NoteField'
+import Weather from '../components/Weather/'
 
 const NewReport = ({  config,
                       metricValues,
@@ -44,8 +45,15 @@ const NewReport = ({  config,
       config,
       metricValues,
       notes,
+      weather: Object.keys(weather)
+                .filter( k => k !== 'image' )
+                .reduce( (obj, k) => ({
+                  ...obj,
+                  [k]: weather[k],
+                }), {}),
       uid: team === 'demo' ? 12345 : uid,
     }
+    console.log('new report:', newReport);
     const updates = {}
     updates[`teams/${team}/test reports/${newReportKey}`] = newReport
     database.ref()
@@ -85,7 +93,6 @@ const NewReport = ({  config,
         config={config}
         />
       <hr/>
-
       {keys.map( (key, i) =>
         <DropDownSliderInput
         key={i + 'b'}
@@ -98,56 +105,15 @@ const NewReport = ({  config,
       <NoteField
         notes={notes}
         />
-      {weather ?
-        <div  className="weather">
-          <hr/>
-          <table>
-            <tbody>
-              <tr>
-                {weather.weather ?
-                  <td>{weather.weather}</td> : <td></td>
-                }
-                {weather.temp_f ?
-                  <td>{weather.temp_f}&#8457;</td> : <td></td>
-                }
-                {weather.relative_humidity ?
-                  <td>{weather.relative_humidity}</td> : <td></td>
-                }
-                <td>Humidity</td>
-              </tr>
-              <tr>
-                <td>Wind avg/gust(mph)</td>
-                {weather.wind_mph !== undefined ?
-                  <td>{weather.wind_mph}</td> : <td></td>
-                }
-                {weather.wind_gust_mph !== undefined  ?
-                  <td>{weather.wind_gust_mph}</td> : <td></td>
-                }
-                {weather.wind_dir !== undefined ?
-                  <td>{weather.wind_dir}</td> : <td></td>
-                }
-              </tr>
-
-
-            </tbody>
-          </table>
-          <div className="wu-img">
-            <p>Powered by</p>
-            <img
-              src={weather.image.url}
-              height={30}
-              alt="Wunderground"></img>
-          </div>
-          <hr/>
-        </div>
-       : ''}
+      <Weather
+        weather={weather}
+        />
       <RaisedButton
         label="Save Report"
         style={styles.button}
         className="reportButton"
         onClick={submitReport}
         />
-
     </div>
   )
 }
