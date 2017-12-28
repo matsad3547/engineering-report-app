@@ -1,7 +1,8 @@
-import {  receiveReports,
-          setDataProperty,
-          setDataError,
-        } from './index'
+import {
+  setUserProperty,
+  setDataProperty,
+  setDataError,
+} from './index'
 
 import database from '../utils/firebase'
 
@@ -20,15 +21,8 @@ const getTeammates = () => {
               .equalTo(team)
               .once('value', snap => {
                 const teammates = snap.val()
-                console.log('teammates:', teammates);
-                // const reports = Object.keys(snap.val())
-                //                 .filter( k => k !== '000')
-                //                 .reduce( (obj, k) => ({
-                //                   ...obj,
-                //                   [k]: snap.val()[k]
-                //                 }), {})
 
-        // dispatch(receiveReports(reports, n, allReports,))
+        dispatch(setUserProperty({teammates,}))
         dispatch(setDataProperty({loading: false}))
       })
       .catch( err => {

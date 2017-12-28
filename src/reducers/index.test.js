@@ -233,6 +233,7 @@ describe('user() ', () => {
       approved: false,
       teams: [],
       team: 'demo',
+      teammates: null
     }
     expect(user(undefined, action)).toEqual(result)
   })
@@ -544,7 +545,7 @@ describe('weather()', () => {
   test('should return a weather object in response to an action type of "SET_WEATHER_DATA"', () => {
     const action = {
       type: 'SET_WEATHER_DATA',
-      weather: {        
+      weather: {
         relative_humidity: "87%",
         weather: "Overcast",
         temp_f: 23.4,

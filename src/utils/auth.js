@@ -57,7 +57,6 @@ export const setData = user => {
     dispatch(setDataProperty({loading: true}))
 
     const {
-      // displayName,
       email,
       uid,
     } = user
@@ -107,9 +106,7 @@ export const createUser = () => {
 
     auth.createUserWithEmailAndPassword(email, password)
     .then( user => {
-      // user.updateProfile({
-      //   displayName,
-      // })
+
       const { uid } = user
       const userInfo = {}
       userInfo[`users/${uid}`] = {
@@ -135,10 +132,10 @@ export const createUser = () => {
         })
       })
     })
-    .then( () => {
-      dispatch(clearUserData())
-      auth.signOut()
-    })
+    // .then( () => {
+    //   dispatch(clearUserData())
+    //   auth.signOut()
+    // })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
       dispatch(setDataError({signOutErr: err}))

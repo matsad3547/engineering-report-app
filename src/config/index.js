@@ -38,6 +38,7 @@ export const initUserState = {
   approved: false,
   teams: [],
   team: 'demo',
+  teammates: null,
 }
 
 export const initDataState = {

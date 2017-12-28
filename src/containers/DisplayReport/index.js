@@ -11,8 +11,11 @@ const DisplayReport = ({  report,
                           metricValues,
                           notes,
                           weather,
+                          uid,
                           displayName,
                           team,
+                          admin,
+                          teammates,
                         }) => {
   if (!!config) {
 
@@ -32,7 +35,7 @@ const DisplayReport = ({  report,
               <tbody>
                 <tr>
                   <td>Author:</td>
-                  <td>{displayName ? displayName : '<name is not available>'}</td>
+                  <td>{admin && teammates ? teammates[uid].displayName : displayName }</td>
                 </tr>
               </tbody>
             </table>
@@ -107,8 +110,11 @@ const mapStateToProps = (state, ownProps) => {
     metricValues: reportVals ? reportVals.metricValues : null,
     notes: reportVals ? reportVals.notes : null,
     weather: reportVals ? reportVals.weather : null,
+    uid: reportVals ? reportVals.uid : null,
     displayName: state.user.displayName,
     team: state.user.team,
+    admin: state.user.admin,
+    teammates: state.user.teammates,
   }
 }
 
