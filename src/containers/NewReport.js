@@ -53,7 +53,6 @@ const NewReport = ({  config,
                 }), {}),
       uid: team === 'demo' ? 12345 : uid,
     }
-    console.log('new report:', newReport);
     const updates = {}
     updates[`teams/${team}/test reports/${newReportKey}`] = newReport
     database.ref()
