@@ -5,6 +5,7 @@ import getReports from '../actions/getReports'
 import getTeams from '../actions/getTeams'
 import getKeywords from '../actions/getKeywords'
 import getWeather from '../actions/getWeather'
+import getTeammates from '../actions/getTeammates'
 
 import {
   setUserData,
@@ -56,7 +57,7 @@ export const setData = user => {
     dispatch(setDataProperty({loading: true}))
 
     const {
-      displayName,
+      // displayName,
       email,
       uid,
     } = user
@@ -67,6 +68,7 @@ export const setData = user => {
         team,
         admin,
         approved,
+        displayName,
       } = snap.val()
 
       dispatch(setUserData({
@@ -84,6 +86,7 @@ export const setData = user => {
       dispatch(getKeywords())
       dispatch(getTeams())
       dispatch(getWeather())
+      dispatch(getTeammates())
     })
     .catch( err => {
       console.error('There was a error retrieving your user data:', err.message)
@@ -104,15 +107,16 @@ export const createUser = () => {
 
     auth.createUserWithEmailAndPassword(email, password)
     .then( user => {
-      user.updateProfile({
-        displayName,
-      })
+      // user.updateProfile({
+      //   displayName,
+      // })
       const { uid } = user
       const userInfo = {}
       userInfo[`users/${uid}`] = {
         team,
         admin: false,
-        approved: false,
+        approved: true,
+        displayName,
       }
       database.ref()
       .update(userInfo)
