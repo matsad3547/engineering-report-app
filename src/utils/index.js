@@ -7,37 +7,52 @@ export const date = unixDate => new Date(parseInt(unixDate, 0))
                                   .toString()
                                   .slice(0, 24)
 
+const getWeatherString = weather => weather ?
+  `"="${JSON.stringify(weather)}""`
+    .replace(/("{|}")/gi,'"') : ''
+
 export const formatReports = (reports, queued) => {
-  let parsedReports = []
-  let count = 0
-  queued.forEach( (q, i) => {
-    count = Object.keys(reports[q].config || {})
-                  .sort( (a, b) => configOrder.indexOf(a[0]) < configOrder.indexOf(b[0]) ? -1 : 1)
-                  .reduce((sum, c, j) => {
-    if (i === 0) parsedReports.push([c])
-    parsedReports[j].push(reports[q].config[c])
-    return sum + 1
-  }, 0)
 
-    if (reports[q].metricValues) {
-      const mvKeys = Object.keys(reports[q].metricValues)
-      mvKeys.forEach( (k, j) => {
-        if (i === 0) parsedReports.push( [ reports[q].metricValues[k].name])
-        parsedReports[j + count].push(reports[q].metricValues[k].val)
-      })
+  const parsedObj = queued.reduce( (obj, n, i) => {
+    Object.keys(reports[n].config)
+      .forEach( c => {
+        if(obj[c]) {
+          obj[c].push(reports[n].config[c])
+        }
+        else {
+          obj[c] = [reports[n].config[c]]
+        }
+        console.log(obj, c);
+    })
+    Object.keys(reports[n].metricValues)
+      .forEach( t => {
+        const mv = reports[n].metricValues[t]
+        if(obj[mv.name]) {
+          obj[mv.name].push(mv.val)
+        }
+        else {
+          obj[mv.name] = [mv.val]
+        }
+    })
+    if (obj.notes) {
+      obj.notes.push(reports[n].notes)
+    }
+    else {
+      obj.notes = [reports[n].notes]
+    }
+    if (obj.weather) {
+      obj.weather.push(getWeatherString(reports[n].weather))
+    }
+    else {
+      obj.weather = [getWeatherString(reports[n].weather)]
     }
 
-    if (reports[q].notes) {
-      if (i === 0) parsedReports.push(['Notes'])
-      parsedReports[parsedReports.length - 1].push(reports[q].notes)
-    }
+    console.log(obj);
+    return obj
+  }, {})
 
-    if (reports[q].weather) {
-      if (i === 0) parsedReports.push(['Weather'])
-      parsedReports[parsedReports.length - 1].push(`"="${JSON.stringify(reports[q].weather, )}""`.replace(/("{|}")/gi,'"'))
-    }
-  })
-  return parsedReports
+  return Object.keys(parsedObj)
+          .map( k => [k, ...parsedObj[k]] )
 }
 
 export const parseCSV = data => (
