@@ -17,10 +17,9 @@ const getWeather = () => {
 
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition( pos => {
-        console.log('there is geolocation', pos);
         const lat = pos.coords.latitude
         const lng = pos.coords.longitude
-        fetch(`http://api.wunderground.com/api/${wundergroundApiKey}/conditions/q/${lat},${lng}.json`)
+        fetch(`https://api.wunderground.com/api/${wundergroundApiKey}/conditions/q/${lat},${lng}.json`)
         .then( res => res.json() )
         .then( res => {
           const weatherData = res.current_observation
