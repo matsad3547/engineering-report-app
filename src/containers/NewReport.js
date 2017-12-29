@@ -7,7 +7,9 @@ import database from '../utils/firebase'
 import {
   saveReport,
   setDataProperty,
+  setDataError,
  } from '../actions'
+
 import getReports from '../actions/getReports'
 import getKeywords from '../actions/getKeywords'
 
@@ -15,6 +17,7 @@ import ConfigForm from './ConfigForm'
 import DropDownSliderInput from './DropDownSliderInput'
 import NoteField from './NoteField'
 import Weather from '../components/Weather/'
+import ErrorPopUp from '../components/ErrorPopUp'
 
 const NewReport = ({  config,
                       metricValues,
@@ -30,6 +33,7 @@ const NewReport = ({  config,
                       getReports,
                       getKeywords,
                       setDataProperty,
+                      clearWeatherErr,
                     }) => {
 
   const keys = Object.keys(metricValues)
@@ -113,6 +117,11 @@ const NewReport = ({  config,
         className="reportButton"
         onClick={submitReport}
         />
+      <ErrorPopUp
+        error={weatherErr}
+        message={`There was an error loading the weather: ${weatherErr}`}
+        clearError={clearWeatherErr}
+        />
     </div>
   )
 }
@@ -161,6 +170,7 @@ const mapDispatchToProps = dispatch => ({
   getReports: team => dispatch(getReports(team)),
   getKeywords: team => dispatch(getKeywords(team)),
   setDataProperty: property => dispatch(setDataProperty(property)),
+  clearWeatherErr: () => dispatch(setDataError({weatherErr: null})),
 })
 
 export default connect(

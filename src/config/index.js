@@ -1,4 +1,4 @@
-export const version = '0.1.11'
+export const version = '0.1.12'
 
 export const muiTheme = {
   palette: {

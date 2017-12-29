@@ -9,8 +9,15 @@ const wundergroundApiKey = process.env.REACT_APP_WUNDERGROUND_API_KEY
 const getWeather = () => {
 
   return (dispatch, getState) => {
+
+    const error = err => {
+      console.error(`There was a geolocation error: ${err.message}`)
+      dispatch(setDataError({weatherErr: err.message}))
+    }
+
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition( pos => {
+        console.log('there is geolocation', pos);
         const lat = pos.coords.latitude
         const lng = pos.coords.longitude
         fetch(`http://api.wunderground.com/api/${wundergroundApiKey}/conditions/q/${lat},${lng}.json`)
@@ -47,7 +54,7 @@ const getWeather = () => {
           dispatch(setDataError({weatherErr: err}))
           dispatch(setDataProperty({loading: false}))
         })
-      })
+      }, error)
     }
     else {
       console.error('location and weather are not available');
