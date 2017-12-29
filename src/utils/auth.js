@@ -23,6 +23,14 @@ export const signIn = (email, password) => {
     dispatch(setDataProperty({loading: true}))
 
     auth.signInWithEmailAndPassword(email, password)
+
+    //TODO ms change stuff here to update user object
+    // .then( user => {
+    //   console.log('updating e-mail verified');
+    //   user.updateProfile({
+    //     displayName: 'Matt',
+    //   })
+    // })
     .catch( err => {
       console.error('There was a error signing in:', err.message)
       dispatch(setDataProperty({loading: false}))
@@ -128,10 +136,11 @@ export const createUser = () => {
           const adminEmail = members[adminUID].email
 
           console.log('admin:', adminUID, '\nteam:', team, '\nemail:', adminEmail);
-          //TODO figure out how to notify admin of new user
+          //TODO ms figure out how to notify admin of new user
         })
       })
     })
+    //This really didn't work very well, anyway
     // .then( () => {
     //   dispatch(clearUserData())
     //   auth.signOut()

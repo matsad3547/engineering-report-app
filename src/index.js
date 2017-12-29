@@ -28,7 +28,11 @@ dotenv.config()
 injectTapEventPlugin()
 
 auth.onAuthStateChanged( user => {
+
   if(user) {
+  //TODO ms Change once e-mail verification has been setup
+  // console.log('user at auth state changed', user)
+  // if(user && user.emailVerified) {
     store.dispatch(setData(user))
   }
   else {
