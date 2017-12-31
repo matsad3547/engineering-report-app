@@ -183,7 +183,7 @@ SetKeywords.propTypes = {
   keywords: PropTypes.arrayOf(PropTypes.string),
   loading: PropTypes.bool,
   location: PropTypes.object,
-  metricValueNames: PropTypes.array,
+  metricValueNames: PropTypes.arrayOf(PropTypes.string),
   setTeamProperty: PropTypes.func,
   setTeamKeyword: PropTypes.func,
   getKeywords: PropTypes.func,
