@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import Checkbox from 'material-ui/Checkbox'
@@ -151,6 +152,20 @@ const mapDispatchToProps = dispatch => {
     getReports: (n, allReports) => dispatch(getReports(n, allReports)),
     setDataProperty: property => dispatch(setDataProperty(property)),
   }
+}
+
+ExistingReports.propTypes = {
+  reports: PropTypes.object,
+  n: PropTypes.number,
+  allReports: PropTypes.bool,
+  queued: PropTypes.array,
+  reportErr: PropTypes.string,
+  admin: PropTypes.bool,
+
+  queueReport: PropTypes.func,
+  unqueueReport: PropTypes.func,
+  clearQueue: PropTypes.func,
+  getReports: PropTypes.func,
 }
 
 export default connect(

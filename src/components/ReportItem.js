@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 import Checkbox from 'material-ui/Checkbox'
@@ -13,8 +14,12 @@ const ReportItem = ({ config,
                       unqueueReport,
                     }) => {
 
-  const { model, shortName, configNum } = config
-
+  const {
+    model,
+    shortName,
+    configNum,
+  } = config
+  
   const checked = queued.includes(report) ? true : false
 
   const onCheck = (e, i) => {
@@ -67,6 +72,15 @@ const ReportItem = ({ config,
         />
     </div>
   )
+}
+
+ReportItem.propTypes = {
+  config: PropTypes.object,
+  report: PropTypes.number,
+  index: PropTypes.number,
+  queued: PropTypes.array,
+  queueReport: PropTypes.func,
+  unqueueReport: PropTypes.func,
 }
 
 export default ReportItem

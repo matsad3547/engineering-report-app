@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router'
@@ -158,6 +159,17 @@ const mapDispatchToProps = dispatch => ({
   setDataProperty: property => dispatch(setDataProperty(property)),
 })
 
+SetKeywords.propTypes = {
+  team: PropTypes.string,
+  keyword: PropTypes.string,
+  keywords: PropTypes.arrayOf(PropTypes.string),
+  loading: PropTypes.bool,
+  location: PropTypes.object,
+  setTeamProperty: PropTypes.func,
+  setTeamKeyword: PropTypes.func,
+  getKeywords: PropTypes.func,
+  setDataProperty: PropTypes.func,
+}
 
 export default connect(
   mapStateToProps,

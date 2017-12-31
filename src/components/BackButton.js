@@ -6,10 +6,7 @@ import { muiTheme } from '../config/'
 
 const BackButton = () => {
 
-  const goBack = e => {
-    e.preventDefault()
-    browserHistory.push('/')
-  }
+  const goBack = () => browserHistory.push('/')
 
   const styles={
     icon: {

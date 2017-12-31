@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Snackbar from 'material-ui/Snackbar'
 
 const ErrorPopUp = ({ error,
@@ -28,5 +29,10 @@ const ErrorPopUp = ({ error,
   )
 }
 
+ErrorPopUp.propTypes = {
+  error: PropTypes.string,
+  message: PropTypes.string,
+  clearError: PropTypes.func.isRequired
+}
 
 export default ErrorPopUp

@@ -1,8 +1,10 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import { Tab, Tabs } from 'material-ui/Tabs'
 
-const TabMenu = ({ dataset, pageDisplayed }) => (
+const TabMenu = ({ pageDisplayed }) => (
+
   <Tabs
     value={pageDisplayed}
     >
@@ -17,5 +19,8 @@ const TabMenu = ({ dataset, pageDisplayed }) => (
   </Tabs>
 )
 
+TabMenu.propTypes = {
+  pageDisplayed: PropTypes.number,
+}
 
 export default TabMenu

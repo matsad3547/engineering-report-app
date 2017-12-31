@@ -1,14 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux'
-
-import { changeMetricVal } from '../actions'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Slider from 'material-ui/Slider'
 
 
-const DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
+const DropDownSliderInput = ({id,
+                              name,
+                              value,
+                              previousVal,
+                              changeMetricVal,
+                            }) => {
 
   const onChange = (e, input) => {
     const output = {
@@ -16,7 +19,7 @@ const DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
       val: input,
       name,
     }
-    dispatch(changeMetricVal(output))
+    changeMetricVal(output)
   }
 
   const styles = {
@@ -60,11 +63,18 @@ const DropDownSliderInput = ({ dispatch, id, name, value, previousVal }) => {
             defaultValue={value}
             onChange={onChange}
             />
-
         </MenuItem>
       </DropDownMenu>
     </div>
   )
 }
 
-export default connect()(DropDownSliderInput)
+DropDownSliderInput.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  value: PropTypes.number,
+  previousVal: PropTypes.number,
+  changeMetricVal: PropTypes.func,
+}
+
+export default DropDownSliderInput

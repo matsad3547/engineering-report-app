@@ -35,6 +35,9 @@ auth.onAuthStateChanged( user => {
   // if(user && user.emailVerified) {
     store.dispatch(setData(user))
   }
+  // else if (user && !user.emailVerified){
+  //   store.dispatch(setDataMessage('Please verify your email address'))
+  // }
   else {
     store.dispatch(getReports())
     store.dispatch(getKeywords())

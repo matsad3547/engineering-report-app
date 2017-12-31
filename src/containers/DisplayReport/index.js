@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './DisplayReport.css'
 
@@ -116,6 +117,19 @@ const mapStateToProps = (state, ownProps) => {
     admin: state.user.admin,
     teammates: state.user.teammates,
   }
+}
+
+DisplayReport.propTypes = {
+  report: PropTypes.number,
+  config: PropTypes.object,
+  metricValues: PropTypes.array,
+  notes: PropTypes.string,
+  weather: PropTypes.object,
+  uid: PropTypes.string,
+  displayName: PropTypes.string,
+  team: PropTypes.string,
+  admin: PropTypes.bool,
+  teammates: PropTypes.array,
 }
 
 export default connect(mapStateToProps)(DisplayReport)

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -161,6 +162,18 @@ const mapDispatchToProps = dispatch => ({
   setTeamProperty: property => dispatch(setTeamProperty(property)),
   createTeam: () => dispatch(createTeam()),
 })
+
+CreateTeam.propTypes = {
+  email: PropTypes.string,
+  displayName: PropTypes.string,
+  team: PropTypes.string,
+  password: PropTypes.string,
+  verifyPassword: PropTypes.string,
+  loading: PropTypes.bool,
+  setUserProperty: PropTypes.func,
+  setTeamProperty: PropTypes.func,
+  createTeam: PropTypes.func,
+}
 
 export default connect(
   mapStateToProps,

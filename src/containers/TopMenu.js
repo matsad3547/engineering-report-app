@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
@@ -68,6 +69,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   signOut: () => dispatch(signOut()),
 })
+
+TopMenu.propTypes = {
+  admin: PropTypes.bool,
+  signOut: PropTypes.func,
+}
 
 export default connect(
   mapStateToProps,

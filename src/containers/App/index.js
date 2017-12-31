@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar'
 import SwipeableViews from 'react-swipeable-views'
@@ -14,7 +15,6 @@ const App = ({  team,
                 children,
                 location,
                 loading,
-                dispatch,
               }) => {
 
   const pageDisplayed = location.pathname === '/app/new_report' ? 1 : 2
@@ -47,13 +47,18 @@ const App = ({  team,
   )
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    team: state.user.team,
-    children: ownProps.children,
-    location: ownProps.location,
-    loading: state.data.loading,
-  }
+const mapStateToProps = (state, ownProps) => ({
+  team: state.user.team,
+  children: ownProps.children,
+  location: ownProps.location,
+  loading: state.data.loading,
+})
+
+App.propTypes = {
+  team: PropTypes.string,
+  children: PropTypes.object,
+  location: PropTypes.object,
+  loading: PropTypes.bool,
 }
 
 export default connect(mapStateToProps)(App)

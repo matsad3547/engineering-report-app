@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -8,14 +9,16 @@ import {
   saveReport,
   setDataProperty,
   setDataError,
+  saveReportNotes,
+  changeMetricVal,
  } from '../actions'
 
 import getReports from '../actions/getReports'
 import getKeywords from '../actions/getKeywords'
 
 import ConfigForm from './ConfigForm'
-import DropDownSliderInput from './DropDownSliderInput'
-import NoteField from './NoteField'
+import DropDownSliderInput from '../components/DropDownSliderInput'
+import NoteField from '../components/NoteField'
 import Weather from '../components/Weather/'
 import ErrorPopUp from '../components/ErrorPopUp'
 
@@ -34,6 +37,8 @@ const NewReport = ({  config,
                       getKeywords,
                       setDataProperty,
                       clearWeatherErr,
+                      saveReportNotes,
+                      changeMetricVal,
                     }) => {
 
   const keys = Object.keys(metricValues)
@@ -103,10 +108,12 @@ const NewReport = ({  config,
         name={metricValues[key].name}
         value={metricValues[key].val}
         previousVal={previousMetricValues[i] ? previousMetricValues[i] : 4.5}
+        changeMetricVal={changeMetricVal}
         />
       )}
       <NoteField
         notes={notes}
+        saveReportNotes={saveReportNotes}
         />
       <Weather
         weather={weather}
@@ -171,7 +178,29 @@ const mapDispatchToProps = dispatch => ({
   getKeywords: team => dispatch(getKeywords(team)),
   setDataProperty: property => dispatch(setDataProperty(property)),
   clearWeatherErr: () => dispatch(setDataError({weatherErr: null})),
+  saveReportNotes: notes => dispatch(saveReportNotes(notes)),
+  changeMetricVal: output => dispatch(changeMetricVal(output)),
 })
+
+NewReport.propTypes = {
+  config: PropTypes.object,
+  metricValues: PropTypes.object,
+  notes: PropTypes.string,
+  previousMetricValues: PropTypes.arrayOf(PropTypes.number),
+  team: PropTypes.string,
+  uid: PropTypes.string,
+  keywords: PropTypes.arrayOf(PropTypes.string),
+  keywordsErr: PropTypes.string,
+  weather: PropTypes.object,
+  weatherErr: PropTypes.string,
+  saveReport: PropTypes.func,
+  getReports: PropTypes.func,
+  getKeywords: PropTypes.func,
+  setDataProperty: PropTypes.func,
+  clearWeatherErr: PropTypes.func,
+  saveReportNotes: PropTypes.func,
+  changeMetricVal: PropTypes.func,
+}
 
 export default connect(
   mapStateToProps,

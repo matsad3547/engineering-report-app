@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
@@ -6,7 +7,9 @@ import MenuItem from 'material-ui/MenuItem'
 import { setReportConfig } from '../actions'
 import { configVals } from '../config/'
 
-const ConfigForm = ({ config, configDispatch }) => {
+const ConfigForm = ({ config,
+                      configDispatch,
+                    }) => {
 
   const {
     model,
@@ -115,10 +118,13 @@ const ConfigForm = ({ config, configDispatch }) => {
   )
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    configDispatch: (output) => dispatch(setReportConfig(output))
-  }
+const mapDispatchToProps = dispatch => ({
+  configDispatch: (output) => dispatch(setReportConfig(output))
+})
+
+ConfigForm.propTypes = {
+  config: PropTypes.object,
+  configDispatch: PropTypes.func,
 }
 
 export default connect(

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -84,11 +85,13 @@ const CreateUser = ({ email,
         <DropDownMenu
           className="dropdown team"
           onChange={onChange.team}
-          value={team}
+          value={team === 'demo' ? '' : team}
           labelStyle={styles.label}
           style={styles.menu}
           >
-          <MenuItem primaryText={'<none selected>'} label={'Choose a team'} value={''} />
+          <MenuItem
+            primaryText={'<none selected>'}
+            label={'Choose a team'} value={''} />
           { teams.map( (t, i) => <MenuItem key={`team-${i}`} primaryText={t} label={t} value={t}/> )}
 
         </DropDownMenu>
@@ -161,6 +164,19 @@ const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
   createUser: () => dispatch(createUser()),
 })
+
+CreateUser.propTypes = {
+  email: PropTypes.string,
+  displayName: PropTypes.string,
+  team: PropTypes.string,
+  password: PropTypes.string,
+  verifyPassword: PropTypes.string,
+  teams: PropTypes.array,
+  loading: PropTypes.bool,
+  error: PropTypes.object,
+  setUserProperty: PropTypes.func,
+  createUser: PropTypes.func,
+}
 
 export default connect(
   mapStateToProps,

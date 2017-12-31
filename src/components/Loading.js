@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import CircularProgress from 'material-ui/CircularProgress'
 
 const Loading = ({message}) => (
@@ -12,5 +13,9 @@ const Loading = ({message}) => (
       />
   </div>
 )
+
+Loading.propTypes = {
+  message: PropTypes.string,
+}
 
 export default Loading

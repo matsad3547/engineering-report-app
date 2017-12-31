@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -94,6 +95,13 @@ const mapDispatchToProps = dispatch => ({
   signIn: (email, password) => dispatch(signIn(email, password)),
 })
 
+Login.propTypes = {
+  email: PropTypes.string,
+  password: PropTypes.string,
+  setUserProperty: PropTypes.func,
+  clearUserData: PropTypes.func,
+  signIn: PropTypes.func,
+}
 
 export default connect(
   mapStateToProps,
