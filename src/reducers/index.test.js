@@ -360,6 +360,7 @@ describe('data() ', () => {
       dataIsFresh: false,
       loading: false,
       error: {},
+      message: '',
     }
     expect(actual).toEqual(expected)
   })
@@ -424,6 +425,27 @@ describe('data() ', () => {
       dataIsFresh: false,
       loading: true,
       error: {},
+    }
+    expect(actual).toEqual(expected)
+  })
+
+  test('should set a `message` property in response to an action type of `SET_DATA_MESSAGE`', () => {
+    const action = {
+      type: 'SET_DATA_MESSAGE',
+      message: 'This is a test',
+    }
+    const state = {
+      dataIsFresh: false,
+      loading: false,
+      error: {},
+      message: '',
+    }
+    const actual = data(state, action)
+    const expected = {
+      dataIsFresh: false,
+      loading: false,
+      error: {},
+      message: 'This is a test',
     }
     expect(actual).toEqual(expected)
   })

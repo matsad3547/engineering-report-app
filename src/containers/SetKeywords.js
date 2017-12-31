@@ -4,29 +4,40 @@ import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router'
 
+import { arrEqualsArr } from '../utils/'
+
 import database from '../utils/firebase'
 
 import {
   setTeamProperty,
   setTeamKeyword,
   setDataProperty,
+  setDataMessage,
 } from '../actions/'
 
 import getKeywords from '../actions/getKeywords'
+
 import BackButton from '../components/BackButton'
+
+import MessagePopUp from './MessagePopUp'
 
 const SetKeywords = ({  team,
                         keyword,
                         keywords,
                         loading,
                         location,
+                        metricValueNames,
+
                         setTeamProperty,
                         setTeamKeyword,
                         getKeywords,
                         setDataProperty,
+                        setSavedMessage,
                       }) => {
 
   const creatingTeam = location.pathname === '/app/set_keywords' ? false : true
+
+  const changesMade = keyword.length > 0 || !arrEqualsArr(metricValueNames, keywords)
 
   const onChange = {
     keyword(e) {
@@ -44,6 +55,7 @@ const SetKeywords = ({  team,
       database.ref()
         .update(updates)
       getKeywords()
+      setSavedMessage()
       setDataProperty({loading: false})
     },
     delete(e, w) {
@@ -96,7 +108,7 @@ const SetKeywords = ({  team,
         { keywords ?
           <div>
             <h4>Keyword List</h4>
-            <p>(keyword changes will not appear in reports until they are saved)</p>
+            {changesMade ? <p>(keyword changes will not appear in reports until they are saved)</p> : null}
             { keywords.map( (k, i) =>
               <div key={`kw-${i}`} className="keyword">
                 {k}
@@ -110,7 +122,7 @@ const SetKeywords = ({  team,
               </div>
             )}
             <RaisedButton
-              disabled={keywords.length === 0}
+              disabled={!changesMade}
               label="Save"
               style={styles.button}
               className="reportButton"
@@ -128,6 +140,7 @@ const SetKeywords = ({  team,
         }
         </div>
       {creatingTeam ? <BackButton /> : ''}
+      <MessagePopUp />
     </div>
   )
 }
@@ -143,12 +156,16 @@ const mapStateToProps = (state, ownProps) => {
 
   const { loading } = state.data
 
+  const metricValueNames = Object.keys(state.metricValues)
+                            .map( k => state.metricValues[k].name)
+
   return {
     team,
     keyword,
     keywords,
     loading,
     location: ownProps.location,
+    metricValueNames,
   }
 }
 
@@ -157,6 +174,7 @@ const mapDispatchToProps = dispatch => ({
   setTeamKeyword: keyword => dispatch(setTeamKeyword(keyword)),
   getKeywords: () => dispatch(getKeywords()),
   setDataProperty: property => dispatch(setDataProperty(property)),
+  setSavedMessage: () => dispatch(setDataMessage('Your changes have been saved')),
 })
 
 SetKeywords.propTypes = {
@@ -165,10 +183,12 @@ SetKeywords.propTypes = {
   keywords: PropTypes.arrayOf(PropTypes.string),
   loading: PropTypes.bool,
   location: PropTypes.object,
+  metricValueNames: PropTypes.array,
   setTeamProperty: PropTypes.func,
   setTeamKeyword: PropTypes.func,
   getKeywords: PropTypes.func,
   setDataProperty: PropTypes.func,
+  setSavedMessage: PropTypes.func,
 }
 
 export default connect(

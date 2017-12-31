@@ -15,6 +15,7 @@ import {
   resetMetricState,
   setDataProperty,
   setDataError,
+  setDataMessage,
   setTeamProperty,
   setTeamKeyword,
   resetLoginData,
@@ -291,6 +292,24 @@ describe('setDataError()', () => {
     const expected = {
       type: 'SET_DATA_ERROR',
       testErr: 'test',
+    }
+    expect(actual).toEqual(expected)
+  })
+})
+
+describe('setDataMessage()', () => {
+  test('should return a type of "SET_DATA_MESSAGE"', () => {
+    const actual = setDataMessage().type
+    const expected = 'SET_DATA_MESSAGE'
+    expect(actual).toEqual(expected)
+  })
+
+  test('should return an message string passed in with a type of "SET_DATA_MESSAGE"', () => {
+    const message = 'this is a test'
+    const actual = setDataMessage(message)
+    const expected = {
+      type: 'SET_DATA_MESSAGE',
+      message: 'this is a test',
     }
     expect(actual).toEqual(expected)
   })

@@ -3,13 +3,10 @@ import {
   parseCSV,
   downloadQueued,
   resetMetricState,
+  arrEqualsArr,
 } from '../index'
 
 describe('formatReports() ', () => {
-
-  // test('should return an array', () => {
-  //   expect(formatReports({}, [])).toEqual([])
-  // })
 
   test('should convert a report-like object to an array of arrays', () => {
     const queued = [1]
@@ -399,4 +396,32 @@ describe('resetMetricState() ', () => {
     }
     expect(actual).toEqual(expected)
   })
+})
+
+describe('arrEqualsArr()', () => {
+
+  test('should return true if two arrays are the same', () => {
+    const arr1 = [1, 2, 3]
+    const arr2 = [1, 2, 3]
+    const actual = arrEqualsArr(arr1, arr2)
+    const expected = true
+    expect(actual).toEqual(expected)
+  })
+
+  test('should return false if two arrays are the different', () => {
+    const arr1 = [1, 2, 3]
+    const arr2 = [1, 2, 4]
+    const actual = arrEqualsArr(arr1, arr2)
+    const expected = false
+    expect(actual).toEqual(expected)
+  })
+
+  test('should return false if two arrays are the different', () => {
+    const arr1 = [1, 2, 3]
+    const arr2 = ['1', '2', '3']
+    const actual = arrEqualsArr(arr1, arr2)
+    const expected = false
+    expect(actual).toEqual(expected)
+  })
+
 })

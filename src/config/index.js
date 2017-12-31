@@ -45,6 +45,7 @@ export const initDataState = {
   dataIsFresh: false,
   loading: false,
   error: {},
+  message: '',
 }
 
 export const initTeamState = {

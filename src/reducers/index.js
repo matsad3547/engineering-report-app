@@ -188,6 +188,11 @@ export const data = (state = initDataState, action) => {
         ...state,
         [key]: action[key]
       }
+    case 'SET_DATA_MESSAGE':
+      return {
+        ...state,
+        message: action.message,
+      }
     default:
       return state
   }

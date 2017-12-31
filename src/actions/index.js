@@ -97,6 +97,11 @@ export const setDataError = error => {
   }
 }
 
+export const setDataMessage = message => ({
+  type: 'SET_DATA_MESSAGE',
+  message,
+})
+
 export const setReportProperty = property => {
   const key = Object.keys(property)
                 .filter( k => k !== 'type' )[0]

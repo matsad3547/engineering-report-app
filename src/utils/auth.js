@@ -12,6 +12,7 @@ import {
   clearUserData,
   setDataProperty,
   setDataError,
+  setDataMessage,
   setTeamProperty,
   resetLoginData,
 } from '../actions/'
@@ -26,11 +27,17 @@ export const signIn = (email, password) => {
 
     //TODO ms change stuff here to update user object
     // .then( user => {
+    //   console.log('user:', user)
+    //   user.sendEmailVerification()
+    //   .catch( err => console.error(err))
+    // })
+    // .then( user => {
     //   console.log('updating e-mail verified');
     //   user.updateProfile({
     //     displayName: 'Matt',
     //   })
     // })
+    // .then( () => browserHistory.push('/') )
     .catch( err => {
       console.error('There was a error signing in:', err.message)
       dispatch(setDataProperty({loading: false}))
@@ -94,6 +101,7 @@ export const setData = user => {
       dispatch(getTeams())
       dispatch(getWeather())
       dispatch(getTeammates())
+      // browserHistory.push('/')
     })
     .catch( err => {
       console.error('There was a error retrieving your user data:', err.message)
@@ -136,18 +144,24 @@ export const createUser = () => {
           const adminEmail = members[adminUID].email
 
           console.log('admin:', adminUID, '\nteam:', team, '\nemail:', adminEmail);
-          //TODO ms figure out how to notify admin of new user
+          // TODO ms figure out how to notify admin of new user
         })
       })
+      user.updateProfile({
+        displayName,
+      })
+      console.log('updated user:', user);
+      user.sendEmailVerification()
+      .then( () => dispatch(setDataMessage(`You have been added to ${team}.  Please go to your email account and follow the link to verify your email.`)))
+      .catch( err => {
+        console.error(err)
+        dispatch(setDataError({createUserErr: err.message}))
+      })
+
     })
-    //This really didn't work very well, anyway
-    // .then( () => {
-    //   dispatch(clearUserData())
-    //   auth.signOut()
-    // })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
-      dispatch(setDataError({signOutErr: err}))
+      dispatch(setDataError({createUserErr: err.message}))
     })
   }
 }

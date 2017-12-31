@@ -9,6 +9,7 @@ import {
   saveReport,
   setDataProperty,
   setDataError,
+  setDataMessage,
   saveReportNotes,
   changeMetricVal,
  } from '../actions'
@@ -17,6 +18,8 @@ import getReports from '../actions/getReports'
 import getKeywords from '../actions/getKeywords'
 
 import ConfigForm from './ConfigForm'
+import MessagePopUp from './MessagePopUp'
+
 import DropDownSliderInput from '../components/DropDownSliderInput'
 import NoteField from '../components/NoteField'
 import Weather from '../components/Weather/'
@@ -39,6 +42,7 @@ const NewReport = ({  config,
                       clearWeatherErr,
                       saveReportNotes,
                       changeMetricVal,
+                      setSavedMessage,
                     }) => {
 
   const keys = Object.keys(metricValues)
@@ -60,7 +64,7 @@ const NewReport = ({  config,
                   ...obj,
                   [k]: weather[k],
                 }), {}),
-      uid: team === 'demo' ? 12345 : uid,
+      uid: team === 'demo' ? '12345' : uid,
     }
     const updates = {}
     updates[`teams/${team}/test reports/${newReportKey}`] = newReport
@@ -69,6 +73,7 @@ const NewReport = ({  config,
     saveReport()
     getReports()
     setDataProperty({loading: false})
+    setSavedMessage()
   }
 
   const styles = {
@@ -129,6 +134,7 @@ const NewReport = ({  config,
         message={`There was an error loading the weather: ${weatherErr}`}
         clearError={clearWeatherErr}
         />
+      <MessagePopUp />
     </div>
   )
 }
@@ -180,6 +186,7 @@ const mapDispatchToProps = dispatch => ({
   clearWeatherErr: () => dispatch(setDataError({weatherErr: null})),
   saveReportNotes: notes => dispatch(saveReportNotes(notes)),
   changeMetricVal: output => dispatch(changeMetricVal(output)),
+  setSavedMessage: () => dispatch(setDataMessage('Your report has been saved')),
 })
 
 NewReport.propTypes = {

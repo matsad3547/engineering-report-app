@@ -5,6 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import { version } from '../config/'
 
+import MessagePopUp from '../containers/MessagePopUp'
+
 const UnAuth = () => {
 
   const style = {
@@ -35,6 +37,7 @@ const UnAuth = () => {
         containerElement={<Link to="app/" ></Link>}
         style={style}/>
       <p className="footer">version {version}</p>
+      <MessagePopUp />
     </div>
   )
 }

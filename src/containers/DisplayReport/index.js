@@ -120,7 +120,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 DisplayReport.propTypes = {
-  report: PropTypes.number,
+  report: PropTypes.string,
   config: PropTypes.object,
   metricValues: PropTypes.array,
   notes: PropTypes.string,
@@ -129,7 +129,7 @@ DisplayReport.propTypes = {
   displayName: PropTypes.string,
   team: PropTypes.string,
   admin: PropTypes.bool,
-  teammates: PropTypes.array,
+  teammates: PropTypes.object,
 }
 
 export default connect(mapStateToProps)(DisplayReport)

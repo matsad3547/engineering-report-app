@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+
 import RaisedButton from 'material-ui/RaisedButton'
 
 import { setUserProperty, clearUserData } from '../actions/'
@@ -31,7 +31,6 @@ const Login = ({  email,
   if (password.length > 6) {
     signIn(email, password)
     clearUserData()
-    browserHistory.push('app/')
     }
   }
 
@@ -75,6 +74,7 @@ const Login = ({  email,
           />
       </div>
       <BackButton />
+      
     </div>
   )
 }

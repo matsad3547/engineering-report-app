@@ -16,7 +16,15 @@ import { routes } from './config/routes'
 import { muiTheme } from './config/'
 
 import { auth }  from './utils/firebase'
-import { setData } from './utils/auth'
+import {
+  setData,
+  signOut,
+} from './utils/auth'
+
+import {
+  setDataMessage,
+  setDataProperty,
+ } from './actions/'
 
 import getReports from './actions/getReports'
 import getTeams from './actions/getTeams'
@@ -29,15 +37,15 @@ injectTapEventPlugin()
 
 auth.onAuthStateChanged( user => {
 
-  if(user) {
-  //TODO ms Change once e-mail verification has been setup
-  // console.log('user at auth state changed', user)
-  // if(user && user.emailVerified) {
+  if(user && user.emailVerified) {
     store.dispatch(setData(user))
+    browserHistory.push('/')
   }
-  // else if (user && !user.emailVerified){
-  //   store.dispatch(setDataMessage('Please verify your email address'))
-  // }
+  else if (user && !user.emailVerified){
+    store.dispatch(setDataMessage(`Please go to your email account and follow the link to verify your email.`))
+    store.dispatch(signOut())
+    store.dispatch(setDataProperty({loading: false}))
+  }
   else {
     store.dispatch(getReports())
     store.dispatch(getKeywords())
