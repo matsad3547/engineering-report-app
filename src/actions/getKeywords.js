@@ -22,7 +22,6 @@ const getKeywords = () => {
       const keywords = snap.val()
                         .filter( k => k !== 'ph' )
       if(admin && keywords.length === 0) {
-        console.log('going to set keywords');
         browserHistory.push('/set_keywords')
       }
       dispatch(receiveKeywords(keywords))
