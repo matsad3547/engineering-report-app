@@ -5,7 +5,6 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, browserHistory } from 'react-router'
 import HttpsRedirect from 'react-https-redirect'
-import dotenv from 'dotenv'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -31,9 +30,10 @@ import getTeams from './actions/getTeams'
 import getKeywords from './actions/getKeywords'
 import getWeather from './actions/getWeather'
 
-dotenv.config()
-
 injectTapEventPlugin()
+
+console.log('process.env:', process.env.NODE_ENV);
+
 
 auth.onAuthStateChanged( user => {
 
