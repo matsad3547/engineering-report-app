@@ -32,8 +32,6 @@ import getWeather from './actions/getWeather'
 
 injectTapEventPlugin()
 
-console.log('checking process.env:', process.env);
-
 auth.onAuthStateChanged( user => {
 
   if(user && user.emailVerified) {

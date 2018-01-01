@@ -127,6 +127,7 @@ const CreateTeam = ({ email,
             className="reportButton"
             onClick={onClick}
             />
+          <p>Upon creating a team, you will need to verify your email address then sign back in to complete setting up your team</p>
         </div>
         <BackButton />
       </div>

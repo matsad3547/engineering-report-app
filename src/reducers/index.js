@@ -231,6 +231,7 @@ export const teamConfig = (state = initTeamState, action) => {
       }
 
     case 'KEYWORDS_RECEIVED':
+    console.log('setting keywords');
       return {
         ...state,
         keywords: action.keywords,

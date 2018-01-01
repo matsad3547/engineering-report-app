@@ -6,15 +6,25 @@ import {
 
 import database from '../utils/firebase'
 
+import { browserHistory } from 'react-router'
+
 const getKeywords = () => {
 
   return (dispatch, getState) => {
-    const { team } = getState().user
+
+    const {
+      team,
+      admin,
+    } = getState().user
 
     return database.ref(`teams/${team}/keywords`)
             .once('value', snap => {
       const keywords = snap.val()
                         .filter( k => k !== 'ph' )
+      if(admin && keywords.length === 0) {
+        console.log('going to set keywords');
+        browserHistory.push('/set_keywords')
+      }
       dispatch(receiveKeywords(keywords))
       dispatch(setDataProperty({loading: false}))
       })

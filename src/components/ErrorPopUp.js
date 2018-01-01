@@ -15,6 +15,7 @@ const ErrorPopUp = ({ error,
       height: 'auto',
       textAlign: 'center',
       padding: '.5em',
+      backgroundColor: '#363636',
     }
   }
   return (

@@ -15,15 +15,17 @@ const MessagePopUp = ({ message,
       height: 'auto',
       textAlign: 'center',
       padding: '.5em',
+      backgroundColor: '#363636',
     }
   }
+
   return (
 
     <Snackbar
       open={message ? true : false}
       message={message}
-      onRequestClose={ clearMessage }
-      autoHideDuration={4000}
+      onRequestClose={clearMessage}
+      autoHideDuration={6000}
       bodyStyle={styles.body}
       contentStyle={styles.content}
       />

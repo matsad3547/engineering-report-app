@@ -211,7 +211,7 @@ a:active {
 
 .login {
   height: 88vh;
-  padding-top: 3em;
+  padding: 3em 1em 0 1em;
 }
 
 .login > input {

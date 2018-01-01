@@ -14,7 +14,6 @@ import {
   setDataError,
   setDataMessage,
   setTeamProperty,
-  resetLoginData,
 } from '../actions/'
 
 export const signIn = (email, password) => {
@@ -67,6 +66,7 @@ export const userKey = Object.keys(window.localStorage)
                         .filter( k => k.startsWith('firebase:authUser') )[0]
 
 export const setData = user => {
+  
   return dispatch => {
 
     dispatch(setDataProperty({loading: true}))
@@ -101,7 +101,6 @@ export const setData = user => {
       dispatch(getTeams())
       dispatch(getWeather())
       dispatch(getTeammates())
-      // browserHistory.push('/')
     })
     .catch( err => {
       console.error('There was a error retrieving your user data:', err.message)
@@ -190,6 +189,7 @@ export const createTeam = () => {
         admin: true,
         approved: true,
         email,
+        displayName,
       }
 
       const teamInfo = {}
@@ -219,9 +219,12 @@ export const createTeam = () => {
       user.updateProfile({
         displayName,
       })
-      .then( () => {
-        dispatch(resetLoginData())
-        browserHistory.push('/set_keywords')
+      console.log('updated user:', user);
+      user.sendEmailVerification()
+      .then( () => dispatch(setDataMessage(`You just created ${team}.  Please go to your email account and follow the link to verify your email then sign in to complete your team configuration.`)))
+      .catch( err => {
+        console.error(err)
+        dispatch(setDataError({createUserErr: err.message}))
       })
     })
     .catch( err => {
