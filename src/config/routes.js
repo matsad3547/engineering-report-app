@@ -15,7 +15,6 @@ import SetKeywords from '../containers/SetKeywords'
 
 const redirectToWelcome = (nextState, replace, cb) => {
 
-  // console.log('user key?', localStorage.getItem(userKey));
   if (localStorage.getItem(userKey)) {
     replace('app/')
     cb()

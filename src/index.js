@@ -32,14 +32,14 @@ import getWeather from './actions/getWeather'
 
 injectTapEventPlugin()
 
-console.log('process.env:', process.env.NODE_ENV);
-
+console.log('checking process.env:', process.env);
 
 auth.onAuthStateChanged( user => {
 
   if(user && user.emailVerified) {
+    console.log('auth state changed verified');
     store.dispatch(setData(user))
-    browserHistory.push('/')
+    browserHistory.replace('/app/')
   }
   else if (user && !user.emailVerified){
     store.dispatch(setDataMessage(`Please go to your email account and follow the link to verify your email.`))

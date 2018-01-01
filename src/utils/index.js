@@ -116,8 +116,8 @@ export const resetMetricState = state => Object.keys(state)
     }), {})
 
 export const arrEqualsArr = (arr1, arr2) => {
-  return  !arr1.map( a => arr2.includes(a) )
-                .includes(false) &&
-          !arr2.map( a => arr1.includes(a) )
-                .includes(false)
+  return !arr1.map( a => arr2.indexOf(a) ===
+    arr1.indexOf(a)).includes(false)
+      && !arr2.map( a => arr1.indexOf(a) ===
+    arr2.indexOf(a) ).includes(false)
 }
