@@ -35,7 +35,6 @@ injectTapEventPlugin()
 auth.onAuthStateChanged( user => {
 
   if(user && user.emailVerified) {
-    console.log('auth state changed verified');
     store.dispatch(setData(user))
     browserHistory.replace('/app/')
   }

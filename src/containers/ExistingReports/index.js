@@ -19,7 +19,9 @@ const ExistingReports = ({  reports,
                             allReports,
                             queued,
                             reportErr,
+                            displayName,
                             admin,
+                            teammates,
                             queueReport,
                             unqueueReport,
                             clearQueue,
@@ -104,10 +106,13 @@ if (reportErr) {
           {reportKeys.map( (k, i) =>
             <ReportItem
               key={i}
-              config={reports[k].config}
-              report={k}
+              report={reports[k]}
+              timeStamp={k}
               index={i}
               queued={queued}
+              displayName={displayName}
+              admin={admin}
+              teammates={teammates}
               queueReport={queueReport}
               unqueueReport={unqueueReport}
               />)}
@@ -140,19 +145,20 @@ const mapStateToProps = state => {
     queued,
     loading: data.loading,
     reportErr,
+    displayName: user.displayName,
     admin: user.admin,
+    teammates: user.teammates,
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    queueReport: report => dispatch(queueReport(report)),
-    unqueueReport: index => dispatch(unqueueReport(index)),
-    clearQueue: () => dispatch(clearQueue()),
-    getReports: (n, allReports) => dispatch(getReports(n, allReports)),
-    setDataProperty: property => dispatch(setDataProperty(property)),
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  queueReport: report => dispatch(queueReport(report)),
+  unqueueReport: index => dispatch(unqueueReport(index)),
+  clearQueue: () => dispatch(clearQueue()),
+  getReports: (n, allReports) => dispatch(getReports(n, allReports)),
+  setDataProperty: property => dispatch(setDataProperty(property)),
+})
+
 
 ExistingReports.propTypes = {
   reports: PropTypes.object,
@@ -160,7 +166,11 @@ ExistingReports.propTypes = {
   allReports: PropTypes.bool,
   queued: PropTypes.array,
   reportErr: PropTypes.string,
+  // uid: reportVals ? reportVals.uid : null,
+  uid: PropTypes.string,
+  displayName: PropTypes.string,
   admin: PropTypes.bool,
+  teammates: PropTypes.object,
 
   queueReport: PropTypes.func,
   unqueueReport: PropTypes.func,
