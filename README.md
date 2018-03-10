@@ -12,6 +12,7 @@ This app is designed to allow test engineers to use a simple, configurable repor
 * Https redirect (not recognized in audit :confused: )
 * Weather using geolocation added to reports
 * Email verification for new accounts
+* Author names in the report list for admins
 
 ### Admin Features
 

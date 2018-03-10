@@ -6,10 +6,13 @@ import Checkbox from 'material-ui/Checkbox'
 
 import { date } from '../utils/'
 
-const ReportItem = ({ config,
-                      report,
+const ReportItem = ({ report,
+                      timeStamp,
                       index,
                       queued,
+                      displayName,
+                      admin,
+                      teammates,
                       queueReport,
                       unqueueReport,
                     }) => {
@@ -18,17 +21,17 @@ const ReportItem = ({ config,
     model,
     shortName,
     configNum,
-  } = config
-  
-  const checked = queued.includes(report) ? true : false
+  } = report.config
+
+  const checked = queued.includes(timeStamp)
 
   const onCheck = (e, i) => {
     e.preventDefault()
     if (checked) {
-      const index = queued.indexOf(report)
+      const index = queued.indexOf(timeStamp)
       unqueueReport(index)
     }
-    else queueReport(report)
+    else queueReport(timeStamp)
   }
 
   const styles = {
@@ -47,12 +50,14 @@ const ReportItem = ({ config,
     },
   }
 
+  const uid = report.uid
+
   return (
     <div className="reportItem">
-      <p>{`${index + 1}. `}{model || '<model>'}: configuration {configNum || '<#>'}</p>
-
-      <p>desc: {shortName || '<description>'}</p>
-      <p>{date(report)}</p>
+      <p>{`${index + 1}. `}{model || '<model>'} - Configuration {configNum || '<#>'}</p>
+      <p>Desc: {shortName || '<description>'}</p>
+      {admin ? <p>Author: {teammates ? teammates[uid].displayName : displayName }</p> : ''}
+      <p>{date(timeStamp)}</p>
 
       <Checkbox
         label="Select to Download"
@@ -65,7 +70,7 @@ const ReportItem = ({ config,
       <div className="download">
       </div>
       <RaisedButton
-        containerElement={<Link to={`/app/existing_reports/${report}`}/>}
+        containerElement={<Link to={`/app/existing_reports/${timeStamp}`}/>}
         label="View Report"
         style={styles.button}
         className="reportButton"
@@ -75,10 +80,12 @@ const ReportItem = ({ config,
 }
 
 ReportItem.propTypes = {
-  config: PropTypes.object,
-  report: PropTypes.number,
+  report: PropTypes.object,
+  timeStamp: PropTypes.number,
   index: PropTypes.number,
   queued: PropTypes.array,
+  admin: PropTypes.bool,
+  teammates: PropTypes.object,
   queueReport: PropTypes.func,
   unqueueReport: PropTypes.func,
 }
