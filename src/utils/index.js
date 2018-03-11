@@ -1,4 +1,7 @@
-import { initVal } from '../config/'
+import {
+  initVal,
+  configOrder,
+} from '../config/'
 
 export const date = unixDate => new Date(parseInt(unixDate, 0))
                                   .toString()
@@ -6,6 +9,8 @@ export const date = unixDate => new Date(parseInt(unixDate, 0))
 
 const getWeatherString = weather => weather ? `"=""${JSON.stringify(weather)
     .replace(/({|}|")/gi,'')}"""` : ''
+
+const formatAsString = str => `"=""${str}"""`
 
 const parseConfigObj = (configObj, parsedObj, i) => {
   return Object.keys(configObj)
@@ -43,12 +48,12 @@ export const formatReports = (reports, queued) => {
     //parse notes
     obj.notes ? obj.notes = {
       ...obj.notes,
-      [i]: reports[n].notes,
+      [i]: formatAsString(reports[n].notes),
     } : obj.notes = {
-      [i]: reports[n].notes,
+      [i]: formatAsString(reports[n].notes),
     }
 
-    //parse weather
+    // parse weather
     obj.weather ? obj.weather = {
       ...obj.weather,
       [i]: getWeatherString(reports[n].weather)
@@ -64,15 +69,17 @@ export const formatReports = (reports, queued) => {
   return Object.keys(parsedObj)
           .filter( k => k !== 'count')
           .sort( (a, b) => {
-            const sortArr = ['notes', 'weather']
-            return sortArr.indexOf(a) > sortArr.indexOf(b) ? 1 : 0
+            const startArr = ['model', 'shortName', 'configNum', 'ballast']
+            const endArr = ['notes', 'weather']
+            return  startArr.indexOf(a) > startArr.indexOf(b) ? -1 : (endArr.indexOf(a) > endArr.indexOf(b) ? 1 : 0)
           })
           .map( k => parsedObj.count.reduce( (arr, n) =>
             parsedObj[k][n] ?
             [
               ...arr,
                parsedObj[k][n],
-            ] : [
+            ]
+            : [
               ...arr,
               'n/a',
             ], [k])
