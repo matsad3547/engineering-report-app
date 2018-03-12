@@ -1,7 +1,4 @@
-import {
-  initVal,
-  configOrder,
-} from '../config/'
+import { initVal } from '../config/'
 
 export const date = unixDate => new Date(parseInt(unixDate, 0))
                                   .toString()
@@ -36,8 +33,6 @@ const parseMVObj = (mvObj, parsedObj, i) => {
       }
   })
 }
-
-const cmp = (a, b) => a > b ? 1 : (a < b ? -1 : 0)
 
 export const formatReports = (reports, queued) => {
 

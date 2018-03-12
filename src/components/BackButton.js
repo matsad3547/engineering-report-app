@@ -26,7 +26,7 @@ const BackButton = () => {
       iconStyle={styles.icon}
       style={styles.button} >
       <FontIcon
-        className="material-icons" >arrow_back</FontIcon>
+        className="material-icons">arrow_back</FontIcon>
       Back
     </IconButton>
   )

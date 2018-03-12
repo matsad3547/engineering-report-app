@@ -1,21 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 import RaisedButton from 'material-ui/RaisedButton'
 
-import { setUserProperty, clearUserData } from '../actions/'
+import {
+  setUserProperty,
+  clearUserData,
+  setDataError,
+} from '../actions/'
 import { signIn } from '../utils/auth'
 
-import MessagePopUp from './MessagePopUp'
-
 import BackButton from '../components/BackButton'
+import ErrorPopUp from '../components/ErrorPopUp'
 
 const Login = ({  email,
                   password,
+                  signInErr,
                   setUserProperty,
                   clearUserData,
                   signIn,
+                  resetError,
                 }) => {
 
   const onChange = {
@@ -48,8 +54,14 @@ const Login = ({  email,
     },
     password: {
       display: display
-    }
+    },
+    link: {
+      paddingTop: '2em',
+      color: 'gray',
+    },
   }
+
+  console.log('error:', signInErr);
 
   return (
     <div className="color ">
@@ -75,35 +87,42 @@ const Login = ({  email,
           className="reportButton"
           onClick={onClick}
           />
+        <Link
+          to="/reset_password"
+          style={styles.link}
+          >Need to reset your password?</Link>
       </div>
       <BackButton />
-      <MessagePopUp />
+      <ErrorPopUp
+        error={signInErr}
+        message={`There was an error signing in: ${signInErr}`}
+        clearError={resetError}
+        />
     </div>
   )
 }
 
-const mapStateToProps = state => {
-
-  const { email, password } = state.user
-
-  return {
-    email,
-    password,
-  }
-}
+const mapStateToProps = state => ({
+  email: state.user.email,
+  password: state.user.password,
+  signInErr: state.data.error.signInErr ? state.data.error.signInErr.message : '',
+})
 
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
   clearUserData: () => dispatch(clearUserData()),
   signIn: (email, password) => dispatch(signIn(email, password)),
+  resetError: () => dispatch(setDataError({signInErr: null}))
 })
 
 Login.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
+  signInError: PropTypes.string,
   setUserProperty: PropTypes.func,
   clearUserData: PropTypes.func,
   signIn: PropTypes.func,
+  resetError: PropTypes.func,
 }
 
 export default connect(

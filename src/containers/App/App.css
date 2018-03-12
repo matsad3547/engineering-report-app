@@ -197,7 +197,7 @@ a {
   color: white;
 }
 
-a:hover, a:active {
+a:hover, a:active, a:focus {
   color: #FF5722;
 }
 

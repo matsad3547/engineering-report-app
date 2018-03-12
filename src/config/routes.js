@@ -12,6 +12,7 @@ import DisplayReport from '../containers/DisplayReport/'
 import NewReport from '../containers/NewReport'
 import ExistingReports from '../containers/ExistingReports/'
 import SetKeywords from '../containers/SetKeywords'
+import ResetPassword from '../containers/ResetPassword'
 
 const redirectToWelcome = (nextState, replace, cb) => {
 
@@ -41,6 +42,10 @@ export const routes = [
   {
     path: '/create_team',
     component: CreateTeam,
+  },
+  {
+    path: '/reset_password',
+    component: ResetPassword,
   },
   {
     path: '/set_keywords',

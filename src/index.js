@@ -21,7 +21,7 @@ import {
 } from './utils/auth'
 
 import {
-  setDataMessage,
+  // setDataMessage,
   setDataProperty,
  } from './actions/'
 
