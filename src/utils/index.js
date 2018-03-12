@@ -28,14 +28,28 @@ const parseMVObj = (mvObj, parsedObj, i) => {
   return Object.keys(mvObj)
     .forEach( t => {
       const mv = mvObj[t]
-      parsedObj[mv.name] ? parsedObj[mv.name] = {
-        ...parsedObj[mv.name],
+      parsedObj[formatAsString(mv.name)] ? parsedObj[formatAsString(mv.name)] = {
+        ...parsedObj[formatAsString(mv.name)],
         [i]: mv.val,
-      } : parsedObj[mv.name] = {
+      } : parsedObj[formatAsString(mv.name)] = {
         [i]: mv.val
       }
   })
+  // console.log('obj:', obj);
+  // return obj
+  // return Object.keys(mvObj)
+  //   .forEach( t => {
+  //     const mv = mvObj[t]
+  //     parsedObj[mv.name] ? parsedObj[mv.name] = {
+  //       ...parsedObj[mv.name],
+  //       [i]: mv.val,
+  //     } : parsedObj[mv.name] = {
+  //       [i]: mv.val
+  //     }
+  // })
 }
+
+const cmp = (a, b) => a > b ? 1 : (a < b ? -1 : 0)
 
 export const formatReports = (reports, queued) => {
 
@@ -66,12 +80,15 @@ export const formatReports = (reports, queued) => {
     return obj
   }, {})
 
+  // console.log('parsed obj:', parsedObj);
+
   return Object.keys(parsedObj)
           .filter( k => k !== 'count')
           .sort( (a, b) => {
-            const startArr = ['model', 'shortName', 'configNum', 'ballast']
+            //reverse order because I don't know how to sort
+            const startArr = ['ballast', 'configNum', 'shortName', 'model']
             const endArr = ['notes', 'weather']
-            return  startArr.indexOf(a) > startArr.indexOf(b) ? -1 : (endArr.indexOf(a) > endArr.indexOf(b) ? 1 : 0)
+            return  startArr.indexOf(a) < startArr.indexOf(b) ? 1 : (startArr.indexOf(a) > startArr.indexOf(b) ? -1 : (endArr.indexOf(a) > endArr.indexOf(b) ? 1 : endArr.indexOf(a) < endArr.indexOf(b) ? -1 : 0) )
           })
           .map( k => parsedObj.count.reduce( (arr, n) =>
             parsedObj[k][n] ?

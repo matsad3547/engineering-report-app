@@ -39,8 +39,8 @@ describe('formatReports() ', () => {
         ['a', 1],
         ['b', 2],
         //mv's
-        ['test1', 2],
-        ['test2', 3],
+        [`"=""test1"""`, 2],
+        [`"=""test2"""`, 3],
         //notes
         ['notes', `"=""this is a test string"""`],
         //weather
@@ -99,8 +99,8 @@ describe('formatReports() ', () => {
     const result = [
       ['a', 1, 2],
       ['b', 2, 3],
-      ['test1', 3, 4],
-      ['test2', 4, 5],
+      [`"=""test1"""`, 3, 4],
+      [`"=""test2"""`, 4, 5],
       ['notes', `"=""this is a test string"""`, `"=""this is a second test string"""`],
       ['weather',`"=""weather:testy,temp_f:54"""`,`"=""weather:testier,temp_f:65"""`],
     ]
@@ -153,8 +153,8 @@ describe('formatReports() ', () => {
     const result = [
       ['a', 1, 2],
       ['b', 2, 3],
-      ['test1', 3, 4],
-      ['test2', 4, 5],
+      [`"=""test1"""`, 3, 4],
+      [`"=""test2"""`, 4, 5],
       ['notes', `"=""this is a test string"""`, `"=""this is a second test string"""`],
       ['weather',`"=""weather:testy,temp_f:54"""`,'n/a'],
     ]
@@ -207,8 +207,8 @@ describe('formatReports() ', () => {
     const result = [
       ['a', 1, 2],
       ['b', 2, 3],
-      ['test1', 3, 4],
-      ['test2', 4, 5],
+      [`"=""test1"""`, 3, 4],
+      [`"=""test2"""`, 4, 5],
       ['notes', `"=""this is a test string"""`, `"=""this is a second test string"""`],
       ['weather','n/a',`"=""weather:testy,temp_f:54"""`],
     ]
@@ -265,9 +265,9 @@ describe('formatReports() ', () => {
     const result = [
       ['a', 1, 2],
       ['b', 2, 3],
-      ['test1', 3, 4],
-      ['test2', 4, 5],
-      ['test3', 'n/a', 6],
+      [`"=""test1"""`, 3, 4],
+      [`"=""test2"""`, 4, 5],
+      [`"=""test3"""`, 'n/a', 6],
       ['notes', `"=""this is a test string"""`, `"=""this is a second test string"""`],
       ['weather','n/a',`"=""weather:testy,temp_f:54"""`],
     ]
@@ -437,22 +437,22 @@ describe('formatReports() ', () => {
       ['shortName', 'string 2', 'string 4'],
       ['configNum', 1, 2],
       ['ballast', 'No', 'No'],
-      ['TiR', 3, 2.5],
-      ['TiE', 4, 3.5],
-      ['TE', 5, 4.5],
-      ['RR', 6, 5.5],
-      ['RL', 7, 6.5],
-      ['RD', 8, 7.5],
-      ['SR', 9, 8.5],
-      ['SD', 10, 9.5],
-      ['YD', 11, 10.5],
-      ['SSTE', 12, 11.5],
-      ['SSTG', 13, 12.5],
-      ['CC', 14, 13.5],
-      ['CG', 15, 14.5],
-      ['CB', 16, 15.5],
-      ['Bu-iT', 17, 16.5],
-      ['Br-iT', 18, 17.5],
+      [`"=""TiR"""`, 3, 2.5],
+      [`"=""TiE"""`, 4, 3.5],
+      [`"=""TE"""`, 5, 4.5],
+      [`"=""RR"""`, 6, 5.5],
+      [`"=""RL"""`, 7, 6.5],
+      [`"=""RD"""`, 8, 7.5],
+      [`"=""SR"""`, 9, 8.5],
+      [`"=""SD"""`, 10, 9.5],
+      [`"=""YD"""`, 11, 10.5],
+      [`"=""SSTE"""`, 12, 11.5],
+      [`"=""SSTG"""`, 13, 12.5],
+      [`"=""CC"""`, 14, 13.5],
+      [`"=""CG"""`, 15, 14.5],
+      [`"=""CB"""`, 16, 15.5],
+      [`"=""Bu-iT"""`, 17, 16.5],
+      [`"=""Br-iT"""`, 18, 17.5],
       ['notes', `"=""this is a test string"""`, `"=""this is another test string"""`],
       ['weather','n/a',`"=""weather:testy,temp_f:54"""`],
     ]
@@ -487,7 +487,7 @@ describe('parseCSV() ', () => {
         },
       }
     }
-    const result = 'data:text/csv;charset=utf-8,a,1\ntest1,3\ntest2,4\nnotes,"=""this is a test string"""\nweather,"=""weather:testy,temp_f:54"""\n'
+    const result = 'data:text/csv;charset=utf-8,a,1\n"=""test1""",3\n"=""test2""",4\nnotes,"=""this is a test string"""\nweather,"=""weather:testy,temp_f:54"""\n'
     expect(parseCSV(formatReports(reports, queued))).toEqual(result)
   })
 
@@ -531,7 +531,7 @@ describe('parseCSV() ', () => {
         },
       }
     }
-    const result = 'data:text/csv;charset=utf-8,a,1,2\ntest1,3,4\ntest2,4,5\nnotes,"=""this is a test string""","=""this is another test string"""\nweather,n/a,"=""weather:testy,temp_f:54"""\n'
+    const result = 'data:text/csv;charset=utf-8,a,1,2\n"=""test1""",3,4\n"=""test2""",4,5\nnotes,"=""this is a test string""","=""this is another test string"""\nweather,n/a,"=""weather:testy,temp_f:54"""\n'
     expect(parseCSV(formatReports(reports, queued))).toEqual(result)
   })
 
@@ -581,7 +581,7 @@ describe('parseCSV() ', () => {
         },
       }
     }
-    const result = 'data:text/csv;charset=utf-8,ballast,No,No\nconfigNum,1,2\nmodel,string 1,string 3\nshortName,string 2,string 4\ntest1,3,4\ntest2,4,5\nnotes,"=""this is a test string""","=""this is another test string"""\nweather,n/a,"=""weather:testy,temp_f:54"""\n'
+    const result = 'data:text/csv;charset=utf-8,model,string 1,string 3\nshortName,string 2,string 4\nconfigNum,1,2\nballast,No,No\n"=""test1""",3,4\n"=""test2""",4,5\nnotes,"=""this is a test string""","=""this is another test string"""\nweather,n/a,"=""weather:testy,temp_f:54"""\n'
     expect(parseCSV(formatReports(reports, queued))).toEqual(result)
   })
 
@@ -743,7 +743,7 @@ describe('parseCSV() ', () => {
         },
       }
     }
-    const result = 'data:text/csv;charset=utf-8,model,string 1,string 3\nshortName,string 2,string 4\nconfigNum,1,2\nballast,No,No\nTiR,3,2.5\nTiE,4,3.5\nTE,5,4.5\nRR,6,5.5\nRL,7,6.5\nRD,8,7.5\nSR,9,8.5\nSD,10,9.5\nYD,11,10.5\nSSTE,12,11.5\nSSTG,13,12.5\nCC,14,13.5\nCG,15,14.5\nCB,16,15.5\nBu-iT,17,16.5\nBr-iT,18,17.5\nnotes,"=""this is a test string""","=""this is another test string"""\nweather,n/a,"=""weather:testy,temp_f:54"""\n'
+    const result = 'data:text/csv;charset=utf-8,model,string 1,string 3\nshortName,string 2,string 4\nconfigNum,1,2\nballast,No,No\n"=""TiR""",3,2.5\n"=""TiE""",4,3.5\n"=""TE""",5,4.5\n"=""RR""",6,5.5\n"=""RL""",7,6.5\n"=""RD""",8,7.5\n"=""SR""",9,8.5\n"=""SD""",10,9.5\n"=""YD""",11,10.5\n"=""SSTE""",12,11.5\n"=""SSTG""",13,12.5\n"=""CC""",14,13.5\n"=""CG""",15,14.5\n"=""CB""",16,15.5\n"=""Bu-iT""",17,16.5\n"=""Br-iT""",18,17.5\nnotes,"=""this is a test string""","=""this is another test string"""\nweather,n/a,"=""weather:testy,temp_f:54"""\n'
     expect(parseCSV(formatReports(reports, queued))).toEqual(result)
   })
 
