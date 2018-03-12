@@ -20,10 +20,7 @@ import {
   signOut,
 } from './utils/auth'
 
-import {
-  // setDataMessage,
-  setDataProperty,
- } from './actions/'
+import { setDataProperty } from './actions/'
 
 import getReports from './actions/getReports'
 import getTeams from './actions/getTeams'
@@ -39,7 +36,6 @@ auth.onAuthStateChanged( user => {
     browserHistory.replace('/app/')
   }
   else if (user && !user.emailVerified){
-    // store.dispatch(setDataMessage(`Please go to your email account and follow the link to verify your email.`))
     store.dispatch(signOut())
     store.dispatch(setDataProperty({loading: false}))
   }

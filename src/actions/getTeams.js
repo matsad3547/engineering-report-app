@@ -12,7 +12,8 @@ const getTeams = () => {
     return database.ref('team_names')
             .once('value', snap => {
       const teams = snap.val()
-      dispatch(setUserProperty({teams,}))
+                      .filter( t => !!t )
+      dispatch(setUserProperty({teams}))
       dispatch(setDataProperty({loading: false}))
       })
     .catch( err => {
