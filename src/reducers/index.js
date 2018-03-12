@@ -165,7 +165,7 @@ export const user = (state = initUserState, action) => {
         password: '',
         verifyPassword: '',
       }
-
+      
     default:
       return state
   }

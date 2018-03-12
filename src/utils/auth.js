@@ -66,7 +66,7 @@ export const userKey = Object.keys(window.localStorage)
                         .filter( k => k.startsWith('firebase:authUser') )[0]
 
 export const setData = user => {
-  
+
   return dispatch => {
 
     dispatch(setDataProperty({loading: true}))
@@ -232,5 +232,15 @@ export const createTeam = () => {
       dispatch(setDataError({signOutErr: err}))
       dispatch(clearUserData())
     })
+  }
+}
+
+const getResetPasswordEmail = () => {
+  return (dispatch, getState) => {
+    const {
+      email,
+    } = getState().user
+
+    dispatch(setDataMessage(`A password reset email has been sent to ${email}`))
   }
 }

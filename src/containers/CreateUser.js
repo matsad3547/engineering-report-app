@@ -10,6 +10,8 @@ import { setUserProperty } from '../actions/'
 import { createUser } from '../utils/auth'
 import BackButton from '../components/BackButton'
 
+import MessagePopUp from './MessagePopUp'
+
 const CreateUser = ({ email,
                       displayName,
                       team,
@@ -132,6 +134,7 @@ const CreateUser = ({ email,
           />
       </div>
       <BackButton />
+      <MessagePopUp />
     </div>
   )
 }

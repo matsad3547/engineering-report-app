@@ -6,6 +6,9 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import { setUserProperty, clearUserData } from '../actions/'
 import { signIn } from '../utils/auth'
+
+import MessagePopUp from './MessagePopUp'
+
 import BackButton from '../components/BackButton'
 
 const Login = ({  email,
@@ -74,7 +77,7 @@ const Login = ({  email,
           />
       </div>
       <BackButton />
-      
+      <MessagePopUp />
     </div>
   )
 }

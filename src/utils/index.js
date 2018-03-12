@@ -35,18 +35,6 @@ const parseMVObj = (mvObj, parsedObj, i) => {
         [i]: mv.val
       }
   })
-  // console.log('obj:', obj);
-  // return obj
-  // return Object.keys(mvObj)
-  //   .forEach( t => {
-  //     const mv = mvObj[t]
-  //     parsedObj[mv.name] ? parsedObj[mv.name] = {
-  //       ...parsedObj[mv.name],
-  //       [i]: mv.val,
-  //     } : parsedObj[mv.name] = {
-  //       [i]: mv.val
-  //     }
-  // })
 }
 
 const cmp = (a, b) => a > b ? 1 : (a < b ? -1 : 0)
@@ -79,8 +67,6 @@ export const formatReports = (reports, queued) => {
 
     return obj
   }, {})
-
-  // console.log('parsed obj:', parsedObj);
 
   return Object.keys(parsedObj)
           .filter( k => k !== 'count')

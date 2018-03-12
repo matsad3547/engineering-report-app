@@ -8,6 +8,8 @@ import { createTeam } from '../utils/auth'
 import BackButton from '../components/BackButton'
 import Loading from '../components/Loading'
 
+import MessagePopUp from './MessagePopUp'
+
 const CreateTeam = ({ email,
                       displayName,
                       team,
@@ -130,6 +132,7 @@ const CreateTeam = ({ email,
           <p>Upon creating a team, you will need to verify your email address then sign back in to complete setting up your team</p>
         </div>
         <BackButton />
+        <MessagePopUp />
       </div>
     )
   }
