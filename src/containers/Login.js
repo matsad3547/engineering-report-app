@@ -12,6 +12,8 @@ import {
 } from '../actions/'
 import { signIn } from '../utils/auth'
 
+import MessagePopUp from './MessagePopUp'
+
 import BackButton from '../components/BackButton'
 import ErrorPopUp from '../components/ErrorPopUp'
 
@@ -61,8 +63,6 @@ const Login = ({  email,
     },
   }
 
-  console.log('error:', signInErr);
-
   return (
     <div className="color ">
       <div className="flexLayout login">
@@ -98,6 +98,7 @@ const Login = ({  email,
         message={`There was an error signing in: ${signInErr}`}
         clearError={resetError}
         />
+      <MessagePopUp />
     </div>
   )
 }

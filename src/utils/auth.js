@@ -236,16 +236,21 @@ export const createTeam = () => {
 }
 
 export const getResetPasswordEmail = email => {
-  
+
   return dispatch => {
 
     auth.sendPasswordResetEmail(email)
+    .then( () => {
+      console.log('at then');
+      dispatch(setDataMessage(`A password reset email has been sent to ${email}`))
+      dispatch(clearUserData())
+      browserHistory.push('/login_user')
+    })
     .catch( err => {
       console.error('There was a error resetting your password:', err.message)
       dispatch(setDataError({resetErr: err}))
       dispatch(clearUserData())
     })
 
-    dispatch(setDataMessage(`A password reset email has been sent to ${email}`))
   }
 }

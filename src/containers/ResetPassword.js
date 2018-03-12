@@ -17,6 +17,7 @@ import BackButton from '../components/BackButton'
 
 const ResetPassword = ({  email,
                           setUserProperty,
+                          getResetPasswordEmail,
                         }) => {
 
   const onChange = {
@@ -29,7 +30,7 @@ const ResetPassword = ({  email,
   const onClick = e => {
   e.preventDefault()
   if (email.includes('@')) {
-    getResetPasswordEmail(email)
+      getResetPasswordEmail(email)
     }
   }
 
@@ -68,7 +69,6 @@ const ResetPassword = ({  email,
 
 const mapStateToProps = state => ({
   email: state.user.email,
-  
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -80,7 +80,6 @@ const mapDispatchToProps = dispatch => ({
 
 ResetPassword.propTypes = {
   email: PropTypes.string,
-  error: PropTypes.string,
   setUserProperty: PropTypes.func,
   getResetPasswordEmail: PropTypes.func,
 }
