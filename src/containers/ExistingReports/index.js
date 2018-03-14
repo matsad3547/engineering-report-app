@@ -30,7 +30,12 @@ const ExistingReports = ({  reports,
 
   const download = e => {
     e.preventDefault()
-    downloadQueued(reports, queued)
+    console.log('teammates:', teammates);
+    downloadQueued( reports,
+                    queued,
+                    admin,
+                    teammates,
+                  )
     clearQueue()
   }
 

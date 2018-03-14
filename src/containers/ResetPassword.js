@@ -12,6 +12,7 @@ import {
 import { getResetPasswordEmail } from '../utils/auth'
 
 import MessagePopUp from './MessagePopUp'
+import ErrorPopUp from './ErrorPopUp'
 
 import BackButton from '../components/BackButton'
 
@@ -63,6 +64,10 @@ const ResetPassword = ({  email,
       </div>
       <BackButton />
       <MessagePopUp />
+      <ErrorPopUp
+        errorKey="resetErr"
+        message="There was an error resetting your password"
+        />
     </div>
   )
 }

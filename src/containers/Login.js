@@ -8,22 +8,20 @@ import RaisedButton from 'material-ui/RaisedButton'
 import {
   setUserProperty,
   clearUserData,
-  setDataError,
+  // setDataError,
 } from '../actions/'
 import { signIn } from '../utils/auth'
 
 import MessagePopUp from './MessagePopUp'
 
 import BackButton from '../components/BackButton'
-import ErrorPopUp from '../components/ErrorPopUp'
+import ErrorPopUp from './ErrorPopUp'
 
 const Login = ({  email,
                   password,
-                  signInErr,
                   setUserProperty,
                   clearUserData,
                   signIn,
-                  resetError,
                 }) => {
 
   const onChange = {
@@ -93,12 +91,11 @@ const Login = ({  email,
           >Need to reset your password?</Link>
       </div>
       <BackButton />
-      <ErrorPopUp
-        error={signInErr}
-        message={`There was an error signing in: ${signInErr}`}
-        clearError={resetError}
-        />
       <MessagePopUp />
+      <ErrorPopUp
+        errorKey="signInErr"
+        message="There was an error signing in"
+        />
     </div>
   )
 }
@@ -106,14 +103,12 @@ const Login = ({  email,
 const mapStateToProps = state => ({
   email: state.user.email,
   password: state.user.password,
-  signInErr: state.data.error.signInErr ? state.data.error.signInErr.message : '',
 })
 
 const mapDispatchToProps = dispatch => ({
   setUserProperty: property => dispatch(setUserProperty(property)),
   clearUserData: () => dispatch(clearUserData()),
   signIn: (email, password) => dispatch(signIn(email, password)),
-  resetError: () => dispatch(setDataError({signInErr: null}))
 })
 
 Login.propTypes = {

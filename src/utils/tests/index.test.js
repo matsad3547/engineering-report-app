@@ -747,6 +747,185 @@ describe('parseCSV() ', () => {
     expect(parseCSV(formatReports(reports, queued))).toEqual(result)
   })
 
+  test('should parse multiple report objects with real config objects and add in the author name when `admin` is true correctly', () => {
+    const queued = [1, 2]
+    const reports = {
+      1: {
+        config: {
+          ballast: 'No',
+          configNum: 1,
+          model: 'string 1',
+          shortName: 'string 2',
+        },
+        metricValues: {
+          0: {
+            name: 'TiR',
+            val: 3,
+          },
+          1: {
+            name: 'TiE',
+            val: 4,
+          },
+          2: {
+            name: 'TE',
+            val: 5,
+          },
+          3: {
+            name: 'RR',
+            val: 6,
+          },
+          4: {
+            name: 'RL',
+            val: 7,
+          },
+          5: {
+            name: 'RD',
+            val: 8,
+          },
+          6: {
+            name: 'SR',
+            val: 9,
+          },
+          7: {
+            name: 'SD',
+            val: 10,
+          },
+          8: {
+            name: 'YD',
+            val: 11,
+          },
+          9: {
+            name: 'SSTE',
+            val: 12,
+          },
+          10: {
+            name: 'SSTG',
+            val: 13,
+          },
+          11: {
+            name: 'CC',
+            val: 14,
+          },
+          12: {
+            name: 'CG',
+            val: 15,
+          },
+          13: {
+            name: 'CB',
+            val: 16,
+          },
+          14: {
+            name: 'Bu-iT',
+            val: 17,
+          },
+          15: {
+            name: 'Br-iT',
+            val: 18,
+          },
+        },
+        notes: 'this is a test string',
+        uid: '123',
+      },
+      2: {
+        config: {
+          ballast: 'No',
+          configNum: 2,
+          model: 'string 3',
+          shortName: 'string 4',
+        },
+        metricValues: {
+          0: {
+            name: 'TiR',
+            val: 2.5,
+          },
+          1: {
+            name: 'TiE',
+            val: 3.5,
+          },
+          2: {
+            name: 'TE',
+            val: 4.5,
+          },
+          3: {
+            name: 'RR',
+            val: 5.5,
+          },
+          4: {
+            name: 'RL',
+            val: 6.5,
+          },
+          5: {
+            name: 'RD',
+            val: 7.5,
+          },
+          6: {
+            name: 'SR',
+            val: 8.5,
+          },
+          7: {
+            name: 'SD',
+            val: 9.5,
+          },
+          8: {
+            name: 'YD',
+            val: 10.5,
+          },
+          9: {
+            name: 'SSTE',
+            val: 11.5,
+          },
+          10: {
+            name: 'SSTG',
+            val: 12.5,
+          },
+          11: {
+            name: 'CC',
+            val: 13.5,
+          },
+          12: {
+            name: 'CG',
+            val: 14.5,
+          },
+          13: {
+            name: 'CB',
+            val: 15.5,
+          },
+          14: {
+            name: 'Bu-iT',
+            val: 16.5,
+          },
+          15: {
+            name: 'Br-iT',
+            val: 17.5,
+          },
+        },
+        notes: 'this is another test string',
+        uid: '234',
+        weather: {
+          weather: 'testy',
+          temp_f: 54,
+        },
+      }
+    }
+    const teammates = {
+      123: {
+        admin: false,
+        approved: true,
+        displayName: 'Testy',
+        team: 'Test',
+      },
+      234: {
+        admin: true,
+        approved: true,
+        displayName: 'Testier',
+        team: 'Test',
+      },
+    }
+    const admin = true
+    const result = 'data:text/csv;charset=utf-8,model,string 1,string 3\nshortName,string 2,string 4\nconfigNum,1,2\nballast,No,No\nauthor,"=""Testy""","=""Testier"""\n"=""TiE""",4,3.5\n"=""TE""",5,4.5\n"=""RR""",6,5.5\n"=""RL""",7,6.5\n"=""RD""",8,7.5\n"=""SR""",9,8.5\n"=""SD""",10,9.5\n"=""YD""",11,10.5\n"=""SSTE""",12,11.5\n"=""SSTG""",13,12.5\n"=""CC""",14,13.5\n"=""CG""",15,14.5\n"=""CB""",16,15.5\n"=""Bu-iT""",17,16.5\n"=""Br-iT""",18,17.5\n"=""TiR""",3,2.5\nnotes,"=""this is a test string""","=""this is another test string"""\nweather,n/a,"=""weather:testy,temp_f:54"""\n'
+    expect(parseCSV(formatReports(reports, queued, admin, teammates ))).toEqual(result)
+  })
+
 })
 
 describe('resetMetricState() ', () => {

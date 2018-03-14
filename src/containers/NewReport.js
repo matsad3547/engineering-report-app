@@ -8,7 +8,6 @@ import database from '../utils/firebase'
 import {
   saveReport,
   setDataProperty,
-  setDataError,
   setDataMessage,
   saveReportNotes,
   changeMetricVal,
@@ -19,11 +18,11 @@ import getKeywords from '../actions/getKeywords'
 
 import ConfigForm from './ConfigForm'
 import MessagePopUp from './MessagePopUp'
+import ErrorPopUp from './ErrorPopUp'
 
 import DropDownSliderInput from '../components/DropDownSliderInput'
 import NoteField from '../components/NoteField'
 import Weather from '../components/Weather/'
-import ErrorPopUp from '../components/ErrorPopUp'
 
 const NewReport = ({  config,
                       metricValues,
@@ -87,7 +86,7 @@ const NewReport = ({  config,
       return (
         <div className="existingReports">
           <h3>Keyword loading has failed, sorry!</h3>
-          <p>{keywordsErr}</p>
+          <p>{keywordsErr.message}</p>
         </div>
     )
   }
@@ -129,12 +128,11 @@ const NewReport = ({  config,
         className="reportButton"
         onClick={submitReport}
         />
-      <ErrorPopUp
-        error={weatherErr}
-        message={`There was an error loading the weather: ${weatherErr}`}
-        clearError={clearWeatherErr}
-        />
       <MessagePopUp />
+      <ErrorPopUp
+        errorKey="weatherErr"
+        message="There was an error loading the weather"
+        />
     </div>
   )
 }
@@ -156,10 +154,7 @@ const mapStateToProps = state => {
 
   const { error } = state.data
 
-  const {
-    keywordsErr,
-    weatherErr,
-  } = error
+  const { keywordsErr } = error
 
   const { keywords } = state.teamConfig
 
@@ -173,7 +168,6 @@ const mapStateToProps = state => {
     keywords,
     keywordsErr,
     weather,
-    weatherErr,
   }
 }
 
@@ -183,7 +177,6 @@ const mapDispatchToProps = dispatch => ({
   getReports: team => dispatch(getReports(team)),
   getKeywords: team => dispatch(getKeywords(team)),
   setDataProperty: property => dispatch(setDataProperty(property)),
-  clearWeatherErr: () => dispatch(setDataError({weatherErr: null})),
   saveReportNotes: notes => dispatch(saveReportNotes(notes)),
   changeMetricVal: output => dispatch(changeMetricVal(output)),
   setSavedMessage: () => dispatch(setDataMessage('Your report has been saved')),

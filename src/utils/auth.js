@@ -154,13 +154,13 @@ export const createUser = () => {
       .then( () => dispatch(setDataMessage(`You have been added to ${team}.  Please go to your email account and follow the link to verify your email.`)))
       .catch( err => {
         console.error(err)
-        dispatch(setDataError({createUserErr: err.message}))
+        dispatch(setDataError({authErr: err.message}))
       })
 
     })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
-      dispatch(setDataError({createUserErr: err.message}))
+      dispatch(setDataError({authErr: err.message}))
     })
   }
 }
@@ -224,12 +224,12 @@ export const createTeam = () => {
       .then( () => dispatch(setDataMessage(`You just created ${team}.  Please go to your email account and follow the link to verify your email then sign in to complete your team configuration.`)))
       .catch( err => {
         console.error(err)
-        dispatch(setDataError({createUserErr: err.message}))
+        dispatch(setDataError({authErr: err.message}))
       })
     })
     .catch( err => {
       console.error('There was a error creating an account:', err.message)
-      dispatch(setDataError({signOutErr: err}))
+      dispatch(setDataError({authErr: err}))
       dispatch(clearUserData())
     })
   }

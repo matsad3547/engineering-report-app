@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { version } from '../config/'
 
 import MessagePopUp from '../containers/MessagePopUp'
+import ErrorPopUp from '../containers/ErrorPopUp'
 
 const UnAuth = () => {
 
@@ -38,6 +39,10 @@ const UnAuth = () => {
         style={style}/>
       <p className="footer">version {version}</p>
       <MessagePopUp />
+      <ErrorPopUp
+        errorKey="authErr"
+        message="There was an authentication error"
+        />
     </div>
   )
 }

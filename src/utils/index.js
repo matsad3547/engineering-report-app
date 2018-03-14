@@ -34,7 +34,7 @@ const parseMVObj = (mvObj, parsedObj, i) => {
   })
 }
 
-export const formatReports = (reports, queued) => {
+export const formatReports = (reports, queued, admin = false, teammates = {}) => {
 
   const parsedObj = queued.reduce( (obj, n, i) => {
 
@@ -49,6 +49,16 @@ export const formatReports = (reports, queued) => {
     } : obj.notes = {
       [i]: formatAsString(reports[n].notes),
     }
+
+    if (admin) {      
+      obj.author ? obj.author = {
+        ...obj.author,
+        [i]: formatAsString(teammates[reports[n].uid].displayName),
+      } : obj.author = {
+        [i]: formatAsString(teammates[reports[n].uid].displayName)
+      }
+    }
+
 
     // parse weather
     obj.weather ? obj.weather = {
@@ -67,7 +77,7 @@ export const formatReports = (reports, queued) => {
           .filter( k => k !== 'count')
           .sort( (a, b) => {
             //reverse order because I don't know how to sort
-            const startArr = ['ballast', 'configNum', 'shortName', 'model']
+            const startArr = ['author', 'ballast', 'configNum', 'shortName', 'model']
             const endArr = ['notes', 'weather']
             return  startArr.indexOf(a) < startArr.indexOf(b) ? 1 : (startArr.indexOf(a) > startArr.indexOf(b) ? -1 : (endArr.indexOf(a) > endArr.indexOf(b) ? 1 : endArr.indexOf(a) < endArr.indexOf(b) ? -1 : 0) )
           })
@@ -97,8 +107,8 @@ const launchDownload = csvContent => {
   link.click()
 }
 
-export const downloadQueued = (reports, queued) => {
-  const dataStr = formatReports(reports, queued)
+export const downloadQueued = ( reports, queued, admin, teammates) => {
+  const dataStr = formatReports(reports, queued, admin, teammates)
   const data = parseCSV(dataStr)
   launchDownload(data)
 }
